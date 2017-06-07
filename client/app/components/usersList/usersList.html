@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="jumbotron">
+    <p>This page will list all of our users registered, you can view the listings, or create your own profile!</p>
+    <p><a class="btn btn-primary btn-lg" ui-sref="app.create" role="button">Create Entry</a></p>
+  </div>
+
+  <user-list-item ng-repeat="user in vm.users" user="user"></user-list-item>
+</div>

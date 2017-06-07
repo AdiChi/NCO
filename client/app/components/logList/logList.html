@@ -1,0 +1,46 @@
+
+<table st-safe-src="vm.logs" st-table="vm.displayCollection"  class="table table-striped">
+    <thead>
+        <tr>
+            <th st-sort="userName">Name</th>
+            <th st-sort="activity">Activity</th>
+            <th st-sort="time">Time</th>
+            <th st-sort="license">License</th>
+        </tr>
+        <tr>
+            <th>
+                <input st-search="userName" placeholder="search for name" class="input-sm form-control" type="search"/>
+            </th>
+            <th>
+                <input st-search="activity" placeholder="search for activity" class="input-sm form-control" type="search"/>
+            </th>
+            <th>
+                <input st-search="time" placeholder="search for time" class="input-sm form-control" type="search"/>
+            </th>
+            <th>
+                <input st-search="license" placeholder="search for license" class="input-sm form-control" type="search"/>
+            </th>
+            <!-- <th>
+                <select st-search="strictSelectValue">
+                    <option value="">All</option>
+                    <option ng-repeat="row in vm.logs | unique:'strictSelectValue'" value="{{row.strictSelectValue}}">{{row.strictSelectValue}}</option>
+                </select>
+            </th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in vm.displayCollection">
+            <td>{{row.userName}}</td>
+            <td>{{row.activity}}</td>
+            <td>{{row.time}}</td>
+            <td>{{row.license}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5" class="text-center">
+                <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
