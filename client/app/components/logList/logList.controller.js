@@ -1,10 +1,10 @@
 class LogListController {
-  constructor($filter) {
+  constructor() {
   	"ngInject";
   	this.displayCollection = [].concat(this.logs);
   	this.itemsByPage = 10;
  //  	this.getters = {
-	//     time: function (value) {            
+	//     time: function (value) {
 	//         return $filter('date')(value, 'medium');
 	//     }
 	// };

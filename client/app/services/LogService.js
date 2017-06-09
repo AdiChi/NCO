@@ -1,6 +1,6 @@
 function LogService($http, $filter) {
     "ngInject";
-    var baseUrl = 'http://172.27.108.132:8085';//change as per need
+    var baseUrl = 'http://172.27.108.133:8085';//change as per need
     var getHeaders= function() {
         var headers = {
            'Accept': 'application/json'

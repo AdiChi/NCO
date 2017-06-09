@@ -1,10 +1,13 @@
 .user-item {
-  .img-wrapper {
-    height: 300px;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-    }
+  #deleteUser {
+  	color: red;
+  	padding: 2px;
+  	float: right;
+  	cursor: pointer;
+  }
+  #editUser {
+  	padding: 2px;
+  	float: right;
+  	cursor: pointer;
   }
 }

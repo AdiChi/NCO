@@ -1,16 +1,24 @@
-import angular      from 'angular';
-import uiRouter     from 'angular-ui-router';
+import angular                from 'angular';
+import uiRouter               from 'angular-ui-router';
+import modal                  from 'angular-ui-bootstrap/src/modal';
+ 
+import AppComponent           from './app.component';
+import NavigationComponent    from './components/navigation/navigation';
+import SonglistsListComponent from './components/songlistsList/songlistsList';
+import LogListComponent       from './components/logList/logList';
+import HomeComponent          from './pages/home/home';
+import CreateComponent        from './pages/create/create';
+import UpdateComponent        from './pages/update/update';
+import LogsComponent          from './pages/logs/logs';
+import SonglistsComponent     from './pages/songlists/songlists';
 
-import AppComponent from './app.component';
-import NavigationComponent from './components/navigation/navigation';
-import LogListComponent from './components/logList/logList';
-import HomeComponent from './pages/home/home';
-import CreateComponent from './pages/create/create';
-import UpdateComponent from './pages/update/update';
-import LogsComponent from './pages/logs/logs';
-
-import UsersService from './services/UsersService';
-import LogService from './services/LogService';
+import UsersService           from './services/UsersService';
+import SongsService           from './services/SongsService';
+import SongListsService       from './services/SongListsService';
+import LogService             from './services/LogService';
+import ModalService           from './services/ModalService';
+import ExportToCsvService     from './services/ExportToCsvService';
+import ExportToCsvDirective   from './directives/export.directive';
 
 // import our default styles for the whole application
 import 'normalize.css';
@@ -19,6 +27,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 angular
     .module('app', [
         uiRouter,
+        modal,
 
         require('angular-smart-table'),
         NavigationComponent.name,
@@ -26,7 +35,9 @@ angular
         UpdateComponent.name,
         LogListComponent.name,
         LogsComponent.name,
-        HomeComponent.name
+        HomeComponent.name,
+        SonglistsListComponent.name,
+        SonglistsComponent.name
     ])
     .config(($locationProvider, $stateProvider, $urlRouterProvider) => {
         "ngInject";
@@ -60,10 +71,19 @@ angular
             .state('app.logs', {
                 url: '/logs',
                 template: '<logs></logs>'
+            })
+            .state('app.songlists', {
+                url: '/songlists',
+                template: '<songlists></songlists>'
             });
 
         $urlRouterProvider.otherwise('/app/home');
     })
     .component('app', AppComponent)
     .factory('UsersService', UsersService)
-    .factory('LogService', LogService);
+    .factory('SongsService', SongsService)
+    .factory('SongListsService', SongListsService)
+    .factory('LogService', LogService)
+    .factory('ModalService', ModalService)
+    .factory('ExportToCsvService', ExportToCsvService)
+    .directive('stExport',ExportToCsvDirective);

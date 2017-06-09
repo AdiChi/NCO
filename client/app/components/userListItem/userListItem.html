@@ -5,8 +5,11 @@
     </div>
  -->
     <div class="caption">
-      <a ui-sref="app.edit({ id : vm.user.id})" ui-sref-active="active">{{vm.user.name}}</a>
-      <p>{{vm.user.address}}</p>
+      <span>{{vm.user.name}}</span>
+      <span id="deleteUser" class="glyphicon glyphicon-remove-circle" ng-click="vm.deleteUser(vm.user.id)"></span>
+      <a id="editUser" ui-sref="app.edit({ id : vm.user.id})" ui-sref-active="active" class="glyphicon glyphicon-pencil"></a>
+
+      <p>({{vm.user.address}})</p>
     </div>
   </div>
 </div>
