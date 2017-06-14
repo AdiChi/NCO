@@ -1,0 +1,73 @@
+<form class="form-horizontal" role="form" ng-submit="vm.updateSonglist()">
+  <div class="form-group">
+    <label class="control-label col-sm-2">Name:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Enter song list name" ng-model="vm.songlist.songListName" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Description:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Enter your description" ng-model="vm.songlist.description" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <table st-safe-src="vm.songlist.songs" st-table="vm.displayCollection"  class="table table-striped" ng-if="vm.songlist.songs.length > 0">
+        <thead>
+            <tr>
+                <th row-select-all="vm.songlist.songs"  selected="vm.selected" ng-click="vm.selectAll(vm.songlist.songs)"></th>
+                <th st-sort="trackname">Track Name</th>
+                <th st-sort="albumname">Album Name</th>
+                <th st-sort="artist">Artist</th>
+                <th st-sort="artistdesc">Artist Description</th>
+                <th st-sort="isrc">ISRC</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>
+                    <input st-search="trackname" placeholder="search for track name" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input st-search="albumname" placeholder="search for album name" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input st-search="artist" placeholder="search for artist" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input st-search="artistdesc" placeholder="search for artist description" class="input-sm form-control" type="search"/>
+                </th>
+                <th>
+                    <input st-search="isrc" placeholder="search by ISRC" class="input-sm form-control" type="search"/>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in vm.displayCollection">
+                <td row-select="row" ng-click="vm.select(row.id)"></td>
+                <td>{{row.trackname}}</td>
+                <td>{{row.albumname}}</td>
+                <td>{{row.artist}}</td>
+                <td>{{row.artistdesc}}</td>
+                <td>{{row.isrc}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <!-- <td><a class="btn btn-default" st-export>Export to Excel</a></td> -->
+
+                <td colspan="5" class="text-center">
+                    <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <h3 class="col-sm-offset-2 col-sm-10" ng-if="!vm.songlist.songs.length">No Songs Added to {{vm.songlist.songListName}}</h3>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Update</button>
+    </div>
+  </div>
+</form>
+{{vm.selected.length}} selected
+<button class="btn btn-default" ng-click="vm.deleteConfirm()">delete</button>

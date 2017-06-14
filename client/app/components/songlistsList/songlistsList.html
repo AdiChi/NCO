@@ -3,12 +3,14 @@
     <p>This page will list all of our users registered, you can view the listings, or create your own profile!</p>
     <p><a class="btn btn-primary btn-lg" ui-sref="app.create" role="button">Create Entry</a></p>
   </div> -->
-
+<p><a class="btn btn-primary btn-md" ui-sref="app.addsonglist" role="button">Create Song list</a></p>
 <table st-safe-src="vm.songlistslist" st-table="vm.displayCollection"  class="table table-striped">
     <thead>
         <tr>
             <th st-sort="songListName">Name</th>
             <th st-sort="description">Description</th>
+            <th>Delete</th>
+            <th>Edit</th>
         </tr>
         <tr>
             <th>
@@ -17,12 +19,20 @@
             <th>
                 <input st-search="description" placeholder="search for activity" class="input-sm form-control" type="search"/>
             </th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="row in vm.displayCollection">
             <td>{{row.songListName}}</td>
             <td>{{row.description}}</td>
+            <td id="deleteSonglist" class="" ng-click="vm.deleteSonglist(row.id)">
+                <span class="glyphicon glyphicon-remove-circle"></span>
+            </td>
+            <td id="editSonglist" ui-sref="app.editsonglist({ id : row.id})" ui-sref-active="active" class="">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </td>
         </tr>
     </tbody>
     <tfoot>

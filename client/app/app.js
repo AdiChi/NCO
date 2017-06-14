@@ -9,8 +9,10 @@ import LogListComponent       from './components/logList/logList';
 import HomeComponent          from './pages/home/home';
 import CreateComponent        from './pages/create/create';
 import UpdateComponent        from './pages/update/update';
+import UpdateSonglistComponent from './pages/updateSonglist/updateSonglist';
 import LogsComponent          from './pages/logs/logs';
 import SonglistsComponent     from './pages/songlists/songlists';
+import CreateSonglistComponent from './pages/createSonglist/createSonglist';
 
 import UsersService           from './services/UsersService';
 import SongsService           from './services/SongsService';
@@ -19,6 +21,8 @@ import LogService             from './services/LogService';
 import ModalService           from './services/ModalService';
 import ExportToCsvService     from './services/ExportToCsvService';
 import ExportToCsvDirective   from './directives/export.directive';
+import RowSelectDirective     from './directives/rowSelect.directive';
+import RowSelectAllDirective  from './directives/rowSelectAll.directive';
 
 // import our default styles for the whole application
 import 'normalize.css';
@@ -31,7 +35,9 @@ angular
 
         require('angular-smart-table'),
         NavigationComponent.name,
+        UpdateSonglistComponent.name,
         CreateComponent.name,
+        CreateSonglistComponent.name,
         UpdateComponent.name,
         LogListComponent.name,
         LogsComponent.name,
@@ -75,6 +81,14 @@ angular
             .state('app.songlists', {
                 url: '/songlists',
                 template: '<songlists></songlists>'
+            })
+            .state('app.addsonglist', {
+                url: '/songlists/add',
+                template: '<create-songlist></create-songlist>'
+            })
+            .state('app.editsonglist', {
+                url: '/songlist/:id',
+                template: '<update-songlist></update-songlist>'
             });
 
         $urlRouterProvider.otherwise('/app/home');
@@ -86,4 +100,6 @@ angular
     .factory('LogService', LogService)
     .factory('ModalService', ModalService)
     .factory('ExportToCsvService', ExportToCsvService)
+    .directive('rowSelectAll', RowSelectAllDirective)
+    .directive('rowSelect', RowSelectDirective)
     .directive('stExport',ExportToCsvDirective);

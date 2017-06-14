@@ -52,16 +52,16 @@ function SongListsService($http) {
                 songListName, description, songs
             };
 
-            return $http.put(`${baseUrl}/songlist`, (tempSongList), {headers: getHeaders()});
+            return $http.post(`${baseUrl}/songlist`, (tempSongList), {headers: getHeaders()});
         },
 
         updateSongList(songlist) {
-            return $http.post(`${baseUrl}/songlist/${songlist.id}`, (songlist), {headers: getHeaders()});
+            return $http.put(`${baseUrl}/songlist/song`, (songlist), {headers: getHeaders()});
         },
         
-        deleteSongList(songlistid) {
+        deleteSongList(id) {
 
-            return $http.delete(`${baseUrl}/songlist/${songlistid}`, {headers: getHeaders()});
+            return $http.delete(`${baseUrl}/songlist/${id}`, {headers: getHeaders()});
         }
     }
 }
