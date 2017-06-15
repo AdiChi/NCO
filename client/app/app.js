@@ -1,28 +1,28 @@
-import angular                from 'angular';
-import uiRouter               from 'angular-ui-router';
-import modal                  from 'angular-ui-bootstrap/src/modal';
+import angular                 from 'angular';
+import uiRouter                from 'angular-ui-router';
+import modal                   from 'angular-ui-bootstrap/src/modal';
  
-import AppComponent           from './app.component';
-import NavigationComponent    from './components/navigation/navigation';
-import SonglistsListComponent from './components/songlistsList/songlistsList';
-import LogListComponent       from './components/logList/logList';
-import HomeComponent          from './pages/home/home';
-import CreateComponent        from './pages/create/create';
-import UpdateComponent        from './pages/update/update';
+import AppComponent            from './app.component';
+import NavigationComponent     from './components/navigation/navigation';
+import SonglistsListComponent  from './components/songlistsList/songlistsList';
+import LogListComponent        from './components/logList/logList';
+import HomeComponent           from './pages/home/home';
+import CreateComponent         from './pages/create/create';
+import UpdateComponent         from './pages/update/update';
 import UpdateSonglistComponent from './pages/updateSonglist/updateSonglist';
-import LogsComponent          from './pages/logs/logs';
-import SonglistsComponent     from './pages/songlists/songlists';
+import LogsComponent           from './pages/logs/logs';
+import SonglistsComponent      from './pages/songlists/songlists';
 import CreateSonglistComponent from './pages/createSonglist/createSonglist';
 
-import UsersService           from './services/UsersService';
-import SongsService           from './services/SongsService';
-import SongListsService       from './services/SongListsService';
-import LogService             from './services/LogService';
-import ModalService           from './services/ModalService';
-import ExportToCsvService     from './services/ExportToCsvService';
-import ExportToCsvDirective   from './directives/export.directive';
-import RowSelectDirective     from './directives/rowSelect.directive';
-import RowSelectAllDirective  from './directives/rowSelectAll.directive';
+import UsersService            from './services/UsersService';
+import SongsService            from './services/SongsService';
+import SongListsService        from './services/SongListsService';
+import LogService              from './services/LogService';
+import ModalService            from './services/ModalService';
+import ExportToCsvService      from './services/ExportToCsvService';
+import ExportToCsvDirective    from './directives/export.directive';
+import RowSelectDirective      from './directives/rowSelect.directive';
+import RowSelectAllDirective   from './directives/rowSelectAll.directive';
 
 // import our default styles for the whole application
 import 'normalize.css';
@@ -102,4 +102,7 @@ angular
     .factory('ExportToCsvService', ExportToCsvService)
     .directive('rowSelectAll', RowSelectAllDirective)
     .directive('rowSelect', RowSelectDirective)
-    .directive('stExport',ExportToCsvDirective);
+    .directive('stExport',ExportToCsvDirective)
+    .factory('superCache', ['$cacheFactory', function($cacheFactory) {
+        return $cacheFactory('super-cache');
+    }]);

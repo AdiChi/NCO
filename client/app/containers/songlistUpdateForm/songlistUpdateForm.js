@@ -1,9 +1,10 @@
 import angular from 'angular';
-import uiRouter from 'angular-ui-router';
 import songlistUpdateFormComponent from './songlistUpdateForm.component';
+import AllSongsListing             from '../../containers/allSongsListing/allSongsListing';
+
 
 const songlistUpdateFormModule = angular.module('songlistUpdateForm', [
-  uiRouter
+	AllSongsListing.name
 ])
 
 .component('songlistUpdateForm', songlistUpdateFormComponent);

@@ -1,20 +1,20 @@
 class SonglistUpdateFormController {
-  constructor($state, $stateParams, SongListsService) {
+  constructor($state, $stateParams, SongListsService, ModalService) {
     "ngInject";
-    var me = this;
+  	var vm = this;
     this.$state = $state;
     this.SongListsService = SongListsService;
+    this.ModalService = ModalService;
 
     this.id = $stateParams.id;
-    me.songlist = {};
+    vm.songlist = {};
     this.SongListsService.getSongList(this.id).then(function(res){
-      me.songlist = res;
+      vm.songlist = res;
+  	  vm.displayCollection2 = [].concat(vm.songlist.songs);
     });
 
-  	this.displayCollection = [].concat(this.songlist.songs);
-  	this.itemsByPage = 10;
+  	this.itemsByPage = 7;
 
-  	var vm = this;
 	vm.selected = []; 
 
 	vm.selectAll = function (collection) {
@@ -44,6 +44,9 @@ class SonglistUpdateFormController {
 			vm.selected.splice(found, 1);
 	};
 
+	vm.cancelEdit = function() {
+		this.$state.go('app.songlists');
+	};
 	vm.deleteConfirm = function() {
 	  	var toDelete = new Set(this.selected);
 
@@ -54,24 +57,70 @@ class SonglistUpdateFormController {
 	  	console.log(filteredArr.length);
 	  	
 	  	this.songlist.songs = filteredArr;
+	  	this.displayCollection2 = [].concat(this.songlist.songs);
+	  	this.selected = [];
   	};
   	vm.updateSonglist = function() {
-	  	var me = this;
+	  	var vm = this;
 	    if(!this.songlist.songListName) return alert('Song list Name is Required');
 
 	    if(!this.songlist.songs) {
 	    	this.songlist.songs=[];
 	    }
-	    this.SongListsService.updateSongList(me.songlist).then(function(res) {
-	    	console.log(res);
-	    	me.songlist = {};
+	    this.SongListsService.updateSongList(vm.songlist).then(function(res) {
+	    	console.log(res , "response");
+	    	vm.songlist = {};
 
 	    		// go to home page, to see our entry
-	    	me.$state.go('app.songlists');
+	    	vm.$state.go('app.songlists');
 	    }).catch(function(err) {
-	    	console.log(err);
+	    	console.log(err,"error");
 	    });
 
+    };
+    vm.addSongs = function() {
+	  	var vm = this;
+    	var custMod = {
+    		size:'lg',
+	        controller: function ($scope, $uibModalInstance) {
+                "ngInject";
+                $scope.sel = [];
+                $scope.songs = [];
+                $scope.modalOptions = {
+		    		closeButtonText: 'Cancel',
+			        actionButtonText: 'Add Songs',
+			        headerText: 'Add Songs'
+		    	};
+                $scope.modalOptions.ok = function (sel,songs) {
+                	var toAdd = new Set(sel);
+				  	var filteredArr = songs.filter(obj => toAdd.has(obj.id));
+				  	console.log(filteredArr);
+                    $uibModalInstance.close(filteredArr);
+                    $scope.sel = [];
+                };
+                $scope.modalOptions.close = function (result) {
+                    $uibModalInstance.dismiss('cancel');
+                };
+            },
+    		template: `<div class="modal-header">
+			                <h3>{{modalOptions.headerText}}</h3>
+			            </div>
+				        <div class="modal-body">
+				          <all-songs-listing sel="sel" songs="songs"></all-songs-listing>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn" 
+				                  data-ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>
+				          <button class="btn btn-primary" 
+				                  data-ng-click="modalOptions.ok(sel,songs);">{{modalOptions.actionButtonText}}</button>
+				        </div>`
+    	};
+    	ModalService.showModal(custMod,{}).then(function(res){
+    		vm.songlist.songs = vm.songlist.songs.concat(res);
+    		vm.displayCollection2 = [].concat(vm.songlist.songs);
+    	}, function(err) {
+    		console.log(err);
+    	});
     };
   }
 }

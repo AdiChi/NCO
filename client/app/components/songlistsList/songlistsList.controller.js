@@ -14,6 +14,7 @@ class SonglistsListController {
     };
 	ModalService.showModal({}, modalOptions)
         .then(function (result) {
+          console.log(result);
             SongListsService.deleteSongList(id).then(function(res) {
             	me.songlistslist = res.data.songlist;
             	console.log(res.data.message);
