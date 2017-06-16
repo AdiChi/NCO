@@ -17,7 +17,7 @@
                 <input st-search="songListName" placeholder="search for name" class="input-sm form-control" type="search"/>
             </th>
             <th>
-                <input st-search="description" placeholder="search for activity" class="input-sm form-control" type="search"/>
+                <input st-search="description" placeholder="search for description" class="input-sm form-control" type="search"/>
             </th>
             <th></th>
             <th></th>
@@ -32,6 +32,11 @@
             </td>
             <td id="editSonglist" ui-sref="app.editsonglist({ id : row.id})" ui-sref-active="active" class="">
                 <span class="glyphicon glyphicon-pencil"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" ng-show="vm.displayCollection.length===0">
+               Your search query has fetched no results
             </td>
         </tr>
     </tbody>

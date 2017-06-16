@@ -1,5 +1,5 @@
 class SonglistUpdateFormController {
-  constructor($state, $stateParams, SongListsService, ModalService) {
+  constructor($state, $stateParams, SongListsService, ModalService, _) {
     "ngInject";
   	var vm = this;
     this.$state = $state;
@@ -49,13 +49,7 @@ class SonglistUpdateFormController {
 	};
 	vm.deleteConfirm = function() {
 	  	var toDelete = new Set(this.selected);
-
-	  	console.log(this.songlist.songs.length);
-
 	  	var filteredArr = this.songlist.songs.filter(obj => !toDelete.has(obj.id));
-
-	  	console.log(filteredArr.length);
-	  	
 	  	this.songlist.songs = filteredArr;
 	  	this.displayCollection2 = [].concat(this.songlist.songs);
 	  	this.selected = [];
@@ -79,7 +73,6 @@ class SonglistUpdateFormController {
 
     };
     vm.addSongs = function() {
-	  	var vm = this;
     	var custMod = {
     		size:'lg',
 	        controller: function ($scope, $uibModalInstance) {
@@ -93,7 +86,10 @@ class SonglistUpdateFormController {
 		    	};
                 $scope.modalOptions.ok = function (sel,songs) {
                 	var toAdd = new Set(sel);
-				  	var filteredArr = songs.filter(obj => toAdd.has(obj.id));
+				  	var filteredArr = songs.filter(function(obj){
+				  		delete obj.isSelected;
+				  		return toAdd.has(obj.id);
+				  	});
 				  	console.log(filteredArr);
                     $uibModalInstance.close(filteredArr);
                     $scope.sel = [];
@@ -116,7 +112,7 @@ class SonglistUpdateFormController {
 				        </div>`
     	};
     	ModalService.showModal(custMod,{}).then(function(res){
-    		vm.songlist.songs = vm.songlist.songs.concat(res);
+    		vm.songlist.songs = _.uniq(vm.songlist.songs.concat(res),'isrc');
     		vm.displayCollection2 = [].concat(vm.songlist.songs);
     	}, function(err) {
     		console.log(err);

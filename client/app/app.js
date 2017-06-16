@@ -1,3 +1,4 @@
+import _                       from 'lodash';
 import angular                 from 'angular';
 import uiRouter                from 'angular-ui-router';
 import modal                   from 'angular-ui-bootstrap/src/modal';
@@ -105,4 +106,10 @@ angular
     .directive('stExport',ExportToCsvDirective)
     .factory('superCache', ['$cacheFactory', function($cacheFactory) {
         return $cacheFactory('super-cache');
-    }]);
+    }])
+    .constant('config', {  
+      apiUrl: 'http://172.27.108.133:8085',
+      baseUrl: '/'
+    }).factory('_', ['$window', function($window) {
+      return $window._; 
+    }]);;

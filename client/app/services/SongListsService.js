@@ -1,6 +1,6 @@
-function SongListsService($http) {
+function SongListsService($http, config) {
     "ngInject";
-    var baseUrl = 'http://172.27.108.132:8085';//change as per need
+    var baseUrl = config.apiUrl;//change as per need
     var getHeaders= function() {
         var headers = {
            'Accept': 'application/json'

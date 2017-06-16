@@ -6,7 +6,7 @@ class AllSongsListingController {
   	vm.SongsService = SongsService;
   	vm.songs = vm.songs || [];
   	vm.sel = vm.sel || [];
-  	vm.itemsByPage = 10;
+  	vm.itemsByPage = 7;
 
   	vm.SongsService.getSongs().then(function(res) {
       vm.songs = res;

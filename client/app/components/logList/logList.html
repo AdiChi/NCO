@@ -35,6 +35,11 @@
             <td>{{row.time}}</td>
             <td>{{row.license}}</td>
         </tr>
+        <tr>
+            <td colspan="5" ng-show="vm.displayCollection.length===0">
+               Your search query has fetched no results
+            </td>
+        </tr>
     </tbody>
     <tfoot>
         <tr>
