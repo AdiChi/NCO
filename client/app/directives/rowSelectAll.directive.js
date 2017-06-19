@@ -1,50 +1,50 @@
 function RowSelectAllDirective() {
-  return {
-    require: '^stTable',
-    template: '<input type="checkbox">',
-    scope: {
-      all: '=rowSelectAll',
-      selected: '='
-    },
-    link: function (scope, element, attr) {
+    return {
+        require: '^stTable',
+        template: '<input type="checkbox">',
+        scope: {
+            all: '=rowSelectAll',
+            selected: '='
+        },
+        link: function(scope, element, attr) {
 
-      scope.isAllSelected = false;
+            scope.isAllSelected = false;
 
-      element.bind('click', function (evt) {
+            element.bind('click', function(evt) {
 
-        scope.$apply(function () {
+                scope.$apply(function() {
 
-          scope.all.forEach(function (val) {
+                    scope.all.forEach(function(val) {
 
-            val.isSelected = scope.isAllSelected;
+                        val.isSelected = scope.isAllSelected;
 
-          });
+                    });
 
-        });
+                });
 
-      });
+            });
 
-      scope.$watchCollection('selected', function(newVal) {
+            scope.$watchCollection('selected', function(newVal) {
 
-        var s = newVal.length;
-        var a = scope.all.length;
+                var s = newVal.length;
+                var a = scope.all.length;
 
-        if ((s == a) && s > 0 && a > 0) {
+                if ((s == a) && s > 0 && a > 0) {
 
-          element.find('input').prop('checked', true);
-          scope.isAllSelected = false;
+                    element.find('input').prop('checked', true);
+                    scope.isAllSelected = false;
 
-        } else {
+                } else {
 
-          // element.find('input').attr('checked', false);
-          element.find('input').prop('checked', false);
-          scope.isAllSelected = true;
+                    // element.find('input').attr('checked', false);
+                    element.find('input').prop('checked', false);
+                    scope.isAllSelected = true;
 
+                }
+
+            });
         }
-
-      });
-    }
-  };
+    };
 }
 
 export default RowSelectAllDirective;

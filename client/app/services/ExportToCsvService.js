@@ -52,26 +52,31 @@ function ExportToCsvService() {
             //this will remove the blank-spaces from the title and replace it with an underscore
             fileName += ReportTitle.replace(/ /g,"_");   
             
-            //Initialize file format you want csv or xls
-            var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
-            
-            // Now the little tricky part.
-            // you can use either>> window.open(uri);
-            // but this will not work in some browsers
-            // or you will not get the correct file extension    
-            
-            //this trick will generate a temp <a /> tag
-            var linkdownload = document.createElement("a");    
-            linkdownload.href = uri;
+            if (navigator.msSaveBlob) { // IE 10+
+                var blob = new Blob([CSV],{type: "text/csv;charset=utf-8;"});
 
-            //set the visibility hidden so it will not effect on your web-layout
-            linkdownload.style = "visibility:hidden";
-            linkdownload.download = fileName + ".csv";
+                navigator.msSaveBlob(blob, fileName + ".csv");
+            }  else {
+                //Initialize file format you want csv or xls
+                var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+                // Now the little tricky part.
+                // you can use either>> window.open(uri);
+                // but this will not work in some browsers
+                // or you will not get the correct file extension    
+                
+                //this trick will generate a temp <a /> tag
+                var linkdownload = document.createElement("a");    
+                linkdownload.href = uri;
+                //set the visibility hidden so it will not effect on your web-layout
+                linkdownload.setAttribute("style","visibility:hidden");
+                // linkdownload.style = "visibility:hidden";
+                linkdownload.download = fileName + ".csv";
 
-            //this part will append the anchor tag and remove it after automatic click
-            document.body.appendChild(linkdownload);
-            linkdownload.click();
-            document.body.removeChild(linkdownload);
+                //this part will append the anchor tag and remove it after automatic click
+                document.body.appendChild(linkdownload);
+                linkdownload.click();
+                document.body.removeChild(linkdownload);
+            }
         }
     }
 }

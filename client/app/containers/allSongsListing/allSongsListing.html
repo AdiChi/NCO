@@ -36,6 +36,11 @@
             <td>{{row.artistdesc}}</td>
             <td>{{row.isrc}}</td>
         </tr>
+        <tr>
+            <td colspan="6" ng-show="vm.displayCollection.length===0">
+               Your search query has fetched no results
+            </td>
+        </tr>
     </tbody>
     <tfoot>
         <tr>

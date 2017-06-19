@@ -4,8 +4,9 @@ function ExportToCsvDirective(ExportToCsvService) {
 		require:'^stTable',
 	    link: function(scope, element, attr,ctrl) {
 	      	element.bind('click', function() {
-		      var data = ctrl.getFilteredCollection();
-		      ExportToCsvService.JSONToCSVConvertor(data, "Table data", true);
+		      var data = scope.vm.toFormat(ctrl.getFilteredCollection());
+		      var header =scope.vm.exportListName || "Table data";
+		      ExportToCsvService.JSONToCSVConvertor(data, header , true);
 	 		});
 		}
 	};

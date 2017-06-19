@@ -60,14 +60,14 @@
         </tbody>
         <tfoot>
             <tr>
-                <!-- <td><a class="btn btn-default" st-export>Export to Excel</a></td> -->
-                <td colspan="4">
+                <td colspan="2">
                   <div>
                     <span><strong>{{vm.selected.length}} selected</strong></span>
                     <span style="font-size:small;" ng-hide="vm.selected.length>0">(Select songs to remove from list)</span>
                     <button ng-show="vm.selected.length>0" type="button" class="btn btn-primary btn-md" ng-click="vm.deleteConfirm()">Remove songs from list</button>
                   </div>
                 </td>
+                <td><a class="btn btn-default" st-export>Export to Excel</a></td>
                 <td colspan="2" class="text-center">
                     <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
                 </td>
