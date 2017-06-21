@@ -1,0 +1,12 @@
+<input name="file" type="file" id="importFile" custom-on-change="vm.uploadXmlFile" />
+<div ng-show="vm.file.size > 0">
+    <span>{{vm.file.webkitRelativePath || vm.file.name}}</span> (
+    <span ng-switch="vm.file.size > 1024*1024">
+            <span ng-switch-when="true">{{vm.file.size / 1024 / 1024 | number:2}} MB</span>
+    <span ng-switch-default>{{vm.file.size / 1024 | number:2}} kB</span>
+    </span>)
+    <input class="btn btn-primary" type="button" ng-click="vm.uploadXml()" value="Upload" />
+</div>
+<div ng-if="data.dataLoading">
+    Loading...
+</div>

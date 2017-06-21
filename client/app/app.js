@@ -1,8 +1,9 @@
 import _                       from 'lodash';
 import angular                 from 'angular';
 import uiRouter                from 'angular-ui-router';
-import modal                   from 'angular-ui-bootstrap/src/modal';
- 
+import modal                   from 'angular-ui-bootstrap/src/modal'; 
+import ngInlineEdit            from 'ng-inline-edit';
+
 import AppComponent            from './app.component';
 import NavigationComponent     from './components/navigation/navigation';
 import SonglistsListComponent  from './components/songlistsList/songlistsList';
@@ -14,6 +15,7 @@ import UpdateSonglistComponent from './pages/updateSonglist/updateSonglist';
 import LogsComponent           from './pages/logs/logs';
 import SonglistsComponent      from './pages/songlists/songlists';
 import CreateSonglistComponent from './pages/createSonglist/createSonglist';
+import UploadSongsComponent    from './pages/uploadSongs/uploadSongs';
 
 import UsersService            from './services/UsersService';
 import SongsService            from './services/SongsService';
@@ -24,19 +26,23 @@ import ExportToCsvService      from './services/ExportToCsvService';
 import ExportToCsvDirective    from './directives/export.directive';
 import RowSelectDirective      from './directives/rowSelect.directive';
 import RowSelectAllDirective   from './directives/rowSelectAll.directive';
+import CustomOnChangeDirective from './directives/customOnChange.directive';
 
 // import our default styles for the whole application
 import 'normalize.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'ng-inline-edit/dist/ng-inline-edit.css';
 
 angular
     .module('app', [
         uiRouter,
         modal,
+        ngInlineEdit,
 
         require('angular-smart-table'),
         NavigationComponent.name,
         UpdateSonglistComponent.name,
+        UploadSongsComponent.name,
         CreateComponent.name,
         CreateSonglistComponent.name,
         UpdateComponent.name,
@@ -90,6 +96,10 @@ angular
             .state('app.editsonglist', {
                 url: '/songlist/:id',
                 template: '<update-songlist></update-songlist>'
+            })
+            .state('app.uploadsongs', {
+                url: '/uploadsongs',
+                template: '<upload-songs></upload-songs>'
             });
 
         $urlRouterProvider.otherwise('/app/home');
@@ -104,6 +114,7 @@ angular
     .directive('rowSelectAll', RowSelectAllDirective)
     .directive('rowSelect', RowSelectDirective)
     .directive('stExport',ExportToCsvDirective)
+    .directive('customOnChange', CustomOnChangeDirective)
     .factory('superCache', ['$cacheFactory', function($cacheFactory) {
         return $cacheFactory('super-cache');
     }])
@@ -112,4 +123,4 @@ angular
       baseUrl: '/'
     }).factory('_', ['$window', function($window) {
       return $window._; 
-    }]);;
+    }]);

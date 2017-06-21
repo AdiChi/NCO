@@ -69,31 +69,21 @@ function SongsService($http, config, superCache) {
                         "artistdesc": item.artistdesc,
                         "isrc": item.isrc,
                         "year": item.year
-                        // "albumsku": item.albumsku,
-                        // "bandphoto": item.bandphoto,
-                        // "bandphotolarge": item.bandphotolarge,
-                        // "bio": item.bio,
-                        // "buy": item.buy,
-                        // "city_state": item.city_state,
-                        // "country": item.country,
-                        // "download_mp3": item.download_mp3,
-                        // "download_mp3lofi": item.download_mp3lofi,
-                        // "home": item.home,
-                        // "launchdate": item.launchdate,
-                        // "magnatunegenres": item.magnatunegenres,
-                        // "mp3genre": item.mp3genre,
-                        // "page": item.page,
-                        // "seconds": item.seconds,
-                        // "songid": item.songid,
-                        // "tracknum": item.tracknum,
-                        // "upc": item.upc,
                     };
                 })
                 .catch(function(error) {
                     console.log(error);
                 });
 
-            return song;}
+            return song;
+        },
+        sendXml(fd) {
+
+            return $http.post(`http://172.27.108.133:8085/xmlimport`, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            });
+        }
         // },
         // createSong(song) {
         //     const {name, address} = song;

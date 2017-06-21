@@ -5,6 +5,9 @@
     </div>
  -->
     <div class="caption">
+      <!-- <span inline-edit="vm.user.name" 
+        inline-edit-on-click
+        inline-edit-btn-edit="">{{vm.user.name}}</span> -->
       <span>{{vm.user.name}}</span>
       <span id="deleteUser" class="glyphicon glyphicon-remove-circle" ng-click="vm.deleteUser(vm.user.id)"></span>
       <a id="editUser" ui-sref="app.edit({ id : vm.user.id})" ui-sref-active="active" class="glyphicon glyphicon-pencil"></a>
