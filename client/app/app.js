@@ -100,6 +100,10 @@ angular
             .state('app.uploadsongs', {
                 url: '/uploadsongs',
                 template: '<upload-songs></upload-songs>'
+            })
+            .state('app.editAllSongs', {
+                url: '/editAllSongs',
+                template: '<h1>hello</h1>'
             });
 
         $urlRouterProvider.otherwise('/app/home');
