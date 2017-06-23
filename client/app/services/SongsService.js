@@ -79,16 +79,16 @@ function SongsService($http, config, superCache) {
         },
         sendXml(fd) {
 
-            return $http.post(`http://172.27.108.132:8085/xmlimport`, fd, {
+            return $http.post(`${baseUrl}/xmlimport`, fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             });
         },
         updateMaster(data) {
             var res = {
-                "songs":data
+                "songs": data
             };
-            return $http.post(`http://172.27.108.132:8085/updatemaster`, (res), {headers: getHeaders()});
+            return $http.post(`${baseUrl}/updatemaster`, (res), {headers: getHeaders()});
         }
         // },
         // createSong(song) {
