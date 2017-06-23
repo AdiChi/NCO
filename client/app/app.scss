@@ -1,0 +1,7 @@
+.pagination > li > a[disabled=disabled] {
+    cursor: default;
+    background-color: #eee;
+}
+.pagination > li > a {
+    cursor: pointer;
+}

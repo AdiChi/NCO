@@ -16,6 +16,7 @@ import LogsComponent           from './pages/logs/logs';
 import SonglistsComponent      from './pages/songlists/songlists';
 import CreateSonglistComponent from './pages/createSonglist/createSonglist';
 import UploadSongsComponent    from './pages/uploadSongs/uploadSongs';
+import EditAllSongsComponent   from './pages/editAllSongs/editAllSongs';
 
 import UsersService            from './services/UsersService';
 import SongsService            from './services/SongsService';
@@ -27,6 +28,7 @@ import ExportToCsvDirective    from './directives/export.directive';
 import RowSelectDirective      from './directives/rowSelect.directive';
 import RowSelectAllDirective   from './directives/rowSelectAll.directive';
 import CustomOnChangeDirective from './directives/customOnChange.directive';
+import StSummaryDirective      from './directives/stSummary.directive';
 
 // import our default styles for the whole application
 import 'normalize.css';
@@ -43,6 +45,7 @@ angular
         NavigationComponent.name,
         UpdateSonglistComponent.name,
         UploadSongsComponent.name,
+        EditAllSongsComponent.name,
         CreateComponent.name,
         CreateSonglistComponent.name,
         UpdateComponent.name,
@@ -64,14 +67,14 @@ angular
                 template: '<app></app>'
             })
 
-            // Dashboard page to contain our users list page
-            .state('app.home', {
-                url: '/home',
-                template: '<home></home>'
-            })
+        // Dashboard page to contain our users list page
+        .state('app.home', {
+            url: '/home',
+            template: '<home></home>'
+        })
 
-            // Create route for our user listings creator
-            .state('app.create', {
+        // Create route for our user listings creator
+        .state('app.create', {
                 url: '/create',
                 template: '<create></create>'
             })
@@ -103,28 +106,41 @@ angular
             })
             .state('app.editAllSongs', {
                 url: '/editAllSongs',
-                template: '<h1>hello</h1>'
+                template: '<edit-all-songs></edit-all-songs>'
             });
 
         $urlRouterProvider.otherwise('/app/home');
     })
     .component('app', AppComponent)
+    .directive('rowSelectAll', RowSelectAllDirective)
+    .directive('rowSelect', RowSelectDirective)
+    .directive('stExport', ExportToCsvDirective)
+    .directive('customOnChange', CustomOnChangeDirective)
+    .directive('stSummary', StSummaryDirective)
     .factory('UsersService', UsersService)
     .factory('SongsService', SongsService)
     .factory('SongListsService', SongListsService)
     .factory('LogService', LogService)
     .factory('ModalService', ModalService)
     .factory('ExportToCsvService', ExportToCsvService)
-    .directive('rowSelectAll', RowSelectAllDirective)
-    .directive('rowSelect', RowSelectDirective)
-    .directive('stExport',ExportToCsvDirective)
-    .directive('customOnChange', CustomOnChangeDirective)
     .factory('superCache', ['$cacheFactory', function($cacheFactory) {
         return $cacheFactory('super-cache');
     }])
-    .constant('config', {  
-      apiUrl: 'http://172.27.108.133:8085',
-      baseUrl: '/'
-    }).factory('_', ['$window', function($window) {
-      return $window._; 
+    .constant('config', {
+        apiUrl: 'http://172.27.108.133:8085',
+        baseUrl: '/'
+    })
+    .factory('_', ['$window', function($window) {
+        return $window._;
+    }])
+    .run(['$templateCache', function($templateCache) {
+        $templateCache.put('template/smart-table/pagination.html',
+            '<div class=" plain" ng-if="pages.length >= 2">' +
+            '<st-summary style="display: inherit;"></st-summary>' +
+            '<ul class="pagination">' +
+            '<li><a style="position: relative;top: 1px;" ng-click="selectPage(1)" ng-disabled="currentPage == 1">First</a></li>' +
+            '<li><a class="glyphicon glyphicon-chevron-left" ng-click="selectPage(currentPage - 1)" ng-disabled="currentPage == 1"></a></li>' +
+            '<li><a class="glyphicon glyphicon-chevron-right" ng-click="selectPage(currentPage + 1)" ng-disabled="currentPage == numPages"></a></li>' +
+            '<li><a style="position: relative;top: 1px;" ng-click="selectPage(numPages)" ng-disabled="currentPage == numPages">Last</a></li>' +
+            '</ul></div>');
     }]);

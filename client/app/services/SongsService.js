@@ -86,9 +86,15 @@ function SongsService($http, config, superCache) {
         },
         updateMaster(data) {
             var res = {
-                "songs": data
+                "track":data
             };
             return $http.post(`${baseUrl}/updatemaster`, (res), {headers: getHeaders()});
+        },
+        updateMasterSongs(data) {
+            var res = {
+                "track": data
+            };
+            return $http.post(`${baseUrl}/updatemastersongs`, (res), {headers: getHeaders()});
         }
         // },
         // createSong(song) {

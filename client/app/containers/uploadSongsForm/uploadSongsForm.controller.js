@@ -16,7 +16,7 @@ class UploadSongsFormController {
                 if (res.data.response === "Success") {
                 	vm.jsonSongs = [];
                 	vm.dataLoading = false;
-                	vm.successmsg = "Songs uploaded";
+                	vm.successmsg = "Success!! Songs uploaded";
                 	vm.showRedirectBtn = true;
                 	// $state.go('app.songlists');
                 } else {
@@ -35,14 +35,19 @@ class UploadSongsFormController {
 			vm.dataLoading = true;
 
             SongsService.sendXml(fd).then(function(res) {
-                vm.jsonSongs = res.data.songs;
-                vm.successmsg = "File uploaded";
-				vm.displayCollection = [].concat(vm.jsonSongs);
+                if (res.data.message == "please check xml file") {
+                    vm.successmsg = "Error... Please check uploaded file";
+                } else if(res.data.message == "file uploaded successfully") {
+                    vm.jsonSongs = res.data.track;
+                    vm.successmsg = "Success!! File uploaded";
+                    vm.displayCollection = [].concat(vm.jsonSongs);
+                }
+                
             }, function(err) {
                 console.log(err);
+                vm.successmsg = "Error! Wrong file type";
             }).finally(function() {
-            	vm.dataLoading = false;
-                // vm.successmsg = "XML file uploaded";
+                vm.dataLoading = false;
             });
             delete vm.file;
         };
