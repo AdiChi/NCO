@@ -42,6 +42,21 @@ function SongsService($http, config, superCache) {
         superCache.put("allSongs", dataresponse);
         return dataresponse;
     }
+    function toMasterSong(r){
+        var dataresponse = r.data.map(function (item) {
+            let song = {
+                "albumname": item.albumname,
+                "trackname": item.trackname,
+                "artist": item.artist,
+                "artistdesc": item.artistdesc,
+                "isrc": item.isrc,
+                "year": item.year
+            };
+            return song;
+        });
+        superCache.put("allMasterSongs", dataresponse);
+        return dataresponse;
+    }
     return {
 
         getSongs() {
@@ -49,6 +64,19 @@ function SongsService($http, config, superCache) {
             if(!cachedVal) {
                 var songs = $http.get(`${baseUrl}/songs`,{headers: getHeaders()})
                     .then(toSong)
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+                return songs;
+            } else {
+                return Promise.resolve(cachedVal);
+            }
+        },
+        getMasterSongs() {
+            var cachedVal = superCache.get("allMasterSongs");
+            if(!cachedVal) {
+                var songs = $http.get(`${baseUrl}/getmastersongs`,{headers: getHeaders()})
+                    .then(toMasterSong)
                     .catch(function(error) {
                         console.log(error);
                     });
@@ -92,7 +120,7 @@ function SongsService($http, config, superCache) {
         },
         updateMasterSongs(data) {
             var res = {
-                "track": data
+                "masterSongs": data
             };
             return $http.post(`${baseUrl}/updatemastersongs`, (res), {headers: getHeaders()});
         }

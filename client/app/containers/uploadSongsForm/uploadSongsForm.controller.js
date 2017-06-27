@@ -10,6 +10,9 @@ class UploadSongsFormController {
                 vm.file = files[0];
             });
         };
+        vm.called = function( ) {
+            $state.transitionTo("app.editAllSongs",{},{reload: true})
+        };
         vm.updateConfirm = function() {
         	vm.dataLoading = true;
         	SongsService.updateMaster(vm.jsonSongs).then(function(res) {
@@ -17,7 +20,7 @@ class UploadSongsFormController {
                 	vm.jsonSongs = [];
                 	vm.dataLoading = false;
                 	vm.successmsg = "Success!! Songs uploaded";
-                	vm.showRedirectBtn = true;
+                	// vm.showRedirectBtn = true;
                 	// $state.go('app.songlists');
                 } else {
                 	$state.reload();

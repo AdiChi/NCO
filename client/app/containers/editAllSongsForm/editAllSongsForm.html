@@ -4,6 +4,9 @@
         <div ng-if="vm.dataLoading">
             Loading...
         </div>
+        <div class="alert alert-info" ng-if="vm.successmsg">
+           {{vm.successmsg}}
+        </div>
         <div class="table-responsive">
             <table st-safe-src="vm.jsonSongs" st-table="vm.displayCollection" class="table table-striped table-hover">
                 <thead>

@@ -19,7 +19,7 @@
    {{vm.successmsg}}
 </div>
 <div class="jumbotron" ng-if="vm.showRedirectBtn">
-    <p>You can view and edit all songs <a ui-sref="app.editAllSongs" href="#!/app/editAllSongs">here</a></p>
+    <p>You can view and edit all songs <button ng-click="vm.called()">here</button></p>
 </div>
 <div class="panel panel-default" ng-if="vm.jsonSongs.length > 0">
     <div class="panel-heading"><h4>Edit your songs data before submit</h4></div>
