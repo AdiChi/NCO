@@ -31,16 +31,22 @@ import CustomOnChangeDirective from './directives/customOnChange.directive';
 import StSummaryDirective      from './directives/stSummary.directive';
 
 // import our default styles for the whole application
+import 'c3-angular';
 import 'normalize.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'c3/c3.min.css';
 import 'ng-inline-edit/dist/ng-inline-edit.css';
+import './services/angularD3js';
+import './services/angularC3js';
 
 angular
     .module('app', [
         uiRouter,
         modal,
         ngInlineEdit,
-
+        'd3js',
+        'c3js',
+        'gridshore.c3js.chart',
         require('angular-smart-table'),
         NavigationComponent.name,
         UpdateSonglistComponent.name,
@@ -133,7 +139,7 @@ angular
     .factory('_', ['$window', function($window) {
         return $window._;
     }])
-    .run(['$templateCache', function($templateCache) {
+    .run(['$templateCache','c3Service', function($templateCache,c3Service) {
         $templateCache.put('template/smart-table/pagination.html',
             '<div class=" plain" ng-if="pages.length >= 2">' +
             '<st-summary style="display: inherit;"></st-summary>' +

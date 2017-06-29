@@ -1,5 +1,5 @@
 class EditAllSongsFormController {
-    constructor(SongsService, $state) {
+    constructor(SongsService, $state, c3Service) {
         "ngInject";
         var vm = this;
         vm.name = "editAllSongs";
@@ -7,6 +7,9 @@ class EditAllSongsFormController {
         vm.jsonSongs = vm.jsonSongs || [];
         vm.sel = vm.sel || [];
         vm.itemsByPage = 10;
+        c3Service.load().then(function(){
+            console.log(c3);
+        });
         vm.updateConfirm = function() {
             vm.dataLoading = true;
             vm.SongsService.updateMasterSongs(vm.jsonSongs).then(function(res) {

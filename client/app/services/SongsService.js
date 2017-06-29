@@ -43,8 +43,9 @@ function SongsService($http, config, superCache) {
         return dataresponse;
     }
     function toMasterSong(r){
-        var dataresponse = r.data.map(function (item) {
+        /*var dataresponse = r.data.map(function (item) {
             let song = {
+                "id": item.id,
                 "albumname": item.albumname,
                 "trackname": item.trackname,
                 "artist": item.artist,
@@ -53,9 +54,9 @@ function SongsService($http, config, superCache) {
                 "year": item.year
             };
             return song;
-        });
-        superCache.put("allMasterSongs", dataresponse);
-        return dataresponse;
+        });*/
+        superCache.put("allMasterSongs", r.data);
+        return r.data;
     }
     return {
 
