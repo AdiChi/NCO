@@ -8,11 +8,13 @@ import AppComponent            from './app.component';
 import NavigationComponent     from './components/navigation/navigation';
 import SonglistsListComponent  from './components/songlistsList/songlistsList';
 import LogListComponent        from './components/logList/logList';
+import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
 import HomeComponent           from './pages/home/home';
 import CreateComponent         from './pages/create/create';
 import UpdateComponent         from './pages/update/update';
 import UpdateSonglistComponent from './pages/updateSonglist/updateSonglist';
 import LogsComponent           from './pages/logs/logs';
+import ReportsComponent        from './pages/reports/reports';
 import SonglistsComponent      from './pages/songlists/songlists';
 import CreateSonglistComponent from './pages/createSonglist/createSonglist';
 import UploadSongsComponent    from './pages/uploadSongs/uploadSongs';
@@ -23,6 +25,7 @@ import SongsService            from './services/SongsService';
 import SongListsService        from './services/SongListsService';
 import LogService              from './services/LogService';
 import ModalService            from './services/ModalService';
+import ReportService           from './services/ReportService';
 import ExportToCsvService      from './services/ExportToCsvService';
 import ExportToCsvDirective    from './directives/export.directive';
 import RowSelectDirective      from './directives/rowSelect.directive';
@@ -31,19 +34,24 @@ import CustomOnChangeDirective from './directives/customOnChange.directive';
 import StSummaryDirective      from './directives/stSummary.directive';
 
 // import our default styles for the whole application
-import 'c3-angular';
 import 'normalize.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'c3/c3.min.css';
 import 'ng-inline-edit/dist/ng-inline-edit.css';
+import 'angular-bootstrap-datetimepicker/src/css/datetimepicker.css';
+// import our default js for the whole application
+import 'c3-angular';
+import 'bootstrap';
 import './services/angularD3js';
 import './services/angularC3js';
+import 'angular-bootstrap-datetimepicker';
 
 angular
     .module('app', [
         uiRouter,
         modal,
         ngInlineEdit,
+        'ui.bootstrap.datetimepicker',
         'd3js',
         'c3js',
         'gridshore.c3js.chart',
@@ -59,7 +67,9 @@ angular
         LogsComponent.name,
         HomeComponent.name,
         SonglistsListComponent.name,
-        SonglistsComponent.name
+        SonglistsComponent.name,
+        DateOverDateSongComponent.name,
+        ReportsComponent.name
     ])
     .config(($locationProvider, $stateProvider, $urlRouterProvider) => {
         "ngInject";
@@ -113,6 +123,10 @@ angular
             .state('app.editAllSongs', {
                 url: '/editAllSongs',
                 template: '<edit-all-songs></edit-all-songs>'
+            })
+            .state('app.reports', {
+                url: '/reports',
+                template: '<reports></reports>'
             });
 
         $urlRouterProvider.otherwise('/app/home');
@@ -128,6 +142,7 @@ angular
     .factory('SongListsService', SongListsService)
     .factory('LogService', LogService)
     .factory('ModalService', ModalService)
+    .factory('ReportService', ReportService)
     .factory('ExportToCsvService', ExportToCsvService)
     .factory('superCache', ['$cacheFactory', function($cacheFactory) {
         return $cacheFactory('super-cache');

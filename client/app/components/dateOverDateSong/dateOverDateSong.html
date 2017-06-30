@@ -1,0 +1,139 @@
+<div class="container-fluid outerdiv">
+    <h3>Date over date Song comparison </h3></div>
+<div>
+    <h4> Select Song:</h4></div>
+<div class="container-fluid outerdiv">
+    <div class="animated zoomInRight">
+        <div class="input-group search-bar">
+            <input type="text" ng-model="songsearch" ng-model-options="{ debounce: 800 }" ng-click="select" class="form-control" placeholder="Enter at least 3 characters of song name" autofocus />
+            <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
+        </div>
+        <div id="main-info" class="col-md-4">
+            <div ng-if="!details">
+                Loading results...
+            </div>
+            <div ng-if="details.songs.length>0">
+                <ul class="dropdown-menu rel-results" style="display: block;">
+                    <li ng-repeat="song in details.songs">
+                        <a href id="{{ $index + 1 }}" ng-click="updateSong(song)">{{ song.Title }}, {{ song.Year }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div ng-if="details.songs.length==0">
+                No results found.
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <h4 ng-if="selectedSong">
+        Selected song: {{selectedSong}} 
+    </h4>
+</div>
+<div class="row">
+    <div id="main-info" class="well col-md-4">
+        <h4>Date Range 1</h4>
+        <div class="dropdown form-group">
+            <label>Start Date</label>
+            <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
+                <!--         <div class="input-group date">
+            <input type="text" class="form-control" data-ng-model="dateRangeStart">
+        </div> -->
+                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+            </a>
+            {{dateRangeStart| date:"MMM dd, yyyy"}}
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }" data-on-set-time="startDateOnSetTime()" data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+            </ul>
+        </div>
+        <div class="dropdown form-group">
+            <label>End Date</label>
+            <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
+                <!-- <div class="input-group date">
+            <input type="text" class="form-control" data-ng-model="dateRangeEnd">
+        </div> -->
+                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+            </a>
+            {{dateRangeEnd| date:"MMM dd, yyyy"}}
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="dateRangeEnd" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }" data-on-set-time="endDateOnSetTime()" data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+            </ul>
+        </div>
+        {{range1diff || 0}} days
+    </div>
+    <div id="main-info2" class="well col-md-4">
+        <h4>Date Range 2</h4>
+        <div class="dropdown form-group">
+            <label>Start Date</label>
+            <a class="dropdown-toggle" id="dropdownStart2" role="button" data-toggle="dropdown" data-target="" href="">
+                <!--         <div class="input-group date">
+            <input type="text" class="form-control" data-ng-model="dateRangeStart">
+        </div> -->
+                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+            </a>
+            {{dateRange2Start| date:"MMM dd, yyyy"}}
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="dateRange2Start" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart2', renderOn: 'end-date2-changed' }" data-on-set-time="startDate2OnSetTime()" data-before-render="startDate2BeforeRender($dates)"></datetimepicker>
+            </ul>
+        </div>
+        <div class="dropdown form-group">
+            <label>End Date</label>
+            <a class="dropdown-toggle" id="dropdownEnd2" role="button" data-toggle="dropdown" data-target="" href="">
+                <!-- <div class="input-group date">
+            <input type="text" class="form-control" data-ng-model="dateRangeEnd">
+        </div> -->
+                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+            </a>
+            {{dateRange2End| date:"MMM dd, yyyy"}}
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="dateRange2End" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd2', renderOn: 'start-date2-changed' }" data-on-set-time="endDate2OnSetTime()" data-before-render="endDate2BeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+            </ul>
+        </div>
+        {{range2diff || 0}} days
+    </div>
+    <div id="main-info3" class="well col-md-4">
+        <h4>Time Range</h4>
+        <div class="form-group">
+            <select class="hour form-control" ng-model="timeStart" style="width: 50%;" ng-change="updateTStart()">
+                <option value="">Select start time</option>
+                <option ng-repeat="i in hours track by $index" ng-if="!timeEnd || timeEnd >= $index" value="{{$index}}">{{$index}}</option>
+            </select>
+            <select class="hour form-control" ng-model="timeEnd" style="width: 50%;" ng-change="updateTEnd()">
+                <option value="">Select end time</option>
+                <option ng-repeat="i in hours track by $index" ng-if="!timeStart || timeStart <= $index" value="{{$index}}">{{$index}}</option>
+            </select>
+        </div>
+        <div ng-hide="!timeStart || !timeEnd" style="font-size: smaller;">{{timeStart}}:00 - {{timeEnd}}:59</div>
+        <div ng-show="!timeStart || !timeEnd" style="font-size: smaller;">Not selected</div>
+    </div>
+</div>
+<div style="color: red;">
+    {{songError}}
+</div>
+<div style="color: red;">
+    {{rangeError}}
+</div>
+<div style="color: red;">
+    {{range1Error}}
+</div>
+<div style="color: red;">
+    {{range2Error}}
+</div>
+<div style="color: red;">
+    {{timeError}}
+</div>
+<div style="color: red;">
+    {{chart}}
+</div>
+<div class="container-fluid">
+    <button id="confirmSubmit" type="submit" class="btn btn-success" ng-click="getChart()">Get chart</button>
+</div> {{chart.firstRange}}
+<div class="container-fluid" ng-if="chart">
+    <c3chart bindto-id="stacked-bar-plot1-chart">
+    <!--  <chart-column column-id="x" column-values="period 10,period 20,period 30,period 40,period 50,period 60" /> -->
+    <chart-column column-id="data 1" column-name="{{chart.firstRange}}" column-values="30,200,100,400,150,250" column-type="bar" />
+    <chart-column column-id="data 2" column-name="{{chart.secondRange}}" column-values="50,20,10,40,15,25" column-type="bar" />
+    <!--       <chart-group group-values="data 1,data 2"/>-->
+</c3chart>
+
+</div>
