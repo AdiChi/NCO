@@ -33,7 +33,7 @@ class EditAllSongsFormController {
             vm.jsonSongs = res;
         }, function(err) {
             console.log(err);
-        }); 
+        });
     };
 }
 

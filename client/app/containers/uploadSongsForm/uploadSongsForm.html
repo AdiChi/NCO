@@ -1,3 +1,6 @@
+<div class="alert alert-info" ng-show="vm.dataLoading === false || vm.successmsg">
+   {{vm.successmsg}}
+</div>
 <div class="panel panel-default" ng-if="vm.dataLoading==undefined">
     <div class="panel-heading"><h4>Upload Songs</h4></div>
     <div class="panel-body">
@@ -15,30 +18,28 @@
 <div ng-if="vm.dataLoading">
     Loading...
 </div>
-<div class="alert alert-info" ng-show="vm.dataLoading === false">
-   {{vm.successmsg}}
-</div>
 <div class="jumbotron" ng-if="vm.showRedirectBtn">
     <p>You can view and edit all songs <button ng-click="vm.called()">here</button></p>
 </div>
 <div class="panel panel-default" ng-if="vm.jsonSongs.length > 0">
     <div class="panel-heading"><h4>Edit your songs data before submit</h4></div>
     <div class="panel-body">
+    <span style="font-size: small;color: grey;">* Click on column headers to sort</span>
         <div class="table-responsive">
             <table st-safe-src="vm.jsonSongs" st-table="vm.displayCollection" class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th ng-repeat="(key, value) in vm.jsonSongs[0]" st-sort="{{key}}">{{key}}</th>
+                        <th ng-repeat="(key, value) in vm.jsonSongs[0]" st-sort="{{key}}" ng-if="key!=='insertFlag'">{{key}}</th>
                     </tr>
                     <tr>
-                    	<th ng-repeat="(key, value) in vm.jsonSongs[0]">
-                        	<input st-search="{{key}}" placeholder="{{key}}" class="input-sm form-control" type="search"/>
+                    	<th ng-repeat="(key, value) in vm.jsonSongs[0]" ng-if="key!=='insertFlag'">
+                        	<input st-search="{{key}}" placeholder="Search" class="input-sm form-control" type="search"/>
                     	</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="(key,row) in vm.displayCollection">
-                        <td ng-repeat="(k,val) in vm.displayCollection[key]">
+                        <td ng-repeat="(k,val) in vm.displayCollection[key]" ng-if="k!=='insertFlag'">
                             <div inline-edit="vm.displayCollection[key][k]" inline-edit-btn-save="Save" inline-edit-btn-cancel="Cancel" inline-edit-on-click inline-edit-textarea></div>
                         </td>
                     </tr>

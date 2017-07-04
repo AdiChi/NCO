@@ -9,8 +9,8 @@
         inline-edit-on-click
         inline-edit-btn-edit="">{{vm.user.name}}</span> -->
       <span>{{vm.user.name}}</span>
-      <span id="deleteUser" class="glyphicon glyphicon-remove-circle" ng-click="vm.deleteUser(vm.user.id)"></span>
-      <a id="editUser" ui-sref="app.edit({ id : vm.user.id})" ui-sref-active="active" class="glyphicon glyphicon-pencil"></a>
+      <span id="deleteUser" class="glyphicon glyphicon-remove-circle" ng-click="vm.deleteUser(vm.user.id)" title="Delete"></span>
+      <a id="editUser" ui-sref="app.edit({ id : vm.user.id})" ui-sref-active="active" class="glyphicon glyphicon-pencil" title="Edit"></a>
 
       <p>({{vm.user.address}})</p>
     </div>

@@ -11,9 +11,8 @@ function ReportService($http, config, superCache) {
     return {
         getSongsBySearch(query) {
             var songs = $http({
-                url: `${baseUrl}/songsBySearch`,
+                url: `${baseUrl}/searchsongs/${query}`,
                 method: "GET",
-                params: { query: query },
                 headers: getHeaders()
             }).catch(function(error) {
                 console.log(error);
@@ -24,42 +23,80 @@ function ReportService($http, config, superCache) {
             /*var chartDetails = $http({
                 url: `${baseUrl}/getDODChart`,
                 method: "GET",
-                params: { query: query },
+                params: query,
                 headers: getHeaders()
-            }).catch(function(error) {
-                console.log(error);
             });*/
 
             var chartDetails = Promise.resolve({
                 songid : 1234,
-                firstRange : "May 1, 2017 to May 3, 2017",
-                secondRange: "June 1, 2017 to June 3, 2017",
+                firstRange : "May 1, 2017 to May 8, 2017",
+                secondRange: "June 1, 2017 to June 8, 2017",
                 salesFirstRange: [
                     {
-                        day: "May 1",
-                        sales: 220
+                        date: "May 1",
+                        totalsales: 220
                     },
                     {
-                        day: "May 2",
-                        sales: 120
+                        date: "May 2",
+                        totalsales: 120
                     },
                     {
-                        day: "May 3",
-                        sales: 234
+                        date: "May 3",
+                        totalsales: 234
+                    },
+                    {
+                        date: "May 4",
+                        totalsales: 432
+                    },
+                    {
+                        date: "May 5",
+                        totalsales: 23
+                    },
+                    {
+                        date: "May 6",
+                        totalsales: 55
+                    },
+                    {
+                        date: "May 7",
+                        totalsales: 567
+                    },
+                    {
+                        date: "May 8",
+                        totalsales: 109
                     }
                 ],
                 salesSecondRange : [
                     {
-                        day: "June 1",
-                        sales: 400
+                        date: "June 1",
+                        totalsales: 400
                     },
                     {
-                        day: "June 2",
-                        sales: 455
+                        date: "June 2",
+                        totalsales: 455
                     },
                     {
-                        day: "June 3",
-                        sales: 211
+                        date: "June 3",
+                        totalsales: 211
+                    },
+                    {
+                        date: "June 4",
+                        totalsales: 554
+                    },
+                    {
+                        date: "June 5",
+                        totalsales: 332
+                    },
+                    {
+                        date: "June 6",
+                        totalsales: 322
+                    },
+                    {
+                        date: "June 7",
+                        totalsales: 111
+                    },
+                    {
+                        date: "June 8",
+                        totalsales: 33
                     }
                 ]
             });

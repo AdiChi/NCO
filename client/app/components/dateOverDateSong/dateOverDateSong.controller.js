@@ -2,6 +2,22 @@ class DateOverDateSongController {
     constructor($scope, $filter, ReportService) {
         "ngInject";
         // var $scope = this;
+        $scope.drilldown = false;
+        $(document).on('click', '.panel-heading span.clickable', function(e){
+            var $this = $(this);
+            collapseSelection($this);
+        });
+        function collapseSelection($this) {
+            if(!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+            }
+        }
         $scope.query = {};
         $scope.details = {};
         $scope.hours = new Array(24);
@@ -11,45 +27,26 @@ class DateOverDateSongController {
         $scope.updateSong = function(song) {
             if ($scope.details)
                 delete $scope.details.songs;
-            $scope.selectedSong = song.Title;
-            $scope.query.songid = song.songid;
+            $scope.selectedSong = song.trackname;
+            $scope.query.songId = song.id;
             $scope.songError = "";
             console.log($scope.query);
         };
         $scope.updateTStart = function() {
-            $scope.query.timeStart = $scope.timeStart;
+            $scope.query.time1 = $scope.time1+":00";
         };
         $scope.updateTEnd = function() {
             $scope.timeError = "";
 
-            $scope.query.timeEnd = $scope.timeEnd;
+            $scope.query.time2 = $scope.time2+":59";
         };
         $scope.fetchSongs = function(name) {
-            /* ReportService.getSongsBySearch(name)
+            ReportService.getSongsBySearch(name)
                  .then(function(response) {
-                     $scope.details = response.data;
-                 })
-                 .catch(function(err) {
+                     $scope.details.songs = response.data;
+                 }).catch(function(err) {
                      console.log(err);
-                     $scope.details = {
-                         songs : []
-                     };
-                 });*/
-            $scope.details = {
-                songs: [{
-                    Title: "ALone",
-                    Year: "2003",
-                    songid: 2131112
-                }, {
-                    Title: "Boulevard of broken dreams",
-                    Year: "2000",
-                    songid: 221112
-                }, {
-                    Title: "Tresses and messes",
-                    Year: "2004",
-                    songid: 434434343
-                }]
-            };
+                 });
         };
         $scope.$watch('songsearch', function(name) {
             if (name && name.length >= 3) {
@@ -88,7 +85,7 @@ class DateOverDateSongController {
                 var b = moment($scope.dateRangeStart);
                 $scope.range1diff = a.diff(b, 'days') + 1; // 1
             }
-            $scope.query.range1DateStart = moment($scope.dateRangeStart).valueOf();
+            $scope.query.range1Date1 = moment($scope.dateRangeStart).format("YYYY.MM.DD");
             $scope.$broadcast('start-date-changed');
         }
 
@@ -99,7 +96,7 @@ class DateOverDateSongController {
                 $scope.range1diff = a.diff(b, 'days') + 1; // 1
             }
             $scope.range1Error = "";
-            $scope.query.range1DateEnd = moment($scope.dateRangeEnd).valueOf();
+            $scope.query.range1Date2 = moment($scope.dateRangeEnd).format("YYYY.MM.DD");
             $scope.$broadcast('end-date-changed');
         }
 
@@ -130,6 +127,7 @@ class DateOverDateSongController {
         $scope.endDate2OnSetTime = endDate2OnSetTime;
         $scope.startDate2BeforeRender = startDate2BeforeRender;
         $scope.startDate2OnSetTime = startDate2OnSetTime;
+        $scope.getChart = getChart;
 
         function startDate2OnSetTime() {
             if ($scope.dateRange2End) {
@@ -137,7 +135,7 @@ class DateOverDateSongController {
                 var b = moment($scope.dateRange2Start);
                 $scope.range2diff = a.diff(b, 'days') + 1; // 1
             }
-            $scope.query.range2DateStart = moment($scope.dateRange2Start).valueOf();
+            $scope.query.range2Date1 = moment($scope.dateRange2Start).format("YYYY.MM.DD");
             $scope.$broadcast('start-date2-changed');
         }
 
@@ -148,7 +146,7 @@ class DateOverDateSongController {
                 $scope.range2diff = a.diff(b, 'days') + 1; // 1
             }
             $scope.range2Error = "";
-            $scope.query.range2DateEnd = moment($scope.dateRange2End).valueOf();
+            $scope.query.range2Date2 = moment($scope.dateRange2End).format("YYYY.MM.DD");
             $scope.$broadcast('end-date2-changed');
         }
 
@@ -175,39 +173,77 @@ class DateOverDateSongController {
                 });
             }
         }
-        $scope.plotChart = function(chart) {
-            
+        
+        $scope.formatTooltip = function(name, ratio, id, index) {
+            var format = name === $scope.datacolumns[0].id ? $scope.names[index][0] :$scope.names[index][1];
+            return format;
         };
-        $scope.getChart = function() {
-            /*if (!$scope.query.songid) {
+
+        $scope.handleCallback = function (chartObj) {
+            $scope.theChart = chartObj;
+        };
+        function getChart() {
+            $scope.theChart = null;
+
+            if (!$scope.query.songId) {
                 $scope.songError = "Please select song";
             }
-            if (!$scope.query.range1DateStart ||
-                !$scope.query.range1DateEnd) {
+            if (!$scope.query.range1Date1 ||
+                !$scope.query.range1Date2) {
                 $scope.range1Error = "Please select first date range";
             }
-            if (!$scope.query.range2DateStart ||
-                !$scope.query.range2DateEnd) {
+            if (!$scope.query.range2Date1 ||
+                !$scope.query.range2Date2) {
                 $scope.range2Error = "Please select second date range";
             }
-            if (!$scope.query.timeStart ||
-                !$scope.query.timeEnd) {
+            if (!$scope.query.time1 ||
+                !$scope.query.time2) {
                 $scope.timeError = "Please select time range";
             }
 
-            if(!$scope.songError && !$scope.rangeError
-                && !$scope.range1Error && !$scope.range2Error
-                &&!$scope.timeError) {*/
-                var q=$scope.query;
-                ReportService.getDODChart(q).then(function(response) {
+            if ($scope.query.songId &&
+                $scope.query.range1Date1 &&
+                $scope.query.range1Date2 &&
+                $scope.query.range2Date1 &&
+                $scope.query.range2Date2 &&
+                $scope.query.time1 &&
+                $scope.query.time2) {
+                console.log($scope.query);
+
+                ReportService.getDODChart($scope.query)
+                .then(function(response) {
+                    console.log('response',response);
                     $scope.chart = response;
-                    $scope.plotChart($scope.chart);
-                }).catch(function (e) {
+                    $scope.names = [];
+                    $scope.datapoints = [];
+                    $scope.datacolumns = [];
+
+                    for (var i = 0; i < $scope.chart.salesFirstRange.length; i++) {
+                        $scope.datapoints[i] = {
+                            x: $scope.chart.salesFirstRange[i].date + "  " + $scope.chart.salesSecondRange[i].date
+                        };
+                        $scope.datapoints[i][$scope.chart.firstRange] = $scope.chart.salesFirstRange[i].totalsales;
+                        $scope.datapoints[i][$scope.chart.secondRange] = $scope.chart.salesSecondRange[i].totalsales;
+                        
+                        var nameVal = [$scope.chart.salesFirstRange[i].date, $scope.chart.salesSecondRange[i].date]
+                        $scope.names.push(nameVal);
+
+                        $scope.datacolumns = [
+                            {"id": $scope.chart.firstRange, "type": "bar"},
+                            {"id": $scope.chart.secondRange, "type": "bar"}
+                        ];
+
+                        $scope.datax = {"id": "x"};
+                    }
+
+                },function (e) {
                     $scope.NoChartError = "Something went wrong!";
                     console.log(e);
                 });
-            /*}*/
-        };
+            } else {
+                // $scope.NoChartError = "Something went wrong!";
+            }
+        }
     }
 }
 

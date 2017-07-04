@@ -9,8 +9,8 @@
         <tr>
             <th st-sort="songListName">Name</th>
             <th st-sort="description">Description</th>
-            <th></th>
-            <th></th>
+            <th>Delete</th>
+            <th>Edit</th>
         </tr>
         <tr>
             <th>
@@ -28,10 +28,10 @@
             <td>{{row.songListName}}</td>
             <td>{{row.description}}</td>
             <td id="deleteSonglist" class="" ng-click="vm.deleteSonglist(row.id)">
-                <span class="glyphicon glyphicon-remove-circle"></span>
+                <span class="glyphicon glyphicon-remove-circle" title="Delete"></span>
             </td>
             <td id="editSonglist" ui-sref="app.editsonglist({ id : row.id})" ui-sref-active="active" class="">
-                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="glyphicon glyphicon-pencil" title="Edit"></span>
             </td>
         </tr>
         <tr>

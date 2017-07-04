@@ -18,7 +18,7 @@ class UploadSongsFormController {
         	SongsService.updateMaster(vm.jsonSongs).then(function(res) {
                 if (res.data.response === "Success") {
                 	vm.jsonSongs = [];
-                	vm.dataLoading = false;
+                	vm.dataLoading = undefined;
                 	vm.successmsg = "Success!! Songs uploaded";
                 	// vm.showRedirectBtn = true;
                 	// $state.go('app.songlists');
@@ -40,6 +40,8 @@ class UploadSongsFormController {
             SongsService.sendXml(fd).then(function(res) {
                 if (res.data.message == "please check xml file") {
                     vm.successmsg = "Error... Please check uploaded file";
+                } else if (res.data.message == "please select xml file") {
+                    vm.successmsg = "Error... Please select xml file";
                 } else if(res.data.message == "file uploaded successfully") {
                     vm.jsonSongs = res.data.track;
                     vm.successmsg = "Success!! File uploaded";
@@ -54,6 +56,7 @@ class UploadSongsFormController {
             });
             delete vm.file;
         };
+
     }
 }
 
