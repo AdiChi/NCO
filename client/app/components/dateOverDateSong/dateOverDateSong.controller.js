@@ -101,18 +101,25 @@ class DateOverDateSongController {
         }
 
         function startDateBeforeRender($dates) {
-            if ($scope.dateRangeEnd) {
-                var activeDate = moment($scope.dateRangeEnd);
+            $scope.sameRangeError = "";
+            if ($scope.dateRangeEnd && 
+                $scope.dateRangeStart && 
+                $scope.dateRangeEnd.valueOf() < $scope.dateRangeStart.valueOf()) {
+                /*var activeDate = moment($scope.dateRangeEnd);
 
                 $dates.filter(function(date) {
                     return date.localDateValue() >= activeDate.valueOf()
                 }).forEach(function(date) {
                     date.selectable = false;
-                });
+                });*/
+                $scope.dateRangeEnd = $scope.dateRangeStart;
+                endDateOnSetTime();
+                // $scope.$broadcast('end-date-changed');
             }
         }
 
         function endDateBeforeRender($view, $dates) {
+            $scope.sameRangeError = "";
             if ($scope.dateRangeStart) {
                 var activeDate = moment($scope.dateRangeStart).subtract(1, $view).add(1, 'minute');
 
@@ -151,18 +158,25 @@ class DateOverDateSongController {
         }
 
         function startDate2BeforeRender($dates) {
-            if ($scope.dateRange2End) {
-                var activeDate = moment($scope.dateRange2End);
+            $scope.sameRangeError = "";
+            if ($scope.dateRange2End && 
+                $scope.dateRange2Start && 
+                $scope.dateRange2End.valueOf() < $scope.dateRange2Start.valueOf()) {
+                /*var activeDate = moment($scope.dateRange2End);
 
                 $dates.filter(function(date) {
                     return date.localDateValue() >= activeDate.valueOf()
                 }).forEach(function(date) {
                     date.selectable = false;
-                });
+                });*/
+                $scope.dateRange2End = $scope.dateRange2Start;
+                endDate2OnSetTime();
+                // $scope.$broadcast('end-date-changed');
             }
         }
 
         function endDate2BeforeRender($view, $dates) {
+            $scope.sameRangeError = "";
             if ($scope.dateRange2Start) {
                 var activeDate = moment($scope.dateRange2Start).subtract(1, $view).add(1, 'minute');
 
@@ -200,6 +214,10 @@ class DateOverDateSongController {
                 !$scope.query.time2) {
                 $scope.timeError = "Please select time range";
             }
+            if( $scope.query.range1Date1 == $scope.query.range2Date1 &&
+                $scope.query.range1Date2 == $scope.query.range2Date2 ) {
+                $scope.sameRangeError = "Please select different sales periods";
+            }
 
             if ($scope.query.songId &&
                 $scope.query.range1Date1 &&
@@ -207,7 +225,8 @@ class DateOverDateSongController {
                 $scope.query.range2Date1 &&
                 $scope.query.range2Date2 &&
                 $scope.query.time1 &&
-                $scope.query.time2) {
+                $scope.query.time2 &&
+                !$scope.sameRangeError) {
                 console.log($scope.query);
 
                 ReportService.getDODChart($scope.query)

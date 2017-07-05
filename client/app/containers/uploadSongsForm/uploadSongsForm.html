@@ -26,7 +26,7 @@
     <div class="panel-body">
     <span style="font-size: small;color: grey;">* Click on column headers to sort</span>
         <div class="table-responsive">
-            <table st-safe-src="vm.jsonSongs" st-table="vm.displayCollection" class="table table-striped table-hover">
+            <table st-safe-src="vm.jsonSongs" st-table="vm.displayCollection" class="uploadSongs table table-striped table-hover">
                 <thead>
                     <tr>
                         <th ng-repeat="(key, value) in vm.jsonSongs[0]" st-sort="{{key}}" ng-if="key!=='insertFlag'">{{key}}</th>
