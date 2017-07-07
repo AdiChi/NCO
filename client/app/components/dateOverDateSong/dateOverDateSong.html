@@ -39,14 +39,11 @@
     </h4>
         </div>
         <div class="container-fluid">
-            <div id="main-info" class="well col-md-4">
+            <div id="main-info" class="well col-md-6">
                 <h4>Sales Period 1</h4>
-                <div class="dropdown form-group">
+                <div class="dropdown form-group timepicker">
                     <label>Start Date</label>
                     <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
-                        <!--         <div class="input-group date">
-            <input type="text" class="form-control" data-ng-model="dateRangeStart">
-        </div> -->
                         <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
                     </a>
                     {{dateRangeStart| date:"MMM dd, yyyy"}}
@@ -54,12 +51,9 @@
                         <datetimepicker data-ng-model="dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }" data-on-set-time="startDateOnSetTime()" data-before-render="startDateBeforeRender($dates)"></datetimepicker>
                     </ul>
                 </div>
-                <div class="dropdown form-group">
+                <div class="dropdown form-group timepicker">
                     <label>End Date</label>
                     <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
-                        <!-- <div class="input-group date">
-            <input type="text" class="form-control" data-ng-model="dateRangeEnd">
-        </div> -->
                         <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
                     </a>
                     {{dateRangeEnd| date:"MMM dd, yyyy"}}
@@ -68,10 +62,13 @@
                     </ul>
                 </div>
                 {{range1diff || 0}} days
+                <h4>Time Range 1</h4>
+                <span uib-timepicker ng-model="time1" ng-change="updateTStart()" min="todayStart" max="time2" class="timepicker"></span>
+                <span uib-timepicker ng-model="time2" ng-change="updateTEnd()" min="time1" max="todayEnd" class="timepicker"></span>
             </div>
-            <div id="main-info2" class="well col-md-4">
+            <div id="main-info2" class="well col-md-6">
                 <h4>Sales Period 2</h4>
-                <div class="dropdown form-group">
+                <div class="dropdown form-group timepicker">
                     <label>Start Date</label>
                     <a class="dropdown-toggle" id="dropdownStart2" role="button" data-toggle="dropdown" data-target="" href="">
                         <!--         <div class="input-group date">
@@ -84,7 +81,7 @@
                         <datetimepicker data-ng-model="dateRange2Start" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart2', renderOn: 'end-date2-changed' }" data-on-set-time="startDate2OnSetTime()" data-before-render="startDate2BeforeRender($dates)"></datetimepicker>
                     </ul>
                 </div>
-                <div class="dropdown form-group">
+                <div class="dropdown form-group timepicker">
                     <label>End Date</label>
                     <a class="dropdown-toggle" id="dropdownEnd2" role="button" data-toggle="dropdown" data-target="" href="">
                         <!-- <div class="input-group date">
@@ -98,49 +95,46 @@
                     </ul>
                 </div>
                 {{range2diff || 0}} days
-            </div>
-            <div id="main-info3" class="well col-md-4">
-                <h4>Time Range</h4>
-                <div class="form-group">
-                    <select class="hour form-control" ng-model="time1" style="width: 50%;" ng-change="updateTStart()">
-                        <option value="">Select start time</option>
-                        <option ng-repeat="i in hours track by $index" ng-if="!time2 || time2 >= $index" value="{{$index}}">{{$index}}</option>
-                    </select>
-                    <select class="hour form-control" ng-model="time2" style="width: 50%;" ng-change="updateTEnd()">
-                        <option value="">Select end time</option>
-                        <option ng-repeat="i in hours track by $index" ng-if="!time1 || time1 <= $index" value="{{$index}}">{{$index}}</option>
-                    </select>
+                <div>
+                <h4>Time Range 2</h4>
+                <span uib-timepicker ng-model="r2time1" ng-change="updateR2TStart()" min="todayStart" max="r2time2" class="timepicker"></span>
+                <span uib-timepicker ng-model="r2time2" ng-change="updateR2TEnd()" min="r2time1" max="todayEnd" class="timepicker"></span>
                 </div>
-                <div ng-hide="!time1 || !time2" style="font-size: smaller;">{{time1}}:00 - {{time2}}:59</div>
-                <div ng-show="!time1 || !time2" style="font-size: smaller;">Not selected</div>
             </div>
+            <!-- <div id="main-info3" class="well col-md-4">
+                <h4>Time Range</h4>
+                <span uib-timepicker ng-model="time1" ng-change="updateTStart()" min="todayStart" max="time2" class="timepicker"></span>
+                to
+                <span uib-timepicker ng-model="time2" ng-change="updateTEnd()" min="time1" max="todayEnd" class="timepicker"></span>
+            </div> -->
         </div>
-        <div style="color: red;">
+        <div ng-if="songError" style="color: red;">
             {{songError}}
         </div>
-        <div style="color: red;">
+        <div ng-if="rangeError" style="color: red;">
             {{rangeError}}
         </div>
-        <div style="color: red;">
+        <div ng-if="range1Error" style="color: red;">
             {{range1Error}}
         </div>
-        <div style="color: red;">
+        <div ng-if="range2Error" style="color: red;">
             {{range2Error}}
         </div>
-        <div style="color: red;">
+        <div ng-if="timeError" style="color: red;">
             {{timeError}}
         </div>
-        <div style="color: red;">
+        <div ng-if="sameRangeError" style="color: red;">
             {{sameRangeError}}
         </div>
         <div class="container-fluid">
-            <button id="confirmSubmit" type="submit" class="btn btn-success" ng-click="getChart()">Get chart</button>
+            <button id="confirmSubmit" type="submit" class="btn btn-success" ng-click="getChart()">Get Information</button>
         </div>
     </div>
 </div>
 <div style="color: red;">
     {{NoChartError}}
 </div>
+<!-- <button class="btn" title="Chart" ng-click="theChart.transform('line')">abc</button> -->
 <button ng-class="{selected: !drilldown}" ng-show="chart" class="btn glyphicon glyphicon-signal" title="Chart" ng-click="drilldown = false"></button>
 <button ng-class="{selected: drilldown}" ng-show="chart" class="btn glyphicon glyphicon-th-list" title="Drilldown" ng-click="drilldown = true"></button>
 <div ng-show="!drilldown">

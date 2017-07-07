@@ -3,6 +3,22 @@ class DateOverDateSongController {
         "ngInject";
         // var $scope = this;
         $scope.drilldown = false;
+        $scope.query = {};
+        $scope.details = {};
+        $scope.hours = new Array(24);
+        $scope.todayStart = moment().startOf('day');
+        $scope.todayEnd = moment().endOf('day');
+
+        $scope.time1 = $scope.todayStart;
+        $scope.query.time1 = $scope.todayStart.format('HH:mm');
+        $scope.time2 = $scope.todayEnd;
+        $scope.query.time2 = $scope.todayEnd.format('HH:mm');
+
+        $scope.r2time1 = $scope.todayStart;
+        $scope.query.r2time1 = $scope.todayStart.format('HH:mm');
+        $scope.r2time2 = $scope.todayEnd;
+        $scope.query.r2time2 = $scope.todayEnd.format('HH:mm');
+
         $(document).on('click', '.panel-heading span.clickable', function(e){
             var $this = $(this);
             collapseSelection($this);
@@ -18,9 +34,6 @@ class DateOverDateSongController {
                 $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
             }
         }
-        $scope.query = {};
-        $scope.details = {};
-        $scope.hours = new Array(24);
         $scope.select = function() {
             this.setSelectionRange(0, this.value.length);
         };
@@ -33,12 +46,22 @@ class DateOverDateSongController {
             console.log($scope.query);
         };
         $scope.updateTStart = function() {
-            $scope.query.time1 = $scope.time1+":00";
+            $scope.query.time1 = moment($scope.time1).format('HH:mm');
+            console.log($scope.time1);
         };
         $scope.updateTEnd = function() {
             $scope.timeError = "";
 
-            $scope.query.time2 = $scope.time2+":59";
+            $scope.query.time2 = moment($scope.time2).format('HH:mm');
+            console.log($scope.time2);
+        };
+        $scope.updateR2TStart = function() {
+            $scope.query.r2time1 = moment($scope.r2time1).format('HH:mm');
+        };
+        $scope.updateR2TEnd = function() {
+            $scope.timeError = "";
+
+            $scope.query.r2time2 = moment($scope.r2time2).format('HH:mm');
         };
         $scope.fetchSongs = function(name) {
             ReportService.getSongsBySearch(name)
@@ -83,9 +106,9 @@ class DateOverDateSongController {
             if ($scope.dateRangeEnd) {
                 var a = moment($scope.dateRangeEnd);
                 var b = moment($scope.dateRangeStart);
-                $scope.range1diff = a.diff(b, 'days') + 1; // 1
+                $scope.range1diff = a.diff(b, 'days') + 1;
             }
-            $scope.query.range1Date1 = moment($scope.dateRangeStart).format("YYYY.MM.DD");
+            $scope.query.range1Date1 = moment($scope.dateRangeStart).format("MM/DD/YYYY");
             $scope.$broadcast('start-date-changed');
         }
 
@@ -93,10 +116,10 @@ class DateOverDateSongController {
             if ($scope.dateRangeStart) {
                 var a = moment($scope.dateRangeEnd);
                 var b = moment($scope.dateRangeStart);
-                $scope.range1diff = a.diff(b, 'days') + 1; // 1
+                $scope.range1diff = a.diff(b, 'days') + 1;
             }
             $scope.range1Error = "";
-            $scope.query.range1Date2 = moment($scope.dateRangeEnd).format("YYYY.MM.DD");
+            $scope.query.range1Date2 = moment($scope.dateRangeEnd).format("MM/DD/YYYY");
             $scope.$broadcast('end-date-changed');
         }
 
@@ -112,9 +135,9 @@ class DateOverDateSongController {
                 }).forEach(function(date) {
                     date.selectable = false;
                 });*/
+                // $scope.$broadcast('end-date-changed');
                 $scope.dateRangeEnd = $scope.dateRangeStart;
                 endDateOnSetTime();
-                // $scope.$broadcast('end-date-changed');
             }
         }
 
@@ -142,7 +165,7 @@ class DateOverDateSongController {
                 var b = moment($scope.dateRange2Start);
                 $scope.range2diff = a.diff(b, 'days') + 1; // 1
             }
-            $scope.query.range2Date1 = moment($scope.dateRange2Start).format("YYYY.MM.DD");
+            $scope.query.range2Date1 = moment($scope.dateRange2Start).format("MM/DD/YYYY");
             $scope.$broadcast('start-date2-changed');
         }
 
@@ -153,7 +176,7 @@ class DateOverDateSongController {
                 $scope.range2diff = a.diff(b, 'days') + 1; // 1
             }
             $scope.range2Error = "";
-            $scope.query.range2Date2 = moment($scope.dateRange2End).format("YYYY.MM.DD");
+            $scope.query.range2Date2 = moment($scope.dateRange2End).format("MM/DD/YYYY");
             $scope.$broadcast('end-date2-changed');
         }
 
@@ -169,9 +192,9 @@ class DateOverDateSongController {
                 }).forEach(function(date) {
                     date.selectable = false;
                 });*/
+                // $scope.$broadcast('end-date-changed');
                 $scope.dateRange2End = $scope.dateRange2Start;
                 endDate2OnSetTime();
-                // $scope.$broadcast('end-date-changed');
             }
         }
 
@@ -195,7 +218,101 @@ class DateOverDateSongController {
 
         $scope.handleCallback = function (chartObj) {
             $scope.theChart = chartObj;
+
         };
+
+        function addEmptyDateValues () {
+            var firstRangeMap, secondRangeMap, range1, range2;
+
+                    if($scope.chart.daysInRange !== $scope.chart.salesFirstRange.length) {
+                        range1 = ($scope.chart.firstRange).split(" to ");
+                        firstRangeMap = new Map();
+                        $scope.chart.salesFirstRange.forEach(function(obj) {
+                            firstRangeMap.set(obj.date, obj.totalsales);
+                        });
+                        console.log(firstRangeMap);
+                    }
+
+                    if($scope.chart.daysInRange !== $scope.chart.salesSecondRange.length) {
+                        range2 = ($scope.chart.secondRange).split(" to ");
+                        secondRangeMap = new Map();
+                        $scope.chart.salesSecondRange.forEach(function(obj) {
+                            secondRangeMap.set(obj.date, obj.totalsales);
+                        });
+                    }
+
+                    if (firstRangeMap && range1) {
+                        var a = moment(range1[0], 'll');
+                        var b = moment(range1[1], 'll');
+                        var salesFirstRange = [];
+
+                        for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
+                            var x = m.format('MMM D');
+                            if(firstRangeMap.has(x) ){
+                                var y = firstRangeMap.get(x);
+                                salesFirstRange.push({
+                                    date: x,
+                                    totalsales: y
+                                });
+                            } else {
+                                
+                                salesFirstRange.push({
+                                    date: x,
+                                    totalsales: 0
+                                });
+                            }
+                        }
+                        console.log(salesFirstRange);
+                        $scope.chart.salesFirstRange = salesFirstRange;
+                    }
+                    if (secondRangeMap && range2) {
+                        var a = moment(range2[0], 'll');
+                        var b = moment(range2[1], 'll');
+                        var salesSecondRange = [];
+
+                        for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
+                            var x = m.format('MMM D');
+                            if(secondRangeMap.has(x)) {
+                                var y = secondRangeMap.get(m.format('MMM D'));
+                                salesSecondRange.push({
+                                    date: x,
+                                    totalsales: y
+                                });
+                            } else {
+                                salesSecondRange.push({
+                                    date: x,
+                                    totalsales: 0
+                                });
+                            }
+                        }
+                        console.log(salesSecondRange);
+                        $scope.chart.salesSecondRange = salesSecondRange;
+                    }
+                    plotChart();
+        }
+        function plotChart() {
+            $scope.names = [];
+            $scope.datapoints = [];
+            $scope.datacolumns = [];
+
+            for (var i = 0; i < $scope.chart.salesFirstRange.length; i++) {
+                $scope.datapoints[i] = {
+                    x: $scope.chart.salesFirstRange[i].date + "  " + $scope.chart.salesSecondRange[i].date
+                };
+                $scope.datapoints[i][$scope.chart.firstRange] = $scope.chart.salesFirstRange[i].totalsales;
+                $scope.datapoints[i][$scope.chart.secondRange] = $scope.chart.salesSecondRange[i].totalsales;
+                
+                var nameVal = [$scope.chart.salesFirstRange[i].date, $scope.chart.salesSecondRange[i].date]
+                $scope.names.push(nameVal);
+
+                $scope.datacolumns = [
+                    {"id": $scope.chart.firstRange, "type": "bar"},
+                    {"id": $scope.chart.secondRange, "type": "bar"}
+                ];
+
+                $scope.datax = {"id": "x"};
+            }
+        }
         function getChart() {
             $scope.theChart = null;
 
@@ -227,42 +344,24 @@ class DateOverDateSongController {
                 $scope.query.time1 &&
                 $scope.query.time2 &&
                 !$scope.sameRangeError) {
-                console.log($scope.query);
-
+                $scope.query.daysInRange = $scope.range1diff;
+                $scope.query.songId = "5928207b55649882af1e6126";
                 ReportService.getDODChart($scope.query)
-                .then(function(response) {
-                    console.log('response',response);
-                    $scope.chart = response;
-                    $scope.names = [];
-                    $scope.datapoints = [];
-                    $scope.datacolumns = [];
-
-                    for (var i = 0; i < $scope.chart.salesFirstRange.length; i++) {
-                        $scope.datapoints[i] = {
-                            x: $scope.chart.salesFirstRange[i].date + "  " + $scope.chart.salesSecondRange[i].date
-                        };
-                        $scope.datapoints[i][$scope.chart.firstRange] = $scope.chart.salesFirstRange[i].totalsales;
-                        $scope.datapoints[i][$scope.chart.secondRange] = $scope.chart.salesSecondRange[i].totalsales;
-                        
-                        var nameVal = [$scope.chart.salesFirstRange[i].date, $scope.chart.salesSecondRange[i].date]
-                        $scope.names.push(nameVal);
-
-                        $scope.datacolumns = [
-                            {"id": $scope.chart.firstRange, "type": "bar"},
-                            {"id": $scope.chart.secondRange, "type": "bar"}
-                        ];
-
-                        $scope.datax = {"id": "x"};
-                    }
-
-                },function (e) {
-                    $scope.NoChartError = "Something went wrong!";
-                    console.log(e);
-                });
+                    .then(function(response) {
+                        console.log('response', response.data);
+                        $scope.chart = response.data;
+                        addEmptyDateValues();
+                        $scope.NoChartError ="";
+                    }, function(e) {
+                        $scope.NoChartError = "Something went wrong!";
+                        console.log(e);
+                    });
             } else {
                 // $scope.NoChartError = "Something went wrong!";
             }
+
         }
+
     }
 }
 

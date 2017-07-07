@@ -2,6 +2,7 @@ import _                       from 'lodash';
 import angular                 from 'angular';
 import uiRouter                from 'angular-ui-router';
 import modal                   from 'angular-ui-bootstrap/src/modal'; 
+import timepicker              from 'angular-ui-bootstrap/src/timepicker'; 
 import ngInlineEdit            from 'ng-inline-edit';
 
 import AppComponent            from './app.component';
@@ -50,6 +51,7 @@ angular
     .module('app', [
         uiRouter,
         modal,
+        timepicker,
         ngInlineEdit,
         'ui.bootstrap.datetimepicker',
         'd3js',
