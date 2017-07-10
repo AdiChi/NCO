@@ -134,13 +134,12 @@
 <div style="color: red;">
     {{NoChartError}}
 </div>
-<!-- <button class="btn" title="Chart" ng-click="theChart.transform('line')">abc</button> -->
 <button ng-class="{selected: !drilldown}" ng-show="chart" class="btn glyphicon glyphicon-signal" title="Chart" ng-click="drilldown = false"></button>
 <button ng-class="{selected: drilldown}" ng-show="chart" class="btn glyphicon glyphicon-th-list" title="Drilldown" ng-click="drilldown = true"></button>
 <div ng-show="!drilldown">
 <div class="container-fluid" ng-if="!theChart && chart" style="padding-top:30px">
     {{selectedSong}}
-    <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback">
+    <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback1">
         <chart-size chart-height="500"/>
         <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
         <!-- <chart-bar ratio="0.5" /> -->
@@ -154,15 +153,23 @@
     </c3chart>
 </div>
 <div class="container-fluid" ng-if="theChart" style="padding-top:30px">
-    {{selectedSong}}
-    <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true">
+    <div class="container-fluid">
+        <div class="col-md-3">{{selectedSong}}</div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <select class="form-control chart-type" ng-model="currentChartType" ng-change="changeChartType(currentChartType, '{{currentChartType}}')" ng-options="t as t for t in chartTypes">
+            </select>
+        </div>
+    </div>
+    <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback2">
         <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
         <chart-size chart-height="500"/>
         <!-- <chart-bar ratio="0.5" /> -->
         <chart-axes values-x="x" />
         <chart-axis>
             <chart-axis-x axis-position="outer-center" axis-type="category" />
-            <chart-axis-y axis-position="outer-middle" axis-label="Sales (1000s)" axis-type="category" />
+            <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
             <chart-axis-x-tick tick-rotate="90" />
         </chart-axis>
         <chart-legend legend-position="inset" />
@@ -184,9 +191,9 @@
     <thead>
       <tr>
         <th>First Range</th>
-        <th>Sales ($)</th>
+        <th>Sales </th>
         <th>Second Range</th>
-        <th>Sales ($)</th>
+        <th>Sales </th>
       </tr>
     </thead>
     <tbody>

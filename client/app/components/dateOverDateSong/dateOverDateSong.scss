@@ -1,4 +1,4 @@
-.row{
+.row {
     margin-top:40px;
     padding: 0 10px;
 }
@@ -21,4 +21,7 @@
 .timepicker {
     padding: 0 20px;
     display:inline-block;
+}
+select.chart-type {
+    text-transform: capitalize;
 }

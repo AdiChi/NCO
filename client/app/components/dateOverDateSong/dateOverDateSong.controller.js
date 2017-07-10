@@ -1,7 +1,9 @@
 class DateOverDateSongController {
     constructor($scope, $filter, ReportService) {
         "ngInject";
-        // var $scope = this;
+
+        $scope.chartTypes = [ "bar" , "area-step" /*, "line" */];
+        $scope.currentChartType = $scope.chartTypes[0];
         $scope.drilldown = false;
         $scope.query = {};
         $scope.details = {};
@@ -96,6 +98,11 @@ class DateOverDateSongController {
                 $scope.rangeError = "";
             }
         });
+
+        $scope.changeChartType = function(type, typeOld) {
+            if($scope.theChart2)
+                $scope.theChart2.transform(type);
+        };
 
         $scope.endDateBeforeRender = endDateBeforeRender;
         $scope.endDateOnSetTime = endDateOnSetTime;
@@ -216,30 +223,35 @@ class DateOverDateSongController {
             return format;
         };
 
-        $scope.handleCallback = function (chartObj) {
+        $scope.handleCallback1 = function (chartObj) {
             $scope.theChart = chartObj;
+            console.log(chartObj);
 
         };
-
+        $scope.handleCallback2 = function (chartObj) {
+            $scope.theChart2 = chartObj;
+            console.log(chartObj);
+        };
+        
         function addEmptyDateValues () {
             var firstRangeMap, secondRangeMap, range1, range2;
 
-                    if($scope.chart.daysInRange !== $scope.chart.salesFirstRange.length) {
+                    // if($scope.chart.daysInRange !== $scope.chart.salesFirstRange.length) {
                         range1 = ($scope.chart.firstRange).split(" to ");
                         firstRangeMap = new Map();
                         $scope.chart.salesFirstRange.forEach(function(obj) {
                             firstRangeMap.set(obj.date, obj.totalsales);
                         });
-                        console.log(firstRangeMap);
-                    }
+                        // console.log(firstRangeMap);
+                    // }
 
-                    if($scope.chart.daysInRange !== $scope.chart.salesSecondRange.length) {
+                    // if($scope.chart.daysInRange !== $scope.chart.salesSecondRange.length) {
                         range2 = ($scope.chart.secondRange).split(" to ");
                         secondRangeMap = new Map();
                         $scope.chart.salesSecondRange.forEach(function(obj) {
                             secondRangeMap.set(obj.date, obj.totalsales);
                         });
-                    }
+                    // }
 
                     if (firstRangeMap && range1) {
                         var a = moment(range1[0], 'll');
@@ -247,7 +259,7 @@ class DateOverDateSongController {
                         var salesFirstRange = [];
 
                         for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
-                            var x = m.format('MMM D');
+                            var x = m.format('MMM DD');
                             if(firstRangeMap.has(x) ){
                                 var y = firstRangeMap.get(x);
                                 salesFirstRange.push({
@@ -255,14 +267,13 @@ class DateOverDateSongController {
                                     totalsales: y
                                 });
                             } else {
-                                
                                 salesFirstRange.push({
                                     date: x,
                                     totalsales: 0
                                 });
                             }
                         }
-                        console.log(salesFirstRange);
+                        // console.log(salesFirstRange);
                         $scope.chart.salesFirstRange = salesFirstRange;
                     }
                     if (secondRangeMap && range2) {
@@ -271,9 +282,9 @@ class DateOverDateSongController {
                         var salesSecondRange = [];
 
                         for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
-                            var x = m.format('MMM D');
+                            var x = m.format('MMM DD');
                             if(secondRangeMap.has(x)) {
-                                var y = secondRangeMap.get(m.format('MMM D'));
+                                var y = secondRangeMap.get(x);
                                 salesSecondRange.push({
                                     date: x,
                                     totalsales: y
@@ -285,7 +296,7 @@ class DateOverDateSongController {
                                 });
                             }
                         }
-                        console.log(salesSecondRange);
+                        // console.log(salesSecondRange);
                         $scope.chart.salesSecondRange = salesSecondRange;
                     }
                     plotChart();
@@ -345,10 +356,10 @@ class DateOverDateSongController {
                 $scope.query.time2 &&
                 !$scope.sameRangeError) {
                 $scope.query.daysInRange = $scope.range1diff;
-                $scope.query.songId = "5928207b55649882af1e6126";
+                $scope.query.songId = "Y66000000067";
                 ReportService.getDODChart($scope.query)
                     .then(function(response) {
-                        console.log('response', response.data);
+                        // console.log('response', response.data);
                         $scope.chart = response.data;
                         addEmptyDateValues();
                         $scope.NoChartError ="";
