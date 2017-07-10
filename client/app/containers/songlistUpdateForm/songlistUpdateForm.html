@@ -14,7 +14,7 @@
     <div class="form-group">
         <button type="button" style="margin-top:20px" class="col-sm-2 btn btn-primary btn-md" ng-click="vm.addSongs()">Add songs</button>
         <h3 class=" col-sm-10" ng-if="!vm.songlist.songs.length">No Songs Added to {{vm.songlist.songListName}}</h3>
-        <table st-safe-src="vm.songlist.songs" st-table="vm.displayCollection2" class="table table-striped" ng-if="vm.songlist.songs.length > 0">
+        <table st-safe-src="vm.songlist.songs" st-table="vm.displayCollection2" on-filter="onFilter" class="table table-striped" ng-if="vm.songlist.songs.length > 0">
             <thead>
                 <tr>
                     <th row-select-all="vm.songlist.songs" selected="vm.selected" ng-click="vm.selectAll(vm.songlist.songs)"></th>

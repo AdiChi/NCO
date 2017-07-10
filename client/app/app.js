@@ -33,6 +33,7 @@ import RowSelectDirective      from './directives/rowSelect.directive';
 import RowSelectAllDirective   from './directives/rowSelectAll.directive';
 import CustomOnChangeDirective from './directives/customOnChange.directive';
 import StSummaryDirective      from './directives/stSummary.directive';
+import OnFilter                from './directives/onDataFilter.directive';
 
 // import our default styles for the whole application
 import 'normalize.css';
@@ -139,6 +140,7 @@ angular
     .directive('stExport', ExportToCsvDirective)
     .directive('customOnChange', CustomOnChangeDirective)
     .directive('stSummary', StSummaryDirective)
+    .directive('onFilter', OnFilter)
     .factory('UsersService', UsersService)
     .factory('SongsService', SongsService)
     .factory('SongListsService', SongListsService)
