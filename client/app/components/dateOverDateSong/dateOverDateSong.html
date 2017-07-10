@@ -177,17 +177,10 @@
 </div>
 </div>
 
-<!-- 
-<c3chart bindto-id="stacked-bar-plot1-chart">
-     <chart-column column-id="x" column-values="period 10,period 20,period 30,period 40,period 50,period 60" />
-    <chart-column column-id="data 1" column-name="{{chart.firstRange}}" column-values="30,200,100,400,150,250" column-type="bar" />
-    <chart-column column-id="data 2" column-name="{{chart.secondRange}}" column-values="50,20,10,40,15,25" column-type="bar" />
-           <chart-group group-values="data 1,data 2"/>
-</c3chart> -->
 <div class="container" ng-if="chart && drilldown">
   <h4>{{chart.firstRange}} - {{chart.secondRange}}</h4>
     {{selectedSong}}
-  <table class="table table-striped">
+  <table st-safe-src="chart.salesFirstRange" st-table="displayCollection" class="table table-striped">
     <thead>
       <tr>
         <th>First Range</th>
@@ -197,12 +190,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="(key, range1) in chart.salesFirstRange">
+      <tr ng-repeat="(key, range1) in displayCollection">
         <td>{{range1.date}}</td>
-        <td>{{range1.totalsales}}K</td>
+        <td>{{range1.totalsales}}</td>
         <td>{{chart.salesSecondRange[key].date}}</td>
-        <td>{{chart.salesSecondRange[key].totalsales}}K</td>
+        <td>{{chart.salesSecondRange[key].totalsales}}</td>
       </tr>
     </tbody>
+    <tfoot>
+        <tr>
+            <td><a class="btn btn-default" st-export>Export to CSV</a></td>
+        </tr>
+    </tfoot>
   </table>
 </div>

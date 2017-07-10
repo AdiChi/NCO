@@ -2,11 +2,12 @@ class DateOverDateSongController {
     constructor($scope, $filter, ReportService) {
         "ngInject";
 
-        $scope.chartTypes = [ "bar" , "area-step" /*, "line" */];
+        $scope.chartTypes = [ "bar" , "area-step" , "line", "pie" ];
         $scope.currentChartType = $scope.chartTypes[0];
         $scope.drilldown = false;
         $scope.query = {};
         $scope.details = {};
+        $scope.displayCollection = [];
         $scope.hours = new Array(24);
         $scope.todayStart = moment().startOf('day');
         $scope.todayEnd = moment().endOf('day');
@@ -25,6 +26,21 @@ class DateOverDateSongController {
             var $this = $(this);
             collapseSelection($this);
         });
+        $scope.toFormat = function(r) {
+            $scope.exportListName = $scope.selectedSong + "\r\n\n\"" 
+                + $scope.chart.firstRange + "\""+
+                " \n\"" + $scope.chart.secondRange + "\"";
+
+            return $scope.chart.salesFirstRange.map(function(item, index) {
+                let sales = {
+                    "First Range": item.date,
+                    "Sales": item.totalsales,
+                    "Second Range": $scope.chart.salesSecondRange[index].date,
+                    "Sales 2": $scope.chart.salesSecondRange[index].totalsales
+                };
+                return sales;
+            });
+        };
         function collapseSelection($this) {
             if(!$this.hasClass('panel-collapsed')) {
                 $this.parents('.panel').find('.panel-body').slideUp();
@@ -146,6 +162,11 @@ class DateOverDateSongController {
                 $scope.dateRangeEnd = $scope.dateRangeStart;
                 endDateOnSetTime();
             }
+            for(var i=0; i<$dates.length;i++) {
+               if(new Date().getTime() < $dates[i].utcDateValue) {
+                  $dates[i].selectable = false;
+               }
+            } 
         }
 
         function endDateBeforeRender($view, $dates) {
@@ -159,6 +180,11 @@ class DateOverDateSongController {
                     date.selectable = false;
                 });
             }
+            for(var i=0; i<$dates.length;i++) {
+               if(new Date().getTime() < $dates[i].utcDateValue) {
+                  $dates[i].selectable = false;
+               }
+            } 
         }
         $scope.endDate2BeforeRender = endDate2BeforeRender;
         $scope.endDate2OnSetTime = endDate2OnSetTime;
@@ -203,6 +229,11 @@ class DateOverDateSongController {
                 $scope.dateRange2End = $scope.dateRange2Start;
                 endDate2OnSetTime();
             }
+            for(var i=0; i<$dates.length;i++) {
+               if(new Date().getTime() < $dates[i].utcDateValue) {
+                  $dates[i].selectable = false;
+               }
+            } 
         }
 
         function endDate2BeforeRender($view, $dates) {
@@ -216,6 +247,11 @@ class DateOverDateSongController {
                     date.selectable = false;
                 });
             }
+            for(var i=0; i<$dates.length;i++) {
+               if(new Date().getTime() < $dates[i].utcDateValue) {
+                  $dates[i].selectable = false;
+               }
+            } 
         }
         
         $scope.formatTooltip = function(name, ratio, id, index) {
@@ -225,12 +261,11 @@ class DateOverDateSongController {
 
         $scope.handleCallback1 = function (chartObj) {
             $scope.theChart = chartObj;
-            console.log(chartObj);
 
         };
         $scope.handleCallback2 = function (chartObj) {
-            $scope.theChart2 = chartObj;
             console.log(chartObj);
+            $scope.theChart2 = chartObj;
         };
         
         function addEmptyDateValues () {
@@ -362,6 +397,7 @@ class DateOverDateSongController {
                         // console.log('response', response.data);
                         $scope.chart = response.data;
                         addEmptyDateValues();
+                        $scope.displayCollection = [].concat($scope.chart.salesFirstRange);
                         $scope.NoChartError ="";
                     }, function(e) {
                         $scope.NoChartError = "Something went wrong!";
