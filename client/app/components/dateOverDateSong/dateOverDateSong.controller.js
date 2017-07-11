@@ -3,6 +3,40 @@ class DateOverDateSongController {
         "ngInject";
 
         $scope.chartTypes = [ "bar" , "area-step" , "line", "pie" ];
+        $scope.options= [
+            {
+                "name": "France",
+                "id": 0
+            },
+            {
+                "name": "United Kingdom",
+                "id": 1
+            },
+            {
+                "name": "Germany",
+                "id": 2
+            },
+            {
+                "name": "Belgium",
+                "id": 3
+            },
+            {
+                "name": "Netherlands",
+                "id": 4
+            },
+            {
+                "name": "Spain",
+                "id": 5
+            },
+            {
+                "name": "Italy",
+                "id": 6
+            },
+            {
+                "name": "Poland",
+                "id": 7
+            }
+        ];
         $scope.currentChartType = $scope.chartTypes[0];
         $scope.drilldown = false;
         $scope.query = {};
@@ -147,7 +181,7 @@ class DateOverDateSongController {
         }
 
         function startDateBeforeRender($dates) {
-            $scope.sameRangeError = "";
+            $scope.sameRangeError = null;
             if ($scope.dateRangeEnd && 
                 $scope.dateRangeStart && 
                 $scope.dateRangeEnd.valueOf() < $scope.dateRangeStart.valueOf()) {
@@ -170,7 +204,7 @@ class DateOverDateSongController {
         }
 
         function endDateBeforeRender($view, $dates) {
-            $scope.sameRangeError = "";
+            $scope.sameRangeError = null;
             if ($scope.dateRangeStart) {
                 var activeDate = moment($scope.dateRangeStart).subtract(1, $view).add(1, 'minute');
 
@@ -214,7 +248,7 @@ class DateOverDateSongController {
         }
 
         function startDate2BeforeRender($dates) {
-            $scope.sameRangeError = "";
+            $scope.sameRangeError = null;
             if ($scope.dateRange2End && 
                 $scope.dateRange2Start && 
                 $scope.dateRange2End.valueOf() < $scope.dateRange2Start.valueOf()) {
@@ -237,7 +271,7 @@ class DateOverDateSongController {
         }
 
         function endDate2BeforeRender($view, $dates) {
-            $scope.sameRangeError = "";
+            $scope.sameRangeError = null;
             if ($scope.dateRange2Start) {
                 var activeDate = moment($scope.dateRange2Start).subtract(1, $view).add(1, 'minute');
 
@@ -294,7 +328,7 @@ class DateOverDateSongController {
                         var salesFirstRange = [];
 
                         for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
-                            var x = m.format('MMM DD');
+                            var x = m.format('MMM DD, YY');
                             if(firstRangeMap.has(x) ){
                                 var y = firstRangeMap.get(x);
                                 salesFirstRange.push({
@@ -317,7 +351,7 @@ class DateOverDateSongController {
                         var salesSecondRange = [];
 
                         for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
-                            var x = m.format('MMM DD');
+                            var x = m.format('MMM DD, YY');
                             if(secondRangeMap.has(x)) {
                                 var y = secondRangeMap.get(x);
                                 salesSecondRange.push({
@@ -343,7 +377,7 @@ class DateOverDateSongController {
 
             for (var i = 0; i < $scope.chart.salesFirstRange.length; i++) {
                 $scope.datapoints[i] = {
-                    x: $scope.chart.salesFirstRange[i].date + "  " + $scope.chart.salesSecondRange[i].date
+                    x: $scope.chart.salesFirstRange[i].date + "_" + $scope.chart.salesSecondRange[i].date
                 };
                 $scope.datapoints[i][$scope.chart.firstRange] = $scope.chart.salesFirstRange[i].totalsales;
                 $scope.datapoints[i][$scope.chart.secondRange] = $scope.chart.salesSecondRange[i].totalsales;
@@ -389,7 +423,8 @@ class DateOverDateSongController {
                 $scope.query.range2Date2 &&
                 $scope.query.time1 &&
                 $scope.query.time2 &&
-                !$scope.sameRangeError) {
+                !$scope.sameRangeError &&
+                !$scope.rangeError) {
                 $scope.query.daysInRange = $scope.range1diff;
                 $scope.query.songId = "Y66000000067";
                 ReportService.getDODChart($scope.query)

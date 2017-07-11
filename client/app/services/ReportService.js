@@ -26,8 +26,8 @@ function ReportService($http, config, superCache) {
                 params: query,
                 headers: getHeaders()
             });
-/*
-            var chartDetails = Promise.resolve({
+
+            /*var chartDetails = Promise.resolve({
                 data: {
                     songid: 1234,
                     daysInRange: 8,
@@ -36,50 +36,49 @@ function ReportService($http, config, superCache) {
                     salesFirstRange: [
 
                         {
-                            date: "May 2",
+                            date: "May 02, 17",
                             totalsales: 120
                         }, {
-                            date: "May 3",
+                            date: "May 03, 17",
                             totalsales: 234
                         }, {
-                            date: "May 4",
+                            date: "May 04, 17",
                             totalsales: 432
                         }, {
-                            date: "May 5",
+                            date: "May 05, 17",
                             totalsales: 23
                         }, {
-                            date: "May 6",
+                            date: "May 06, 17",
                             totalsales: 55
                         }, {
-                            date: "May 7",
+                            date: "May 07, 17",
                             totalsales: 567
                         }, {
-                            date: "May 8",
+                            date: "May 08, 17",
                             totalsales: 109
                         }
                     ],
                     salesSecondRange: [{
-                            date: "Jun 1",
+                            date: "Jun 01, 17",
                             totalsales: 400
                         }, {
-                            date: "Jun 2",
+                            date: "Jun 02, 17",
                             totalsales: 455
                         },
-
                         {
-                            date: "Jun 4",
+                            date: "Jun 04, 17",
                             totalsales: 554
                         }, {
-                            date: "Jun 5",
+                            date: "Jun 05, 17",
                             totalsales: 332
                         }, {
-                            date: "Jun 6",
+                            date: "Jun 06, 17",
                             totalsales: 322
                         }, {
-                            date: "Jun 7",
+                            date: "Jun 07, 17",
                             totalsales: 111
                         }, {
-                            date: "Jun 8",
+                            date: "Jun 08, 17",
                             totalsales: 33
                         }
                     ]
