@@ -1,5 +1,5 @@
 class SonglistUpdateFormController {
-    constructor($state, $stateParams, SongListsService, ModalService, _) {
+    constructor($state, $stateParams, $scope, SongListsService, ModalService, _) {
         "ngInject";
         var vm = this;
         this.$state = $state;
