@@ -19,6 +19,39 @@ function ReportService($http, config, superCache) {
             });
             return songs;
         },
+        getTerritories() {
+            var territories = $http.get(`${baseUrl}/nco/territoryList`,{headers: getHeaders()})
+                .catch(function(error) {
+                    console.log(error);
+                });
+            return territories;
+        },
+        getTerritoryGroups() {
+            var TGs = $http.get(`${baseUrl}/nco/territoryGroupList`,{headers: getHeaders()})
+                .catch(function(error) {
+                    console.log(error);
+                });
+            return TGs;
+        },
+        getRetailers() {
+            var retailers = $http.get(`${baseUrl}/nco/retailerList`,{headers: getHeaders()})
+                .catch(function(error) {
+                    console.log(error);
+                });
+            /*var retailers = Promise.resolve({
+                data: [
+                    {
+                        "id": "1",
+                        "name": "iTunes"
+                    },
+                    {
+                        "id": "2",
+                        "name": "Spotify"
+                    }
+                ]
+            });*/
+            return retailers;
+        },
         getDODChart(query) {
             var chartDetails = $http({
                 url:  `${baseUrl}/getDODChart`,

@@ -3,40 +3,37 @@ class DateOverDateSongController {
         "ngInject";
 
         $scope.chartTypes = [ "bar" , "area-step" , "line", "pie" ];
-        $scope.options= [
-            {
-                "name": "France",
-                "id": 0
-            },
-            {
-                "name": "United Kingdom",
-                "id": 1
-            },
-            {
-                "name": "Germany",
-                "id": 2
-            },
-            {
-                "name": "Belgium",
-                "id": 3
-            },
-            {
-                "name": "Netherlands",
-                "id": 4
-            },
-            {
-                "name": "Spain",
-                "id": 5
-            },
-            {
-                "name": "Italy",
-                "id": 6
-            },
-            {
-                "name": "Poland",
-                "id": 7
-            }
-        ];
+        $scope.territories = [];
+        $scope.territoryGroups = [];
+        $scope.retailers = [];
+        $scope.territoryLabels = {
+            select: "Select Territories",
+            itemsSelected: "Territories Selected"
+        };
+        $scope.territoryGroupLabels = {
+            select: "Select Territory Groups",
+            itemsSelected: "Territory Groups Selected"
+        };
+        $scope.retailerLabels = {
+            select: "Select Retailer",
+            itemsSelected: "Retailers Selected"
+        };
+        ReportService.getTerritories().then(function(res) {
+            $scope.territories = res.data;
+        }, function(err) {
+            console.log(err);
+        });
+        ReportService.getTerritoryGroups().then(function(res) {
+            $scope.territoryGroups = res.data;
+        }, function(err) {
+            console.log(err);
+        });
+        ReportService.getRetailers().then(function(res) {
+            $scope.retailers = res.data;
+        }, function(err) {
+            console.log(err);
+        });
+
         $scope.currentChartType = $scope.chartTypes[0];
         $scope.drilldown = false;
         $scope.query = {};
@@ -295,13 +292,26 @@ class DateOverDateSongController {
 
         $scope.handleCallback1 = function (chartObj) {
             $scope.theChart = chartObj;
-
         };
         $scope.handleCallback2 = function (chartObj) {
             console.log(chartObj);
             $scope.theChart2 = chartObj;
         };
-        
+        $scope.onSelectTerritory = function() {
+            $scope.query.territories= $scope.selectedTer.map(function(terr) {
+                return terr.id;
+            });
+        };
+        $scope.onSelectTerritoryGroup = function() {
+            $scope.query.territoryGroups= $scope.selectedTG.map(function(tg) {
+                return tg.id;
+            });
+        };
+        $scope.onSelectRetailer = function() {
+            $scope.query.retailers= $scope.selectedRet.map(function(retailer) {
+                return retailer.id;
+            });
+        };
         function addEmptyDateValues () {
             var firstRangeMap, secondRangeMap, range1, range2;
 
@@ -371,6 +381,11 @@ class DateOverDateSongController {
                     plotChart();
         }
         function plotChart() {
+            $('.panel-heading span.clickable').each(function() {
+                 var $this = $(this); 
+                 collapseSelection($this);
+            });
+
             $scope.names = [];
             $scope.datapoints = [];
             $scope.datacolumns = [];
@@ -433,7 +448,7 @@ class DateOverDateSongController {
                         $scope.chart = response.data;
                         addEmptyDateValues();
                         $scope.displayCollection = [].concat($scope.chart.salesFirstRange);
-                        $scope.NoChartError ="";
+                        $scope.NoChartError = "";
                     }, function(e) {
                         $scope.NoChartError = "Something went wrong!";
                         console.log(e);
@@ -443,7 +458,6 @@ class DateOverDateSongController {
             }
 
         }
-
     }
 }
 

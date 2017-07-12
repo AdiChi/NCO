@@ -152,7 +152,7 @@ angular
         return $cacheFactory('super-cache');
     }])
     .constant('config', {
-        apiUrl: 'http://172.27.108.133:8085',
+        apiUrl: 'http://172.27.108.133:8080',
         baseUrl: '/'
     })
     .factory('_', ['$window', function($window) {
