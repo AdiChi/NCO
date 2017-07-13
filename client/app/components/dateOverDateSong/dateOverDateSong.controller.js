@@ -2,7 +2,7 @@ class DateOverDateSongController {
     constructor($scope, $filter, ReportService) {
         "ngInject";
 
-        $scope.chartTypes = [ "bar" , "area-step" , "line", "pie" ];
+        $scope.chartTypes = [ "bar" , "stacked-bar", "area-step" , "line", "pie" ];
         $scope.territories = [];
         $scope.territoryGroups = [];
         $scope.retailers = [];
@@ -147,8 +147,16 @@ class DateOverDateSongController {
         });
 
         $scope.changeChartType = function(type, typeOld) {
-            if($scope.theChart2)
-                $scope.theChart2.transform(type);
+            if($scope.theChart2) {
+                $scope.currentChartType = type;
+                if (type == "stacked-bar") {
+                    $scope.theChart2.groups([[$scope.chart.firstRange,$scope.chart.secondRange]]);
+                    $scope.theChart2.transform("bar");
+                } else {
+                    $scope.theChart2.groups([]);
+                    $scope.theChart2.transform(type);
+                }
+            }
         };
 
         $scope.endDateBeforeRender = endDateBeforeRender;
@@ -286,7 +294,11 @@ class DateOverDateSongController {
         }
         
         $scope.formatTooltip = function(name, ratio, id, index) {
-            var format = name === $scope.datacolumns[0].id ? $scope.names[index][0] :$scope.names[index][1];
+            if($scope.currentChartType == "pie") {
+                var format = name === $scope.datacolumns[0].id ? $scope.datacolumns[0].id : $scope.datacolumns[1].id;
+            } else {
+                var format = name === $scope.datacolumns[0].id ? $scope.names[index][0] : $scope.names[index][1];
+            }
             return format;
         };
 
@@ -407,6 +419,7 @@ class DateOverDateSongController {
 
                 $scope.datax = {"id": "x"};
             }
+            $scope.currentChartType = $scope.chartTypes[0];
         }
         function getChart() {
             $scope.theChart = null;
