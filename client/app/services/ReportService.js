@@ -20,21 +20,21 @@ function ReportService($http, config, superCache) {
             return songs;
         },
         getTerritories() {
-            var territories = $http.get(`${baseUrl}/nco/territoryList`,{headers: getHeaders()})
+            var territories = $http.get(`${baseUrl}/nco/territoryList`, {headers: getHeaders()})
                 .catch(function(error) {
                     console.log(error);
                 });
             return territories;
         },
         getTerritoryGroups() {
-            var TGs = $http.get(`${baseUrl}/nco/territoryGroupList`,{headers: getHeaders()})
+            var TGs = $http.get(`${baseUrl}/nco/territoryGroupList`, {headers: getHeaders()})
                 .catch(function(error) {
                     console.log(error);
                 });
             return TGs;
         },
         getRetailers() {
-            var retailers = $http.get(`${baseUrl}/nco/retailerList`,{headers: getHeaders()})
+            var retailers = $http.get(`${baseUrl}/nco/orgList`, {headers: getHeaders()})
                 .catch(function(error) {
                     console.log(error);
                 });
