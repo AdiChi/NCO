@@ -109,11 +109,14 @@
             </div> -->
         </div>
         <div class="container-fluid territories-retailers">
-            <multiselect ng-model="selectedTer" options="territories" id-prop="id" display-prop="name" show-search="true" labels="territoryLabels" show-select-all="true" show-unselect-all="true" class="col-md-4" ng-change="onSelectTerritory()"> </multiselect>
+            <multiselect ng-model="selectedTer" options="territories" id-prop="id" display-prop="name" show-search="true" labels="territoryLabels" show-select-all="true" show-unselect-all="true" class="col-md-3" ng-change="onSelectTerritory()"> </multiselect>
 
-            <multiselect ng-model="selectedTG" options="territoryGroups" id-prop="id" display-prop="name" show-search="true" labels="territoryGroupLabels" show-select-all="true" show-unselect-all="true" class="col-md-4" ng-change="onSelectTerritoryGroup()"> </multiselect>
+            <multiselect ng-model="selectedTG" options="territoryGroups" id-prop="id" display-prop="name" show-search="true" labels="territoryGroupLabels" show-select-all="true" show-unselect-all="true" class="col-md-3" ng-change="onSelectTerritoryGroup()"> </multiselect>
 
-            <multiselect ng-model="selectedRet" options="retailers" id-prop="id" display-prop="name" show-search="true" labels="retailerLabels" show-select-all="true" show-unselect-all="true" class="col-md-4" ng-change="onSelectRetailer()"> </multiselect>
+            <multiselect ng-model="selectedRet" options="retailers" id-prop="id" display-prop="name" show-search="true" labels="retailerLabels" show-select-all="true" show-unselect-all="true" class="col-md-3" ng-change="onSelectRetailer()"> </multiselect>
+            <div class="col-md-3" ng-if="selectedRet.length!== 1">
+                <label><input type="checkbox" ng-model="brkByRetailer">Break out by Retailer</label>
+            </div>
         </div>
         <div ng-if="songError" style="color: red;">
             {{songError}}
@@ -146,7 +149,7 @@
 <div ng-show="!drilldown">
     <div class="container-fluid" ng-if="!theChart && chart" style="padding-top:30px">
         {{selectedSong}}
-        <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback1">
+        <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections">
             <chart-size chart-height="700" />
             <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
             <!-- <chart-bar ratio="0.5" /> -->
@@ -169,7 +172,7 @@
             </select>
             </div>
         </div>
-        <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback2">
+        <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback2" empty-label="No data available for above selections">
             <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
             <chart-size chart-height="700" />
             <!-- <chart-bar ratio="0.5" /> -->
