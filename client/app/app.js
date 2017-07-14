@@ -103,8 +103,8 @@ angular
                 template: '<login></login>'
             })
             // Dashboard page to contain our users list page
-            .state('app.dashboard', {
-                url: '/dashboard',
+            .state('app.home', {
+                url: '/home',
                 template: '<dashboard></dashboard>'
             })
             .state('app.artists', {

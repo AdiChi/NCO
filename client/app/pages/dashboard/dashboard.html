@@ -12,10 +12,42 @@
             </div>
         </div>
         <div class="info-wrapper">
-            <div class="info-block {{vm.dashboard.theme}}-block"></div>
-            <div class="info-block {{vm.dashboard.theme}}-block"></div>
-            <div class="info-block {{vm.dashboard.theme}}-block"></div>
-            <div class="info-block {{vm.dashboard.theme}}-block"></div>
+            <div class="info-block {{vm.dashboard.theme}}-block">
+                <div class="info-icon expenses">
+                    <i class="fa fa-university fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="info-right">
+                    <p class="info-title">Total Expenses</p>
+                    <p class="info-value">$ 9,982</p>
+                </div>
+            </div>
+            <div class="info-block {{vm.dashboard.theme}}-block">
+                <div class="info-icon plays">
+                    <i class="fa fa-headphones fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="info-right">
+                    <p class="info-title">Plays</p>
+                    <p class="info-value">1023</p>
+                </div>
+            </div>
+            <div class="info-block {{vm.dashboard.theme}}-block">
+                <div class="info-icon status">
+                    <i class="fa fa-line-chart fa-2x" aria-hidden="true"></i>
+                </div>
+                <div class="info-right">
+                    <p class="info-title">Other Status</p>
+                    <p class="info-value">290</p>
+                </div>
+            </div>
+            <div class="info-block {{vm.dashboard.theme}}-block">
+                <div class="info-icon sales">
+                    <img src="app/images/sales_{{$root.currentUser.role}}.png" />
+                </div>
+                <div class="info-right">
+                    <p class="info-title">California Sales</p>
+                    <p class="info-value">1023</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

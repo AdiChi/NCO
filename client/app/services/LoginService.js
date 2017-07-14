@@ -24,7 +24,7 @@ function LoginService($filter) {
         },
         {
             userId: 'user3',
-            fullName: 'Dipen Shah',
+            fullName: 'Chris Exec',
             email: 'chris.exec@willow.com',
             password: 'password',
             role: 'distributor',

@@ -12,7 +12,7 @@ class LoginController {
             if (user) {
                 $rootScope.currentUser = user;
                 UtilService.storeInSession('currentUser', user);
-                $state.go('app.dashboard');
+                $state.go('app.home');
             } else {
                 this.showError = true;
             }

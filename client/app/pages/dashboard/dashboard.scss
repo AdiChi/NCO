@@ -8,7 +8,7 @@
         .dashboard-title {
             color: #fff;
             line-height: 60px;
-            font-size: 24px;
+            font-size: 20px;
             .dashboard-banner {
                 float: right;
                 img {
@@ -46,7 +46,35 @@
                 width: 20%;
                 height: 75px;
                 margin: 25px 30px;
-                display: inline-block;
+                float: left;
+                .info-icon {
+                    width: 50px;
+                    height: 50px;
+                    float: left;
+                    border-radius: 50%;
+                    margin: 14px 20px;
+                }
+                .expenses,
+                .status {
+                    padding: 10px;
+                }
+                .plays {
+                    padding: 12px;
+                }
+                .sales {
+                    img {
+                        padding: 10px 12px;
+                    }
+                }
+                .info-right {
+                    float: right;
+                    padding: 10px 20px;
+                    text-align: right;
+                    .info-title {}
+                    .info-value {
+                        font-size: 20px;
+                    }
+                }
             }
         }
         .light-widget,
@@ -54,10 +82,42 @@
         .medium-widget,
         .medium-block {
             background-color: #FFFFFF;
+            .expenses {
+                background: #fba700;
+                color: #FFFFFF;
+            }
+            .plays {
+                background: #8a8888;
+                color: #FFFFFF;
+            }
+            .status {
+                background: #fe6d00;
+                color: #FFFFFF;
+            }
+            .sales {
+                background: #383c46;
+            }
         }
         .dark-widget,
         .dark-block {
             background-color: #261521;
+            color: #FFFFFF;
+            .expenses {
+                background: #fba700;
+                color: #151517;
+            }
+            .plays {
+                background: #8a8888;
+                color: #151517;
+            }
+            .status {
+                background: #00f9fa;
+                color: #151517;
+            }
+            .sales {
+                background: #ffffff;
+                color: #151517;
+            }
         }
     }
     .light {
