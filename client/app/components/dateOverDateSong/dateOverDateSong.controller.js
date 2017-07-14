@@ -2,10 +2,11 @@ class DateOverDateSongController {
     constructor($scope, $filter, ReportService) {
         "ngInject";
 
-        $scope.chartTypes = [ "bar" , "stacked-bar", "area-step" , "line", "pie" ];
+        $scope.chartTypes = [ "bar" , "stacked-bar", "area-step" , "line", "donut" ];
         $scope.territories = [];
         $scope.territoryGroups = [];
         $scope.retailers = [];
+        $scope.brkByRetailer = false;
         $scope.territoryLabels = {
             select: "Select Territories",
             itemsSelected: "Territories Selected"
@@ -149,13 +150,18 @@ class DateOverDateSongController {
         $scope.changeChartType = function(type, typeOld) {
             if($scope.theChart2) {
                 $scope.currentChartType = type;
+                $scope.theChart2.resize({height:700});
+                $scope.theChart2.groups([]);
+                var chartType = type;
+
                 if (type == "stacked-bar") {
                     $scope.theChart2.groups([[$scope.chart.firstRange,$scope.chart.secondRange]]);
-                    $scope.theChart2.transform("bar");
-                } else {
-                    $scope.theChart2.groups([]);
-                    $scope.theChart2.transform(type);
+                    chartType = "bar";
+                } else if(type == "donut") {
+                    $scope.theChart2.resize({height:400});
                 }
+
+                $scope.theChart2.transform(chartType);
             }
         };
 
@@ -294,7 +300,7 @@ class DateOverDateSongController {
         }
         
         $scope.formatTooltip = function(name, ratio, id, index) {
-            if($scope.currentChartType == "pie") {
+            if($scope.currentChartType == "donut") {
                 var format = name === $scope.datacolumns[0].id ? $scope.datacolumns[0].id : $scope.datacolumns[1].id;
             } else {
                 var format = name === $scope.datacolumns[0].id ? $scope.names[index][0] : $scope.names[index][1];
@@ -328,69 +334,74 @@ class DateOverDateSongController {
             var firstRangeMap, secondRangeMap, range1, range2;
 
                     // if($scope.chart.daysInRange !== $scope.chart.salesFirstRange.length) {
-                        range1 = ($scope.chart.firstRange).split(" to ");
-                        firstRangeMap = new Map();
-                        $scope.chart.salesFirstRange.forEach(function(obj) {
-                            firstRangeMap.set(obj.date, obj.totalsales);
-                        });
+            range1 = ($scope.chart.firstRange).split(" to ");
+            firstRangeMap = new Map();
+            $scope.chart.salesFirstRange.forEach(function(obj) {
+                firstRangeMap.set(obj.date, obj.totalsales);
+            });
                         // console.log(firstRangeMap);
                     // }
 
                     // if($scope.chart.daysInRange !== $scope.chart.salesSecondRange.length) {
-                        range2 = ($scope.chart.secondRange).split(" to ");
-                        secondRangeMap = new Map();
-                        $scope.chart.salesSecondRange.forEach(function(obj) {
-                            secondRangeMap.set(obj.date, obj.totalsales);
-                        });
+            range2 = ($scope.chart.secondRange).split(" to ");
+            secondRangeMap = new Map();
+            $scope.chart.salesSecondRange.forEach(function(obj) {
+                secondRangeMap.set(obj.date, obj.totalsales);
+            });
                     // }
 
-                    if (firstRangeMap && range1) {
-                        var a = moment(range1[0], 'll');
-                        var b = moment(range1[1], 'll');
-                        var salesFirstRange = [];
+            if(firstRangeMap.size == 0 && secondRangeMap.size == 0) {
+                $scope.chart.salesFirstRange = [];
+                $scope.chart.salesSecondRange = [];
+            } else {
+                if (firstRangeMap && range1) {
+                    var a = moment(range1[0], 'll');
+                    var b = moment(range1[1], 'll');
+                    var salesFirstRange = [];
 
-                        for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
-                            var x = m.format('MMM DD, YY');
-                            if(firstRangeMap.has(x) ){
-                                var y = firstRangeMap.get(x);
-                                salesFirstRange.push({
-                                    date: x,
-                                    totalsales: y
-                                });
-                            } else {
-                                salesFirstRange.push({
-                                    date: x,
-                                    totalsales: 0
-                                });
-                            }
+                    for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
+                        var x = m.format('MMM DD, YY');
+                        if(firstRangeMap.has(x) ){
+                            var y = firstRangeMap.get(x);
+                            salesFirstRange.push({
+                                date: x,
+                                totalsales: y
+                            });
+                        } else {
+                            salesFirstRange.push({
+                                date: x,
+                                totalsales: 0
+                            });
                         }
-                        // console.log(salesFirstRange);
-                        $scope.chart.salesFirstRange = salesFirstRange;
                     }
-                    if (secondRangeMap && range2) {
-                        var a = moment(range2[0], 'll');
-                        var b = moment(range2[1], 'll');
-                        var salesSecondRange = [];
+                    // console.log(salesFirstRange);
+                    $scope.chart.salesFirstRange = salesFirstRange;
+                }
+                if (secondRangeMap && range2) {
+                    var a = moment(range2[0], 'll');
+                    var b = moment(range2[1], 'll');
+                    var salesSecondRange = [];
 
-                        for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
-                            var x = m.format('MMM DD, YY');
-                            if(secondRangeMap.has(x)) {
-                                var y = secondRangeMap.get(x);
-                                salesSecondRange.push({
-                                    date: x,
-                                    totalsales: y
-                                });
-                            } else {
-                                salesSecondRange.push({
-                                    date: x,
-                                    totalsales: 0
-                                });
-                            }
+                    for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
+                        var x = m.format('MMM DD, YY');
+                        if(secondRangeMap.has(x)) {
+                            var y = secondRangeMap.get(x);
+                            salesSecondRange.push({
+                                date: x,
+                                totalsales: y
+                            });
+                        } else {
+                            salesSecondRange.push({
+                                date: x,
+                                totalsales: 0
+                            });
                         }
-                        // console.log(salesSecondRange);
-                        $scope.chart.salesSecondRange = salesSecondRange;
                     }
-                    plotChart();
+                    // console.log(salesSecondRange);
+                    $scope.chart.salesSecondRange = salesSecondRange;
+                }
+            }
+            plotChart();
         }
         function plotChart() {
             $('.panel-heading span.clickable').each(function() {
@@ -455,6 +466,8 @@ class DateOverDateSongController {
                 !$scope.rangeError) {
                 $scope.query.daysInRange = $scope.range1diff;
                 $scope.query.songId = "Y66000000067";
+                $scope.query.breakByRetailer = $scope.brkByRetailer;
+
                 ReportService.getDODChart($scope.query)
                     .then(function(response) {
                         // console.log('response', response.data);
