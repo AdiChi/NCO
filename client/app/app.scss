@@ -35,15 +35,15 @@
         color: #FFFFFF!important;
         font-size: 14px;
         padding: 15px;
+        &:visited,
         &:hover,
-        &:focus,
-        &:visited {
+        &:focus {
             background: #2E4053!important;
         }
     }
     .active {
-        background: #2E4053!important;
         .menu {
+            background: #2E4053!important;
             color: #F5B041!important;
         }
     }
