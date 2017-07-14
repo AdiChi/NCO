@@ -98,11 +98,16 @@ class SonglistUpdateFormController {
                         headerText: 'Add Songs'
                     };
                     $scope.modalOptions.ok = function(sel, songs) {
-                        var toAdd = new Set(sel);
+                        var toAdd = new Set();
+                        sel.forEach(function(s) {
+                            toAdd.add(s);
+                        });
+
                         var filteredArr = songs.filter(function(obj) {
                             delete obj.isSelected;
                             return toAdd.has(obj.id);
                         });
+
                         console.log(filteredArr);
                         $uibModalInstance.close(filteredArr);
                         $scope.sel = [];
