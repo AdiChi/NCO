@@ -1,0 +1,21 @@
+<div class="dashboard-wrapper">
+    <div id="dashboardHeader" class="dashboard-header {{vm.dashboard.theme}}-header">
+        <div class="dashboard-title">
+            <span>Dashboard</span>
+            <span class="dashboard-banner"><img src="app/images/banner_{{$root.currentUser.role}}.png" /></span>
+        </div>
+    </div>
+    <div class="dashboard {{vm.dashboard.theme}} ">
+        <div ui-sortable="vm.sortOptions " ng-model="vm.dashboard.widgets ">
+            <div class="widget-wrapper {{vm.dashboard.theme}}-widget draggable" ng-repeat="widget in vm.dashboard.widgets ">
+                <div ng-include="vm.getTemplateUrl()"></div>
+            </div>
+        </div>
+        <div class="info-wrapper">
+            <div class="info-block {{vm.dashboard.theme}}-block"></div>
+            <div class="info-block {{vm.dashboard.theme}}-block"></div>
+            <div class="info-block {{vm.dashboard.theme}}-block"></div>
+            <div class="info-block {{vm.dashboard.theme}}-block"></div>
+        </div>
+    </div>
+</div>

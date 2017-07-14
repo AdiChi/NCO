@@ -1,53 +1,58 @@
+.upload-songs {
+    margin-top: 20px;
+}
+
 .ng-inline-edit--error .ng-inline-edit__input {
-  color: #f00;
+    color: #f00;
 }
 
 .ng-inline-edit__button {
-  font-size: 0;
-  margin-left: 5px;
-  visibility: hidden;
-  opacity: .6;
-  float: left;
+    font-size: 0;
+    margin-left: 5px;
+    visibility: hidden;
+    opacity: .6;
+    float: left;
 }
 
 .ng-inline-edit__button:hover {
-  opacity: 1;
+    opacity: 1;
 }
 
 .ng-inline-edit:hover .ng-inline-edit__button,
 .ng-inline-edit .ng-inline-edit__button--save,
 .ng-inline-edit .ng-inline-edit__button--cancel {
-  visibility: visible;
-  text-decoration: none;
+    visibility: visible;
+    text-decoration: none;
 }
 
 .ng-inline-edit__button:after {
-  font-size: 24px;
-  line-height: 24px;
+    font-size: 24px;
+    line-height: 24px;
 }
 
 .ng-inline-edit__button--edit:after {
-  content: "\270E";
-  color: #000;
+    content: "\270E";
+    color: #000;
 }
 
 .ng-inline-edit__button--save:after {
-  content: "\2714";
-  color: #006400;
+    content: "\2714";
+    color: #006400;
 }
 
 .ng-inline-edit__button--cancel:after {
-  content: "\2716";
-  color: #8B0000;
+    content: "\2716";
+    color: #8B0000;
 }
 
-#confirmUpload,#cancelUpload {
-  margin: 0 0 20px 0;
+#confirmUpload,
+#cancelUpload {
+    margin: 0 0 20px 0;
 }
 
 .ng-inline-edit__inner-container {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }

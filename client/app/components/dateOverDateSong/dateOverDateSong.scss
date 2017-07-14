@@ -1,31 +1,40 @@
+.reporting {
+    margin-top: 20px;
+}
+
 .row {
-    margin-top:40px;
+    margin-top: 40px;
     padding: 0 10px;
 }
 
-.clickable{
-    cursor: pointer;   
+.clickable {
+    cursor: pointer;
 }
 
 .panel-heading span {
     margin-top: -20px;
     font-size: 15px;
 }
+
 .btn.selected {
     background: #337ab7;
     color: white;
 }
-.selected.btn:hover, .selected.btn:focus {
-    color:white;
+
+.selected.btn:hover,
+.selected.btn:focus {
+    color: white;
 }
+
 .timepicker {
     padding: 0 20px;
-    display:inline-block;
+    display: inline-block;
 }
+
 select.chart-type {
     text-transform: capitalize;
 }
 
 .territories-retailers {
-    padding-bottom:20px;
+    padding-bottom: 20px;
 }

@@ -1,7 +1,7 @@
 <!-- <div class="container-fluid outerdiv">
     <h3>Date over date Song comparison </h3>
 </div> -->
-<div class="panel panel-primary">
+<div class="panel panel-primary reporting">
     <div class="panel-heading">
         <h3 class="panel-title">Song sales comparison</h3>
         <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -35,8 +35,8 @@
         </div>
         <div class="container-fluid">
             <h4 ng-if="selectedSong">
-        Selected song: <span style="color: #337ab7">{{selectedSong}}</span>
-    </h4>
+                Selected song: <span style="color: #337ab7">{{selectedSong}}</span>
+            </h4>
         </div>
         <div class="container-fluid">
             <div id="main-info" class="well col-md-6">
@@ -96,9 +96,9 @@
                 </div>
                 {{range2diff || 0}} days
                 <div>
-                <h4>Time Range 2</h4>
-                <span uib-timepicker ng-model="r2time1" ng-change="updateR2TStart()" min="todayStart" max="r2time2" class="timepicker"></span>
-                <span uib-timepicker ng-model="r2time2" ng-change="updateR2TEnd()" min="r2time1" max="todayEnd" class="timepicker"></span>
+                    <h4>Time Range 2</h4>
+                    <span uib-timepicker ng-model="r2time1" ng-change="updateR2TStart()" min="todayStart" max="r2time2" class="timepicker"></span>
+                    <span uib-timepicker ng-model="r2time2" ng-change="updateR2TEnd()" min="r2time1" max="todayEnd" class="timepicker"></span>
                 </div>
             </div>
             <!-- <div id="main-info3" class="well col-md-4">
@@ -144,70 +144,70 @@
 <button ng-class="{selected: !drilldown}" ng-show="chart" class="btn glyphicon glyphicon-signal" title="Chart" ng-click="drilldown = false"></button>
 <button ng-class="{selected: drilldown}" ng-show="chart" class="btn glyphicon glyphicon-th-list" title="Drilldown" ng-click="drilldown = true"></button>
 <div ng-show="!drilldown">
-<div class="container-fluid" ng-if="!theChart && chart" style="padding-top:30px">
-    {{selectedSong}}
-    <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback1">
-        <chart-size chart-height="700"/>
-        <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
-        <!-- <chart-bar ratio="0.5" /> -->
-        <chart-axes values-x="x" />
-        <chart-axis>
-            <chart-axis-x axis-position="outer-center" axis-type="category" />
-            <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-            <chart-axis-x-tick tick-rotate="90" tick-multiline="false"/>
-        </chart-axis>
-        <chart-legend legend-position="inset" />
-    </c3chart>
-</div>
-<div class="container-fluid" ng-if="theChart" style="padding-top:30px">
-    <div class="container-fluid">
-        <div class="col-md-3">{{selectedSong}}</div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3">
-            <select class="form-control chart-type" ng-model="currentChartType" ng-change="changeChartType(currentChartType, '{{currentChartType}}')" ng-options="t as t for t in chartTypes">
-            </select>
-        </div>
+    <div class="container-fluid" ng-if="!theChart && chart" style="padding-top:30px">
+        {{selectedSong}}
+        <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback1">
+            <chart-size chart-height="700" />
+            <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
+            <!-- <chart-bar ratio="0.5" /> -->
+            <chart-axes values-x="x" />
+            <chart-axis>
+                <chart-axis-x axis-position="outer-center" axis-type="category" />
+                <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+            </chart-axis>
+            <chart-legend legend-position="inset" />
+        </c3chart>
     </div>
-    <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback2">
-        <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
-        <chart-size chart-height="700"/>
-        <!-- <chart-bar ratio="0.5" /> -->
-        <chart-axes values-x="x" />
-        <chart-axis>
-            <chart-axis-x axis-position="outer-center" axis-type="category" />
-            <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-            <chart-axis-x-tick tick-rotate="90" tick-multiline="false"/>
-        </chart-axis>
-        <chart-legend legend-position="inset" />
-    </c3chart>
-</div>
+    <div class="container-fluid" ng-if="theChart" style="padding-top:30px">
+        <div class="container-fluid">
+            <div class="col-md-3">{{selectedSong}}</div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <select class="form-control chart-type" ng-model="currentChartType" ng-change="changeChartType(currentChartType, '{{currentChartType}}')" ng-options="t as t for t in chartTypes">
+            </select>
+            </div>
+        </div>
+        <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback2">
+            <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
+            <chart-size chart-height="700" />
+            <!-- <chart-bar ratio="0.5" /> -->
+            <chart-axes values-x="x" />
+            <chart-axis>
+                <chart-axis-x axis-position="outer-center" axis-type="category" />
+                <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+            </chart-axis>
+            <chart-legend legend-position="inset" />
+        </c3chart>
+    </div>
 </div>
 
 <div class="container" ng-if="chart && drilldown">
-  <h4>{{chart.firstRange}} - {{chart.secondRange}}</h4>
+    <h4>{{chart.firstRange}} - {{chart.secondRange}}</h4>
     {{selectedSong}}
-  <table st-safe-src="chart.salesFirstRange" st-table="displayCollection" class="table table-striped">
-    <thead>
-      <tr>
-        <th>First Range</th>
-        <th>Sales </th>
-        <th>Second Range</th>
-        <th>Sales </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="(key, range1) in displayCollection">
-        <td>{{range1.date}}</td>
-        <td>{{range1.totalsales}}</td>
-        <td>{{chart.salesSecondRange[key].date}}</td>
-        <td>{{chart.salesSecondRange[key].totalsales}}</td>
-      </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td><a class="btn btn-default" st-export>Export to CSV</a></td>
-        </tr>
-    </tfoot>
-  </table>
+    <table st-safe-src="chart.salesFirstRange" st-table="displayCollection" class="table table-striped">
+        <thead>
+            <tr>
+                <th>First Range</th>
+                <th>Sales </th>
+                <th>Second Range</th>
+                <th>Sales </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(key, range1) in displayCollection">
+                <td>{{range1.date}}</td>
+                <td>{{range1.totalsales}}</td>
+                <td>{{chart.salesSecondRange[key].date}}</td>
+                <td>{{chart.salesSecondRange[key].totalsales}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><a class="btn btn-default" st-export>Export to CSV</a></td>
+            </tr>
+        </tfoot>
+    </table>
 </div>
