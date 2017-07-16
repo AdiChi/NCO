@@ -2,13 +2,14 @@ class DateOverDateSongController {
     constructor($scope, $filter, ReportService) {
         "ngInject";
 
-        $scope.chartTypes = ["bar", "stacked-bar", "area-step", "line", "donut", "heatmap"];
+        $scope.chartTypes = [ "heatmap","donut","line","area-step","stacked-bar","bar" ];
         $scope.territories = [];
         $scope.territoryGroups = [];
         $scope.retailers = [];
         $scope.brkByRetailer = false;
         $scope.brkByTerritory = false;
         $scope.showHeatMap = false;
+        $scope.timewise = false;
         $scope.territoryLabels = {
             select: "Select Territories",
             itemsSelected: "Territories Selected"
@@ -37,9 +38,8 @@ class DateOverDateSongController {
             console.log(err);
         });
 
-        $scope.currentChartType = $scope.chartTypes[0];
         $scope.mapData = [];
-        $scope.drilldown = false;
+        $scope.currentChartType = "bar";
         $scope.query = {};
         $scope.details = {};
         $scope.displayCollection = [];
@@ -160,8 +160,8 @@ class DateOverDateSongController {
             }
         });
 
-        $scope.getSum = function (obj) {
-            var val = 0;
+        $scope.getSum = function(obj) {
+            var val=0;
             for (var k in obj) {
                 val += obj[k];
             }
@@ -172,19 +172,19 @@ class DateOverDateSongController {
             if (type == "heatmap") {
                 $scope.showHeatMap = true;
                 $scope.toggleMap($scope.range1sales);
-            }
-            else if ($scope.theChart2) {
+            } else if ($scope.theChart2) {
                 $scope.showHeatMap = false;
                 $scope.currentChartType = type;
-                $scope.theChart2.resize({ height: 700 });
+                $scope.theChart2.resize({height:650});
                 $scope.theChart2.groups([]);
                 var chartType = type;
 
                 if (type == "stacked-bar") {
                     $scope.theChart2.groups([[$scope.chart.firstRange, $scope.chart.secondRange]]);
                     chartType = "bar";
-                } else if (type == "donut") {
-                    $scope.theChart2.resize({ height: 400 });
+                } else if(type == "donut") {
+                    $scope.theChart2.groups([]);
+                    $scope.theChart2.resize({height:400});
                 }
 
                 $scope.theChart2.transform(chartType);
@@ -369,13 +369,17 @@ class DateOverDateSongController {
                 return retailer.id;
             });
         };
-        $scope.person = {
-            "name": "john",
-            "properties": {
-                "age": 25,
-                "sex": "m"
-            },
-            "salary": 1000
+
+        $scope.toggleRows = function (data) {
+            ReportService.getTimeRangeData()
+                .then(function (response) {
+                    // console.log('response', response.data);
+                    $scope.timeCollection = [].concat(response.data.salesByHour);
+                    $scope.showHours = data.date;
+                }, function (e) {
+                    $scope.NoChartError = "Something went wrong!";
+                    console.log(e);
+                });
         }
 
         // helper method to check if a field is a nested object
@@ -541,12 +545,12 @@ class DateOverDateSongController {
 
                 $scope.datax = { "id": "x" };
             }
-            $scope.currentChartType = $scope.chartTypes[0];
+            $scope.currentChartType = "bar";
         }
         function getChart() {
             $scope.theChart = null;
 
-            /*if (!$scope.query.songId) {
+            if (!$scope.query.songId) {
                 $scope.songError = "Please select song";
             }
             if (!$scope.query.range1Date1 ||
@@ -561,8 +565,10 @@ class DateOverDateSongController {
                 !$scope.query.time2) {
                 $scope.timeError = "Please select time range";
             }
-            if( $scope.query.range1Date1 == $scope.query.range2Date1 &&
-                $scope.query.range1Date2 == $scope.query.range2Date2 ) {
+            if(( $scope.query.range1Date1 == $scope.query.range2Date1 &&
+                    $scope.query.range1Date2 == $scope.query.range2Date2 ) && 
+                    ($scope.query.time1 == $scope.query.r2time1 &&
+                     $scope.query.time2 == $scope.query.r2time2)) {
                 $scope.sameRangeError = "Please select different sales periods";
             }
 
@@ -574,26 +580,26 @@ class DateOverDateSongController {
                 $scope.query.time1 &&
                 $scope.query.time2 &&
                 !$scope.sameRangeError &&
-                !$scope.rangeError) {*/
+                !$scope.rangeError) {
             $scope.query.daysInRange = $scope.range1diff;
             $scope.query.songId = "5928207b55649882af1e6126";
             $scope.query.breakByRetailer = $scope.brkByRetailer;
 
             ReportService.getDODChart($scope.query)
                 .then(function (response) {
-                    // console.log('response', response.data);
                     $scope.chart = response.data;
                     addEmptyDateValues();
                     $scope.displayCollection = [].concat($scope.chart.salesFirstRange);
                     $scope.NoChartError = "";
+                    $scope.drilldown = true;
                 }, function (e) {
                     $scope.NoChartError = "Something went wrong!";
                     console.log(e);
                 });
-            /*} else {
+            } else {
                 // $scope.NoChartError = "Something went wrong!";
             }
-*/
+
         }
     }
 }

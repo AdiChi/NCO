@@ -3,6 +3,7 @@ import angular                 from 'angular';
 import uiRouter                from 'angular-ui-router';
 import modal                   from 'angular-ui-bootstrap/src/modal'; 
 import timepicker              from 'angular-ui-bootstrap/src/timepicker'; 
+import buttons                 from 'angular-ui-bootstrap/src/buttons'; 
 import ngInlineEdit            from 'ng-inline-edit';
 import {default as multiselect} from 'angular-bootstrap-multiselect';
 
@@ -54,6 +55,7 @@ angular
         uiRouter,
         modal,
         timepicker,
+        buttons,
         multiselect,
         ngInlineEdit,
         'ui.bootstrap.datetimepicker',
