@@ -13,7 +13,8 @@
         <div class="container-fluid outerdiv">
             <div class="animated zoomInRight">
                 <div class="input-group search-bar">
-                    <input type="text" ng-model="songsearch" ng-model-options="{ debounce: 800 }" ng-click="select" class="form-control" placeholder="Enter at least 3 characters of song name" autofocus />
+                    <input type="text" ng-model="songsearch" ng-model-options="{ debounce: 800 }" ng-click="select" class="form-control" placeholder="Enter at least 3 characters of song name"
+                        autofocus />
                     <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
                 </div>
                 <div id="main-info" class="col-md-4">
@@ -35,8 +36,8 @@
         </div>
         <div class="container-fluid">
             <h4 ng-if="selectedSong">
-        Selected song: <span style="color: #337ab7">{{selectedSong}}</span>
-    </h4>
+                Selected song: <span style="color: #337ab7">{{selectedSong}}</span>
+            </h4>
         </div>
         <div class="container-fluid">
             <div id="main-info" class="well col-md-6">
@@ -45,20 +46,20 @@
                     <label>Start Date</label>
                     <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
                         <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
-                    </a>
-                    {{dateRangeStart| date:"MMM dd, yyyy"}}
+                    </a> {{dateRangeStart| date:"MMM dd, yyyy"}}
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <datetimepicker data-ng-model="dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }" data-on-set-time="startDateOnSetTime()" data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+                        <datetimepicker data-ng-model="dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
+                            data-on-set-time="startDateOnSetTime()" data-before-render="startDateBeforeRender($dates)"></datetimepicker>
                     </ul>
                 </div>
                 <div class="dropdown form-group timepicker">
                     <label>End Date</label>
                     <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
                         <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
-                    </a>
-                    {{dateRangeEnd| date:"MMM dd, yyyy"}}
+                    </a> {{dateRangeEnd| date:"MMM dd, yyyy"}}
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <datetimepicker data-ng-model="dateRangeEnd" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }" data-on-set-time="endDateOnSetTime()" data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                        <datetimepicker data-ng-model="dateRangeEnd" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }"
+                            data-on-set-time="endDateOnSetTime()" data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
                     </ul>
                 </div>
                 {{range1diff || 0}} days
@@ -78,7 +79,8 @@
                     </a>
                     {{dateRange2Start| date:"MMM dd, yyyy"}}
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <datetimepicker data-ng-model="dateRange2Start" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart2', renderOn: 'end-date2-changed' }" data-on-set-time="startDate2OnSetTime()" data-before-render="startDate2BeforeRender($dates)"></datetimepicker>
+                        <datetimepicker data-ng-model="dateRange2Start" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart2', renderOn: 'end-date2-changed' }"
+                            data-on-set-time="startDate2OnSetTime()" data-before-render="startDate2BeforeRender($dates)"></datetimepicker>
                     </ul>
                 </div>
                 <div class="dropdown form-group timepicker">
@@ -91,14 +93,15 @@
                     </a>
                     {{dateRange2End| date:"MMM dd, yyyy"}}
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <datetimepicker data-ng-model="dateRange2End" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd2', renderOn: 'start-date2-changed' }" data-on-set-time="endDate2OnSetTime()" data-before-render="endDate2BeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                        <datetimepicker data-ng-model="dateRange2End" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd2', renderOn: 'start-date2-changed' }"
+                            data-on-set-time="endDate2OnSetTime()" data-before-render="endDate2BeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
                     </ul>
                 </div>
                 {{range2diff || 0}} days
                 <div>
-                <h4>Time Range 2</h4>
-                <span uib-timepicker ng-model="r2time1" ng-change="updateR2TStart()" min="todayStart" max="r2time2" class="timepicker"></span>
-                <span uib-timepicker ng-model="r2time2" ng-change="updateR2TEnd()" min="r2time1" max="todayEnd" class="timepicker"></span>
+                    <h4>Time Range 2</h4>
+                    <span uib-timepicker ng-model="r2time1" ng-change="updateR2TStart()" min="todayStart" max="r2time2" class="timepicker"></span>
+                    <span uib-timepicker ng-model="r2time2" ng-change="updateR2TEnd()" min="r2time1" max="todayEnd" class="timepicker"></span>
                 </div>
             </div>
             <!-- <div id="main-info3" class="well col-md-4">
@@ -109,13 +112,16 @@
             </div> -->
         </div>
         <div class="container-fluid territories-retailers">
-            <multiselect ng-model="selectedTer" options="territories" id-prop="id" display-prop="name" show-search="true" labels="territoryLabels" show-select-all="true" show-unselect-all="true" class="col-md-3" ng-change="onSelectTerritory()"> </multiselect>
+            <multiselect ng-model="selectedTer" options="territories" id-prop="id" display-prop="name" show-search="true" labels="territoryLabels"
+                show-select-all="true" show-unselect-all="true" class="col-md-3" ng-change="onSelectTerritory()"> </multiselect>
 
-            <multiselect ng-model="selectedTG" options="territoryGroups" id-prop="id" display-prop="name" show-search="true" labels="territoryGroupLabels" show-select-all="true" show-unselect-all="true" class="col-md-3" ng-change="onSelectTerritoryGroup()"> </multiselect>
+            <multiselect ng-model="selectedTG" options="territoryGroups" id-prop="id" display-prop="name" show-search="true" labels="territoryGroupLabels"
+                show-select-all="true" show-unselect-all="true" class="col-md-3" ng-change="onSelectTerritoryGroup()"> </multiselect>
 
-            <multiselect ng-model="selectedRet" options="retailers" id-prop="id" display-prop="name" show-search="true" labels="retailerLabels" show-select-all="true" show-unselect-all="true" class="col-md-3" ng-change="onSelectRetailer()"> </multiselect>
+            <multiselect ng-model="selectedRet" options="retailers" id-prop="id" display-prop="name" show-search="true" labels="retailerLabels"
+                show-select-all="true" show-unselect-all="true" class="col-md-3" ng-change="onSelectRetailer()"> </multiselect>
             <div class="col-md-3" ng-if="selectedRet.length!== 1">
-              <label><input type="checkbox" ng-model="brkByRetailer">Break out by Retailer</label>
+                <label><input type="checkbox" ng-model="brkByRetailer">Break out by Retailer</label>
             </div>
         </div>
         <div ng-if="songError" style="color: red;">
@@ -147,70 +153,88 @@
 <button ng-class="{selected: !drilldown}" ng-show="chart" class="btn glyphicon glyphicon-signal" title="Chart" ng-click="drilldown = false"></button>
 <button ng-class="{selected: drilldown}" ng-show="chart" class="btn glyphicon glyphicon-th-list" title="Drilldown" ng-click="drilldown = true"></button>
 <div ng-show="!drilldown">
-<div class="container-fluid" ng-if="!theChart && chart" style="padding-top:30px">
-    {{selectedSong}}
-    <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections">
-        <chart-size chart-height="700"/>
-        <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
-        <!-- <chart-bar ratio="0.5" /> -->
-        <chart-axes values-x="x" />
-        <chart-axis>
-            <chart-axis-x axis-position="outer-center" axis-type="category" />
-            <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-            <chart-axis-x-tick tick-rotate="90" tick-multiline="false"/>
-        </chart-axis>
-        <chart-legend legend-position="inset" />
-    </c3chart>
-</div>
-<div class="container-fluid" ng-if="theChart" style="padding-top:30px">
-    <div class="container-fluid">
+    <div class="container-fluid" ng-if="theChart || chart || showHeatMap">
         <div class="col-md-3">{{selectedSong}}</div>
         <div class="col-md-3"></div>
         <div class="col-md-3"></div>
         <div class="col-md-3">
-            <select class="form-control chart-type" ng-model="currentChartType" ng-change="changeChartType(currentChartType, '{{currentChartType}}')" ng-options="t as t for t in chartTypes">
+            <select class="form-control chart-type" ng-model="currentChartType" ng-change="changeChartType(currentChartType, '{{currentChartType}}')"
+                ng-options="t as t for t in chartTypes">
             </select>
         </div>
     </div>
-    <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback2" empty-label="No data available for above selections">
-        <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
-        <chart-size chart-height="700"/>
-        <!-- <chart-bar ratio="0.5" /> -->
-        <chart-axes values-x="x" />
-        <chart-axis>
-            <chart-axis-x axis-position="outer-center" axis-type="category" />
-            <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-            <chart-axis-x-tick tick-rotate="90" tick-multiline="false"/>
-        </chart-axis>
-        <chart-legend legend-position="inset" />
-    </c3chart>
-</div>
+    <div class="container-fluid" ng-if="!theChart && chart && !showHeatMap" style="padding-top:30px">
+        {{selectedSong}}
+        <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
+            show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections" ng-if="!showHeatMap">
+            <chart-size chart-height="700" />
+            <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
+            <!-- <chart-bar ratio="0.5" /> -->
+            <chart-axes values-x="x" />
+            <chart-axis>
+                <chart-axis-x axis-position="outer-center" axis-type="category" />
+                <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+            </chart-axis>
+            <chart-legend legend-position="inset" />
+        </c3chart>
+    </div>
+    <div class="container-fluid" ng-if="theChart && !showHeatMap" style="padding-top:30px">
+        <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
+            show-subchart="true" callback-function="handleCallback2" empty-label="No data available for above selections">
+            <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
+            <chart-size chart-height="700" />
+            <!-- <chart-bar ratio="0.5" /> -->
+            <chart-axes values-x="x" />
+            <chart-axis>
+                <chart-axis-x axis-position="outer-center" axis-type="category" />
+                <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+            </chart-axis>
+            <chart-legend legend-position="inset" />
+        </c3chart>
+    </div>
+    <div class="container-fluid" id="world-map" ng-if="showHeatMap">
+            <button type="button" class="btn btn-primary" ng-click="toggleMap(range1sales)">Sales Range 1 {{chart.firstRange}}</button>
+            <button type="button" class="btn btn-primary" ng-click="toggleMap(range2sales)">Sales Range 2 {{chart.secondRange}}</button>
+            <div datamap data="heatMapData" id="world-map-container" show-heat-map="showHeatMap" ng-if="heatMapData.length"> </div>
+        </div>
 </div>
 
 <div class="container" ng-if="chart && drilldown">
-  <h4>{{chart.firstRange}} - {{chart.secondRange}}</h4>
-    {{selectedSong}}
-  <table st-safe-src="chart.salesFirstRange" st-table="displayCollection" class="table table-striped">
-    <thead>
-      <tr>
-        <th>First Range</th>
-        <th>Sales </th>
-        <th>Second Range</th>
-        <th>Sales </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="(key, range1) in displayCollection">
-        <td>{{range1.date}}</td>
-        <td>{{range1.totalsales}}</td>
-        <td>{{chart.salesSecondRange[key].date}}</td>
-        <td>{{chart.salesSecondRange[key].totalsales}}</td>
-      </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td><a class="btn btn-default" st-export>Export to CSV</a></td>
-        </tr>
-    </tfoot>
-  </table>
+    <h4>{{chart.firstRange}} - {{chart.secondRange}}</h4>
+    <p>{{selectedSong}}</p>
+    <div class="col-md-6">
+        <table class="table table-responsive">
+            <tr>
+                <th>Date Range 1 ({{chart.firstRange}})</th>
+                <th>Sales</th>
+            </tr>
+            <tr ng-repeat-start="(key, range1) in firstCollection">
+                <td>{{range1.date}}<i class="glyphicon glyphicon-arrow-down" ng-click="toggleRows(range1)"></i></td>
+                <td><span>{{range1.totalsales}}</span></td>
+            </tr>
+            <tr ng-repeat="(key, value) in timeCollection" ng-repeat-end ng-if="showHours == range1.date">
+                <td style="padding-left: 45px">{{value.range}}</td>
+                <td>{{value.sales}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-responsive">
+            <tr>
+                <th>Date Range 2 ({{chart.secondRange}})</th>
+                <th>Sales</th>
+            </tr>
+            <tr ng-repeat-start="(key, range2) in secondCollection">
+                <td>{{range2.date}}<i class="glyphicon glyphicon-arrow-down" ng-click="toggleRows(range2)"></i></td>
+                <td><span>{{range2.totalsales}}</span></td>
+            </tr>
+            <tr ng-repeat="(key, value) in timeCollection" ng-repeat-end ng-if="showHours == range2.date">
+                <td style="padding-left: 45px">{{value.range}}</td>
+                <td>{{value.sales}}</td>
+            </tr>
+        </table>
+    </div>
 </div>
+<a class="btn btn-default">Export to CSV</a>
