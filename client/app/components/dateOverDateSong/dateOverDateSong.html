@@ -192,7 +192,7 @@
             <chart-legend legend-position="inset" />
         </c3chart>
     </div>
-    <div class="container-fluid" ng-if="theChart && !showHeatMap" style="padding-top:30px">
+    <div class="container-fluid" ng-show="theChart && !showHeatMap" style="padding-top:30px">
         <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
             show-subchart="true" callback-function="handleCallback2" empty-label="No data available for above selections">
             <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
