@@ -42,13 +42,13 @@ function ReportService($http, config, superCache) {
             return retailers;
         },
         getDODChart(query) {
-            /*var chartDetails = $http({
-                url:  `${baseUrl}/nco/completesales`,
+            var chartDetails = $http({
+                url:  `${baseUrl}/getDODChart`,
                 method: "GET",
-                // params: query,
+                params: query,
                 headers: getHeaders()
-            });*/
-            var chartDetails = Promise.resolve( {
+            });
+            /*var chartDetails = Promise.resolve( {
               data: {
                   "songid": "Y66000000067",
                   "daysInRange": 10,
@@ -699,7 +699,7 @@ function ReportService($http, config, superCache) {
                     }
                   ]
                 }
-                });
+                });*/
             return chartDetails;
         },
         getTimeRangeData() {

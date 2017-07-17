@@ -10,7 +10,8 @@
     display: block;
 }
 .footer {
-    background: #EDEFF1;
+    background: #172A3A !important;
+    color:white;
     height: auto;
     padding-bottom: 30px;
     position: relative;
@@ -46,7 +47,7 @@
     display: block;
 }
 .footer a {
-    color: #78828D
+    color: #fff
 }
 .supportLi h4 {
     font-size: 20px;
@@ -74,7 +75,7 @@
     height: 40px;
     padding: 0;
     width: 100%;
-    color: #fff;
+    color: #000;
 }
 .newsletter-box {
     overflow: hidden;
@@ -124,7 +125,8 @@
     color: #EDEFF1 !important;
 }
 .footer-bottom {
-    background: #E3E3E3;
+    background: #172A3A!important;
+    color:white;
     border-top: 1px solid #DDDDDD;
     padding-top: 5px;
     padding-bottom: 5px;

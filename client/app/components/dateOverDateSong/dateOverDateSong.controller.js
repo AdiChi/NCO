@@ -358,6 +358,7 @@ class DateOverDateSongController {
             $scope.query.territories = $scope.selectedTer.map(function (terr) {
                 return terr.id;
             });
+            console.log($scope.query.territories);
         };
         $scope.onSelectTerritoryGroup = function () {
             $scope.query.territoryGroups = $scope.selectedTG.map(function (tg) {
@@ -582,8 +583,9 @@ class DateOverDateSongController {
                 !$scope.sameRangeError &&
                 !$scope.rangeError) {
             $scope.query.daysInRange = $scope.range1diff;
-            $scope.query.songId = "5928207b55649882af1e6126";
+            $scope.query.songId = "Y66000000067";
             $scope.query.breakByRetailer = $scope.brkByRetailer;
+            $scope.query.territories =  Array.from(new Set($scope.query.territories)) || [];
 
             ReportService.getDODChart($scope.query)
                 .then(function (response) {

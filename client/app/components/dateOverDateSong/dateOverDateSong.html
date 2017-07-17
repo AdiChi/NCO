@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Song sales comparison</h3>
         <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -33,7 +33,7 @@
         </div>
         <div class="container-fluid">
             <h4 ng-if="selectedSong">
-                Selected song: <span style="color: #337ab7">{{selectedSong}}</span>
+                Selected song: <span style="color: #F5B041">{{selectedSong}}</span>
             </h4>
         </div>
         <div class="container-fluid">
@@ -107,23 +107,26 @@
               <label><input type="checkbox" ng-model="brkByRetailer">Break out by Retailer</label>
             </div> -->
         </div>
-        <div ng-if="songError" style="color: red;">
-            {{songError}}
-        </div>
-        <div ng-if="rangeError" style="color: red;">
-            {{rangeError}}
-        </div>
-        <div ng-if="range1Error" style="color: red;">
-            {{range1Error}}
-        </div>
-        <div ng-if="range2Error" style="color: red;">
-            {{range2Error}}
-        </div>
-        <div ng-if="timeError" style="color: red;">
-            {{timeError}}
-        </div>
-        <div ng-if="sameRangeError" style="color: red;">
-            {{sameRangeError}}
+        <div class="container-fluid error-alert">
+            <div ng-if="songError" >
+                {{songError}}
+            </div>
+            <div ng-if="rangeError" >
+                {{rangeError}}
+            </div>
+            <div ng-if="range1Error" >
+                {{range1Error}}
+            </div>
+            <div ng-if="range2Error" >
+                {{range2Error}}
+            </div>
+            <div ng-if="timeError" >
+                {{timeError}}
+            </div>
+            <div ng-if="sameRangeError" >
+                {{sameRangeError}}
+            </div>
+            
         </div>
         <div class="container-fluid">
             <button id="confirmSubmit" type="submit" class="btn btn-success" ng-click="getChart()">Get Information</button>
