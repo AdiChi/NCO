@@ -1,19 +1,37 @@
-<nav class="navbar navbar-fixed-top navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">NCO</a>
+<nav class="navbar navbar-fixed-top navbar-default navMain">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand"><img src="app/images/logo.png" /></a>
+        </div>
+        <div class="navbar-collapse" id="navigationLinks">
+            <ul class="nav navbar-nav">
+                <li ui-sref-active="active" ui-sref="app.home"><a class="menu" href="">Home</a></li>
+                <li ui-sref-active="active" ui-sref="app.artists"><a class="menu" href="">Artists</a></li>
+                <li ui-sref-active="active" ui-sref="app.editAllSongs"><a class="menu" href="">Songs</a></li>
+                <li ui-sref-active="active" ui-sref="app.songlists"><a class="menu" href="">Song lists</a></li>
+                <li ui-sref-active="active" ui-sref="app.reports"><a class="menu" href="">Analytic Reporting</a></li>
+                <li ui-sref-active="active" ui-sref="app.uploadsongs"><a class="menu" href="">Upload</a></li>
+                <li ui-sref-active="active" ui-sref="app.users"><a class="menu" href="">Users</a></li>
+                <!-- <li ui-sref-active="active" ui-sref="app.create"><a href="">Create</a></li> -->
+                <li ui-sref-active="active" ui-sref="app.logs"><a class="menu" href="">Logs</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="menu" href="">Contact Us</a></li>
+                <li><a class="menu" href="">Help</a></li>
+                <li><a class="menu"><i class="fa fa-envelope-o" aria-hidden="true"><i class="email-notification">3</i></i></a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle menu user-menu" data-toggle="dropdown" href="javascript:void(0)">
+                        <img class="user-thumbnail" src="app/images/{{$root.currentUser.role}}.png" />
+                        <span class="user-name">{{$root.currentUser.fullName}}</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a>Settings</a></li>
+                        <li><a>Change Password</a></li>
+                        <li><a ui-sref="app.login">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li ui-sref-active="active" ui-sref="app.home"><a href="">Home</a></li>
-        <!-- <li ui-sref-active="active" ui-sref="app.create"><a href="">Create</a></li> -->
-        <li ui-sref-active="active" ui-sref="app.logs"><a href="">Logs</a></li>
-        <li ui-sref-active="active" ui-sref="app.songlists"><a href="">Song lists</a></li>
-        <li ui-sref-active="active" ui-sref="app.uploadsongs"><a href="">Upload</a></li>
-        <li ui-sref-active="active" ui-sref="app.editAllSongs"><a href="">Update Songs</a></li>
-        <li ui-sref-active="active" ui-sref="app.reports"><a href="">Reports</a></li>
-      </ul>
-    </div>
-  </div>
 </nav>
