@@ -4,6 +4,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import modal from 'angular-ui-bootstrap/src/modal';
 import timepicker from 'angular-ui-bootstrap/src/timepicker';
+import buttons from 'angular-ui-bootstrap/src/buttons';
 import ngInlineEdit from 'ng-inline-edit';
 import { default as multiselect } from 'angular-bootstrap-multiselect';
 
@@ -40,6 +41,8 @@ import RowSelectDirective from './directives/rowSelect.directive';
 import RowSelectAllDirective from './directives/rowSelectAll.directive';
 import CustomOnChangeDirective from './directives/customOnChange.directive';
 import StSummaryDirective from './directives/stSummary.directive';
+import OnFilter from './directives/onDataFilter.directive';
+import DataMap from './directives/datamap.directive';
 
 // import our default styles for the whole application
 import 'normalize.css';
@@ -60,6 +63,7 @@ angular
         uiRouter,
         modal,
         timepicker,
+        buttons,
         multiselect,
         ngInlineEdit,
         'ui.bootstrap.datetimepicker',
@@ -164,6 +168,8 @@ angular
     .directive('stExport', ExportToCsvDirective)
     .directive('customOnChange', CustomOnChangeDirective)
     .directive('stSummary', StSummaryDirective)
+    .directive('onFilter', OnFilter)
+    .directive('datamap', DataMap)
     .factory('UsersService', UsersService)
     .factory('SongsService', SongsService)
     .factory('SongListsService', SongListsService)

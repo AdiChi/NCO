@@ -1,4 +1,4 @@
-<table st-safe-src="vm.songs" st-table="vm.displayCollection"  class="table table-striped" ng-if="vm.songs.length > 0">
+<table st-safe-src="vm.songs" st-table="vm.displayCollection" on-filter="onFilter" class="table table-striped" ng-if="vm.songs.length > 0">
     <thead>
         <tr>
             <th row-select-all="vm.songs"  selected="vm.sel" ng-click="vm.selectAll(vm.songs)"></th>

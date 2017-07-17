@@ -1,18 +1,23 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>NCO</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="NCO app">
-    <base href="/">
-  </head>
-  <body ng-app="app" ng-strict-di ng-cloak>
+
+<head>
+  <meta charset="utf-8">
+  <title>NCO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NCO app">
+  <base href="/">
+</head>
+
+<body ng-app="app" ng-strict-di ng-cloak>
   <script type="text/javascript" async="" src="app/chart-lib/c3.min.js"></script>
   <script type="text/javascript" async="" src="app/chart-lib/d3.min.js"></script>
   <script type="text/javascript" async="" src="app/chart-lib/moment.js"></script>
-    <!-- Our app entry point, everything will be generated here-->
-    <div ui-view></div>
+  <script type="text/javascript" async="" src="app/chart-lib/topojson.min.js"></script>
+  <script type="text/javascript" async="" src="app/chart-lib/datamaps.all.hires.js"></script>
+  <!-- Our app entry point, everything will be generated here-->
+  <div ui-view></div>
 
-  </body>
+</body>
+
 </html>

@@ -1,5 +1,5 @@
 class SonglistUpdateFormController {
-    constructor($state, $stateParams, SongListsService, ModalService, _) {
+    constructor($state, $stateParams, $scope, SongListsService, ModalService, _) {
         "ngInject";
         var vm = this;
         this.$state = $state;
@@ -18,22 +18,22 @@ class SonglistUpdateFormController {
 
         vm.selected = [];
 
-        vm.selectAll = function(collection) {
+        vm.selectAll = function (collection) {
+            var filteredCollection = ($scope.filtered.length > collection.length) ? collection : $scope.filtered;
+
             if (vm.selected.length === 0) {
-                angular.forEach(collection, function(val) {
+                angular.forEach(filteredCollection, function (val) {
                     vm.selected.push(val.id);
                 });
-            } else if (vm.selected.length > 0 && vm.selected.length != vm.songlist.songs.length) {
-                angular.forEach(collection, function(val) {
-                    var found = vm.selected.indexOf(val.id);
-                    if (found == -1)
-                        vm.selected.push(val.id);
-                });
-
             } else {
                 vm.selected = [];
             }
         };
+
+        // Function to get collection when filter applied
+        $scope.onFilter = function (stCtrl) {
+            $scope.filtered = stCtrl.getFilteredCollection();
+        }
 
         // Function to get data by selecting a single row
         vm.select = function(id) {
@@ -98,11 +98,16 @@ class SonglistUpdateFormController {
                         headerText: 'Add Songs'
                     };
                     $scope.modalOptions.ok = function(sel, songs) {
-                        var toAdd = new Set(sel);
+                        var toAdd = new Set();
+                        sel.forEach(function(s) {
+                            toAdd.add(s);
+                        });
+
                         var filteredArr = songs.filter(function(obj) {
                             delete obj.isSelected;
                             return toAdd.has(obj.id);
                         });
+
                         console.log(filteredArr);
                         $uibModalInstance.close(filteredArr);
                         $scope.sel = [];
