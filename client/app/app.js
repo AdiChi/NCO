@@ -9,6 +9,7 @@ import {default as multiselect} from 'angular-bootstrap-multiselect';
 
 import AppComponent            from './app.component';
 import NavigationComponent     from './components/navigation/navigation';
+import FooterComponent         from './components/footernco/footernco';
 import SonglistsListComponent  from './components/songlistsList/songlistsList';
 import LogListComponent        from './components/logList/logList';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
@@ -65,6 +66,7 @@ angular
         'gridshore.c3js.chart',
         require('angular-smart-table'),
         NavigationComponent.name,
+        FooterComponent.name,
         UpdateSonglistComponent.name,
         UploadSongsComponent.name,
         EditAllSongsComponent.name,

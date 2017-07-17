@@ -392,14 +392,14 @@ class DateOverDateSongController {
             // Setting up an array with individual objects
             object.forEach(function (dateObj) {
                 var dateSales = {}, sales = 0;
-                dateObj.retailerList.forEach(function (retailerObj) {
+                dateObj.orgRetailerList.forEach(function (retailerObj) {
                     retailerObj.territoryList.forEach(function (territoryObj) {
-                        sales = sales + parseInt(territoryObj.sales);
+                        sales = sales + parseInt(territoryObj.totalSaleTerr);
                         var finalObj = {
                             date: dateObj.date,
                             territory: territoryObj.name,
                             retailer: retailerObj.name,
-                            sales: territoryObj.sales
+                            sales: territoryObj.totalSaleTerr
                         }
                         firstMap.push(finalObj);
                     })
