@@ -22,6 +22,40 @@
     padding: 0 20px;
     display:inline-block;
 }
-select.chart-type {
-    text-transform: capitalize;
+.graph-type-labels {
+    margin-top: 20px;
+    .btn.btn-primary {
+        background-color: gray;
+        border-color:gray;
+    }
+    .btn-primary:active, .btn-primary.active {
+        background-color: #286090;
+        border-color: #204d74;
+    }
+    .btn {
+        float:right;
+        margin-right: 10px;
+        border-radius: 20px;
+        text-transform: capitalize;
+    }
+}
+
+.territories-retailers {
+    padding-bottom:20px;
+}
+.tab-head{
+    color: #337ab7;
+}
+.drilldown {
+    table tr td {
+        cursor:pointer;
+        i {
+            color:grey;
+        }
+    }
+    padding-top: 30px;
+    padding-bottom:60px;
+}
+#world-map {
+    padding-top: 20px;
 }
