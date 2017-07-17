@@ -16,7 +16,7 @@ import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDat
 import LoginComponent from './pages/login/login';
 import DashboardComponent from './pages/dashboard/dashboard';
 import ArtistsComponent from './pages/artists/artists';
-import HomeComponent from './pages/home/home';
+import UsersComponent from './pages/users/users';
 import CreateComponent from './pages/create/create';
 import UpdateComponent from './pages/update/update';
 import UpdateSonglistComponent from './pages/updateSonglist/updateSonglist';
@@ -83,7 +83,7 @@ angular
         LoginComponent.name,
         DashboardComponent.name,
         ArtistsComponent.name,
-        HomeComponent.name,
+        UsersComponent.name,
         SonglistsListComponent.name,
         SonglistsComponent.name,
         DateOverDateSongComponent.name,
@@ -117,7 +117,7 @@ angular
             })
             .state('app.users', {
                 url: '/users',
-                template: '<home></home>'
+                template: '<users></users>'
             })
 
         // Create route for our user listings creator
