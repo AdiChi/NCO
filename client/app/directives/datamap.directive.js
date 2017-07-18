@@ -117,7 +117,7 @@ function DataMap() {
                     map.resize();
                 });
 
-            }, true)
+            })
 
         }
     }
