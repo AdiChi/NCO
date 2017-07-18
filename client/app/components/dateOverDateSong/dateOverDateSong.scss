@@ -1,39 +1,49 @@
+.song-report {
+    margin-top: 20px;
+}
+
 .row {
-    margin-top:40px;
+    margin-top: 40px;
     padding: 0 10px;
 }
 
-.clickable{
-    cursor: pointer;   
+.clickable {
+    cursor: pointer;
 }
 
 .panel-heading span {
     margin-top: -20px;
     font-size: 15px;
 }
+
 .btn.selected {
     background: #337ab7;
     color: white;
 }
-.selected.btn:hover, .selected.btn:focus {
-    color:white;
+
+.selected.btn:hover,
+.selected.btn:focus {
+    color: white;
 }
+
 .timepicker {
     padding: 0 20px;
-    display:inline-block;
+    display: inline-block;
 }
+
 .graph-type-labels {
     margin-top: 20px;
     .btn.btn-primary {
         background-color: gray;
-        border-color:gray;
+        border-color: gray;
     }
-    .btn-primary:active, .btn-primary.active {
+    .btn-primary:active,
+    .btn-primary.active {
         background-color: #286090;
         border-color: #204d74;
     }
     .btn {
-        float:right;
+        float: right;
         margin-right: 10px;
         border-radius: 20px;
         text-transform: capitalize;
@@ -41,21 +51,24 @@
 }
 
 .territories-retailers {
-    padding-bottom:20px;
+    padding-bottom: 20px;
 }
-.tab-head{
+
+.tab-head {
     color: #337ab7;
 }
+
 .drilldown {
     table tr td {
-        cursor:pointer;
+        cursor: pointer;
         i {
-            color:grey;
+            color: grey;
         }
     }
     padding-top: 20px;
     padding-bottom:60px;
 }
+
 #world-map {
     padding-top: 20px;
 }

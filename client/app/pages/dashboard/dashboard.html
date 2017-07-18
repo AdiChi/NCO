@@ -7,45 +7,118 @@
     </div>
     <div class="dashboard {{vm.dashboard.theme}} ">
         <div ui-sortable="vm.sortOptions " ng-model="vm.dashboard.widgets ">
-            <div class="widget-wrapper {{vm.dashboard.theme}}-widget draggable" ng-repeat="widget in vm.dashboard.widgets ">
-                <div ng-include="vm.getTemplateUrl()"></div>
+            <div class="widget-wrapper {{vm.dashboard.theme}}-widget">
+                <div class="widget-header">
+                    Total Revenue
+                </div>
+                <div class="widget-info-wrapper">
+                    <div class="widget-info">
+                        <p class="info-title">7,653</p>
+                        <p class="info-value ">Total Sales</p>
+                    </div>
+                    <div class="widget-info">
+                        <p class="info-title">852</p>
+                        <p class="info-value ">Open Campaign</p>
+                    </div>
+                </div>
+                <div class="widget-chart">
+                    <c3chart bindto-id="chart1">
+                        <chart-column column-id="Data 1" column-values="50,20,10,40,15,25" column-type="spline" />
+                        <chart-column column-id="Data 2" column-values="25,15,40,10,20,50" column-type="spline" />
+                        <chart-legend show-legend="false" />
+                        <chart-size chart-height="300" chart-width="350" />
+                        <chart-axis>
+                            <chart-axis-x range-start="2010" range-min="2010" range-max="2020"></chart-axis-x>
+                            <chart-axis-y></chart-axis-y>
+                        </chart-axis>
+                    </c3chart>
+                </div>
+            </div>
+            <div class="widget-wrapper {{vm.dashboard.theme}}-widget">
+                <div class="widget-header">
+                    Statistics
+                </div>
+                <div class="widget-info-wrapper more-info">
+                    <div class="widget-info">
+                        <p class="info-title">1,507</p>
+                        <p class="info-value ">Total Sales</p>
+                    </div>
+                    <div class="widget-info">
+                        <p class="info-title">916</p>
+                        <p class="info-value ">Open Campaign</p>
+                    </div>
+                    <div class="widget-info">
+                        <p class="info-title">22</p>
+                        <p class="info-value ">Daily Sales</p>
+                    </div>
+                </div>
+                <div class="widget-chart">
+                    <c3chart bindto-id="chart2">
+                        <chart-column column-id="Data 1" column-values="50,20,10,40,15,25" column-type="bar" />
+                        <chart-column column-id="Data 2" column-values="25,15,40,10,20,50" column-type="bar" />
+                        <chart-legend show-legend="false" />
+                        <chart-size chart-height="300" chart-width="350" />
+                    </c3chart>
+                </div>
+            </div>
+            <div class="widget-wrapper {{vm.dashboard.theme}}-widget">
+                <div class="widget-header">
+                    Daily Sales
+                </div>
+                <div class="widget-info-wrapper">
+                    <div class="widget-info">
+                        <p class="info-title">7,653</p>
+                        <p class="info-value ">Total Sales</p>
+                    </div>
+                    <div class="widget-info">
+                        <p class="info-title">852</p>
+                        <p class="info-value ">Open Campaign</p>
+                    </div>
+                </div>
+                <div class="widget-chart">
+                    <c3chart bindto-id="chart3">
+                        <chart-column column-id="Data 1" column-values="50,20,10,40,15,25" column-type="donut" />
+                        <chart-column column-id="Data 2" column-values="25,15,40,10,20,50" column-type="donut" />
+                        <chart-legend show-legend="false" />
+                    </c3chart>
+                </div>
             </div>
         </div>
-        <div class="info-wrapper">
-            <div class="info-block {{vm.dashboard.theme}}-block">
-                <div class="info-icon expenses">
-                    <i class="fa fa-university fa-2x" aria-hidden="true"></i>
+        <div class="info-wrapper ">
+            <div class="info-block {{vm.dashboard.theme}}-block ">
+                <div class="info-icon expenses ">
+                    <i class="fa fa-university fa-2x " aria-hidden="true "></i>
                 </div>
-                <div class="info-right">
-                    <p class="info-title">Total Expenses</p>
-                    <p class="info-value">$ 9,982</p>
-                </div>
-            </div>
-            <div class="info-block {{vm.dashboard.theme}}-block">
-                <div class="info-icon plays">
-                    <i class="fa fa-headphones fa-2x" aria-hidden="true"></i>
-                </div>
-                <div class="info-right">
-                    <p class="info-title">Plays</p>
-                    <p class="info-value">1023</p>
+                <div class="info-right ">
+                    <p class="info-title ">Total Expenses</p>
+                    <p class="info-value ">$ 9,982</p>
                 </div>
             </div>
-            <div class="info-block {{vm.dashboard.theme}}-block">
-                <div class="info-icon status">
-                    <i class="fa fa-line-chart fa-2x" aria-hidden="true"></i>
+            <div class="info-block {{vm.dashboard.theme}}-block ">
+                <div class="info-icon plays ">
+                    <i class="fa fa-headphones fa-2x " aria-hidden="true "></i>
                 </div>
-                <div class="info-right">
-                    <p class="info-title">Other Status</p>
-                    <p class="info-value">290</p>
+                <div class="info-right ">
+                    <p class="info-title ">Plays</p>
+                    <p class="info-value ">1023</p>
                 </div>
             </div>
-            <div class="info-block {{vm.dashboard.theme}}-block">
-                <div class="info-icon sales">
-                    <img src="app/images/sales_{{$root.currentUser.role}}.png" />
+            <div class="info-block {{vm.dashboard.theme}}-block ">
+                <div class="info-icon status ">
+                    <i class="fa fa-line-chart fa-2x " aria-hidden="true "></i>
                 </div>
-                <div class="info-right">
-                    <p class="info-title">California Sales</p>
-                    <p class="info-value">1023</p>
+                <div class="info-right ">
+                    <p class="info-title ">Other Status</p>
+                    <p class="info-value ">290</p>
+                </div>
+            </div>
+            <div class="info-block {{vm.dashboard.theme}}-block ">
+                <div class="info-icon sales ">
+                    <img src="app/images/sales_{{$root.currentUser.role}}.png " />
+                </div>
+                <div class="info-right ">
+                    <p class="info-title ">California Sales</p>
+                    <p class="info-value ">1023</p>
                 </div>
             </div>
         </div>

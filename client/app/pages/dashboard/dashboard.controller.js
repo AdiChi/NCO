@@ -1,5 +1,5 @@
 class DashboardController {
-    constructor($rootScope) {
+    constructor($scope, $rootScope) {
         'ngInject'
         this.name = 'dashboard';
         $('#navigationLinks').removeClass('hide-menu');

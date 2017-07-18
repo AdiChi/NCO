@@ -36,10 +36,44 @@
             cursor: move
         }
         .widget-wrapper {
-            display: inline-block;
+            float: left;
             height: 450px;
             margin: 14px;
             width: 31%;
+            .widget-header {
+                padding: 15px;
+                font-size: 16px;
+            }
+            .widget-info-wrapper {
+                border: 1px solid #e6e6e6;
+                border-right: 0px;
+                border-left: 0px;
+                .widget-info {
+                    display: inline-block;
+                    width: 48%;
+                    text-align: center;
+                    margin: 10px 0px;
+                    border-right: 1px solid #e6e6e6;
+                    .info-title {
+                        font-weight: bold;
+                        margin-bottom: 5px;
+                    }
+                    .info-value {
+                        margin-bottom: 0px;
+                    }
+                }
+                .widget-info:last-child {
+                    border-right: none;
+                }
+            }
+            .more-info {
+                .widget-info {
+                    width: 32%;
+                }
+            }
+            .widget-chart {
+                padding: 15px;
+            }
         }
         .info-wrapper {
             .info-block {
