@@ -274,8 +274,9 @@
                     <th>Sales</th>
                 </tr>
                 <tr ng-repeat-start="(key, value) in range1sales">
-                    <td ng-click="showTab[value.date] = !showTab[value.date]">
-                        <i class="glyphicon" 
+                    <td ng-click="value.totalsales>0 ?(showTab[value.date] = !showTab[value.date]): null">
+                        <i style="padding-left: 18px; " ng-if="value.totalsales==0"></i>
+                        <i class="glyphicon" ng-if="value.totalsales>0"
                             ng-class=" showTab[value.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>
                         {{value.date}}
                     </td>
@@ -290,9 +291,10 @@
                     </td>
                 </tr>
                 <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="showTab[value.date]">
-                    <td ng-click="showRet[value.date][ret.name] = !showRet[value.date][ret.name]">
+                    <td ng-click="ret.totalSaleRetailer?showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null">
                         <i style="padding-left: 20px"></i>
-                        <i class="glyphicon"
+                        <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
+                        <i class="glyphicon" ng-if="ret.totalSaleRetailer>0"
                             ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>
                         {{ret.name}}
                     </td>
@@ -334,8 +336,9 @@
                     <th>Sales</th>
                 </tr>
                 <tr ng-repeat-start="(key, value) in range2sales">
-                    <td ng-click="showTab[value.date] = !showTab[value.date]">
-                        <i class="glyphicon" 
+                    <td ng-click="value.totalsales>0 ?(showTab[value.date] = !showTab[value.date]): null">
+                        <i style="padding-left: 18px; " ng-if="value.totalsales==0"></i>
+                        <i class="glyphicon" ng-if="value.totalsales>0"
                             ng-class=" showTab[value.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>
                         {{value.date}}
                     </td>
@@ -350,9 +353,10 @@
                     </td>
                 </tr>
                 <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="showTab[value.date]">
-                    <td ng-click="showRet[value.date][ret.name] = !showRet[value.date][ret.name]">
+                    <td ng-click="ret.totalSaleRetailer>0 ? showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null">
                         <i style="padding-left:20px"></i>
-                        <i class="glyphicon"
+                        <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
+                        <i class="glyphicon" ng-if="ret.totalSaleRetailer>0"
                             ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"
                             ></i>
                         {{ret.name}}

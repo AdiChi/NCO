@@ -171,7 +171,9 @@ class DateOverDateSongController {
         $scope.changeChartType = function (type, typeOld) {
             if (type == "heatmap") {
                 $scope.showHeatMap = true;
-                $scope.toggleMap($scope.range1sales);
+                if(!$scope.heatMapData) {
+                    $scope.toggleMap($scope.range1sales);
+                }
             } else if ($scope.theChart2) {
                 $scope.showHeatMap = false;
                 $scope.currentChartType = type;
@@ -546,6 +548,7 @@ class DateOverDateSongController {
         }
         function getChart() {
             $scope.theChart = null;
+            $scope.showHeatMap = false;
 
             if (!$scope.query.songId) {
                 $scope.songError = "Please select song";
