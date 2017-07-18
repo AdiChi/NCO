@@ -1,0 +1,20 @@
+<div class="widget-header">
+    {{widget.header}}
+</div>
+<div class="widget-info-wrapper">
+    <div class="widget-info">
+        <p class="info-title">{{widget.info.totalSales}}</p>
+        <p class="info-value ">Total Sales</p>
+    </div>
+    <div class="widget-info">
+        <p class="info-title">{{widget.info.openCampaign}}</p>
+        <p class="info-value ">Open Campaign</p>
+    </div>
+</div>
+<div class="widget-chart">
+    <c3chart bindto-id="chart3">
+        <chart-column column-id="Range 1" column-values="{{widget.chart.firstValue}}" column-type="donut" />
+        <chart-column column-id="Range 2" column-values="{{widget.chart.secondValue}}" column-type="donut" />
+        <chart-legend show-legend="false" />
+    </c3chart>
+</div>

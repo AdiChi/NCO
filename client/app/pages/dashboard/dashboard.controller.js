@@ -4,7 +4,6 @@ class DashboardController {
         this.name = 'dashboard';
         $('#navigationLinks').removeClass('hide-menu');
         this.dashboard = ($rootScope.currentUser) ? $rootScope.currentUser.dashboard : {};
-        this.dashboard.widgets = [{}, {}, {}];
     }
 }
 
