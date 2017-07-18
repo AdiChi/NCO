@@ -355,10 +355,9 @@ class DateOverDateSongController {
             $scope.theChart2 = chartObj;
         };
         $scope.onSelectTerritory = function () {
-            $scope.query.territories = $scope.selectedTer.map(function (terr) {
+            $scope.territory = $scope.selectedTer.map(function (terr) {
                 return terr.id;
             });
-            console.log($scope.query.territories);
         };
         $scope.onSelectTerritoryGroup = function () {
             $scope.query.territoryGroups = $scope.selectedTG.map(function (tg) {
@@ -366,7 +365,7 @@ class DateOverDateSongController {
             });
         };
         $scope.onSelectRetailer = function () {
-            $scope.query.retailers = $scope.selectedRet.map(function (retailer) {
+            $scope.retailer = $scope.selectedRet.map(function (retailer) {
                 return retailer.id;
             });
         };
@@ -520,10 +519,7 @@ class DateOverDateSongController {
             plotChart();
         }
         function plotChart() {
-            $('.panel-heading span.clickable').each(function () {
-                var $this = $(this);
-                collapseSelection($this);
-            });
+            collapseSelection($('.panel-heading span.clickable'));
 
             $scope.names = [];
             $scope.datapoints = [];
@@ -585,13 +581,13 @@ class DateOverDateSongController {
             $scope.query.daysInRange = $scope.range1diff;
             $scope.query.songId = "Y66000000067";
             $scope.query.breakByRetailer = $scope.brkByRetailer;
-            $scope.query.territories =  Array.from(new Set($scope.query.territories)) || [];
+            $scope.query["territory[]"] =  Array.from(new Set($scope.territory)) || [];
+            $scope.query["retailer[]"] =  $scope.retailer;
 
             ReportService.getDODChart($scope.query)
                 .then(function (response) {
                     $scope.chart = response.data;
                     addEmptyDateValues();
-                    $scope.displayCollection = [].concat($scope.chart.salesFirstRange);
                     $scope.NoChartError = "";
                     $scope.drilldown = true;
                 }, function (e) {
