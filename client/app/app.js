@@ -8,6 +8,7 @@ import buttons from 'angular-ui-bootstrap/src/buttons';
 import ngInlineEdit from 'ng-inline-edit';
 import { default as multiselect } from 'angular-bootstrap-multiselect';
 
+import FooterComponent from './components/footernco/footernco';
 import AppComponent from './app.component';
 import NavigationComponent from './components/navigation/navigation';
 import SonglistsListComponent from './components/songlistsList/songlistsList';
@@ -72,6 +73,7 @@ angular
         'gridshore.c3js.chart',
         require('angular-smart-table'),
         NavigationComponent.name,
+        FooterComponent.name,
         UpdateSonglistComponent.name,
         UploadSongsComponent.name,
         EditAllSongsComponent.name,
@@ -183,7 +185,7 @@ angular
         return $cacheFactory('super-cache');
     }])
     .constant('config', {
-        apiUrl: 'http://172.27.108.135:8080',
+        apiUrl: 'http://172.27.108.135:8090',
         baseUrl: '/'
     })
     .factory('_', ['$window', function($window) {

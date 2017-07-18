@@ -355,7 +355,7 @@ class DateOverDateSongController {
             $scope.theChart2 = chartObj;
         };
         $scope.onSelectTerritory = function () {
-            $scope.query.territories = $scope.selectedTer.map(function (terr) {
+            $scope.territory = $scope.selectedTer.map(function (terr) {
                 return terr.id;
             });
         };
@@ -365,7 +365,7 @@ class DateOverDateSongController {
             });
         };
         $scope.onSelectRetailer = function () {
-            $scope.query.retailers = $scope.selectedRet.map(function (retailer) {
+            $scope.retailer = $scope.selectedRet.map(function (retailer) {
                 return retailer.id;
             });
         };
@@ -392,14 +392,14 @@ class DateOverDateSongController {
             // Setting up an array with individual objects
             object.forEach(function (dateObj) {
                 var dateSales = {}, sales = 0;
-                dateObj.retailerList.forEach(function (retailerObj) {
+                dateObj.orgRetailerList.forEach(function (retailerObj) {
                     retailerObj.territoryList.forEach(function (territoryObj) {
-                        sales = sales + parseInt(territoryObj.sales);
+                        sales = sales + parseInt(territoryObj.totalSaleTerr);
                         var finalObj = {
                             date: dateObj.date,
                             territory: territoryObj.name,
                             retailer: retailerObj.name,
-                            sales: territoryObj.sales
+                            sales: territoryObj.totalSaleTerr
                         }
                         firstMap.push(finalObj);
                     })
@@ -519,10 +519,7 @@ class DateOverDateSongController {
             plotChart();
         }
         function plotChart() {
-            $('.panel-heading span.clickable').each(function () {
-                var $this = $(this);
-                collapseSelection($this);
-            });
+            collapseSelection($('.panel-heading span.clickable'));
 
             $scope.names = [];
             $scope.datapoints = [];
@@ -582,14 +579,15 @@ class DateOverDateSongController {
                 !$scope.sameRangeError &&
                 !$scope.rangeError) {
             $scope.query.daysInRange = $scope.range1diff;
-            $scope.query.songId = "5928207b55649882af1e6126";
+            $scope.query.songId = "Y66000000067";
             $scope.query.breakByRetailer = $scope.brkByRetailer;
+            $scope.query["territory[]"] =  Array.from(new Set($scope.territory)) || [];
+            $scope.query["retailer[]"] =  $scope.retailer;
 
             ReportService.getDODChart($scope.query)
                 .then(function (response) {
                     $scope.chart = response.data;
                     addEmptyDateValues();
-                    $scope.displayCollection = [].concat($scope.chart.salesFirstRange);
                     $scope.NoChartError = "";
                     $scope.drilldown = true;
                 }, function (e) {

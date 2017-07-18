@@ -1,49 +1,61 @@
-.song-report {
-    margin-top: 20px;
-}
-
 .row {
-    margin-top: 40px;
+    margin-top:40px;
     padding: 0 10px;
 }
 
-.clickable {
-    cursor: pointer;
+.clickable{
+    cursor: pointer;   
 }
 
-.panel-heading span {
-    margin-top: -20px;
-    font-size: 15px;
+#confirmSubmit:hover {
+    opacity: 0.8;
 }
-
+#confirmSubmit {
+    background:#172a3a !important; 
+    border-color :#172a3a;
+}
+.timepicker a {
+    color:#172a3a;
+}
+.error-alert {
+    color: #a94442;
+}
+.panel-heading {
+    background:#F5B041 !important;
+    span {
+        margin-top: -20px;
+        font-size: 15px;
+    }
+}
 .btn.selected {
     background: #337ab7;
     color: white;
 }
-
-.selected.btn:hover,
-.selected.btn:focus {
-    color: white;
+.selected.btn:hover, .selected.btn:focus {
+    color:white;
 }
-
 .timepicker {
     padding: 0 20px;
-    display: inline-block;
+    display:inline-block;
 }
-
 .graph-type-labels {
     margin-top: 20px;
     .btn.btn-primary {
         background-color: gray;
-        border-color: gray;
+        border-color:gray;
     }
-    .btn-primary:active,
-    .btn-primary.active {
-        background-color: #286090;
-        border-color: #204d74;
+    .btn-primary:active:hover, .btn-primary.active:hover,.btn:hover, .btn:focus, .btn.focus {
+        background:#F5B041 !important;
+        color:#000;
+        border-color:#F5B041 !important;
+    }
+    .btn-primary:active, .btn-primary.active {
+        color:#000;
+        background:#F5B041 !important;
+        border-color:#F5B041 !important;
     }
     .btn {
-        float: right;
+        float:right;
         margin-right: 10px;
         border-radius: 20px;
         text-transform: capitalize;
@@ -51,24 +63,35 @@
 }
 
 .territories-retailers {
-    padding-bottom: 20px;
+    padding-bottom:20px;
 }
-
-.tab-head {
+.tab-head{
     color: #337ab7;
 }
-
 .drilldown {
     table tr td {
-        cursor: pointer;
+        cursor:pointer;
         i {
-            color: grey;
+            color:grey;
         }
     }
     padding-top: 20px;
     padding-bottom:60px;
 }
-
 #world-map {
+    .btn {
+        background:#172a3a !important; 
+        border-color :#172a3a;
+    }
+    .btn:hover {
+        opacity: 0.8;
+    }
     padding-top: 20px;
+}
+
+.selectedSong {
+    background:#172a3a; 
+    color:white; 
+    padding:5px 10px; 
+    border-radius: 15px;
 }
