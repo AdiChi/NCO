@@ -466,7 +466,9 @@ class DateOverDateSongController {
             range1 = ($scope.chart.firstRange).split(" to ");
             firstRangeMap = new Map();
             $scope.chart.salesFirstRange.forEach(function (obj) {
-                firstRangeMap.set(obj.date, obj.totalsales);
+                if(obj.totalsales!==0) {
+                    firstRangeMap.set(obj.date, obj.totalsales);
+                }
             });
             // console.log(firstRangeMap);
             // }
@@ -475,7 +477,9 @@ class DateOverDateSongController {
             range2 = ($scope.chart.secondRange).split(" to ");
             secondRangeMap = new Map();
             $scope.chart.salesSecondRange.forEach(function (obj) {
-                secondRangeMap.set(obj.date, obj.totalsales);
+                if(obj.totalsales!==0) {
+                    secondRangeMap.set(obj.date, obj.totalsales);
+                }
             });
             // }
 
@@ -562,6 +566,8 @@ class DateOverDateSongController {
             $scope.theChart = null;
             $scope.showHeatMap = false;
             $scope.loading = true;
+            $scope.drilldown = false;
+            $scope.heatMapData = null;
 
             if (!$scope.query.songId) {
                 $scope.songError = "Please select song";
