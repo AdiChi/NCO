@@ -13,7 +13,7 @@ function LoginService($filter) {
                         info: {
                             totalSales: '7,653',
                             openCampaign: '852',
-                            dailySales: '',
+                            dailySales: '22',
                         },
                         chart: {
                             datapoints : [
@@ -75,7 +75,7 @@ function LoginService($filter) {
                         info: {
                             totalSales: '7,653',
                             openCampaign: '852',
-                            dailySales: ''
+                            dailySales: '22'
                         },
                         chart: {
                             datapoints : [
@@ -122,7 +122,7 @@ function LoginService($filter) {
                         info: {
                             totalSales: '6,134',
                             openCampaign: '725',
-                            dailySales: ''
+                            dailySales: '34'
                         },
                         chart: {
                             datapoints : [
@@ -183,7 +183,7 @@ function LoginService($filter) {
                         info: {
                             totalSales: '5,753',
                             openCampaign: '678',
-                            dailySales: ''
+                            dailySales: '34'
                         },
                         chart: {
                             datapoints : [
@@ -231,7 +231,7 @@ function LoginService($filter) {
                         info: {
                             totalSales: '5,567',
                             openCampaign: '654',
-                            dailySales: ''
+                            dailySales: '41'
                         },
                         chart: {
                             datapoints : [
@@ -296,7 +296,7 @@ function LoginService($filter) {
                         info: {
                             totalSales: '7,676',
                             openCampaign: '456',
-                            dailySales: ''
+                            dailySales: '41'
                         },
                         chart: {
                             datapoints : [
