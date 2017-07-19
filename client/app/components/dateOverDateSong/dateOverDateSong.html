@@ -273,12 +273,12 @@
                             </td>
                         </tr>
                         <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="showTab[value.date]">
-                            <td ng-click="ret.totalSaleRetailer?showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null">
+                            <td ng-click="ret.totalSaleRetailer?showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null" ng-if="ret.totalSaleRetailer>0">
                                 <i style="padding-left: 20px"></i>
                                 <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
                                 <i class="glyphicon" ng-if="ret.totalSaleRetailer>0" ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{ret.name}}
                             </td>
-                            <td>
+                            <td ng-if="ret.totalSaleRetailer>0">
                                 <strong>{{ret.totalSaleRetailer}}</strong>
                             </td>
                         </tr>
@@ -329,12 +329,12 @@
                             </td>
                         </tr>
                         <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="showTab[value.date]">
-                            <td ng-click="ret.totalSaleRetailer>0 ? showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null">
+                            <td ng-click="ret.totalSaleRetailer>0 ? showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null" ng-if="ret.totalSaleRetailer>0">
                                 <i style="padding-left:20px"></i>
                                 <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
                                 <i class="glyphicon" ng-if="ret.totalSaleRetailer>0" ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{ret.name}}
                             </td>
-                            <td>
+                            <td ng-if="ret.totalSaleRetailer>0">
                                 <strong> {{ret.totalSaleRetailer}}</strong>
                             </td>
                         </tr>
