@@ -371,6 +371,18 @@ class DateOverDateSongController {
                 return retailer.id;
             });
         };
+        /*function getAllRetailers() {
+            $scope.retailer = $scope.retailers.map(function (r) {
+                return r.id;
+            });
+            return $scope.retailer;
+        };
+        function getAllTerritories() {
+            $scope.territory = $scope.territories.map(function (terr) {
+                return terr.id;
+            });
+            return $scope.territory;
+        };*/
 
         $scope.toggleRows = function (data) {
             ReportService.getTimeRangeData()
@@ -549,6 +561,7 @@ class DateOverDateSongController {
         function getChart() {
             $scope.theChart = null;
             $scope.showHeatMap = false;
+            $scope.loading = true;
 
             if (!$scope.query.songId) {
                 $scope.songError = "Please select song";
@@ -584,8 +597,8 @@ class DateOverDateSongController {
             $scope.query.daysInRange = $scope.range1diff;
             $scope.query.songId = "Y66000000067";
             $scope.query.breakByRetailer = $scope.brkByRetailer;
-            $scope.query["territory[]"] =  Array.from(new Set($scope.territory)) || [];
-            $scope.query["retailer[]"] =  $scope.retailer;
+            $scope.query["territory[]"] =  $scope.territory || []/*getAllTerritories()*/;
+            $scope.query["retailer[]"] =  $scope.retailer|| []/*getAllRetailers()*/;
 
             ReportService.getDODChart($scope.query)
                 .then(function (response) {
@@ -593,11 +606,14 @@ class DateOverDateSongController {
                     addEmptyDateValues();
                     $scope.NoChartError = "";
                     $scope.drilldown = true;
+                    $scope.loading = false;
                 }, function (e) {
                     $scope.NoChartError = "Something went wrong!";
                     console.log(e);
+                    $scope.loading = false;
                 });
             } else {
+                $scope.loading = false;
                 // $scope.NoChartError = "Something went wrong!";
             }
 
