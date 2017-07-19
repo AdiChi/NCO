@@ -362,7 +362,7 @@ class DateOverDateSongController {
             });
         };
         $scope.onSelectTerritoryGroup = function () {
-            $scope.query.territoryGroups = $scope.selectedTG.map(function (tg) {
+            $scope.territoryGroup = $scope.selectedTG.map(function (tg) {
                 return tg.id;
             });
         };
@@ -599,6 +599,7 @@ class DateOverDateSongController {
             $scope.query.breakByRetailer = $scope.brkByRetailer;
             $scope.query["territory[]"] =  $scope.territory || []/*getAllTerritories()*/;
             $scope.query["retailer[]"] =  $scope.retailer|| []/*getAllRetailers()*/;
+            $scope.query["territoryGroup[]"] =  $scope.territoryGroup|| []/*getAllRetailers()*/;
 
             ReportService.getDODChart($scope.query)
                 .then(function (response) {
