@@ -79,3 +79,17 @@
         padding: 0px 5px;
     }
 }
+
+.c3-tooltip td{
+    color: #000;
+}
+
+.dark-widget{
+    .c3 line, .c3 path{
+        stroke: #fff;
+    }
+
+    .c3 text {
+        fill: #fff;
+    }
+}

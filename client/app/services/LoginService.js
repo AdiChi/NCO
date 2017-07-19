@@ -9,41 +9,55 @@ function LoginService($filter) {
             dashboard: {
                 theme: 'light',
                 widgets: [{
-                        header: 'Total Revenue',
+                        header: 'Streaming',
                         info: {
                             totalSales: '7,653',
                             openCampaign: '852',
-                            dailySales: ''
+                            dailySales: '',
                         },
                         chart: {
-                            firstValue: '50,20,10,40,15,25',
-                            secondValue: '25,15,40,10,20,50',
-                            templateUrl: 'app/templates/charts/spline.html'
+                            firstValue: '50,20,10,40,15',
+                            firstColumnName: 'New York',
+                            secondValue: '25,15,40,10,20',
+                            secondColumnName: 'Los Angeles',
+                            thirdValue: '30,20,15,14,30',
+                            thirdColumnName: 'Chicago',
+                            templateUrl: 'app/templates/charts/spline.html',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5'
                         }
 
                     },
                     {
-                        header: 'Statistics',
+                        header: 'Revenue',
                         info: {
                             totalSales: '1,507',
                             openCampaign: '916',
                             dailySales: '22'
                         },
                         chart: {
-                            firstValue: '50,20,10,40,15,25',
-                            secondValue: '25,15,40,10,20,50',
-                            templateUrl: 'app/templates/charts/bar.html'
+                            firstValue: '50,20,10,40,15',
+                            firstColumnName: 'New York',
+                            secondValue: '25,15,40,10,20',
+                            secondColumnName: 'Los Angeles',
+                            thirdValue: '30,20,15,14,30',
+                            thirdColumnName: 'Chicago',
+                            templateUrl: 'app/templates/charts/bar.html',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5'
                         }
                     }, {
-                        header: 'Daily Sales',
+                        header: 'Popularity',
                         info: {
                             totalSales: '7,653',
                             openCampaign: '852',
                             dailySales: ''
                         },
                         chart: {
-                            firstValue: '50,20,10,40,15,25',
-                            secondValue: '25,15,40,10',
+                            firstValue: '50,20,10,40,15',
+                            firstColumnName: 'New York',
+                            secondValue: '25,15,40,10,20',
+                            secondColumnName: 'Los Angeles',
+                            thirdValue: '30,20,15,14,30',
+                            thirdColumnName: 'Chicago',
                             templateUrl: 'app/templates/charts/donut.html'
                         }
                     }
@@ -72,9 +86,14 @@ function LoginService($filter) {
                             dailySales: ''
                         },
                         chart: {
-                            firstValue: '40,15,25,20,10,50',
-                            secondValue: '10,20,25,15,40,50',
-                            templateUrl: 'app/templates/charts/bar.html'
+                            firstValue: '100,250,120,240,150',
+                            firstColumnName: 'USA',
+                            secondValue: '125,150,340,100,200',
+                            secondColumnName: 'UK',
+                            thirdValue: '300,250,150,154,230',
+                            thirdColumnName: 'Canada',
+                            templateUrl: 'app/templates/charts/bar.html',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5'
                         }
 
                     },
@@ -86,8 +105,12 @@ function LoginService($filter) {
                             dailySales: '34'
                         },
                         chart: {
-                            firstValue: '50,20,10,40,15,25',
-                            secondValue: '25,15,40,10,20,50',
+                            firstValue: '100,250,120,240,150',
+                            firstColumnName: 'USA',
+                            secondValue: '125,150,340,100,200',
+                            secondColumnName: 'UK',
+                            thirdValue: '300,250,150,154,230',
+                            thirdColumnName: 'Canada',
                             templateUrl: 'app/templates/charts/donut.html'
                         }
                     }, {
@@ -98,9 +121,14 @@ function LoginService($filter) {
                             dailySales: ''
                         },
                         chart: {
-                            firstValue: '50,20,10,40,15,25',
-                            secondValue: '25,15,40,10,20,50',
-                            templateUrl: 'app/templates/charts/spline.html'
+                            firstValue: '100,250,120,240,150',
+                            firstColumnName: 'USA',
+                            secondValue: '125,150,340,100,200',
+                            secondColumnName: 'UK',
+                            thirdValue: '300,250,150,154,230',
+                            thirdColumnName: 'Canada',
+                            templateUrl: 'app/templates/charts/spline.html',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5'
                         }
                     }
                 ],
@@ -128,8 +156,14 @@ function LoginService($filter) {
                             dailySales: ''
                         },
                         chart: {
-                            firstValue: '40,15,25,50,20,10',
-                            secondValue: '10,20,50,25,15,40',
+                            firstValue: '150,200,220,250,100',
+                            firstColumnName: 'Shape of You',
+                            secondValue: '150,180,240,120,220',
+                            secondColumnName: 'Starboy',
+                            thirdValue: '200,350,250,150,220',
+                            thirdColumnName: 'Closer',
+                            fourthValue: '250,150,100,180,120',
+                            fourthColumnName: 'Be With You',
                             templateUrl: 'app/templates/charts/donut.html'
                         }
 
@@ -142,9 +176,16 @@ function LoginService($filter) {
                             dailySales: '41'
                         },
                         chart: {
-                            firstValue: '40,15,25,50,20,10',
-                            secondValue: '10,20,50,25,15,40',
-                            templateUrl: 'app/templates/charts/spline.html'
+                            firstValue: '150,200,220,250,100',
+                            firstColumnName: 'Shape of You',
+                            secondValue: '150,180,240,120,220',
+                            secondColumnName: 'Starboy',
+                            thirdValue: '200,350,250,150,220',
+                            thirdColumnName: 'Closer',
+                            fourthValue: '250,150,100,180,120',
+                            fourthColumnName: 'Be With You',
+                            templateUrl: 'app/templates/charts/spline.html',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5'
                         }
                     }, {
                         header: 'Daily Sales',
@@ -154,9 +195,16 @@ function LoginService($filter) {
                             dailySales: ''
                         },
                         chart: {
-                            firstValue: '40,15,25,50,20,10',
-                            secondValue: '10,20,50,25,15,40',
-                            templateUrl: 'app/templates/charts/bar.html'
+                            firstValue: '150,200,220,250,100',
+                            firstColumnName: 'Shape of You',
+                            secondValue: '150,180,240,120,220',
+                            secondColumnName: 'Starboy',
+                            thirdValue: '200,350,250,150,220',
+                            thirdColumnName: 'Closer',
+                            fourthValue: '250,150,100,180,120',
+                            fourthColumnName: 'Be With You',
+                            templateUrl: 'app/templates/charts/bar.html',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5'
                         }
                     }
                 ],

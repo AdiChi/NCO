@@ -13,8 +13,10 @@
 </div>
 <div class="widget-chart">
     <c3chart bindto-id="chart3">
-        <chart-column column-id="Range 1" column-values="{{widget.chart.firstValue}}" column-type="donut" />
-        <chart-column column-id="Range 2" column-values="{{widget.chart.secondValue}}" column-type="donut" />
+        <chart-column column-id="Range 1" column-name="{{widget.chart.firstColumnName}}" column-values="{{widget.chart.firstValue}}" column-type="donut" />
+        <chart-column column-id="Range 2" column-name="{{widget.chart.secondColumnName}}" column-values="{{widget.chart.secondValue}}" column-type="donut" />
+        <chart-column column-id="Range 3" column-name="{{widget.chart.thirdColumnName}}" column-values="{{widget.chart.thirdValue}}" column-type="donut" />
+        <chart-column column-id="Range 4" column-name="{{widget.chart.fourthColumnName}}" column-values="{{widget.chart.fourthValue}}" column-type="donut" ng-if="widget.chart.fourthValue" />
         <chart-legend show-legend="false" />
     </c3chart>
 </div>

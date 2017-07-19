@@ -17,9 +17,22 @@
 </div>
 <div class="widget-chart">
     <c3chart bindto-id="chart2">
-        <chart-column column-id="Range 1" column-values="{{widget.chart.firstValue}}" column-type="bar" />
-        <chart-column column-id="Range 2" column-values="{{widget.chart.secondValue}}" column-type="bar" />
+        <chart-column column-id="x" column-values="{{widget.chart.xLabels}}" />
+        <chart-column column-id="Range 1" column-name="{{widget.chart.firstColumnName}}" column-values="{{widget.chart.firstValue}}"
+            column-type="bar" />
+        <chart-column column-id="Range 2" column-name="{{widget.chart.secondColumnName}}" column-values="{{widget.chart.secondValue}}"
+            column-type="bar" />
+        <chart-column column-id="Range 3" column-name="{{widget.chart.thirdColumnName}}" column-values="{{widget.chart.thirdValue}}"
+            column-type="bar" />
+        <chart-column column-id="Range 4" column-name="{{widget.chart.fourthColumnName}}" column-values="{{widget.chart.fourthValue}}"
+            column-type="bar" ng-if="widget.chart.fourthValue" />
         <chart-legend show-legend="false" />
+        <chart-axes values-x="x"></chart-axes>
+        <chart-axis>
+            <chart-axis-x axis-position="outer-center" axis-type="category">
+                <chart-axis-x-tick tick-rotate="50" />
+            </chart-axis-x>
+        </chart-axis>
         <chart-size chart-height="300" chart-width="350" />
     </c3chart>
 </div>
