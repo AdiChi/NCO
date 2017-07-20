@@ -1,0 +1,28 @@
+.component-header {
+    margin-bottom: 0px;
+    height: 60px;
+    padding-left: 25px;
+    border: 0px;
+    border-radius: 0px;
+    .component-title {
+        color: #fff;
+        line-height: 60px;
+        font-size: 20px;
+        .component-banner {
+            float: right;
+            img {
+                height: 56px;
+                width: 100%;
+            }
+        }
+    }
+}
+.light-header {
+    background: #000000;
+}
+.medium-header {
+    background: #00081b;
+}
+.dark-header {
+    background: #18000c;
+}

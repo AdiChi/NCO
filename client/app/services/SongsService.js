@@ -87,24 +87,51 @@ function SongsService($http, config, superCache) {
             }
         },
         getSong(id) {
-            var song = $http.get(`${baseUrl}/songs/${id}`,{headers: getHeaders()})
-                .then(function(r) {
-                    var item = r.data;
-                    return {
-                        "id": item.id,
-                        "albumname": item.albumname,
-                        "trackname": item.trackname,
-                        "artist": item.artist,
-                        "artistdesc": item.artistdesc,
-                        "isrc": item.isrc,
-                        "year": item.year
-                    };
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
+            // var song = $http.get(`${baseUrl}/songs/${id}`,{headers: getHeaders()})
+            //     .then(function(r) {
+            //         var item = r.data;
+            //         return {
+            //             "id": item.id,
+            //             "albumname": item.albumname,
+            //             "trackname": item.trackname,
+            //             "artist": item.artist,
+            //             "artistdesc": item.artistdesc,
+            //             "isrc": item.isrc,
+            //             "year": item.year
+            //         };
+            //     })
+            //     .catch(function(error) {
+            //         console.log(error);
+            //     });
 
-            return song;
+            // return song;
+            return {
+                    "id": "5928207b55649882af1e6126",
+                    "isrc": "USANA0431901",
+                    "artistdesc": "Spectacular Baroque and Classical chamber music",
+                    "artist": "American Baroque",
+                    "songid": null,
+                    "trackname": "Oboe Quartet in F (K370) - Allegro",
+                    "albumname": "Mozart 4 Quartets for Strings and Winds",
+                    "year": "2003",
+                    "page": null,
+                    "tracknum": null,
+                    "mp3genre": null,
+                    "magnatunegenres": null,
+                    "seconds": null,
+                    "buy": null,
+                    "home": null,
+                    "bio": null,
+                    "bandphotolarge": null,
+                    "bandphoto": null,
+                    "launchdate": null,
+                    "albumsku": null,
+                    "upc": null,
+                    "city_state": null,
+                    "country": null,
+                    "download_mp3": null,
+                    "download_mp3lofi": null
+                    };
         },
         sendXml(fd) {
 

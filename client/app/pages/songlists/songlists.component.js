@@ -4,7 +4,9 @@ import './songlists.scss';
 
 let songlistsComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {
+    heading: '@'
+  },
   template,
   controller,
   controllerAs: 'vm'

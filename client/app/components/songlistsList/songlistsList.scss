@@ -6,3 +6,27 @@
   background: aliceblue;
   color: black;
 }
+
+.list-table{
+  thead{
+    background-color: #d3d3d3;
+    border: 1px solid #d3d3d3;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  thead th{
+    color: #1a1c22;
+    font-size: 13px;
+  }
+
+  tbody td{
+    color: #222;
+    border-bottom-color: #d3d3d3; 
+  }
+}
+
+.songs-artist-component{
+  position: relative;
+  margin: 15px 0 0;
+}

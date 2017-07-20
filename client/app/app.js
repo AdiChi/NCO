@@ -5,6 +5,7 @@ import uiRouter from 'angular-ui-router';
 import modal from 'angular-ui-bootstrap/src/modal';
 import timepicker from 'angular-ui-bootstrap/src/timepicker';
 import buttons from 'angular-ui-bootstrap/src/buttons';
+import ngAnimate from 'angular-animate'
 import ngInlineEdit from 'ng-inline-edit';
 import { default as multiselect } from 'angular-bootstrap-multiselect';
 
@@ -16,6 +17,7 @@ import LogListComponent from './components/logList/logList';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
 import LoginComponent from './pages/login/login';
 import DashboardComponent from './pages/dashboard/dashboard';
+import SideNavComponent from './components/sideNav/sideNav';
 import ArtistsComponent from './pages/artists/artists';
 import UsersComponent from './pages/users/users';
 import CreateComponent from './pages/create/create';
@@ -67,6 +69,7 @@ angular
         buttons,
         multiselect,
         ngInlineEdit,
+        ngAnimate,
         'ui.bootstrap.datetimepicker',
         'd3js',
         'c3js',
@@ -89,7 +92,8 @@ angular
         SonglistsListComponent.name,
         SonglistsComponent.name,
         DateOverDateSongComponent.name,
-        ReportsComponent.name
+        ReportsComponent.name,
+        SideNavComponent.name
     ])
     .config(($locationProvider, $stateProvider, $urlRouterProvider) => {
         "ngInject";
@@ -115,7 +119,11 @@ angular
             })
             .state('app.artists', {
                 url: '/artists',
-                template: '<artists></artists>'
+                template: '<songlists heading="Artists"></songlists>'
+            })
+            .state('app.songs', {
+                url: '/songs',
+                template: '<songlists heading="Songs"></songlists>'
             })
             .state('app.users', {
                 url: '/users',
@@ -139,7 +147,7 @@ angular
             })
             .state('app.songlists', {
                 url: '/songlists',
-                template: '<songlists></songlists>'
+                template: '<songlists heading="My Song Lists"></songlists>'
             })
             .state('app.addsonglist', {
                 url: '/songlists/add',
