@@ -30,6 +30,10 @@
 }
 .timepicker a {
     color:#172a3a;
+    &:hover, &:focus {
+        text-decoration:none;
+        color:grey;
+    }
 }
 .error-alert {
     color: #a94442;
@@ -78,6 +82,10 @@
 
 .territories-retailers {
     padding-bottom:20px;
+    .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+        color: #000;
+        background-color: #F5B041;
+    }
 }
 .tab-head{
     color: #337ab7;
