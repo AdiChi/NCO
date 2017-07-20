@@ -102,8 +102,16 @@
 }
 #world-map {
     .btn {
-        background:#172a3a !important; 
-        border-color :#172a3a;
+        &.active {
+            &:hover {
+                opacity:1;
+            }
+            background:#F5B041;
+            border-color:#F5B041;
+            color: #000;
+        }
+        background:gray; 
+        border-color :gray;
     }
     .btn:hover {
         opacity: 0.8;
