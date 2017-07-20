@@ -173,6 +173,7 @@ class DateOverDateSongController {
                 $scope.showHeatMap = true;
                 if(!$scope.heatMapData) {
                     $scope.toggleMap($scope.range1sales);
+                    $scope.activefirst=true;
                 }
             } else if ($scope.theChart2) {
                 $scope.showHeatMap = false;
