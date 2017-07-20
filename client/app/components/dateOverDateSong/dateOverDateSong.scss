@@ -103,6 +103,9 @@
 #world-map {
     .btn {
         &.active {
+            &:hover {
+                opacity:1;
+            }
             background:#F5B041;
             border-color:#F5B041;
             color: #000;

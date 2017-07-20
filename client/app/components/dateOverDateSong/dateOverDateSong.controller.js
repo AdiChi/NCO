@@ -585,11 +585,11 @@ class DateOverDateSongController {
                 !$scope.query.time2) {
                 $scope.timeError = "Please select time range";
             }
-            if(( $scope.query.range1Date1 == $scope.query.range2Date1 &&
-                    $scope.query.range1Date2 == $scope.query.range2Date2 ) && 
-                    ($scope.query.time1 == $scope.query.r2time1 &&
-                     $scope.query.time2 == $scope.query.r2time2)) {
+            if (($scope.query.range1Date1 == $scope.query.range2Date1 &&
+                $scope.query.range1Date2 == $scope.query.range2Date2) && ($scope.query.time1 == $scope.query.r2time1 && $scope.query.time2 == $scope.query.r2time2)) {
                 $scope.sameRangeError = "Please select different sales periods";
+            } else {
+                $scope.sameRangeError = "";
             }
 
             if ($scope.query.songId &&
