@@ -1,0 +1,72 @@
+.analytic-reports-component {
+    background: #fff;
+    .nav-content {
+        width: 100%;
+
+        .nav-tabs {
+
+            border-bottom: 1px solid #c28103;
+            &>li {
+                &:not(:first-child) {
+                    margin-left: 10px;
+                }
+                &.active a,
+                &.active a:hover,
+                &.active a:focus {
+                    border-radius: 0;
+                    background-color: #c28103;
+                    border: 1px solid #c28103;
+                    color: #fff;
+                    font-weight: 600;
+                    text-align: center;
+                    cursor: default;
+                }
+
+                a {
+                    text-align: center;
+                    border-radius: 0;
+                    border: 1px solid #c28103;
+                    border-bottom: none;
+                    cursor: pointer;
+                    background-color: #fff;
+                    color: #c28103;
+                }
+            }
+        }
+
+        .tab-content {
+            background: #fff;
+            padding: 10px 0;
+            color: #000;
+
+            .tab-pane {
+                .list-table {
+                    thead {
+                        background-color: #d3d3d3;
+                        border: 1px solid #d3d3d3;
+                        border-left: 0;
+                        border-right: 0;
+                    }
+
+                    thead th {
+                        color: #1a1c22;
+                        font-size: 13px;
+                    }
+                    tbody tr {
+                        &:hover {
+                            background-color: #F0F0F0;
+                        }
+                    }
+                    tbody td {
+                        a {
+                            text-decoration:none;
+                            color: #222;
+                        }
+                        color: #222;
+                        border-bottom-color: #d3d3d3;
+                    }
+                }
+            }
+        }
+    }
+}
