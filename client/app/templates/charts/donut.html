@@ -19,7 +19,7 @@
         <chart-column column-id="Range 4" column-name="{{widget.chart.fourthColumnName}}" column-values="{{widget.chart.fourthValue}}" column-type="donut" />
         <chart-legend show-legend="false" />
     </c3chart> -->
-    <c3chart bindto-id="chart3" chart-data="widget.chart.datapoints" chart-columns="widget.chart.datacolumns" chart-x="widget.chart.datax">
+    <c3chart bindto-id="{{widget.chart.id}}" chart-data="widget.chart.datapoints" chart-columns="widget.chart.datacolumns" chart-x="widget.chart.datax">
         <!-- <chart-bar ratio="0.5" /> -->
         <chart-axes values-x="x" />
         <chart-axis>

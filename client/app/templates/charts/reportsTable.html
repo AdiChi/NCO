@@ -1,0 +1,43 @@
+<table st-safe-src="vm.songlistslist" st-table="vm.displayCollection"  class="table list-table">
+    <thead>
+        <tr>
+            <th st-sort="reportName">Report Name <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+            <th st-sort="sharedReport">Shared Report (Y/N) <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+            <th st-sort="lastModified">Last Modified <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+            <th st-sort="lastRan">Last Ran <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+            <th st-sort="dataset">Dataset <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+        </tr>
+        <!-- <tr>
+            <th>
+                <input st-search="songListName" placeholder="search for name" class="input-sm form-control" type="search"/>
+            </th>
+            <th>
+                <input st-search="description" placeholder="search for description" class="input-sm form-control" type="search"/>
+            </th>
+            <th></th>
+            <th></th>
+        </tr> -->
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in vm.displayCollection" ng-click="vm.toggleSideNav(row)">
+            <td>{{row.reportName}}</td>
+            <td><strong>{{row.sharedReport}}</strong></td>
+            <td>{{row.lastModified}}</td>
+            <td>{{row.lastRan}}</td>
+            <td>{{row.dataset}}</td>
+        </tr>
+        <tr>
+            <td colspan="4" ng-show="vm.displayCollection.length===0">
+               Your search query has fetched no results
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><a class="btn btn-default" st-export>Export to Excel</a></td>
+            <td colspan="5" class="text-center">
+                <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+            </td>
+        </tr>
+    </tfoot>
+</table>

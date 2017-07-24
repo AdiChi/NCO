@@ -16,6 +16,106 @@ function LoginService($filter) {
                             dailySales: '22',
                         },
                         chart: {
+                            id: "chart1", //should be unique
+                            datapoints : [
+                                {"x": "Jul 1", "New York": 231, "Los Angeles": 321, "Chicago": 511},
+                                {"x": "Jul 2", "New York": 110, "Los Angeles": 222, "Chicago": 421},
+                                {"x": "Jul 3", "New York": 321, "Los Angeles": 122, "Chicago": 221},
+                                {"x": "Jul 4", "New York": 432, "Los Angeles": 150, "Chicago": 331},
+                                {"x": "Jul 5", "New York": 111, "Los Angeles": 21, "Chicago": 311}
+                            ],
+                            datacolumns : [
+                                {"id": "New York", "type": "spline"},
+                                {"id": "Los Angeles", "type": "spline"},
+                                {"id": "Chicago", "type": "spline"}
+                            ],
+                            datax : {"id": "x"},
+                            /*firstValue: '50,20,10,40,15',
+                            firstColumnName: 'New York',
+                            secondValue: '25,15,40,10,20',
+                            secondColumnName: 'Los Angeles',
+                            thirdValue: '30,20,15,14,30',
+                            thirdColumnName: 'Chicago',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5',*/
+                            templateUrl: 'app/templates/charts/spline.html'
+                        }
+
+                    },
+                    {
+                        header: 'Streaming',
+                        info: {
+                            totalSales: '7,653',
+                            openCampaign: '852',
+                            dailySales: '22',
+                        },
+                        chart: {
+                            id: "chart2",
+                            datapoints : [
+                                {"x": "Jul 1", "New York": 231, "Los Angeles": 321, "Chicago": 511},
+                                {"x": "Jul 2", "New York": 110, "Los Angeles": 222, "Chicago": 421},
+                                {"x": "Jul 3", "New York": 321, "Los Angeles": 122, "Chicago": 221},
+                                {"x": "Jul 4", "New York": 432, "Los Angeles": 150, "Chicago": 331},
+                                {"x": "Jul 5", "New York": 111, "Los Angeles": 21, "Chicago": 311}
+                            ],
+                            datacolumns : [
+                                {"id": "New York", "type": "spline"},
+                                {"id": "Los Angeles", "type": "spline"},
+                                {"id": "Chicago", "type": "spline"}
+                            ],
+                            datax : {"id": "x"},
+                            /*firstValue: '50,20,10,40,15',
+                            firstColumnName: 'New York',
+                            secondValue: '25,15,40,10,20',
+                            secondColumnName: 'Los Angeles',
+                            thirdValue: '30,20,15,14,30',
+                            thirdColumnName: 'Chicago',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5',*/
+                            templateUrl: 'app/templates/charts/spline.html'
+                        }
+
+                    },
+                    {
+                        header: 'Streaming',
+                        info: {
+                            totalSales: '7,653',
+                            openCampaign: '852',
+                            dailySales: '22',
+                        },
+                        chart: {
+                            id: "chart3",
+                            datapoints : [
+                                {"x": "Jul 1", "New York": 231, "Los Angeles": 321, "Chicago": 511},
+                                {"x": "Jul 2", "New York": 110, "Los Angeles": 222, "Chicago": 421},
+                                {"x": "Jul 3", "New York": 321, "Los Angeles": 122, "Chicago": 221},
+                                {"x": "Jul 4", "New York": 432, "Los Angeles": 150, "Chicago": 331},
+                                {"x": "Jul 5", "New York": 111, "Los Angeles": 21, "Chicago": 311}
+                            ],
+                            datacolumns : [
+                                {"id": "New York", "type": "spline"},
+                                {"id": "Los Angeles", "type": "spline"},
+                                {"id": "Chicago", "type": "spline"}
+                            ],
+                            datax : {"id": "x"},
+                            /*firstValue: '50,20,10,40,15',
+                            firstColumnName: 'New York',
+                            secondValue: '25,15,40,10,20',
+                            secondColumnName: 'Los Angeles',
+                            thirdValue: '30,20,15,14,30',
+                            thirdColumnName: 'Chicago',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5',*/
+                            templateUrl: 'app/templates/charts/spline.html'
+                        }
+
+                    },
+                    {
+                        header: 'Streaming',
+                        info: {
+                            totalSales: '7,653',
+                            openCampaign: '852',
+                            dailySales: '22',
+                        },
+                        chart: {
+                            id: "chart4",
                             datapoints : [
                                 {"x": "Jul 1", "New York": 231, "Los Angeles": 321, "Chicago": 511},
                                 {"x": "Jul 2", "New York": 110, "Los Angeles": 222, "Chicago": 421},
@@ -48,6 +148,7 @@ function LoginService($filter) {
                             dailySales: '22'
                         },
                         chart: {
+                            id: "chart5",
                             datapoints : [
                                 {"x": "Jul 1", "New York": 231, "Los Angeles": 321, "Chicago": 511},
                                 {"x": "Jul 2", "New York": 110, "Los Angeles": 222, "Chicago": 421},
@@ -78,6 +179,7 @@ function LoginService($filter) {
                             dailySales: '22'
                         },
                         chart: {
+                            id: "chart6",
                             datapoints : [
                                 {"x": "Jul 1", "New York": 231, "Los Angeles": 321, "Chicago": 511},
                                 {"x": "Jul 2", "New York": 110, "Los Angeles": 222, "Chicago": 421},
@@ -125,6 +227,7 @@ function LoginService($filter) {
                             dailySales: '34'
                         },
                         chart: {
+                            id: "chart1",
                             datapoints : [
                                 {"x": "Jul 1", "USA": 100, "UK": 321, "Canada": 221},
                                 {"x": "Jul 2", "USA": 110, "UK": 130, "Canada": 121},
@@ -157,6 +260,7 @@ function LoginService($filter) {
                             dailySales: '34'
                         },
                         chart: {
+                            id: "chart2",
                             datapoints : [
                                 {"x": "Jul 1", "USA": 100, "UK": 321, "Canada": 221},
                                 {"x": "Jul 2", "USA": 110, "UK": 130, "Canada": 121},
@@ -186,6 +290,100 @@ function LoginService($filter) {
                             dailySales: '34'
                         },
                         chart: {
+                            id: "chart3",
+                            datapoints : [
+                                {"x": "Jul 1", "USA": 100, "UK": 321, "Canada": 221},
+                                {"x": "Jul 2", "USA": 110, "UK": 130, "Canada": 121},
+                                {"x": "Jul 3", "USA": 321, "UK": 140, "Canada": 321},
+                                {"x": "Jul 4", "USA": 130, "UK": 150, "Canada": 421},
+                                {"x": "Jul 5", "USA": 140, "UK": 160, "Canada": 21}
+                            ],
+                            datacolumns : [
+                                {"id": "USA", "type": "spline"},
+                                {"id": "UK", "type": "spline"},
+                                {"id": "Canada", "type": "spline"}
+                            ],
+                            datax : {"id": "x"},
+/*                            firstValue: '100,250,120,240,150',
+                            firstColumnName: 'USA',
+                            secondValue: '125,150,340,100,200',
+                            secondColumnName: 'UK',
+                            thirdValue: '300,250,150,154,230',
+                            thirdColumnName: 'Canada',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5',*/
+                            templateUrl: 'app/templates/charts/spline.html'
+                        }
+                    }, {
+                        header: 'Daily Sales',
+                        info: {
+                            totalSales: '5,753',
+                            openCampaign: '678',
+                            dailySales: '34'
+                        },
+                        chart: {
+                            id: "chart4",
+                            datapoints : [
+                                {"x": "Jul 1", "USA": 100, "UK": 321, "Canada": 221},
+                                {"x": "Jul 2", "USA": 110, "UK": 130, "Canada": 121},
+                                {"x": "Jul 3", "USA": 321, "UK": 140, "Canada": 321},
+                                {"x": "Jul 4", "USA": 130, "UK": 150, "Canada": 421},
+                                {"x": "Jul 5", "USA": 140, "UK": 160, "Canada": 21}
+                            ],
+                            datacolumns : [
+                                {"id": "USA", "type": "spline"},
+                                {"id": "UK", "type": "spline"},
+                                {"id": "Canada", "type": "spline"}
+                            ],
+                            datax : {"id": "x"},
+/*                            firstValue: '100,250,120,240,150',
+                            firstColumnName: 'USA',
+                            secondValue: '125,150,340,100,200',
+                            secondColumnName: 'UK',
+                            thirdValue: '300,250,150,154,230',
+                            thirdColumnName: 'Canada',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5',*/
+                            templateUrl: 'app/templates/charts/spline.html'
+                        }
+                    }, {
+                        header: 'Daily Sales',
+                        info: {
+                            totalSales: '5,753',
+                            openCampaign: '678',
+                            dailySales: '34'
+                        },
+                        chart: {
+                            id: "chart5",
+                            datapoints : [
+                                {"x": "Jul 1", "USA": 100, "UK": 321, "Canada": 221},
+                                {"x": "Jul 2", "USA": 110, "UK": 130, "Canada": 121},
+                                {"x": "Jul 3", "USA": 321, "UK": 140, "Canada": 321},
+                                {"x": "Jul 4", "USA": 130, "UK": 150, "Canada": 421},
+                                {"x": "Jul 5", "USA": 140, "UK": 160, "Canada": 21}
+                            ],
+                            datacolumns : [
+                                {"id": "USA", "type": "spline"},
+                                {"id": "UK", "type": "spline"},
+                                {"id": "Canada", "type": "spline"}
+                            ],
+                            datax : {"id": "x"},
+/*                            firstValue: '100,250,120,240,150',
+                            firstColumnName: 'USA',
+                            secondValue: '125,150,340,100,200',
+                            secondColumnName: 'UK',
+                            thirdValue: '300,250,150,154,230',
+                            thirdColumnName: 'Canada',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5',*/
+                            templateUrl: 'app/templates/charts/spline.html'
+                        }
+                    }, {
+                        header: 'Daily Sales',
+                        info: {
+                            totalSales: '5,753',
+                            openCampaign: '678',
+                            dailySales: '34'
+                        },
+                        chart: {
+                            id: "chart6",
                             datapoints : [
                                 {"x": "Jul 1", "USA": 100, "UK": 321, "Canada": 221},
                                 {"x": "Jul 2", "USA": 110, "UK": 130, "Canada": 121},
@@ -234,6 +432,7 @@ function LoginService($filter) {
                             dailySales: '41'
                         },
                         chart: {
+                            id: "chart1",
                             datapoints : [
                                 {"x": "Jul 1", "Shape of You": 100, "Starboy": 321, "Closer": 221},
                                 {"x": "Jul 2", "Shape of You": 110, "Starboy": 130, "Closer": 121},
@@ -267,6 +466,7 @@ function LoginService($filter) {
                             dailySales: '41'
                         },
                         chart: {
+                            id: "chart2",
                             datapoints : [
                                 {"x": "Jul 1", "Shape of You": 100, "Starboy": 321, "Closer": 221},
                                 {"x": "Jul 2", "Shape of You": 110, "Starboy": 130, "Closer": 121},
@@ -299,6 +499,106 @@ function LoginService($filter) {
                             dailySales: '41'
                         },
                         chart: {
+                            id: "chart3",
+                            datapoints : [
+                                {"x": "Jul 1", "Shape of You": 100, "Starboy": 321, "Closer": 221},
+                                {"x": "Jul 2", "Shape of You": 110, "Starboy": 130, "Closer": 121},
+                                {"x": "Jul 3", "Shape of You": 321, "Starboy": 140, "Closer": 321},
+                                {"x": "Jul 4", "Shape of You": 130, "Starboy": 150, "Closer": 421},
+                                {"x": "Jul 5", "Shape of You": 140, "Starboy": 160, "Closer": 21}
+                            ],
+                            datacolumns : [
+                                {"id": "Shape of You", "type": "bar"},
+                                {"id": "Starboy", "type": "bar"},
+                                {"id": "Closer", "type": "bar"}
+                            ],
+                            datax : {"id": "x"},
+/*                            firstValue: '150,200,220,250,100',
+                            firstColumnName: 'Shape of You',
+                            secondValue: '150,180,240,120,220',
+                            secondColumnName: 'Starboy',
+                            thirdValue: '200,350,250,150,220',
+                            thirdColumnName: 'Closer',
+                            fourthValue: '250,150,100,180,120',
+                            fourthColumnName: 'Be With You',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5',*/
+                            templateUrl: 'app/templates/charts/bar.html'
+                        }
+                    }, {
+                        header: 'Daily Sales',
+                        info: {
+                            totalSales: '7,676',
+                            openCampaign: '456',
+                            dailySales: '41'
+                        },
+                        chart: {
+                            id: "chart4",
+                            datapoints : [
+                                {"x": "Jul 1", "Shape of You": 100, "Starboy": 321, "Closer": 221},
+                                {"x": "Jul 2", "Shape of You": 110, "Starboy": 130, "Closer": 121},
+                                {"x": "Jul 3", "Shape of You": 321, "Starboy": 140, "Closer": 321},
+                                {"x": "Jul 4", "Shape of You": 130, "Starboy": 150, "Closer": 421},
+                                {"x": "Jul 5", "Shape of You": 140, "Starboy": 160, "Closer": 21}
+                            ],
+                            datacolumns : [
+                                {"id": "Shape of You", "type": "bar"},
+                                {"id": "Starboy", "type": "bar"},
+                                {"id": "Closer", "type": "bar"}
+                            ],
+                            datax : {"id": "x"},
+/*                            firstValue: '150,200,220,250,100',
+                            firstColumnName: 'Shape of You',
+                            secondValue: '150,180,240,120,220',
+                            secondColumnName: 'Starboy',
+                            thirdValue: '200,350,250,150,220',
+                            thirdColumnName: 'Closer',
+                            fourthValue: '250,150,100,180,120',
+                            fourthColumnName: 'Be With You',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5',*/
+                            templateUrl: 'app/templates/charts/bar.html'
+                        }
+                    }, {
+                        header: 'Daily Sales',
+                        info: {
+                            totalSales: '7,676',
+                            openCampaign: '456',
+                            dailySales: '41'
+                        },
+                        chart: {
+                            id: "chart5",
+                            datapoints : [
+                                {"x": "Jul 1", "Shape of You": 100, "Starboy": 321, "Closer": 221},
+                                {"x": "Jul 2", "Shape of You": 110, "Starboy": 130, "Closer": 121},
+                                {"x": "Jul 3", "Shape of You": 321, "Starboy": 140, "Closer": 321},
+                                {"x": "Jul 4", "Shape of You": 130, "Starboy": 150, "Closer": 421},
+                                {"x": "Jul 5", "Shape of You": 140, "Starboy": 160, "Closer": 21}
+                            ],
+                            datacolumns : [
+                                {"id": "Shape of You", "type": "bar"},
+                                {"id": "Starboy", "type": "bar"},
+                                {"id": "Closer", "type": "bar"}
+                            ],
+                            datax : {"id": "x"},
+/*                            firstValue: '150,200,220,250,100',
+                            firstColumnName: 'Shape of You',
+                            secondValue: '150,180,240,120,220',
+                            secondColumnName: 'Starboy',
+                            thirdValue: '200,350,250,150,220',
+                            thirdColumnName: 'Closer',
+                            fourthValue: '250,150,100,180,120',
+                            fourthColumnName: 'Be With You',
+                            xLabels: 'Jul 1, Jul 2, Jul 3, Jul 4, Jul 5',*/
+                            templateUrl: 'app/templates/charts/bar.html'
+                        }
+                    }, {
+                        header: 'Daily Sales',
+                        info: {
+                            totalSales: '7,676',
+                            openCampaign: '456',
+                            dailySales: '41'
+                        },
+                        chart: {
+                            id: "chart6",
                             datapoints : [
                                 {"x": "Jul 1", "Shape of You": 100, "Starboy": 321, "Closer": 221},
                                 {"x": "Jul 2", "Shape of You": 110, "Starboy": 130, "Closer": 121},
