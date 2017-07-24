@@ -1,22 +1,44 @@
 <table st-safe-src="vm.allReports" st-table="vm.displayCollection"  class="table list-table">
     <thead>
         <tr>
-            <th st-sort="reportName">Report Name <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="sharedReport">Shared Report (Y/N) <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="lastModified">Last Modified <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="lastRan">Last Ran <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="dataset">Dataset <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+            <th>
+                <span st-sort="reportName">Report Name</span> 
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
+            <th>
+                <span st-sort="sharedReport"> Shared Report (Y/N)</span> 
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
+            <th>
+                <span st-sort="lastModified"> Last Modified </span>
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
+            <th>
+                <span st-sort="lastRan"> Last Ran</span> 
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
+            <th>
+                <span st-sort="dataset">Dataset </span>
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
         </tr>
-        <!-- <tr>
+        <tr ng-show="showFilter">
             <th>
-                <input st-search="songListName" placeholder="search for name" class="input-sm form-control" type="search"/>
+                <input st-search="reportName" placeholder="search" class="input-sm form-control" type="search"/>
             </th>
             <th>
-                <input st-search="description" placeholder="search for description" class="input-sm form-control" type="search"/>
+                <input st-search="sharedReport" placeholder="search" class="input-sm form-control" type="search"/>
             </th>
-            <th></th>
-            <th></th>
-        </tr> -->
+            <th>
+                <input st-search="lastModified" placeholder="search" class="input-sm form-control" type="search"/>
+            </th>
+            <th>
+                <input st-search="lastRan" placeholder="search" class="input-sm form-control" type="search"/>
+            </th>
+            <th>
+                <input st-search="dataset" placeholder="search" class="input-sm form-control" type="search"/>
+            </th>
+        </tr>
     </thead>
     <tbody>
         <tr ng-repeat="row in vm.displayCollection">
