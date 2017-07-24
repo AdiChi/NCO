@@ -10,6 +10,7 @@ class DateOverDateSongController {
         $scope.brkByTerritory = false;
         $scope.showHeatMap = false;
         $scope.timewise = false;
+        $scope.showNoData = false;
         $scope.territoryLabels = {
             select: "Select Territories",
             itemsSelected: "Territories Selected"
@@ -188,6 +189,7 @@ class DateOverDateSongController {
 
         $scope.toggleMap = function (data) {
             let results = {}, mapObject = [];
+            $scope.showNoData = false;
             results = $scope.calculateTotal(data)
 
             angular.forEach(results.salesByTerr, function (key, value) {
@@ -196,7 +198,12 @@ class DateOverDateSongController {
                     'Total Sales': key
                 })
             })
+            if (!mapObject.length) {
+                $scope.showNoData = true;
+            }
+
             $scope.heatMapData = mapObject;
+
         }
 
         $scope.endDateBeforeRender = endDateBeforeRender;

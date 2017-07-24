@@ -201,7 +201,8 @@
         <div class="container-fluid" id="world-map" ng-if="showHeatMap">
             <button type="button" class="btn btn-primary" ng-class="{active: activefirst}" ng-click="activefirst=true;toggleMap(range1sales);">{{chart.firstRange}}</button>
             <button type="button" class="btn btn-primary" ng-class="{active: !activefirst}" ng-click="activefirst=false;toggleMap(range2sales);">{{chart.secondRange}}</button>
-            <div datamap data="heatMapData" id="world-map-container" show-heat-map="showHeatMap" ng-if="heatMapData.length"> </div>
+            <div datamap data="heatMapData" id="world-map-container" show-heat-map="showHeatMap" ng-if="!showNoData"> </div>
+            <div ng-if="showNoData" class="no-map-data">No data available for heatmap for the selected Date Range</div>
         </div>
     </div>
     <div ng-if="chart && drilldown">
