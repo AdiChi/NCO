@@ -1,49 +1,44 @@
-<table st-safe-src="vm.songlistslist" st-table="vm.displayCollection"  class="table list-table">
-    <thead>
-        <tr>
-            <th st-sort="isrc">ISRC <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="artist">Artist <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="trackname">Track <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="year">Year <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="seconds">Duration <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="disk">Disk <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="launchdate">Date <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-            <th st-sort="version">Version <i class="fa fa-angle-down" aria-hidden="true"></i></th>
-        </tr>
-        <!-- <tr>
-            <th>
-                <input st-search="songListName" placeholder="search for name" class="input-sm form-control" type="search"/>
-            </th>
-            <th>
-                <input st-search="description" placeholder="search for description" class="input-sm form-control" type="search"/>
-            </th>
-            <th></th>
-            <th></th>
-        </tr> -->
-    </thead>
-    <tbody>
-        <tr ng-repeat="row in vm.displayCollection" ng-click="vm.toggleSideNav(row)">
-            <td>{{row.isrc}}</td>
-            <td><strong>{{row.artist}}</strong></td>
-            <td>{{row.trackname}}</td>
-            <td>{{row.year}}</td>
-            <td>{{row.seconds}}</td>
-            <td>{{row.disk}}</td>
-            <td>{{row.launchdate}}</td>
-            <td>{{row.version}}</td>
-        </tr>
-        <tr>
-            <td colspan="4" ng-show="vm.displayCollection.length===0">
-               Your search query has fetched no results
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td><a class="btn btn-default" st-export>Export to Excel</a></td>
-            <td colspan="5" class="text-center">
-                <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+<div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter">
+    <div class="action-buttons pull-right text-right">
+        <button type="button" st-reset-filter class="btn btn-default btn-action">Clear Filters</button>
+    </div>
+    <table class="table list-table">
+        <thead>
+            <tr>
+                <th>First Name <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'firstName')" aria-hidden="true"></i></th>
+                <th>Last Name <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'lastName')" aria-hidden="true"></i></th>
+                <th>Genre <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'genre')" aria-hidden="true"></i></th>
+                <th>Instruments <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'instruments')" aria-hidden="true"></i></th>
+                <th>Occupation <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'occupation')" aria-hidden="true"></i></th>
+                <th>Date of Birth <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'dateOfBirth')" aria-hidden="true"></i></th>
+                <th>Albums <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'albums')" aria-hidden="true"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in vm.displayCollection" ng-click="vm.toggleSideNav(row)">
+                <td>{{row.firstName}}</td>
+                <td>{{row.lastName}}</td>
+                <td>{{row.genre}}</td>
+                <td>{{row.instruments}}</td>
+                <td>{{row.occupation}}</td>
+                <td>{{row.dateOfBirth}}</td>
+                <td>{{row.albums}}</td>
+            </tr>
+            <tr>
+                <td colspan="4" ng-show="vm.displayCollection.length===0">
+                    Your search query has fetched no results
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td><a class="btn btn-default" st-export>Export to Excel</a></td>
+                <td colspan="5" class="text-center">
+                    <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <filter-component ng-blur="vm.hideSidenav()" show-filter="vm.showFilter" position="vm.setPosition" filter-data="vm.displayCollection"
+        filter-option="vm.filterOptions"></filter-component>
+</div>

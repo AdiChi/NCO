@@ -7,7 +7,9 @@
   color: black;
 }
 
-.list-table{
+.table.list-table{
+  position: relative;
+
   thead{
     background-color: #d3d3d3;
     border: 1px solid #d3d3d3;
@@ -15,18 +17,76 @@
     border-right: 0;
   }
 
-  thead th{
+  & > thead > tr > th{
     color: #1a1c22;
     font-size: 13px;
+    vertical-align: top;
+
+    .fa-angle-down::before{
+      font-size: 16px;
+      cursor: pointer;
+      position: relative;
+      top: 2px;
+      left: 2px;
+    }
   }
 
   tbody td{
     color: #222;
-    border-bottom-color: #d3d3d3; 
+    border-bottom-color: #d3d3d3;
+
+    .fa-trash, .fa-pencil{
+      cursor: pointer;
+      text-align: center;
+    }
   }
 }
 
 .songs-artist-component{
   position: relative;
   margin: 15px 0 0;
+}
+
+.upload-song-component{
+  width: 50%;
+  display: inline-block;
+  text-align: left;
+
+  .upload-songs {
+    margin-top: 0;
+  }
+
+  h4{
+    margin: 0;
+  }
+}
+
+.list-header{
+  font-size: 20px;
+  font-weight: 600;
+  color: #252934;
+  padding-top: 5px;
+}
+
+.action-buttons{
+  width: 49%;
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+
+    .btn-action {
+      color: #fff;
+      background-color: #c28103;
+      border: 0;
+      border-radius: 20px;
+      font-size: 16px;
+      padding: 8px 30px;
+      margin: 0 0 20px 0;
+      font-weight: 600;
+
+      &:hover, &:focus {
+        background-color: rgba(194, 129, 3, 0.7);
+        color: #fff;
+      }
+  }
 }

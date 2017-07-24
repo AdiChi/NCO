@@ -1,16 +1,16 @@
 <div class="dashboard-wrapper">
-    <div id="dashboardHeader" class="dashboard-header {{vm.dashboard.theme}}-header">
+    <div id="dashboardHeader" class="dashboard-header {{$root.currentUser.role}}-header">
         <div class="dashboard-title">
             <span>Dashboard</span>
             <span class="dashboard-banner"><img src="app/images/banner_{{$root.currentUser.role}}.png" /></span>
         </div>
     </div>
-    <div class="dashboard {{vm.dashboard.theme}} ">
+    <div class="dashboard {{$root.currentUser.role}} ">
         <div ui-sortable="vm.sortOptions " ng-model="vm.dashboard.widgets ">
-            <div ng-repeat="widget in vm.dashboard.widgets track by $index" ng-include="widget.chart.templateUrl" class="widget-wrapper {{vm.dashboard.theme}}-widget"></div>
+            <div ng-repeat="widget in vm.dashboard.widgets track by $index" ng-include="widget.chart.templateUrl" class="widget-wrapper {{$root.currentUser.role}}-widget"></div>
         </div>
         <div class="info-wrapper ">
-            <div class="info-block {{vm.dashboard.theme}}-block ">
+            <div class="info-block {{$root.currentUser.role}}-block ">
                 <div class="info-icon expenses ">
                     <i class="fa fa-university fa-2x " aria-hidden="true "></i>
                 </div>
@@ -19,7 +19,7 @@
                     <p class="info-value ">$ {{vm.dashboard.tiles.totalExpenses}}</p>
                 </div>
             </div>
-            <div class="info-block {{vm.dashboard.theme}}-block ">
+            <div class="info-block {{$root.currentUser.role}}-block ">
                 <div class="info-icon plays ">
                     <i class="fa fa-headphones fa-2x " aria-hidden="true "></i>
                 </div>
@@ -28,7 +28,7 @@
                     <p class="info-value ">{{vm.dashboard.tiles.plays}}</p>
                 </div>
             </div>
-            <div class="info-block {{vm.dashboard.theme}}-block ">
+            <div class="info-block {{$root.currentUser.role}}-block ">
                 <div class="info-icon status ">
                     <i class="fa fa-line-chart fa-2x " aria-hidden="true "></i>
                 </div>
@@ -37,7 +37,7 @@
                     <p class="info-value ">{{vm.dashboard.tiles.otherStatus}}</p>
                 </div>
             </div>
-            <div class="info-block {{vm.dashboard.theme}}-block ">
+            <div class="info-block {{$root.currentUser.role}}-block ">
                 <div class="info-icon sales ">
                     <img src="app/images/sales_{{$root.currentUser.role}}.png " />
                 </div>

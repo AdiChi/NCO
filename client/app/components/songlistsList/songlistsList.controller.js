@@ -6,12 +6,14 @@ class SonglistsListController {
         me.detailsData = {};
         me.detailsTitle = "";
         me.visible = false;
-        
+        me.showFilter = false;
+        me.setPosition = {};
+        me.filterOptions = "";
+
         me.name = $state.current.name.split('.');
         me.name = me.name[1];
-        console.log(me.name);
 
-        this.toggleSideNav = function (row) {
+        this.toggleSideNav = (row) => {
             let id = row.id;
             var res = SongsService.getSong();
             me.detailsData = res;
@@ -25,6 +27,33 @@ class SonglistsListController {
             //         me.visible = false;
             //         console.log(e);
             //     });
+        }
+
+        $scope.onFilter = function (stCtrl) {
+			console.log(stCtrl.tableState());
+		}
+
+        this.toggleOptions = (event, filterData) => {
+            if (me.showFilter) {
+                me.showFilter = false;
+            }
+            let left = angular.element(event.target).parent().prop('offsetLeft');
+            left = (left > 900) ? 'auto' : left + 'px';
+            let top = angular.element(event.target).parent().prop('offsetTop');
+            me.setPosition = {
+                top: (top + 80) + 'px',
+                left: left
+            }
+            me.filterOptions = filterData;
+            me.showFilter = true;
+        }
+
+        this.hideFilter = () => {
+            me.showFilter = !me.showFilter;
+        }
+
+        this.hideSidenav = () => {
+            me.visible = !me.visible;
         }
 
         this.displayCollection = [].concat(this.songlistslist);

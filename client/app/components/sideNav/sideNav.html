@@ -1,12 +1,12 @@
 <div class="side-nav-component" id="divSideNav" ng-class='{ show: vm.visible, left: vm.alignment === "left", right: vm.alignment === "right", animate }'
     ng-show="vm.visible" ng-animate="animate">
-    <div class="nav-content">
-        <div class="nav-header">
+    <div class="nav-content {{$root.currentUser.role}}-content" ng-if="vm.visible">
+        <div class="nav-header {{$root.currentUser.role}}-header">
             <h3 class="details-title">{{vm.title}}</h3>
             <i class="fa fa-times pull-right" ng-click="vm.closeNav()"></i>
         </div>
 
-        <div class="tabbable"  ng-if="vm.visible">
+        <div class="tabbable">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="" data-target="#tab1" data-toggle="tab">Details</a></li>
                 <li><a href="" data-target="#tab2" data-toggle="tab">Reports</a></li>

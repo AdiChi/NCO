@@ -58,12 +58,30 @@
     }
         
     .nav-content{
-        background-color:#202531;
         width: 100%;
+
+        &.artist-content {
+            background: #000000;
+        }
+        &.analyst-content {
+            background: #00081b;
+        }
+        &.distributor-content {
+            background: #18000c;
+        }
 
         .nav-header {
             padding: 10px;
-            background-color: #202531;
+
+            &.artist-header {
+                background: #000000;
+            }
+            &.analyst-header {
+                background: #00081b;
+            }
+            &.distributor-header {
+                background: #18000c;
+            }
 
             h3.details-title{
                 font-size: 18px;
@@ -96,7 +114,7 @@
 
                 a{
                     border-radius: 0;
-                    background-color: #202531;
+                    background-color: transparent;
                     border: 1px solid #c28103;
                     color: #c28103;
                     padding: 8px;

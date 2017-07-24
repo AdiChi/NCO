@@ -18,6 +18,7 @@ import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDat
 import LoginComponent from './pages/login/login';
 import DashboardComponent from './pages/dashboard/dashboard';
 import SideNavComponent from './components/sideNav/sideNav';
+import FilterComponent from './components/filterComponent/filterComponent';
 import ArtistsComponent from './pages/artists/artists';
 import UsersComponent from './pages/users/users';
 import CreateComponent from './pages/create/create';
@@ -32,6 +33,7 @@ import EditAllSongsComponent from './pages/editAllSongs/editAllSongs';
 
 import UsersService from './services/UsersService';
 import SongsService from './services/SongsService';
+import ArtistService from './services/ArtistService';
 import SongListsService from './services/SongListsService';
 import LogService from './services/LogService';
 import ModalService from './services/ModalService';
@@ -46,6 +48,8 @@ import CustomOnChangeDirective from './directives/customOnChange.directive';
 import StSummaryDirective from './directives/stSummary.directive';
 import OnFilter from './directives/onDataFilter.directive';
 import DataMap from './directives/datamap.directive';
+import StResetFiltersDirective from './directives/stResetFilters.directive';
+import StRatioDirective from './directives/stRatio.directive';
 
 // import our default styles for the whole application
 import 'normalize.css';
@@ -93,7 +97,8 @@ angular
         SonglistsComponent.name,
         DateOverDateSongComponent.name,
         ReportsComponent.name,
-        SideNavComponent.name
+        SideNavComponent.name,
+        FilterComponent.name
     ])
     .config(($locationProvider, $stateProvider, $urlRouterProvider) => {
         "ngInject";
@@ -119,11 +124,11 @@ angular
             })
             .state('app.artists', {
                 url: '/artists',
-                template: '<songlists heading="Artists"></songlists>'
+                template: '<songlists heading="Artist"></songlists>'
             })
             .state('app.songs', {
                 url: '/songs',
-                template: '<songlists heading="Songs"></songlists>'
+                template: '<songlists heading="Song"></songlists>'
             })
             .state('app.users', {
                 url: '/users',
@@ -147,7 +152,7 @@ angular
             })
             .state('app.songlists', {
                 url: '/songlists',
-                template: '<songlists heading="My Song Lists"></songlists>'
+                template: '<songlists heading="Song List"></songlists>'
             })
             .state('app.addsonglist', {
                 url: '/songlists/add',
@@ -180,9 +185,12 @@ angular
     .directive('stSummary', StSummaryDirective)
     .directive('onFilter', OnFilter)
     .directive('datamap', DataMap)
+    .directive('stResetFilter', StResetFiltersDirective)
+    .directive('stRatio', StRatioDirective)
     .factory('UsersService', UsersService)
     .factory('SongsService', SongsService)
     .factory('SongListsService', SongListsService)
+    .factory('ArtistService', ArtistService)
     .factory('LogService', LogService)
     .factory('ModalService', ModalService)
     .factory('ReportService', ReportService)
@@ -193,7 +201,7 @@ angular
         return $cacheFactory('super-cache');
     }])
     .constant('config', {
-        apiUrl: 'http://172.27.108.135:8090',
+        apiUrl: 'http://localhost:8090',
         baseUrl: '/'
     })
     .factory('_', ['$window', function($window) {

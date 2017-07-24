@@ -1,0 +1,82 @@
+.filter-wrapper{
+    position: absolute;
+    right: 0;
+    min-width: 300px;
+    max-width: 300px;
+    background-color: #fff;
+    border: 1px solid #00081B;
+    box-shadow: 0 0 12px 12px rgba(0, 0, 0, 0.1);
+    transition: all ease 0.4s;
+
+    &.ng-enter {
+        opacity: 0;
+    }
+        
+    &.ng-leave, 
+    &.ng-enter.ng-enter-active {
+        opacity: 1;
+    }
+        
+    &.ng-leave.ng-leave-active {
+        opacity: 0;
+    }
+
+    .filter-header{
+        color: #fff;
+
+        &.artist-header {
+            background: #000000;
+        }
+        &.analyst-header {
+            background: #00081b;
+        }
+        &.distributor-header {
+            background: #18000c;
+        }
+
+        h3{
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+            display: inline-block;
+            width: auto;
+        }
+
+        .fa-times:before {
+            content: "\F00D";
+            position: relative;
+            top: 9px;
+            font-size: 18px;
+            right: 10px;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+
+    .filter-content {
+        padding: 10px;
+
+        label {
+            vertical-align: middle;
+            margin: 0 10px 0 0;
+        }
+
+        input[type=text].form-control {
+            display: inline-block;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .btn.btn-inverse {
+            display: block;
+            margin: 10px 0 0;
+            width: 100%;
+            padding: 5px 0;
+
+            &.st-sort-ascent::before, &.st-sort-descent::before {
+                content: '';
+            }
+        }
+    }
+}

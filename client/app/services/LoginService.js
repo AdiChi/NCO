@@ -7,7 +7,6 @@ function LoginService($filter) {
             password: 'password',
             role: 'artist',
             dashboard: {
-                theme: 'light',
                 widgets: [{
                         header: 'Streaming',
                         info: {

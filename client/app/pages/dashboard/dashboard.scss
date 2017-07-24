@@ -18,13 +18,13 @@
             }
         }
     }
-    .light-header {
+    .artist-header {
         background: #000000;
     }
-    .medium-header {
+    .analyst-header {
         background: #00081b;
     }
-    .dark-header {
+    .distributor-header {
         background: #18000c;
     }
     .dashboard {
@@ -111,10 +111,10 @@
                 }
             }
         }
-        .light-widget,
-        .light-block,
-        .medium-widget,
-        .medium-block {
+        .artist-widget,
+        .artist-block,
+        .analyst-widget,
+        .analyst-block {
             background-color: #FFFFFF;
             .expenses {
                 background: #fba700;
@@ -132,8 +132,8 @@
                 background: #383c46;
             }
         }
-        .dark-widget,
-        .dark-block {
+        .distributor-widget,
+        .distributor-block {
             background-color: #261521;
             color: #FFFFFF;
             .expenses {
@@ -154,13 +154,13 @@
             }
         }
     }
-    .light {
+    .artist {
         background: #E8E8E9;
     }
-    .medium {
+    .analyst {
         background: #dfeefb;
     }
-    .dark {
+    .distributor {
         background: #070003;
     }
 }

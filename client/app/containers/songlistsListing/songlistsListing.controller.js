@@ -1,10 +1,11 @@
 class SonglistsListingController {
-  constructor($state, SongListsService, SongsService) {
+  constructor($state, SongListsService, SongsService, ArtistService) {
     "ngInject";
 
     // This will keep the service instance across our class
     this.SongListsService = SongListsService;
     this.SongsService = SongsService;
+    this.ArtistService = ArtistService;
 
     // this will gold our songlistList, it will be passed to the other components.
     this.songlistList = [];
@@ -31,8 +32,12 @@ class SonglistsListingController {
         console.log(err);
       });
     }
-    else {
-      me.songlistList = [];
+    else if (this.currentUrl.indexOf('artists') != -1) {
+      this.ArtistService.getArtists().then(function (res) {
+        me.songlistList = res;
+      }, function (err) {
+        console.log(err);
+      });
     }
   }
 }

@@ -1,5 +1,5 @@
 <div class="component-wrapper">
-  <div id="componentHeader" class="component-header medium-header">
+  <div id="componentHeader" class="component-header {{$root.currentUser.role}}-header">
     <div class="component-title">
       <span>{{vm.heading}}</span>
       <span class="component-banner"><img src="app/images/banner_{{$root.currentUser.role}}.png" /></span>

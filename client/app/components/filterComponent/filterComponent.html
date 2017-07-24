@@ -1,0 +1,10 @@
+<div class="filter-wrapper" ng-class="{show: vm.showFilter}" ng-style="vm.showFilter && vm.setPosition()" ng-if="vm.showFilter" ng-animate="animate">
+    <div class="filter-header {{$root.currentUser.role}}-header">
+        <h3>Options</h3>
+        <i class="fa fa-times pull-right" ng-click="vm.closeFilter()"></i>
+    </div>
+    <div class="filter-content">
+        <label for="txtFilterText">Filter by: </label><input type="text" st-search="{{vm.filterOption}}" placeholder="Search for {{vm.filterOption}}" class="form-control" id="txtFilterText" />
+        <button type="button" class="btn btn-inverse" st-sort="{{vm.filterOption}}" ng-click="vm.setSortText($event)" ng-bind-html="vm.sortText"></button>
+    </div>
+</div>
