@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default reports">
     <div class="panel-heading">
         <h3 class="panel-title">Song sales comparison</h3>
         <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -40,7 +40,7 @@
                 <h4>Sales Period 1</h4>
                 <div class="dropdown form-group timepicker">
                     <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
-                    <label>Start Date</label>
+                        <label>Start Date</label>
                         <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
                     </a> {{dateRangeStart| date:"MMM dd, yyyy"}}
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="dropdown form-group timepicker">
                     <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
-                    <label>End Date</label>
+                        <label>End Date</label>
                         <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
                     </a> {{dateRangeEnd| date:"MMM dd, yyyy"}}
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -65,7 +65,7 @@
                 <h4>Sales Period 2</h4>
                 <div class="dropdown form-group timepicker">
                     <a class="dropdown-toggle" id="dropdownStart2" role="button" data-toggle="dropdown" data-target="" href="">
-                    <label>Start Date</label>
+                        <label>Start Date</label>
                         <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
                     </a> {{dateRange2Start| date:"MMM dd, yyyy"}}
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -74,7 +74,7 @@
                 </div>
                 <div class="dropdown form-group timepicker">
                     <a class="dropdown-toggle" id="dropdownEnd2" role="button" data-toggle="dropdown" data-target="" href="">
-                    <label>End Date</label>
+                        <label>End Date</label>
                         <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
                     </a> {{dateRange2End| date:"MMM dd, yyyy"}}
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -146,8 +146,8 @@
     </div>
     <div class="container-fluid" ng-if="theChart" style="padding-top:30px">
         <div class="container-fluid">
-            <h3 class="col-md-6">{{selectedSong}}</h3>
-            <div class="col-md-6 graph-type-labels">
+            <h3 class="col-md-5">{{selectedSong}}</h3>
+            <div class="col-md-7 graph-type-labels">
                 <!-- NG-REPEAT doesn't give correct active btns hence this approach -->
                 <label class="btn btn-primary" ng-model="currentChartType" uib-btn-radio="'{{chartTypes[0]}}'" ng-click="changeChartType(currentChartType, '{{currentChartType}}')">
                     {{chartTypes[0]}}

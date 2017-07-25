@@ -1,8 +1,11 @@
 class LoginController {
     constructor($rootScope, $state, UtilService, LoginService) {
         'ngInject'
+        $rootScope.currentUser = null;
         this.name = 'login';
-        $('#navigationLinks').addClass('hide-menu');
+        $('#leftNav').hide();
+        $('#navigationMenu').hide();
+        $('#footer').hide();
         UtilService.clearSession();
 
         this.validateUser = function(form) {

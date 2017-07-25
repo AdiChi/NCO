@@ -2,7 +2,9 @@ class DashboardController {
     constructor($scope, $rootScope) {
         'ngInject'
         this.name = 'dashboard';
-        $('#navigationLinks').removeClass('hide-menu');
+        $('#leftNav').show();
+        $('#navigationMenu').show();
+        $('#footer').show();
         this.dashboard = ($rootScope.currentUser) ? $rootScope.currentUser.dashboard : {};
     }
 }

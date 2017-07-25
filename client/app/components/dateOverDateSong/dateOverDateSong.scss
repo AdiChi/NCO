@@ -1,12 +1,19 @@
+.reports {
+    margin-top: 20px;
+}
+
 .row {
-    margin-top:40px;
+    margin-top: 40px;
     padding: 0 10px;
 }
+
 .loader {
     position: absolute;
     left: 50%;
-    border: 10px solid #f3f3f3; /* Light grey */
-    border-top: 10px solid #F5B041; /* orange */
+    border: 10px solid #f3f3f3;
+    /* Light grey */
+    border-top: 10px solid #F5B041;
+    /* orange */
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -14,66 +21,86 @@
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
-.clickable{
-    cursor: pointer;   
+
+.clickable {
+    cursor: pointer;
 }
 
 #confirmSubmit:hover {
     opacity: 0.8;
 }
+
 #confirmSubmit {
-    background:#172a3a !important; 
-    border-color :#172a3a;
+    background: #172a3a !important;
+    border-color: #172a3a;
 }
+
 .timepicker a {
-    color:#172a3a;
-    &:hover, &:focus {
-        text-decoration:none;
-        color:grey;
+    color: #172a3a;
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: grey;
     }
 }
+
 .error-alert {
     color: #a94442;
 }
+
 .panel-heading {
-    background:#F5B041 !important;
+    background: #F5B041 !important;
     span {
         margin-top: -20px;
         font-size: 15px;
     }
 }
+
 .btn.selected {
     background: #337ab7;
     color: white;
 }
-.selected.btn:hover, .selected.btn:focus {
-    color:white;
+
+.selected.btn:hover,
+.selected.btn:focus {
+    color: white;
 }
+
 .timepicker {
-    padding: 0 20px;
-    display:inline-block;
+    padding-right: 20px;
+    display: inline-block;
 }
+
 .graph-type-labels {
     margin-top: 20px;
     .btn.btn-primary {
         background-color: gray;
-        border-color:gray;
+        border-color: gray;
     }
-    .btn-primary:active:hover, .btn-primary.active:hover,.btn:hover, .btn:focus, .btn.focus {
-        background:#F5B041 !important;
-        color:#000;
-        border-color:#F5B041 !important;
+    .btn-primary:active:hover,
+    .btn-primary.active:hover,
+    .btn:hover,
+    .btn:focus,
+    .btn.focus {
+        background: #F5B041 !important;
+        color: #000;
+        border-color: #F5B041 !important;
     }
-    .btn-primary:active, .btn-primary.active {
-        color:#000;
-        background:#F5B041 !important;
-        border-color:#F5B041 !important;
+    .btn-primary:active,
+    .btn-primary.active {
+        color: #000;
+        background: #F5B041 !important;
+        border-color: #F5B041 !important;
     }
     .btn {
-        float:right;
+        float: right;
         margin-right: 10px;
         border-radius: 20px;
         text-transform: capitalize;
@@ -81,36 +108,41 @@
 }
 
 .territories-retailers {
-    padding-bottom:20px;
-    .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    padding-bottom: 20px;
+    .dropdown-menu>.active>a,
+    .dropdown-menu>.active>a:hover,
+    .dropdown-menu>.active>a:focus {
         color: #000;
         background-color: #F5B041;
     }
 }
-.tab-head{
+
+.tab-head {
     color: #337ab7;
 }
+
 .drilldown {
     table tr td {
-        cursor:pointer;
+        cursor: pointer;
         i {
-            color:grey;
+            color: grey;
         }
     }
     padding-top: 20px;
     padding-bottom:60px;
 }
+
 #world-map {
     .btn {
         &.active {
             &:hover {
-                opacity:1;
+                opacity: 1;
             }
             background:#F5B041;
             border-color:#F5B041;
             color: #000;
         }
-        background:gray; 
+        background:gray;
         border-color :gray;
     }
     .btn:hover {
@@ -120,8 +152,8 @@
 }
 
 .selectedSong {
-    background:#172a3a; 
-    color:white; 
-    padding:5px 10px; 
+    background: #172a3a;
+    color: white;
+    padding: 5px 10px;
     border-radius: 15px;
 }

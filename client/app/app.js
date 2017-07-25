@@ -10,6 +10,7 @@ import ngInlineEdit from 'ng-inline-edit';
 import { default as multiselect } from 'angular-bootstrap-multiselect';
 
 import FooterComponent from './components/footernco/footernco';
+import LeftNavComponent from './components/leftNav/leftNav';
 import AppComponent from './app.component';
 import NavigationComponent from './components/navigation/navigation';
 import SonglistsListComponent from './components/songlistsList/songlistsList';
@@ -80,6 +81,7 @@ angular
         'gridshore.c3js.chart',
         require('angular-smart-table'),
         NavigationComponent.name,
+        LeftNavComponent.name,
         FooterComponent.name,
         UpdateSonglistComponent.name,
         UploadSongsComponent.name,
@@ -128,7 +130,7 @@ angular
             })
             .state('app.songs', {
                 url: '/songs',
-                template: '<songlists heading="Song"></songlists>'
+                template: '<songlists heading="Songs"></songlists>'
             })
             .state('app.users', {
                 url: '/users',
@@ -152,7 +154,7 @@ angular
             })
             .state('app.songlists', {
                 url: '/songlists',
-                template: '<songlists heading="Song List"></songlists>'
+                template: '<songlists heading="Songs List"></songlists>'
             })
             .state('app.addsonglist', {
                 url: '/songlists/add',

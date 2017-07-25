@@ -1,5 +1,10 @@
 <div class="app">
     <navigation></navigation>
-    <div ui-view class="app-main"></div>
-    <footernco></footernco>
+    <div class="app-main">
+        <left-nav id="leftNav" class="col-lg-2 leftNav leftNav-{{$root.currentUser.role}}"></left-nav>
+        <div class="col-lg-10 view-main" ng-class="{'full-view': !$root.currentUser}" style="padding: 0px;">
+            <div ui-view class="content"></div>
+            <footernco id="footer"></footernco>
+        </div>
+    </div>
 </div>
