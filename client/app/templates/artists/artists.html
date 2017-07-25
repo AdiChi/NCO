@@ -1,25 +1,21 @@
-<div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter" class="container">
+<div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter" class="container {{$root.currentUser.role}}-table">
     <div class="clear-filters text-right">
-        <a st-reset-filter href="javascript:void(0);"><i class="fa fa-ban" aria-hidden="true"></i> Clear Filters</a>
+        <a st-reset-filter href="javascript:void(0);" ng-disabled="!vm.isFilterApplied"><i class="fa fa-ban" aria-hidden="true"></i> Clear Filters</a>
     </div>
     <div class="table-component" id="tableComponent">
         <table class="table list-table" id="listTable">
             <thead>
                 <tr>
-                    <th st-sort="firstName">First Name <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="lastName">Last Name <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="genre">Genre <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="instruments">Instruments <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="occupation">Occupation <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="dateOfBirth">Date of Birth <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="albums">Albums <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="10"><span st-sort="artistName">Artist/Band Name</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="10"><span st-sort="genre">Genre</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="10"><span st-sort="instruments">Instruments</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="7"><span st-sort="occupation">Role</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="7"><span st-sort="type">Type</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="12"><span st-sort="member">Members</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
                 </tr>
                 <tr ng-show="vm.showFilter">
                     <th>
-                        <input st-search="firstName" placeholder="Search" class="input-sm form-control" type="search" />
-                    </th>
-                    <th>
-                        <input st-search="lastName" placeholder="Search" class="input-sm form-control" type="search" />
+                        <input st-search="artistName" placeholder="Search" class="input-sm form-control" type="search" />
                     </th>
                     <th>
                         <input st-search="genre" placeholder="Search" class="input-sm form-control" type="search" />
@@ -31,22 +27,21 @@
                         <input st-search="occupation" placeholder="Search" class="input-sm form-control" type="search" />
                     </th>
                     <th>
-                        <input st-search="dateOfBirth" placeholder="Search" class="input-sm form-control" type="search" />
+                        <input st-search="type" placeholder="Search" class="input-sm form-control" type="search" />
                     </th>
                     <th>
-                        <input st-search="albums" placeholder="Search" class="input-sm form-control" type="search" />
+                        <input st-search="member" placeholder="Search" class="input-sm form-control" type="search" />
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="row in vm.displayCollection" ng-click="vm.toggleSideNav(row)">
-                    <td>{{row.firstName}}</td>
-                    <td>{{row.lastName}}</td>
-                    <td>{{row.genre}}</td>
-                    <td>{{row.instruments}}</td>
-                    <td>{{row.occupation}}</td>
-                    <td>{{row.dateOfBirth}}</td>
-                    <td>{{row.albums}}</td>
+                    <td st-ratio="10">{{row.artistName}}</td>
+                    <td st-ratio="10">{{row.genre}}</td>
+                    <td st-ratio="10">{{row.instruments}}</td>
+                    <td st-ratio="7">{{row.occupation}}</td>
+                    <td st-ratio="7">{{row.type}}</td>
+                    <td st-ratio="12">{{row.member}}</td>
                 </tr>
                 <tr>
                     <td colspan="4" ng-show="vm.displayCollection.length===0">

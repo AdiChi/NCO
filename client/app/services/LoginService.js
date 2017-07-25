@@ -33,7 +33,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
 
@@ -63,7 +63,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
 
@@ -93,7 +93,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
 
@@ -124,7 +124,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
 
@@ -156,7 +156,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
             }, {
@@ -186,7 +186,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
             }
@@ -232,7 +232,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
 
@@ -262,7 +262,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
             }, {
@@ -290,7 +290,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
             }, {
@@ -319,7 +319,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
 
@@ -350,7 +350,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
             }, {
@@ -381,7 +381,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
             }
@@ -543,7 +543,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
 
@@ -574,7 +574,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
             }, {
@@ -605,7 +605,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '30%'
+                        'width': '30.5%'
                     }
                 }
             }

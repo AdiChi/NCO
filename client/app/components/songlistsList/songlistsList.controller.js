@@ -9,6 +9,7 @@ class SonglistsListController {
         me.showFilter = false;
         me.setPosition = {};
         me.filterOptions = "";
+        me.isFilterApplied = false;
 
         me.name = $state.current.name.split('.');
         me.name = me.name[1];
@@ -59,10 +60,14 @@ class SonglistsListController {
         $scope.onFilter = function (stCtrl) {
             var filteredCols = [], i;
             if (stCtrl.tableState().search.predicateObject) {
+                me.isFilterApplied = true;
                 filteredCols = Object.keys(stCtrl.tableState().search.predicateObject);
                 for(i in filteredCols){
                     me['filtered_' + filteredCols[i]] = true;
                 }
+            }
+            else {
+                 me.isFilterApplied = false;
             }
         }
 

@@ -1,4 +1,4 @@
-<div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter" class="container">
+<div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter" class="container {{$root.currentUser.role}}-table">
     <div class="upload-song-component pull-left">
         <upload-songs-form></upload-songs-form>
     </div>
@@ -6,20 +6,20 @@
         <a ui-sref="app.editAllSongs" class="btn btn-default btn-action">Edit Songs</a>
     </div>
     <div class="clear-filters text-right">
-        <a st-reset-filter href="javascript:void(0);"><i class="fa fa-ban" aria-hidden="true"></i> Clear Filters</a>
+        <a st-reset-filter href="javascript:void(0);" ng-disabled="!vm.isFilterApplied"><i class="fa fa-ban" aria-hidden="true"></i> Clear Filters</a>
     </div>
     <div class="table-component" id="tableComponent">
         <table class="table list-table" id="listTable">
             <thead>
                 <tr>
-                    <th st-sort="isrc" st-ratio="10" ng-class="{filter: vm.filtered_isrc}">ISRC <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="artist" st-ratio="15" ng-class="{filter: vm.filtered_artist}">Artist <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="trackname" st-ratio="25" ng-class="{filter: vm.filtered_trackname}">Track <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="year" st-ratio="7" ng-class="{filter: vm.filtered_year}">Year <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="seconds" st-ratio="9" ng-class="{filter: vm.filtered_seconds}">Duration <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="disk" st-ratio="7" ng-class="{filter: vm.filtered_disk}">Disk <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="launchdate" st-ratio="7" ng-class="{filter: vm.filtered_launchdate}">Date <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-sort="version" st-ratio="7" ng-class="{filter: vm.filtered_version}">Version <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="6" ng-class="{filter: vm.filtered_isrc}"><span st-sort="isrc">ISRC</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="14" ng-class="{filter: vm.filtered_artist}"><span st-sort="artist">Artist</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="20" ng-class="{filter: vm.filtered_trackname}"><span st-sort="trackname">Track</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="7" ng-class="{filter: vm.filtered_year}"><span st-sort="year">Year</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="10" ng-class="{filter: vm.filtered_seconds}"><span st-sort="seconds">Duration</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="7" ng-class="{filter: vm.filtered_disk}"><span st-sort="disk">Disk</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="8" ng-class="{filter: vm.filtered_launchdate}"><span st-sort="launchdate">Date</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="8" ng-class="{filter: vm.filtered_version}"><span st-sort="version">Version</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
                 </tr>
                 <tr ng-show="vm.showFilter">
                     <th>
@@ -50,14 +50,14 @@
             </thead>
             <tbody>
                 <tr ng-repeat="row in vm.displayCollection" ng-click="vm.toggleSideNav(row)">
-                    <td st-ratio="10">{{row.isrc}}</td>
-                    <td st-ratio="20"><strong>{{row.artist}}</strong></td>
-                    <td st-ratio="30">{{row.trackname}}</td>
+                    <td st-ratio="6">{{row.isrc}}</td>
+                    <td st-ratio="14"><strong>{{row.artist}}</strong></td>
+                    <td st-ratio="20">{{row.trackname}}</td>
                     <td st-ratio="7">{{row.year}}</td>
-                    <td st-ratio="7">{{row.seconds}}</td>
+                    <td st-ratio="10">{{row.seconds}}</td>
                     <td st-ratio="7">{{row.disk}}</td>
-                    <td st-ratio="7">{{row.launchdate}}</td>
-                    <td st-ratio="7">{{row.version}}</td>
+                    <td st-ratio="8">{{row.launchdate}}</td>
+                    <td st-ratio="8">{{row.version}}</td>
                 </tr>
                 <tr>
                     <td colspan="4" ng-show="vm.displayCollection.length===0">

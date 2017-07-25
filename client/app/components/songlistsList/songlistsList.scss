@@ -96,16 +96,33 @@
     }
 }
 
+.artist-table{
+    margin-top: 25px;
+}
+
 .clear-filters {
     display: inline-block;
     width: 100%;
     position: relative;
-    top: -15px;
+    top: -10px;
     right: 10px;
     font-size: 15px;
 
     a:hover{
         text-decoration: none;
+    }
+
+    a[disabled]{
+        color: #ddd;
+        text-decoration: none;
+        cursor: not-allowed;
+        pointer-events: none;
+
+        &::hover,
+        &::focus {
+            text-decoration: none;
+            color: #ddd;
+        }
     }
 }
 

@@ -1,8 +1,8 @@
-<div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter" class="container">
+<div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter" class="container {{$root.currentUser.role}}-table">
     <div class="pull-left text-left list-header">My Song Lists</div>
     <div class="pull-right text-right action-buttons"><button type="button" class="btn btn-primary btn-action" ui-sref="app.addsonglist" role="button">Create New Songs list <i class="fa fa-list-ul"></i></button></div>
     <div class="clear-filters text-right">
-        <a st-reset-filter href="javascript:void(0);"><i class="fa fa-ban" aria-hidden="true"></i> Clear Filters</a>
+        <a st-reset-filter href="javascript:void(0);" ng-disabled="!vm.isFilterApplied"><i class="fa fa-ban" aria-hidden="true"></i> Clear Filters</a>
     </div>
     <div class="table-component" id="tableComponent">
         <table class="table list-table">
@@ -11,11 +11,11 @@
                     <th st-ratio="7" st-sort="id">ID/Code <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
                     <th st-ratio="12" st-sort="songListName">Song List Name <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
                     <th st-ratio="18" st-sort="description">Description <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="8" st-sort="userCount">No. of Users <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="8" st-sort="secWorkGroup">Sec-Work Group <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="8" st-sort="secOrg">Sec Org. <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="8" st-sort="artistsCount">No. of Artists <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="8" st-sort="songsCount">No. of Songs <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9" st-sort="userCount">No. of Users <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9" st-sort="secWorkGroup">Sec-Work Group <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9" st-sort="secOrg">Sec Org. <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9" st-sort="artistsCount">No. of Artists <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9" st-sort="songsCount">No. of Songs <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
                     <th st-ratio="7" st-sort="rank">Rank <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
                     <th st-ratio="5">Delete</th>
                     <th st-ratio="5">Edit</th>
@@ -55,12 +55,12 @@
                     <td st-ratio="7">{{row.id}}</td>
                     <td st-ratio="15">{{row.songListName}}</td>
                     <td st-ratio="15">{{row.description}}</td>
-                    <td st-ratio="8">{{row.userCount}}</td>
-                    <td st-ratio="8">{{row.secWorkGroup}}</td>
-                    <td st-ratio="8">{{row.secOrg}}</td>
-                    <td st-ratio="8">{{row.artistsCount}}</td>
-                    <td st-ratio="8">{{row.songsCount}}</td>
-                    <td st-ratio="7">{{row.rank}}</td>
+                    <td st-ratio="9">{{row.userCount}}</td>
+                    <td st-ratio="9">{{row.secWorkGroup}}</td>
+                    <td st-ratio="9">{{row.secOrg}}</td>
+                    <td st-ratio="9">{{row.artistsCount}}</td>
+                    <td st-ratio="9">{{row.songsCount}}</td>
+                    <td st-ratio="9">{{row.rank}}</td>
                     <td st-ratio="5" id="deleteSonglist" class="text-center">
                         <i class="fa fa-trash" title="Delete List" aria-hidden="true" ng-click="vm.deleteSonglist(row.id)"></i>
                     </td>

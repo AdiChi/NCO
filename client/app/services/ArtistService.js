@@ -12,12 +12,12 @@ function ArtistService($http, config, superCache) {
         var dataresponse = r.data.map(function (item) {
             let song = {
                 "artistId": item.artistId,
-                "firstName": item.firstName,
-                "lastName": item.lastName,
+                "artistName": item.firstName + ' ' + item.lastName,
                 "genre": item.genre,
                 "instruments": item.instruments,
                 "occupation": item.occupation,
-                "dateOfBirth": item.dateOfBirth
+                "type": item.type,
+                "member": item.member
             };
             return song;
         });
@@ -45,12 +45,12 @@ function ArtistService($http, config, superCache) {
                     var item = r.data;
                     return {
                         "artistId": item.artistId,
-                        "firstName": item.firstName,
-                        "lastName": item.lastName,
+                        "artistName": item.firstName + ' ' + item.lastName,
                         "genre": item.genre,
                         "instruments": item.instruments,
                         "occupation": item.occupation,
-                        "dateOfBirth": item.dateOfBirth
+                        "type": item.type,
+                        "member": item.member
                     };
                 })
                 .catch(function (error) {
