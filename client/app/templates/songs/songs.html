@@ -3,7 +3,10 @@
         <upload-songs-form></upload-songs-form>
     </div>
     <div class="action-buttons pull-right text-right">
-        <button type="button" st-reset-filter class="btn btn-default btn-action">Clear Filters</button>
+        <a ui-sref="app.editAllSongs" class="btn btn-default btn-action">Edit Songs</a>
+    </div>
+    <div class="clear-filters text-right">
+        <a st-reset-filter href="javascript:void(0);">Clear Filters</a>
     </div>
     <table class="table list-table" id="listTable">
         <thead>
@@ -44,6 +47,5 @@
             </tr>
         </tfoot>
     </table>
-    <filter-component ng-blur="vm.hideSidenav()" show-filter="vm.showFilter" position="vm.setPosition" filter-data="vm.displayCollection"
-        filter-option="vm.filterOptions"></filter-component>
+    <filter-component ng-blur="vm.hideSidenav()" show-filter="vm.showFilter" position="vm.setPosition" filter-data="vm.displayCollection" filter-option="vm.filterOptions"></filter-component>
 </div>

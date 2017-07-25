@@ -1,6 +1,6 @@
 <div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter" class="container">
-    <div class="action-buttons pull-right text-right">
-        <button type="button" st-reset-filter class="btn btn-default btn-action">Clear Filters</button>
+    <div class="clear-filters text-right">
+        <a st-reset-filter href="javascript:void(0);">Clear Filters</a>
     </div>
     <table class="table list-table" id="listTable">
         <thead>
@@ -39,6 +39,5 @@
             </tr>
         </tfoot>
     </table>
-    <filter-component ng-blur="vm.hideSidenav()" show-filter="vm.showFilter" position="vm.setPosition" filter-data="vm.displayCollection"
-        filter-option="vm.filterOptions"></filter-component>
+    <filter-component ng-blur="vm.hideSidenav()" show-filter="vm.showFilter" position="vm.setPosition" filter-data="vm.displayCollection" filter-option="vm.filterOptions"></filter-component>
 </div>

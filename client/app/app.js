@@ -201,7 +201,7 @@ angular
         return $cacheFactory('super-cache');
     }])
     .constant('config', {
-        apiUrl: 'http://localhost:8090',
+        apiUrl: 'http://172.27.108.135:8090',
         baseUrl: '/'
     })
     .factory('_', ['$window', function($window) {

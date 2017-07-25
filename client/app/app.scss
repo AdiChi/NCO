@@ -6,8 +6,9 @@
 .pagination>li>a {
     cursor: pointer;
 }
+
 .app-main {
-    margin-top: 60px;
+    margin-top: 50px;
     margin-bottom: 0px;
     min-height: 100vh;
 }
@@ -80,15 +81,15 @@
     }
 }
 
-.c3-tooltip td{
+.c3-tooltip td {
     color: #000;
 }
 
-.distributor-widget{
-    .c3 line, .c3 path{
+.distributor-widget {
+    .c3 line,
+    .c3 path {
         stroke: #fff;
     }
-
     .c3 text {
         fill: #fff;
     }
