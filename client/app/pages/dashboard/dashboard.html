@@ -7,7 +7,7 @@
     </div>
     <div class="dashboard {{vm.dashboard.theme}} ">
         <div ui-sortable="vm.sortOptions " ng-model="vm.dashboard.widgets ">
-            <div ng-repeat="widget in vm.dashboard.widgets track by $index" ng-include="widget.chart.templateUrl" class="widget-wrapper {{vm.dashboard.theme}}-widget"></div>
+            <div ng-repeat="widget in vm.dashboard.widgets track by $index" ng-include="widget.chart.templateUrl" class="widget-wrapper {{vm.dashboard.theme}}-widget" ng-style="widget.setWidth();"></div>
         </div>
         <div class="info-wrapper ">
             <div class="info-block {{vm.dashboard.theme}}-block ">
