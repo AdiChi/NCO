@@ -135,18 +135,19 @@ function LoginService($filter) {
                 chart: {
                     id: "chart5",
                     datapoints: [
-                        { "x": "Jun 1_Jul 1", "Jun 1 - Jun 5": 200, "Jul 1 - Jul 5": 121 },
+                        { "x": "Jun 1_Jul 1", "Jun 1 - Jun 5": 500, "Jul 1 - Jul 5": 121 },
                         { "x": "Jun 2_Jul 2", "Jun 1 - Jun 5": 250, "Jul 1 - Jul 5": 200 },
-                        { "x": "Jun 3_Jul 3", "Jun 1 - Jun 5": 450, "Jul 1 - Jul 5": 490 },
-                        { "x": "Jun 4_Jul 4", "Jun 1 - Jun 5": 180, "Jul 1 - Jul 5": 160 },
+                        { "x": "Jun 3_Jul 3", "Jun 1 - Jun 5": 350, "Jul 1 - Jul 5": 40 },
+                        { "x": "Jun 4_Jul 4", "Jun 1 - Jun 5": 180, "Jul 1 - Jul 5": 60 },
                         { "x": "Jun 5_Jul 5", "Jun 1 - Jun 5": 100, "Jul 1 - Jul 5": 186 },
                     ],
                     datacolumns: [
-                        { "id": "Jun 1 - Jun 5", "type": "pie" },
-                        { "id": "Jul 1 - Jul 5", "type": "pie" }
+                        { "id": "Jun 1 - Jun 5", "type": "bar" },
+                        { "id": "Jul 1 - Jul 5", "type": "bar" }
                     ],
+                    groups: "Jun 1 - Jun 5,Jul 1 - Jul 5",
                     datax: { "id": "x" },
-                    templateUrl: 'app/templates/charts/donut.html'
+                    templateUrl: 'app/templates/charts/bar.html'
                 },
                 setWidth: function() {
                     return {
