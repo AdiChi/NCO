@@ -420,7 +420,7 @@ function LoginService($filter) {
                     datacolumns: [
                         { "id": "How Many Apples in the Basket", "type": "line" }
                     ],
-                    colors: "#00f9fa, #fba700",
+                    colors: "#00f9fa, #fba700, #8a8888",
                     datax: { "id": "x" },
                     templateUrl: 'app/templates/charts/spline.html'
                 },
@@ -452,7 +452,7 @@ function LoginService($filter) {
                     ],
                     datax: { "id": "x" },
                     templateUrl: 'app/templates/charts/spline.html',
-                    colors: "#00f9fa, #fba700"
+                    colors: "#00f9fa, #fba700, #8a8888"
                 },
                 setWidth: function() {
                     return {
@@ -481,7 +481,7 @@ function LoginService($filter) {
                     ],
                     datax: { "id": "x" },
                     templateUrl: 'app/templates/charts/spline.html'
-                    ,colors: "#00f9fa, #fba700"
+                    ,colors: "#00f9fa, #fba700, #8a8888"
                 },
                 setWidth: function() {
                     return {
@@ -507,7 +507,7 @@ function LoginService($filter) {
                     datacolumns: [
                         { "id": "Haunt Me (instrumental)", "type": "line" }
                     ],
-                    colors: "#00f9fa, #fba700",
+                    colors: "#00f9fa, #fba700, #8a8888",
                     datax: { "id": "x" },
                     templateUrl: 'app/templates/charts/spline.html'
                 },
@@ -536,7 +536,7 @@ function LoginService($filter) {
                         { "id": "Jun 1 - Jun 5", "type": "area-step" },
                         { "id": "Jul 1 - Jul 5", "type": "area-step" }
                     ]
-                    ,colors: "#00f9fa, #fba700",
+                    ,colors: "#00f9fa, #fba700, #8a8888",
                     datax: { "id": "x" },
                     templateUrl: 'app/templates/charts/bar.html'
                 },
@@ -567,7 +567,7 @@ function LoginService($filter) {
                         { "id": "Jun 1 - Jun 5", "type": "area-step" },
                         { "id": "Jul 1 - Jul 5", "type": "area-step" }
                     ],
-                    colors: "#00f9fa, #fba700",
+                    colors: "#00f9fa, #fba700, #8a8888",
                     datax: { "id": "x" },
                     templateUrl: 'app/templates/charts/bar.html'
                 },
@@ -597,7 +597,7 @@ function LoginService($filter) {
                         { "id": "Jun 5 - Jun 10", "type": "area-step" },
                         { "id": "Jun 11 - Jun 16", "type": "area-step" }
                     ]
-                    ,colors: "#00f9fa, #fba700",
+                    ,colors: "#00f9fa, #fba700, #8a8888",
                     datax: { "id": "x" },
                     templateUrl: 'app/templates/charts/bar.html'
                 },
