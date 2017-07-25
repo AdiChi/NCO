@@ -27,8 +27,8 @@ function LoginService($filter) {
                     datacolumns: [
                         { "id": "New York", "type": "spline" }
                     ],
-                    datax: { "id": "x" },
                     colors: "#fba700,#8a8888,#fe6d00",
+                    datax: { "id": "x" },
                     templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
@@ -57,8 +57,8 @@ function LoginService($filter) {
                     datacolumns: [
                         { "id": "Los Angeles", "type": "bar" }
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
                     templateUrl: 'app/templates/charts/bar.html'
                 },
                 setWidth: function() {
@@ -87,8 +87,8 @@ function LoginService($filter) {
                     datacolumns: [
                         { "id": "Chicago", "type": "area" }
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
                     templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
@@ -114,12 +114,12 @@ function LoginService($filter) {
                         { "x": "Jun 4_Jul 4", "Jun 1 - Jun 5": 100, "Jul 1 - Jul 5": 120 },
                         { "x": "Jun 5_Jul 5", "Jun 1 - Jun 5": 150, "Jul 1 - Jul 5": 286 },
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datacolumns: [
                         { "id": "Jun 1 - Jun 5", "type": "donut" },
                         { "id": "Jul 1 - Jul 5", "type": "donut" }
                     ],
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
                     templateUrl: 'app/templates/charts/donut.html'
                 },
                 setWidth: function() {
@@ -180,8 +180,8 @@ function LoginService($filter) {
                         { "id": "Jun 5 - Jun 10", "type": "area-step" },
                         { "id": "Jun 11 - Jun 16", "type": "area-step" }
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
                     templateUrl: 'app/templates/charts/bar.html'
                 },
                 setWidth: function() {
@@ -223,11 +223,11 @@ function LoginService($filter) {
                         { "x": "Jul 4", "USA": 190 },
                         { "x": "Jul 5", "USA": 240 }
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datacolumns: [
                         { "id": "USA", "type": "bar" }
                     ],
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
                     templateUrl: 'app/templates/charts/bar.html'
                 },
                 setWidth: function() {
@@ -253,12 +253,12 @@ function LoginService($filter) {
                         { "x": "Jul 4", "UK": 290 },
                         { "x": "Jul 5", "UK": 360 }
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datacolumns: [
-                        { "id": "UK", "type": "bar" }
+                        { "id": "UK", "type": "line" }
                     ],
                     datax: { "id": "x" },
-                    templateUrl: 'app/templates/charts/bar.html'
+                    colors: "#fba700,#8a8888,#fe6d00",
+                    templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
                     return {
@@ -281,12 +281,12 @@ function LoginService($filter) {
                         { "x": "Jul 4", "Canada": 250 },
                         { "x": "Jul 5", "Canada": 410 }
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datacolumns: [
-                        { "id": "Canada", "type": "bar" }
+                        { "id": "Canada", "type": "area-spline" }
                     ],
                     datax: { "id": "x" },
-                    templateUrl: 'app/templates/charts/bar.html'
+                    colors: "#fba700,#8a8888,#fe6d00",
+                    templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
                     return {
@@ -309,12 +309,12 @@ function LoginService($filter) {
                         { "x": "Jun 4_Jul 4", "Jun 1 - Jun 5": 100, "Jul 1 - Jul 5": 120 },
                         { "x": "Jun 5_Jul 5", "Jun 1 - Jun 5": 150, "Jul 1 - Jul 5": 286 },
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datacolumns: [
-                        { "id": "Jun 1 - Jun 5", "type": "spline" },
-                        { "id": "Jul 1 - Jul 5", "type": "spline" }
+                        { "id": "Jun 1 - Jun 5", "type": "line" },
+                        { "id": "Jul 1 - Jul 5", "type": "line" }
                     ],
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
                     templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
@@ -340,13 +340,13 @@ function LoginService($filter) {
                         { "x": "Jun 4_Jul 4", "Jun 1 - Jun 5": 180, "Jul 1 - Jul 5": 160 },
                         { "x": "Jun 5_Jul 5", "Jun 1 - Jun 5": 100, "Jul 1 - Jul 5": 186 },
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datacolumns: [
-                        { "id": "Jun 1 - Jun 5", "type": "spline" },
-                        { "id": "Jul 1 - Jul 5", "type": "spline" }
+                        { "id": "Jun 1 - Jun 5", "type": "area-step" },
+                        { "id": "Jul 1 - Jul 5", "type": "area-step" }
                     ],
                     datax: { "id": "x" },
-                    templateUrl: 'app/templates/charts/spline.html'
+                    colors: "#fba700,#8a8888,#fe6d00",
+                    templateUrl: 'app/templates/charts/bar.html'
                 },
                 setWidth: function() {
                     return {
@@ -370,13 +370,14 @@ function LoginService($filter) {
                         { "x": "Jun 9_Jun 15", "Jun 5 - Jun 10": 198, "Jun 11 - Jun 16": 411 },
                         { "x": "Jun 10_Jun 16", "Jun 5 - Jun 10": 211, "Jun 11 - Jun 16": 110 }
                     ],
-                    colors: "#fba700,#8a8888,#fe6d00",
                     datacolumns: [
-                        { "id": "Jun 5 - Jun 10", "type": "spline" },
-                        { "id": "Jun 11 - Jun 16", "type": "spline" }
+                        { "id": "Jun 5 - Jun 10", "type": "bar" },
+                        { "id": "Jun 11 - Jun 16", "type": "bar" }
                     ],
                     datax: { "id": "x" },
-                    templateUrl: 'app/templates/charts/spline.html'
+                    colors: "#fba700,#8a8888,#fe6d00",
+                    groups: "Jun 1 - Jun 5,Jul 1 - Jul 5",
+                    templateUrl: 'app/templates/charts/bar.html'
                 },
                 setWidth: function() {
                     return {
@@ -420,8 +421,8 @@ function LoginService($filter) {
                     datacolumns: [
                         { "id": "How Many Apples in the Basket", "type": "line" }
                     ],
-                    colors: "#00f9fa, #fba700, #8a8888",
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
                     templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
@@ -448,18 +449,17 @@ function LoginService($filter) {
                         { "x": "Jul 5", "A Fine Day for Sailing": 210 }
                     ],
                     datacolumns: [
-                        { "id": "A Fine Day for Sailing", "type": "line" }
+                        { "id": "A Fine Day for Sailing", "type": "bar" }
                     ],
                     datax: { "id": "x" },
-                    templateUrl: 'app/templates/charts/spline.html',
-                    colors: "#00f9fa, #fba700, #8a8888"
+                    colors: "#fba700,#8a8888,#fe6d00",
+                    templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
                     return {
                         'width': '22.5%'
                     }
                 }
-                
             }, {
                 header: 'Say Goodbye - [Jul 1 - Jul 4]',
                 info: {
@@ -477,11 +477,11 @@ function LoginService($filter) {
                         { "x": "Jul 5", "Say Goodbye": 210 }
                     ],
                     datacolumns: [
-                        { "id": "Say Goodbye", "type": "line" }
+                        { "id": "Say Goodbye", "type": "area" }
                     ],
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
                     templateUrl: 'app/templates/charts/spline.html'
-                    ,colors: "#00f9fa, #fba700, #8a8888"
                 },
                 setWidth: function() {
                     return {
@@ -505,10 +505,10 @@ function LoginService($filter) {
                         { "x": "Jul 5", "Haunt Me (instrumental)": 210 }
                     ],
                     datacolumns: [
-                        { "id": "Haunt Me (instrumental)", "type": "line" }
+                        { "id": "Haunt Me (instrumental)", "type": "area-step" }
                     ],
-                    colors: "#00f9fa, #fba700, #8a8888",
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
                     templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
@@ -533,11 +533,12 @@ function LoginService($filter) {
                         { "x": "Jun 5_Jul 5", "Jun 1 - Jun 5": 150, "Jul 1 - Jul 5": 286 },
                     ],
                     datacolumns: [
-                        { "id": "Jun 1 - Jun 5", "type": "area-step" },
-                        { "id": "Jul 1 - Jul 5", "type": "area-step" }
-                    ]
-                    ,colors: "#00f9fa, #fba700, #8a8888",
+                        { "id": "Jun 1 - Jun 5", "type": "bar" },
+                        { "id": "Jul 1 - Jul 5", "type": "bar" }
+                    ],
                     datax: { "id": "x" },
+                    colors: "#fba700,#8a8888,#fe6d00",
+                    groups: "Jun 1 - Jun 5,Jul 1 - Jul 5",
                     templateUrl: 'app/templates/charts/bar.html'
                 },
                 setWidth: function() {
@@ -564,12 +565,12 @@ function LoginService($filter) {
                         { "x": "Jun 5_Jul 5", "Jun 1 - Jun 5": 100, "Jul 1 - Jul 5": 186 },
                     ],
                     datacolumns: [
-                        { "id": "Jun 1 - Jun 5", "type": "area-step" },
-                        { "id": "Jul 1 - Jul 5", "type": "area-step" }
+                        { "id": "Jun 1 - Jun 5", "type": "line" },
+                        { "id": "Jul 1 - Jul 5", "type": "line" }
                     ],
-                    colors: "#00f9fa, #fba700, #8a8888",
                     datax: { "id": "x" },
-                    templateUrl: 'app/templates/charts/bar.html'
+                    colors: "#fba700,#8a8888,#fe6d00",
+                    templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
                     return {
@@ -594,12 +595,13 @@ function LoginService($filter) {
                         { "x": "Jun 10_Jun 16", "Jun 5 - Jun 10": 211, "Jun 11 - Jun 16": 110 }
                     ],
                     datacolumns: [
-                        { "id": "Jun 5 - Jun 10", "type": "area-step" },
-                        { "id": "Jun 11 - Jun 16", "type": "area-step" }
-                    ]
-                    ,colors: "#00f9fa, #fba700, #8a8888",
+                        { "id": "Jun 5 - Jun 10", "type": "area-spline" },
+                        { "id": "Jun 11 - Jun 16", "type": "area-spline" }
+                    ],
                     datax: { "id": "x" },
-                    templateUrl: 'app/templates/charts/bar.html'
+                    colors: "#fba700,#8a8888,#fe6d00",
+                    groups: "Jun 5 - Jun 10,Jun 11 - Jun 16",
+                    templateUrl: 'app/templates/charts/spline.html'
                 },
                 setWidth: function() {
                     return {
