@@ -11,11 +11,12 @@
     max-width: 50%;
     top: 0;
     bottom: 0;
-    right: -30px;
+    right: 0px;
     overflow: auto;
     max-height: 700px;
     min-height: 700px;
     background: #fff;
+    transform: translateX(0);
 
     -webkit-transition: all 0 cubic-bezier(0.25, 0.46, 0.45, 0.94);
     -moz-transition: all 0 cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -30,30 +31,34 @@
     transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     &.ng-hide-add {
-        width: 50% !important;
-        max-width: 50% !important;
+        // width: 50% !important;
+        // max-width: 50% !important;
+        transform: translateX(0);
         transition-duration: 1s;
         -webkit-transition-duration: 1s;
         opacity: 1;
     }
 
     &.ng-hide-add.ng-hide-add-active {
-        width: 0px !important;
-        max-width: 0px !important;
+        // width: 0px !important;
+        // max-width: 0px !important;
+        transform: translateX(100%);
         opacity: 0;
     }
 
     &.ng-hide-remove {
-        width: 0px !important;
-        max-width: 0px !important;
+        // width: 0px !important;
+        // max-width: 0px !important;
+        transform: translateX(100%);
         opacity: 0;
         transition-duration: 1s;
         -webkit-transition-duration: 1s;
     }
 
     &.ng-hide-remove.ng-hide-remove-active {
-        width: 50% !important;
-        max-width: 50% !important;
+        // width: 50% !important;
+        // max-width: 50% !important;
+        transform: translateX(0);
         opacity: 1;
     }
         
@@ -90,6 +95,7 @@
                 display: inline-block;
                 width: auto;
                 margin-top: 10px;
+                max-width: 400px;
             }
 
             .fa-times:before {

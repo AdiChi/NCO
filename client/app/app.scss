@@ -18,6 +18,19 @@
 .pagination>li>a {
     cursor: pointer;
 }
+.app-main {
+    margin-top: 60px;
+    margin-bottom: 0px;
+    min-height: 100vh;
+}
+
+.hide-menu {
+    display: none!important;
+}
+.modal-dialog.modal-lg {
+    width:1080px;
+}
+
 
 .navMain {
     background: #2C3E50!important;

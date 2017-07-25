@@ -6,46 +6,73 @@
         <a ui-sref="app.editAllSongs" class="btn btn-default btn-action">Edit Songs</a>
     </div>
     <div class="clear-filters text-right">
-        <a st-reset-filter href="javascript:void(0);">Clear Filters</a>
+        <a st-reset-filter href="javascript:void(0);"><i class="fa fa-ban" aria-hidden="true"></i> Clear Filters</a>
     </div>
-    <table class="table list-table" id="listTable">
-        <thead>
-            <tr>
-                <th st-ratio="10">ISRC <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'isrc')" aria-hidden="true"></i></th>
-                <th st-ratio="15">Artist <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'artist')" aria-hidden="true"></i></th>
-                <th st-ratio="25">Track <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'trackname')" aria-hidden="true"></i></th>
-                <th st-ratio="7">Year <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'year')" aria-hidden="true"></i></th>
-                <th st-ratio="9">Duration <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'seconds')" aria-hidden="true"></i></th>
-                <th st-ratio="7">Disk <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'disk')" aria-hidden="true"></i></th>
-                <th st-ratio="7">Date <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'launchdate')" aria-hidden="true"></i></th>
-                <th st-ratio="7">Version <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'version')" aria-hidden="true"></i></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="row in vm.displayCollection" ng-click="vm.toggleSideNav(row)">
-                <td st-ratio="10">{{row.isrc}}</td>
-                <td st-ratio="20"><strong>{{row.artist}}</strong></td>
-                <td st-ratio="30">{{row.trackname}}</td>
-                <td st-ratio="7">{{row.year}}</td>
-                <td st-ratio="7">{{row.seconds}}</td>
-                <td st-ratio="7">{{row.disk}}</td>
-                <td st-ratio="7">{{row.launchdate}}</td>
-                <td st-ratio="7">{{row.version}}</td>
-            </tr>
-            <tr>
-                <td colspan="4" ng-show="vm.displayCollection.length===0">
-                    Your search query has fetched no results
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td><a class="btn btn-default" st-export>Export to Excel</a></td>
-                <td colspan="5" class="text-center">
-                    <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-    <filter-component ng-blur="vm.hideSidenav()" show-filter="vm.showFilter" position="vm.setPosition" filter-data="vm.displayCollection" filter-option="vm.filterOptions"></filter-component>
+    <div class="table-component" id="tableComponent">
+        <table class="table list-table" id="listTable">
+            <thead>
+                <tr>
+                    <th st-sort="isrc" st-ratio="10" ng-class="{filter: vm.filtered_isrc}">ISRC <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-sort="artist" st-ratio="15" ng-class="{filter: vm.filtered_artist}">Artist <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-sort="trackname" st-ratio="25" ng-class="{filter: vm.filtered_trackname}">Track <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-sort="year" st-ratio="7" ng-class="{filter: vm.filtered_year}">Year <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-sort="seconds" st-ratio="9" ng-class="{filter: vm.filtered_seconds}">Duration <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-sort="disk" st-ratio="7" ng-class="{filter: vm.filtered_disk}">Disk <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-sort="launchdate" st-ratio="7" ng-class="{filter: vm.filtered_launchdate}">Date <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-sort="version" st-ratio="7" ng-class="{filter: vm.filtered_version}">Version <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                </tr>
+                <tr ng-show="vm.showFilter">
+                    <th>
+                        <input st-search="isrc" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="artist" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="trackname" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="year" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="seconds" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="disk" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="launchdate" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="version" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in vm.displayCollection" ng-click="vm.toggleSideNav(row)">
+                    <td st-ratio="10">{{row.isrc}}</td>
+                    <td st-ratio="20"><strong>{{row.artist}}</strong></td>
+                    <td st-ratio="30">{{row.trackname}}</td>
+                    <td st-ratio="7">{{row.year}}</td>
+                    <td st-ratio="7">{{row.seconds}}</td>
+                    <td st-ratio="7">{{row.disk}}</td>
+                    <td st-ratio="7">{{row.launchdate}}</td>
+                    <td st-ratio="7">{{row.version}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" ng-show="vm.displayCollection.length===0">
+                        Your search query has fetched no results
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><a class="btn btn-default" st-export>Export to Excel</a></td>
+                    <td colspan="5" class="text-center">
+                        <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>

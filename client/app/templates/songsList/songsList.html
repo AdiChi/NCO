@@ -2,57 +2,88 @@
     <div class="pull-left text-left list-header">My Song Lists</div>
     <div class="pull-right text-right action-buttons"><button type="button" class="btn btn-primary btn-action" ui-sref="app.addsonglist" role="button">Create New Songs list <i class="fa fa-list-ul"></i></button></div>
     <div class="clear-filters text-right">
-        <a st-reset-filter href="javascript:void(0);">Clear Filters</a>
+        <a st-reset-filter href="javascript:void(0);"><i class="fa fa-ban" aria-hidden="true"></i> Clear Filters</a>
     </div>
-    <table class="table list-table">
-        <thead>
-            <tr>
-                <th st-ratio="7">ID/Code <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'id')" aria-hidden="true"></i></th>
-                <th st-ratio="12">Song List Name <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'songListName')" aria-hidden="true"></i></th>
-                <th st-ratio="18">Description <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'description')" aria-hidden="true"></i></th>
-                <th st-ratio="8">No. of Users <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'userCount')" aria-hidden="true"></i></th>
-                <th st-ratio="8">Sec-Work Group <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'secWorkGroup')" aria-hidden="true"></i></th>
-                <th st-ratio="8">Sec Org. <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'secOrg')" aria-hidden="true"></i></th>
-                <th st-ratio="8">No. of Artists <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'artistsCount')" aria-hidden="true"></i></th>
-                <th st-ratio="8">No. of Songs <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'songsCount')" aria-hidden="true"></i></th>
-                <th st-ratio="7">Rank <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'rank')" aria-hidden="true"></i></th>
-                <th st-ratio="5">Delete</th>
-                <th st-ratio="5">Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="row in vm.displayCollection">
-                <td st-ratio="7">{{row.id}}</td>
-                <td st-ratio="15">{{row.songListName}}</td>
-                <td st-ratio="15">{{row.description}}</td>
-                <td st-ratio="8">{{row.userCount}}</td>
-                <td st-ratio="8">{{row.secWorkGroup}}</td>
-                <td st-ratio="8">{{row.secOrg}}</td>
-                <td st-ratio="8">{{row.artistsCount}}</td>
-                <td st-ratio="8">{{row.songsCount}}</td>
-                <td st-ratio="7">{{row.rank}}</td>
-                <td st-ratio="5" id="deleteSonglist" class="text-center">
-                    <i class="fa fa-trash" title="Delete List" aria-hidden="true" ng-click="vm.deleteSonglist(row.id)"></i>
-                </td>
-                <td st-ratio="5" class="text-center">
-                    <i class="fa fa-pencil" title="Edit List" aria-hidden="true" id="editSonglist" ui-sref="app.editsonglist({ id : row.id})" ui-sref-active="active"></i>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4" ng-show="vm.displayCollection.length===0">
-                    Your search query has fetched no results
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td><a class="btn btn-default" st-export>Export to Excel</a></td>
+    <div class="table-component" id="tableComponent">
+        <table class="table list-table">
+            <thead>
+                <tr>
+                    <th st-ratio="7" st-sort="id">ID/Code <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="12" st-sort="songListName">Song List Name <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="18" st-sort="description">Description <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="8" st-sort="userCount">No. of Users <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="8" st-sort="secWorkGroup">Sec-Work Group <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="8" st-sort="secOrg">Sec Org. <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="8" st-sort="artistsCount">No. of Artists <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="8" st-sort="songsCount">No. of Songs <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="7" st-sort="rank">Rank <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="5">Delete</th>
+                    <th st-ratio="5">Edit</th>
+                </tr>
+                <tr ng-show="vm.showFilter">
+                    <th>
+                        <input st-search="id" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="songListName" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="description" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="userCount" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="secWorkGroup" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="secOrg" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="artistsCount" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="songsCount" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="rank" placeholder="Search" class="input-sm form-control" type="search" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in vm.displayCollection">
+                    <td st-ratio="7">{{row.id}}</td>
+                    <td st-ratio="15">{{row.songListName}}</td>
+                    <td st-ratio="15">{{row.description}}</td>
+                    <td st-ratio="8">{{row.userCount}}</td>
+                    <td st-ratio="8">{{row.secWorkGroup}}</td>
+                    <td st-ratio="8">{{row.secOrg}}</td>
+                    <td st-ratio="8">{{row.artistsCount}}</td>
+                    <td st-ratio="8">{{row.songsCount}}</td>
+                    <td st-ratio="7">{{row.rank}}</td>
+                    <td st-ratio="5" id="deleteSonglist" class="text-center">
+                        <i class="fa fa-trash" title="Delete List" aria-hidden="true" ng-click="vm.deleteSonglist(row.id)"></i>
+                    </td>
+                    <td st-ratio="5" class="text-center">
+                        <i class="fa fa-pencil" title="Edit List" aria-hidden="true" id="editSonglist" ui-sref="app.editsonglist({ id : row.id})"
+                            ui-sref-active="active"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" ng-show="vm.displayCollection.length===0">
+                        Your search query has fetched no results
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><a class="btn btn-default" st-export>Export to Excel</a></td>
 
-                <td colspan="5" class="text-center">
-                    <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-    <filter-component ng-blur="vm.hideSidenav()" show-filter="vm.showFilter" position="vm.setPosition" filter-data="vm.displayCollection" filter-option="vm.filterOptions"></filter-component>
+                    <td colspan="5" class="text-center">
+                        <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>

@@ -175,6 +175,10 @@ angular
             .state('app.reports', {
                 url: '/reports',
                 template: '<reports></reports>'
+            })
+            .state('app.dateOverDateSong', {
+                url: '/dateOverDateSong',
+                template: '<date-over-date-song></date-over-date-song>'
             });
 
         $urlRouterProvider.otherwise('/app/');

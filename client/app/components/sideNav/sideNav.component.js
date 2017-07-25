@@ -8,7 +8,7 @@ let sideNavComponent = {
     visible: "=",
     alignment: "@",
     data: "<",
-    title: "=",
+    heading: "=",
     name: "="
   },
   template,

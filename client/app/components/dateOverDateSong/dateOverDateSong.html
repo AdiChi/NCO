@@ -201,7 +201,8 @@
         <div class="container-fluid" id="world-map" ng-if="showHeatMap">
             <button type="button" class="btn btn-primary" ng-class="{active: activefirst}" ng-click="activefirst=true;toggleMap(range1sales);">{{chart.firstRange}}</button>
             <button type="button" class="btn btn-primary" ng-class="{active: !activefirst}" ng-click="activefirst=false;toggleMap(range2sales);">{{chart.secondRange}}</button>
-            <div datamap data="heatMapData" id="world-map-container" show-heat-map="showHeatMap" ng-if="heatMapData.length"> </div>
+            <div datamap data="heatMapData" id="world-map-container" show-heat-map="showHeatMap" ng-if="!showNoData"> </div>
+            <div ng-if="showNoData" class="no-map-data">No data available for heatmap for the selected Date Range</div>
         </div>
     </div>
     <div ng-if="chart && drilldown">
@@ -307,7 +308,7 @@
                 </table>
             </div>
             <div class="col-xs-6">
-                <table class="table table-hover table-responsive">
+                <table st-table="vm.displayCollection" class="table table-hover table-responsive">
                     <tbody ng-init="showTab={};showRet={};">
                         <tr class="tab-head">
                             <th>Sales Period 2 ({{chart.secondRange}})</th>
@@ -361,6 +362,11 @@
                             <td><strong>{{range2RollUp.salesTotal}}</strong></td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><a class="btn btn-default" st-export>Export to Excel</a></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

@@ -10,6 +10,7 @@ class DateOverDateSongController {
         $scope.brkByTerritory = false;
         $scope.showHeatMap = false;
         $scope.timewise = false;
+        $scope.showNoData = false;
         $scope.territoryLabels = {
             select: "Select Territories",
             itemsSelected: "Territories Selected"
@@ -66,15 +67,7 @@ class DateOverDateSongController {
                 $scope.chart.firstRange + "\"" +
                 " \n\"" + $scope.chart.secondRange + "\"";
 
-            return $scope.chart.salesFirstRange.map(function(item, index) {
-                let sales = {
-                    "First Range": item.date,
-                    "Sales": item.totalsales,
-                    "Second Range": $scope.chart.salesSecondRange[index].date,
-                    "Sales 2": $scope.chart.salesSecondRange[index].totalsales
-                };
-                return sales;
-            });
+            return $scope.range1RollUp.allMap.concat($scope.range2RollUp.allMap);
         };
 
         function collapseSelection($this) {
@@ -198,9 +191,9 @@ class DateOverDateSongController {
             }
         };
 
-        $scope.toggleMap = function(data) {
-            let results = {},
-                mapObject = [];
+        $scope.toggleMap = function (data) {
+            let results = {}, mapObject = [];
+            $scope.showNoData = false;
             results = $scope.calculateTotal(data)
 
             angular.forEach(results.salesByTerr, function(key, value) {
@@ -209,7 +202,12 @@ class DateOverDateSongController {
                     'Total Sales': key
                 })
             })
+            if (!mapObject.length) {
+                $scope.showNoData = true;
+            }
+
             $scope.heatMapData = mapObject;
+
         }
 
         $scope.endDateBeforeRender = endDateBeforeRender;

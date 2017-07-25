@@ -14,7 +14,7 @@ class SonglistsListController {
         me.name = me.name[1];
 
         this.toggleSideNav = (row) => {
-            var table = document.getElementById('listTable');
+            var tableContainer = document.getElementById('tableComponent');
 
             if (me.name == 'songs') {
                 let id = row.id;
@@ -23,14 +23,19 @@ class SonglistsListController {
                 // me.detailsTitle = me.detailsData.trackname;
                 // me.visible = true;
 
-                SongsService.getSong(id).then((res)=>{
+                SongsService.getSong(id).then((res) => {
                     me.detailsData = res;
                     me.detailsTitle = me.detailsData.trackname;
                     me.visible = true;
-                }, (e)=> {
-                        me.visible = false;
-                        console.log(e);
-                    });
+                    me.detailsData.setTop = () => {
+                        return {
+                            'top': angular.element(tableContainer).prop('offsetTop') + 'px'
+                        };
+                    }
+                }, (e) => {
+                    me.visible = false;
+                    console.log(e);
+                });
             }
 
             if (me.name == 'artists') {
@@ -39,21 +44,26 @@ class SonglistsListController {
                     me.detailsData = res;
                     me.detailsTitle = me.detailsData.firstName + ' ' + me.detailsData.lastName;
                     me.visible = true;
+                    me.detailsData.setTop = () => {
+                        return {
+                            'top': angular.element(tableContainer).prop('offsetTop') + 'px'
+                        };
+                    }
                 }, (e) => {
                     me.visible = false;
                     console.log(e);
                 });
             }
-console.log(angular.element(table).prop('offsetLeft') + 'px');
-            me.detailsData.setTop = () => {
-                return {
-                    'top': angular.element(table).prop('offsetTop') + 'px'
-                };
-            }
         }
 
         $scope.onFilter = function (stCtrl) {
-            console.log(stCtrl.tableState());
+            var filteredCols = [], i;
+            if (stCtrl.tableState().search.predicateObject) {
+                filteredCols = Object.keys(stCtrl.tableState().search.predicateObject);
+                for(i in filteredCols){
+                    me['filtered_' + filteredCols[i]] = true;
+                }
+            }
         }
 
         this.toggleOptions = (event, filterData) => {
@@ -62,9 +72,9 @@ console.log(angular.element(table).prop('offsetLeft') + 'px');
             }
             let left = angular.element(event.target).parent().prop('offsetLeft');
             left = (left > 870) ? 'auto' : left + 'px';
-            let top = angular.element(event.target).prop('offsetTop');
+            let top = angular.element(event.target).parent().parent().prop('clientHeight');
             me.setPosition = {
-                top: (top + 80) + 'px',
+                top: (top) + 'px',
                 left: left
             }
             me.filterOptions = filterData;
