@@ -1,11 +1,11 @@
-<div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter">
+<div st-safe-src="vm.songlistslist" st-table="vm.displayCollection" on-filter="onFilter" class="container">
     <div class="pull-left text-left list-header">My Song Lists</div>
     <div class="pull-right text-right action-buttons"><button type="button" class="btn btn-primary btn-action" ui-sref="app.addsonglist" role="button">Create New Songs list <i class="fa fa-list-ul"></i></button></div>
     <table class="table list-table">
         <thead>
             <tr>
                 <th st-ratio="7">ID/Code <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'id')" aria-hidden="true"></i></th>
-                <th st-ratio="12">Name <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'songListName')" aria-hidden="true"></i></th>
+                <th st-ratio="12">Song List Name <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'songListName')" aria-hidden="true"></i></th>
                 <th st-ratio="18">Description <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'description')" aria-hidden="true"></i></th>
                 <th st-ratio="8">No. of Users <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'userCount')" aria-hidden="true"></i></th>
                 <th st-ratio="8">Sec-Work Group <i class="fa fa-angle-down" ng-click="vm.toggleOptions($event, 'secWorkGroup')" aria-hidden="true"></i></th>

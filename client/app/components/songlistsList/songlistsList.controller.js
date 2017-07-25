@@ -1,5 +1,5 @@
 class SonglistsListController {
-    constructor($rootScope, $scope, $state, $window, ModalService, SongListsService, SongsService) {
+    constructor($rootScope, $scope, $state, $window, ModalService, SongListsService, SongsService, ArtistService) {
         "ngInject";
         var me = this;
         me.$state = $state;
@@ -14,32 +14,55 @@ class SonglistsListController {
         me.name = me.name[1];
 
         this.toggleSideNav = (row) => {
-            let id = row.id;
-            var res = SongsService.getSong();
-            me.detailsData = res;
-            me.detailsTitle = me.detailsData.trackname;
-            me.visible = true;
-            // SongsService.getSong().then((res)=>{
-            //     me.detailsData = res;
-            //     me.detailsTitle = me.detailsData.trackname;
-            //     me.visible = true;
-            // }, (e)=> {
-            //         me.visible = false;
-            //         console.log(e);
-            //     });
+            var table = document.getElementById('listTable');
+
+            if (me.name == 'songs') {
+                let id = row.id;
+                // var res = SongsService.getSong();
+                // me.detailsData = res;
+                // me.detailsTitle = me.detailsData.trackname;
+                // me.visible = true;
+
+                SongsService.getSong(id).then((res)=>{
+                    me.detailsData = res;
+                    me.detailsTitle = me.detailsData.trackname;
+                    me.visible = true;
+                }, (e)=> {
+                        me.visible = false;
+                        console.log(e);
+                    });
+            }
+
+            if (me.name == 'artists') {
+                let id = row.artistId;
+                ArtistService.getArtist(id).then((res) => {
+                    me.detailsData = res;
+                    me.detailsTitle = me.detailsData.firstName + ' ' + me.detailsData.lastName;
+                    me.visible = true;
+                }, (e) => {
+                    me.visible = false;
+                    console.log(e);
+                });
+            }
+console.log(angular.element(table).prop('offsetLeft') + 'px');
+            me.detailsData.setTop = () => {
+                return {
+                    'top': angular.element(table).prop('offsetTop') + 'px'
+                };
+            }
         }
 
         $scope.onFilter = function (stCtrl) {
-			console.log(stCtrl.tableState());
-		}
+            console.log(stCtrl.tableState());
+        }
 
         this.toggleOptions = (event, filterData) => {
             if (me.showFilter) {
                 me.showFilter = false;
             }
             let left = angular.element(event.target).parent().prop('offsetLeft');
-            left = (left > 900) ? 'auto' : left + 'px';
-            let top = angular.element(event.target).parent().prop('offsetTop');
+            left = (left > 870) ? 'auto' : left + 'px';
+            let top = angular.element(event.target).prop('offsetTop');
             me.setPosition = {
                 top: (top + 80) + 'px',
                 left: left

@@ -1,0 +1,94 @@
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="" data-target="#tab1" data-toggle="tab">Details</a></li>
+        <li><a href="" data-target="#tab2" data-toggle="tab">Reports</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+            <div class="list-group">
+                <div class="list-inline list-label">ISRC</div>
+                <div class="list-inline list-detail">{{vm.data.isrc}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Artist</div>
+                <div class="list-inline list-detail">{{vm.data.artist}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Track</div>
+                <div class="list-inline list-detail">{{vm.data.trackname}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Year</div>
+                <div class="list-inline list-detail">{{vm.data.year}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Duration</div>
+                <div class="list-inline list-detail">{{vm.data.seconds}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Disk</div>
+                <div class="list-inline list-detail">{{vm.data.disk}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Date</div>
+                <div class="list-inline list-detail">{{vm.data.launchdate}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Version</div>
+                <div class="list-inline list-detail">{{vm.data.version}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Data</div>
+                <div class="list-inline list-detail">{{vm.data.bio}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Media</div>
+                <div class="list-inline list-detail">{{vm.data.media}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Album Artist</div>
+                <div class="list-inline list-detail">{{vm.data.artist}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Label</div>
+                <div class="list-inline list-detail">{{vm.data.label}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Asin</div>
+                <div class="list-inline list-detail">{{vm.data.asin}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Barcode</div>
+                <div class="list-inline list-detail">{{vm.data.barcode}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Catalog Number</div>
+                <div class="list-inline list-detail">{{vm.data.catalognumber}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Release Status</div>
+                <div class="list-inline list-detail">{{vm.data.releasestatus}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Release Type</div>
+                <div class="list-inline list-detail">{{vm.data.releasetype}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Script</div>
+                <div class="list-inline list-detail">{{vm.data.script}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Original Year</div>
+                <div class="list-inline list-detail">{{vm.data.originalyear}}</div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab2">
+            <div class="report-pane">
+                <button type="button" class="btn btn-default btn-report">Artist Sales by Date Range Comparison Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-default btn-report">Artist Date over Date Song Comparison Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-default btn-report">Artist Songs Sales by Territory / Territory Group Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-default btn-report">Artist Songs by City Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="" data-target="#tab1" data-toggle="tab">Details</a></li>
+        <li><a href="" data-target="#tab2" data-toggle="tab">Reports</a></li>
+        <li><a href="" data-target="#tab3" data-toggle="tab">Social</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+            <div class="list-group">
+                <div class="list-inline list-label">First Name</div>
+                <div class="list-inline list-detail">{{vm.data.firstName}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Last Name</div>
+                <div class="list-inline list-detail">{{vm.data.lastName}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Genre</div>
+                <div class="list-inline list-detail">{{vm.data.genre}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Instruments</div>
+                <div class="list-inline list-detail">{{vm.data.instruments}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Occupation</div>
+                <div class="list-inline list-detail">{{vm.data.occupation}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Date of Birth</div>
+                <div class="list-inline list-detail">{{vm.data.dateOfBirth}}</div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab2">
+            <div class="report-pane">
+                <button type="button" class="btn btn-default btn-report">Artist Sales by Date Range Comparison Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-default btn-report">Artist Date over Date Song Comparison Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-default btn-report">Artist Songs Sales by Territory / Territory Group Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-default btn-report">Artist Songs by City Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab3">
+            <div class="social-pane">
+
+            </div>
+        </div>
+    </div>
+</div>

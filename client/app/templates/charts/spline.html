@@ -12,33 +12,15 @@
     </div>
 </div>
 <div class="widget-chart">
-    <!-- <c3chart bindto-id="chart1">
-        <chart-column column-id="x" column-values="{{widget.chart.xLabels}}" />
-        <chart-column column-id="Range 1" column-name="{{widget.chart.firstColumnName}}" column-values="{{widget.chart.firstValue}}"
-            column-type="spline" />
-        <chart-column column-id="Range 2" column-name="{{widget.chart.secondColumnName}}" column-values="{{widget.chart.secondValue}}"
-            column-type="spline" />
-        <chart-column column-id="Range 3" column-name="{{widget.chart.thirdColumnName}}" column-values="{{widget.chart.thirdValue}}"
-            column-type="spline" />
-        <chart-column column-id="Range 4" column-name="{{widget.chart.fourthColumnName}}" column-values="{{widget.chart.fourthValue}}"
-            column-type="spline"  />
-        <chart-legend show-legend="false" />
-        <chart-axis>
-            <chart-axis-x axis-position="outer-center" axis-type="category">
-                <chart-axis-x-tick tick-rotate="50" />
-            </chart-axis-x>
-        </chart-axis>
-        <chart-size chart-height="300" chart-width="350" />
-    </c3chart> -->
-    <c3chart bindto-id="chart1" chart-data="widget.chart.datapoints" chart-columns="widget.chart.datacolumns" chart-x="widget.chart.datax">
-        <chart-size chart-height="300" chart-width="350" />
+    <c3chart bindto-id="{{widget.chart.id}}" chart-data="widget.chart.datapoints" chart-columns="widget.chart.datacolumns" chart-x="widget.chart.datax">
+        <!-- <chart-size chart-height="300" chart-width="350" /> -->
         <!-- <chart-bar ratio="0.5" /> -->
         <chart-axes values-x="x" />
         <chart-axis>
             <chart-axis-x axis-position="outer-center" axis-type="category">
-                <chart-axis-x-tick tick-rotate="50" />
+                <chart-axis-x-tick tick-rotate="90" />
             </chart-axis-x>
         </chart-axis>
-        <chart-legend show-legend="false" />
+        <chart-legend show-legend="true" />
     </c3chart>
 </div>

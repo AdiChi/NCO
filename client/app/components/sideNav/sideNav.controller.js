@@ -3,7 +3,6 @@ class SideNavController {
     "ngInject";
 
     var vm = this;
-
     vm.closeNav = function(){
       vm.visible = false;
     }

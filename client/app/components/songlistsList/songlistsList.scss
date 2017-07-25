@@ -31,6 +31,14 @@
     }
   }
 
+  tbody tr {
+    cursor: pointer;
+
+    &:hover{
+      background-color: #f5f5f5;
+    }
+  }
+
   tbody td{
     color: #222;
     border-bottom-color: #d3d3d3;
