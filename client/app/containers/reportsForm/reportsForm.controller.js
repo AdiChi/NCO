@@ -1,7 +1,6 @@
 class ReportsFormController {
     constructor() {
-        this.allReports = [
-            {
+        this.allReports = [{
                 reportName: "Percent of retail source streams",
                 sharedReport: "N",
                 lastModified: "08/05/2017",
@@ -63,7 +62,7 @@ class ReportsFormController {
                 lastModified: "06/05/2017",
                 lastRan: "12/05/2017",
                 dataset: "Tableau - Historical",
-                url: "reports"
+                url: "songSalesByTerritory"
             },
             {
                 reportName: "Songs Comparison Date Over Date Report",
@@ -87,10 +86,10 @@ class ReportsFormController {
         this.toFormat = function(r) {
             return r.map(function(i) {
                 let list = {
-                    "Report Name" : i.reportName,
-                    "Shared Report (Y/N)" : i.sharedReport,
-                    "Last Modified" : i.lastModified,
-                    "Last Ran" : i.lastRan,
+                    "Report Name": i.reportName,
+                    "Shared Report (Y/N)": i.sharedReport,
+                    "Last Modified": i.lastModified,
+                    "Last Ran": i.lastRan,
                     "Dataset": i.dataset
                 };
                 return list;
