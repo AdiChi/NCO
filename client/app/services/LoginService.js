@@ -427,7 +427,7 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '22%'
+                        'width': '30.5%'
                     }
                 }
 
@@ -457,11 +457,11 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '22%'
+                        'width': '30.5%'
                     }
                 }
             }, {
-                header: 'Say Goodbye - [Jul 1 - Jul 4]',
+                header: 'Say Goodbye - [Jul 1 - Jul 5]',
                 info: {
                     totalSales: '7,676',
                     openCampaign: '456',
@@ -485,10 +485,10 @@ function LoginService($filter) {
                 },
                 setWidth: function() {
                     return {
-                        'width': '22%'
+                        'width': '30.5%'
                     }
                 }
-            }, {
+            }/*, {
                 header: 'Haunt Me (instrumental) - [Jul 1 - Jul 5]',
                 info: {
                     totalSales: '7,676',
@@ -516,7 +516,7 @@ function LoginService($filter) {
                         'width': '22%'
                     }
                 }
-            }, {
+            }*/, {
                 header: 'A Fine Day for Sailing [Jun 1 - Jun 5], [Jul 1 - Jul 5]',
                 info: {
                     totalSales: '7,653',
