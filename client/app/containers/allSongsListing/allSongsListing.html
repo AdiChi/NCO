@@ -1,57 +1,59 @@
-<table st-safe-src="vm.songs" st-table="vm.displayCollection" on-filter="onFilter" class="table table-striped" ng-if="vm.songs.length > 0">
-    <thead>
-        <tr>
-            <th row-select-all="vm.songs"  selected="vm.sel" ng-click="vm.selectAll(vm.songs)"></th>
-            <th st-sort="trackname">Track Name</th>
-            <th st-sort="albumname">Album Name</th>
-            <th st-sort="artist">Artist</th>
-            <th st-sort="artistdesc">Artist Description</th>
-            <th st-sort="isrc">ISRC</th>
-        </tr>
-        <tr>
-            <th></th>
-            <th>
-                <input st-search="trackname" placeholder="search for track name" class="input-sm form-control" type="search"/>
-            </th>
-            <th>
-                <input st-search="albumname" placeholder="search for album name" class="input-sm form-control" type="search"/>
-            </th>
-            <th>
-                <input st-search="artist" placeholder="search for artist" class="input-sm form-control" type="search"/>
-            </th>
-            <th>
-                <input st-search="artistdesc" placeholder="search for artist description" class="input-sm form-control" type="search"/>
-            </th>
-            <th>
-                <input st-search="isrc" placeholder="search by ISRC" class="input-sm form-control" type="search"/>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="row in vm.displayCollection">
-            <td row-select="row" ng-click="vm.select(row.id)"></td>
-            <td>{{row.trackname}}</td>
-            <td>{{row.albumname}}</td>
-            <td>{{row.artist}}</td>
-            <td>{{row.artistdesc}}</td>
-            <td>{{row.isrc}}</td>
-        </tr>
-        <tr>
-            <td colspan="6" ng-show="vm.displayCollection.length===0">
-               Your search query has fetched no results
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="4">
-              <div>
-                <span><strong>{{vm.sel.length}} selected</strong></span>
-              </div>
-            </td>
-            <td colspan="2" class="text-center">
-                <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+<div class="table-component">
+    <table st-safe-src="vm.songs" st-table="vm.displayCollection" on-filter="onFilter" class="table table-striped" ng-if="vm.songs.length > 0">
+        <thead>
+            <tr>
+                <th row-select-all="vm.songs" selected="vm.sel" ng-click="vm.selectAll(vm.songs)"></th>
+                <th st-sort="trackname">Track Name</th>
+                <th st-sort="albumname">Album Name</th>
+                <th st-sort="artist">Artist</th>
+                <th st-sort="artistdesc">Artist Description</th>
+                <th st-sort="isrc">ISRC</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>
+                    <input st-search="trackname" placeholder="search for track name" class="input-sm form-control" type="search" />
+                </th>
+                <th>
+                    <input st-search="albumname" placeholder="search for album name" class="input-sm form-control" type="search" />
+                </th>
+                <th>
+                    <input st-search="artist" placeholder="search for artist" class="input-sm form-control" type="search" />
+                </th>
+                <th>
+                    <input st-search="artistdesc" placeholder="search for artist description" class="input-sm form-control" type="search" />
+                </th>
+                <th>
+                    <input st-search="isrc" placeholder="search by ISRC" class="input-sm form-control" type="search" />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in vm.displayCollection">
+                <td row-select="row" ng-click="vm.select(row.id)"></td>
+                <td>{{row.trackname}}</td>
+                <td>{{row.albumname}}</td>
+                <td>{{row.artist}}</td>
+                <td>{{row.artistdesc}}</td>
+                <td>{{row.isrc}}</td>
+            </tr>
+            <tr>
+                <td colspan="6" ng-show="vm.displayCollection.length===0">
+                    Your search query has fetched no results
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <div>
+                        <span><strong>{{vm.sel.length}} selected</strong></span>
+                    </div>
+                </td>
+                <td colspan="2" class="text-center">
+                    <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

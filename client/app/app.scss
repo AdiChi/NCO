@@ -356,32 +356,34 @@ body {
     }
 }
 
-.table {
-    thead {
-        background-color: #d3d3d3;
-        border: 1px solid #d3d3d3;
-        border-left: 0;
-        border-right: 0;
-    }
+.table-component{
+    .table {
+        thead {
+            background-color: #d3d3d3;
+            border: 1px solid #d3d3d3;
+            border-left: 0;
+            border-right: 0;
+        }
 
-    thead th {
-        color: #1a1c22;
-        font-size: 13px;
-        input[type=search]{
-            width: 100%;
+        thead th {
+            color: #1a1c22;
+            font-size: 13px;
+            input[type=search]{
+                width: 100%;
+            }
         }
-    }
-    tbody tr {
-        &:hover {
-            background-color: #F0F0F0;
+        tbody tr {
+            &:hover {
+                background-color: #F0F0F0;
+            }
         }
-    }
-    tbody td {
-        a {
-            text-decoration:none;
+        tbody td {
+            a {
+                text-decoration:none;
+                color: #222;
+            }
             color: #222;
+            border-bottom-color: #d3d3d3;
         }
-        color: #222;
-        border-bottom-color: #d3d3d3;
     }
 }
