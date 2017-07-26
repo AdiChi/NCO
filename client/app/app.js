@@ -174,7 +174,7 @@ angular
             })
             .state('app.reports', {
                 url: '/reports',
-                template: '<reports></reports>'
+                template: '<reports heading="Analytic Reporting"></reports>'
             })
             .state('app.dateOverDateSong', {
                 url: '/dateOverDateSong',

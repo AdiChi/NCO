@@ -169,6 +169,9 @@
                 </label>
             </div>
         </div>
+        <div class="container-fluid">
+            <i class="fa fa-star fa-2x fav" aria-hidden="true" ng-click="fav = fav ? false:true" ng-class="{selected: fav}" title="Add to favourites"></i>
+        </div>
         <div class="container-fluid" ng-if="!theChart && chart && !showHeatMap" style="padding-top:30px">
             {{selectedSong}}
             <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections" ng-if="!showHeatMap">
@@ -206,8 +209,7 @@
         </div>
     </div>
     <div ng-if="chart && drilldown">
-        <label>
-            <input type="checkbox" ng-model="timewise">Break out sales by hour</label>
+        <label style="padding-left: 10px;"><input type="checkbox" ng-model="timewise">Break out sales by hour</label>
         <div class="container drilldown" ng-if="timewise">
             <h3 class="tab-head">Sales by hour</h3>
             <h4>{{selectedSong}}</h4>

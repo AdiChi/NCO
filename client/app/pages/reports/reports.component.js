@@ -4,7 +4,9 @@ import './reports.scss';
 
 let reportsComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {
+    heading: '@'
+  },
   template,
   controller,
   controllerAs: 'vm'

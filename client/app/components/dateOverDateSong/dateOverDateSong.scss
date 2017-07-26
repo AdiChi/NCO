@@ -1,7 +1,25 @@
-.reports {
+.reports.panel-default{
     margin-bottom: 0px!important;
+    .panel-heading {
+        background: #c28103 !important;
+        color: #fff;
+        span {
+            margin-top: -20px;
+            font-size: 15px;
+        }
+    }
 }
 
+.fav {
+    color:grey;
+    padding-left: 15px;
+    &:hover {
+        color: #f7a407;
+    }
+    &.selected {
+        color:#f7a407;
+    }
+}
 .row {
     margin-top: 40px;
     padding: 0 10px;
@@ -47,8 +65,9 @@
 }
 
 #confirmSubmit {
-    background: #172a3a !important;
-    border-color: #172a3a;
+    border-color: #c28103 !important;
+    background: #c28103 !important;
+    color: #fff;
 }
 
 .timepicker a {
@@ -62,14 +81,6 @@
 
 .error-alert {
     color: #a94442;
-}
-
-.panel-default>.panel-heading {
-    background: #F5B041;
-    span {
-        margin-top: -20px;
-        font-size: 15px;
-    }
 }
 
 .btn.selected {
