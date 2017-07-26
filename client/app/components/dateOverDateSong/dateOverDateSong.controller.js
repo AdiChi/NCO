@@ -617,11 +617,11 @@ class DateOverDateSongController {
 
                 ReportService.getDODChart($scope.query)
                     .then(function(response) {
+                        $scope.loading = false;
                         $scope.chart = response.data;
                         addEmptyDateValues();
                         $scope.NoChartError = "";
                         $scope.drilldown = true;
-                        $scope.loading = false;
                     }, function(e) {
                         $scope.NoChartError = "Something went wrong!";
                         console.log(e);
