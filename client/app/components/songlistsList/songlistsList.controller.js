@@ -119,16 +119,51 @@ class SonglistsListController {
                     console.log(err);
                 });
         };
-        this.exportListName = "Song lists";
-        this.toFormat = function (r) {
-            return r.map(function (item) {
-                let list = {
-                    "Name": item.songListName,
-                    "Description": item.description
-                };
-                return list;
-            });
-        };
+        if (me.name == 'songs') {
+            this.exportListName = "Songs";
+            this.toFormat = function (r) {
+                return r.map(function (item) {
+                    let list = {
+                        "ISRC": (item.isrc != undefined) ? item.isrc : "",
+                        "Album Name": (item.albumname != undefined) ? item.albumname : "",
+                        "Track": (item.trackname != undefined) ? item.trackname : "",
+                        "Artist": (item.artist != undefined) ? item.artist : "",
+                        "Year": (item.year != undefined) ? item.year : "",
+                        "Duration": (item.duration != undefined) ? item.duration : "",
+                        "Launch Date": (item.launchdate != undefined) ? item.launchdate : ""
+                    };
+                    return list;
+                });
+            };
+        }
+        else if (me.name == 'artists') {
+            this.exportListName = "Artist";
+            this.toFormat = function (r) {
+                return r.map(function (item) {
+                    let list = {
+                        "Artist Name": (item.artistName != undefined) ? item.artistName : "",
+                        "Genre": (item.genre != undefined) ? item.genre : "",
+                        "Instruments": (item.instruments != undefined) ? item.instruments : "",
+                        "Role": (item.role != undefined) ? item.role : "",
+                        "Type": (item.type != undefined) ? item.type : "",
+                        "Members": (item.member != undefined) ? item.member : ""
+                    };
+                    return list;
+                });
+            };
+        }
+        else {
+            this.exportListName = "Songs List";
+            this.toFormat = function (r) {
+                return r.map(function (item) {
+                    let list = {
+                        "Name": (item.songListName != undefined) ? item.songListName : "",
+                        "Description": (item.description != undefined) ? item.description : ""
+                    };
+                    return list;
+                });
+            };
+        }
     }
 }
 

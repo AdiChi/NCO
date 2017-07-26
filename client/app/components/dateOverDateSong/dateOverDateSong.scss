@@ -1,12 +1,29 @@
+.report-panel{
+    padding: 20px;
+}
+
 .reports.panel-default{
     margin-bottom: 0px!important;
-    .panel-heading {
-        background: #c28103 !important;
-        color: #fff;
+    & > .panel-heading {
         span {
             margin-top: -20px;
             font-size: 15px;
         }
+    }
+
+    & > .artist-heading{
+        background-color: #1a1c22;
+        color: #b9babd;
+    }
+
+    & > .analyst-heading{
+        background-color: #01172d;
+        color: #b9babd;
+    }
+
+    & > .distributor-heading{
+        background-color: #230118;
+        color: #b9babd;
     }
 }
 
