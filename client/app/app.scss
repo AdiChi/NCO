@@ -1,6 +1,7 @@
-body{
+body {
     overflow-x: hidden;
 }
+
 .body-artist {
     background: #1a1c22;
 }
@@ -21,19 +22,14 @@ body{
 .pagination>li>a {
     cursor: pointer;
 }
-.app-main {
-    margin-top: 60px;
-    margin-bottom: 0px;
-    min-height: 100vh;
-}
 
 .hide-menu {
     display: none!important;
 }
-.modal-dialog.modal-lg {
-    width:1080px;
-}
 
+.modal-dialog.modal-lg {
+    width: 1080px;
+}
 
 .navMain {
     background: #2C3E50;
@@ -61,7 +57,7 @@ body{
         }
         .dropdown {
             .user-menu {
-                padding: 8px 0 0;
+                padding: 8px 10px 5px;
             }
         }
     }
@@ -75,17 +71,32 @@ body{
 
 .navMain-artist {
     background: #1a1c22!important;
+    .open {
+        a.menu,
+        a.menu:hover {
+            background: #101114!important;
+        }
+        .dropdown-menu {
+            background: #1a1c22!important;
+            a {
+                color: #b9babd;
+            }
+            a:hover {
+                background: #101114!important;
+            }
+        }
+    }
     .menu {
         color: #b9babd!important;
         &:visited,
         &:hover,
         &:focus {
-            background: #2E4053!important;
+            background: #101114!important;
         }
     }
     .active {
         .menu {
-            background: #2E4053!important;
+            background: #101114!important;
             color: #c28103!important;
         }
     }
@@ -93,8 +104,23 @@ body{
 
 .navMain-distributor {
     background: #320122!important;
+    .open {
+        a.menu,
+        a.menu:hover {
+            background: #11000c!important;
+        }
+        .dropdown-menu {
+            background: #320122!important;
+            a {
+                color: #bcbdc0;
+            }
+            a:hover {
+                background: #11000c!important;
+            }
+        }
+    }
     .menu {
-        color: #9d9ea1!important;
+        color: #bcbdc0!important;
         &:visited,
         &:hover,
         &:focus {
@@ -111,6 +137,21 @@ body{
 
 .navMain-analyst {
     background: #011d3a!important;
+    .open {
+        a.menu,
+        a.menu:hover {
+            background: #000b16!important;
+        }
+        .dropdown-menu {
+            background: #011d3a!important;
+            a {
+                color: #bcbdc0;
+            }
+            a:hover {
+                background: #000b16!important;
+            }
+        }
+    }
     .menu {
         color: #bcbdc0!important;
         &:visited,

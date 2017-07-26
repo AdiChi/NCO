@@ -1,11 +1,12 @@
 .reports {
-    margin-top: 20px;
+    margin-bottom: 0px!important;
 }
 
 .row {
     margin-top: 40px;
     padding: 0 10px;
 }
+
 .no-map-data {
     width: 100%;
     height: 200px;
@@ -14,6 +15,7 @@
     padding: 70px 20%;
     text-align: center;
 }
+
 .loader {
     position: absolute;
     left: 50%;
@@ -62,7 +64,7 @@
     color: #a94442;
 }
 
-.panel-default > .panel-heading {
+.panel-default>.panel-heading {
     background: #F5B041;
     span {
         margin-top: -20px;
