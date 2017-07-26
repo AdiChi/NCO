@@ -10,16 +10,16 @@ function ArtistService($http, config, superCache) {
 
     function toArtist(r) {
         var dataresponse = r.data.map(function (item) {
-            let song = {
+            let artist = {
                 "artistId": item.artistId,
-                "artistName": item.firstName + ' ' + item.lastName,
+                "artistName": item.displayName,
                 "genre": item.genre,
                 "instruments": item.instruments,
-                "occupation": item.occupation,
+                "role": item.role,
                 "type": item.type,
                 "member": item.member
             };
-            return song;
+            return artist;
         });
         superCache.put("allArtists", dataresponse);
         return dataresponse;
@@ -45,10 +45,10 @@ function ArtistService($http, config, superCache) {
                     var item = r.data;
                     return {
                         "artistId": item.artistId,
-                        "artistName": item.firstName + ' ' + item.lastName,
+                        "artistName": item.displayName,
                         "genre": item.genre,
                         "instruments": item.instruments,
-                        "occupation": item.occupation,
+                        "role": item.role,
                         "type": item.type,
                         "member": item.member
                     };

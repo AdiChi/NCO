@@ -43,7 +43,7 @@ class SonglistsListController {
                 let id = row.artistId;
                 ArtistService.getArtist(id).then((res) => {
                     me.detailsData = res;
-                    me.detailsTitle = me.detailsData.firstName + ' ' + me.detailsData.lastName;
+                    me.detailsTitle = me.detailsData.artistName;
                     me.visible = true;
                     me.detailsData.setTop = () => {
                         return {
@@ -59,15 +59,18 @@ class SonglistsListController {
 
         $scope.onFilter = function (stCtrl) {
             var filteredCols = [], i;
+            var tableState = stCtrl.tableState();
             if (stCtrl.tableState().search.predicateObject) {
-                me.isFilterApplied = true;
-                filteredCols = Object.keys(stCtrl.tableState().search.predicateObject);
-                for(i in filteredCols){
-                    me['filtered_' + filteredCols[i]] = true;
+                if (Object.keys(stCtrl.tableState().search.predicateObject).length > 0) {
+                    me.isFilterApplied = true;
+                    filteredCols = Object.keys(stCtrl.tableState().search.predicateObject);
+                    for (i in filteredCols) {
+                        me['filtered_' + filteredCols[i]] = true;
+                    }
                 }
-            }
-            else {
-                 me.isFilterApplied = false;
+                else {
+                    me.isFilterApplied = false;
+                }
             }
         }
 

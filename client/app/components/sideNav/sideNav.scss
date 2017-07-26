@@ -95,6 +95,7 @@
                 display: inline-block;
                 width: auto;
                 margin-top: 10px;
+                margin-left: 10px;
                 max-width: 400px;
             }
 
@@ -151,6 +152,7 @@
                     width: 100%;
                     border-bottom: 1px solid #d3d3d3;
                     margin-bottom: 0;
+                    overflow: hidden;
 
                     &::last-child{
                         border-bottom: 0;
@@ -183,7 +185,21 @@
                 
                 .report-pane{
                     margin: 30px auto 0;
-                    width: 80%;
+                    width: 90%;
+                }
+
+                .profile-picture {
+                    img{
+                        margin: 0 auto;
+                        display: block;
+                    }
+                }
+
+                .social-pane {
+                    img{
+                        margin: 0 auto;
+                        display: block;
+                    }
                 }
                 .btn-report {
                     border-radius: 16px;

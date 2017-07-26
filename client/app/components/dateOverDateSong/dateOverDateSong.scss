@@ -62,8 +62,8 @@
     color: #a94442;
 }
 
-.panel-heading {
-    background: #F5B041 !important;
+.panel-default > .panel-heading {
+    background: #F5B041;
     span {
         margin-top: -20px;
         font-size: 15px;

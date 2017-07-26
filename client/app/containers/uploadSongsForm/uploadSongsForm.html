@@ -3,7 +3,7 @@
         {{vm.successmsg}}
     </div>
     <div class="panel panel-default" ng-if="vm.dataLoading==undefined">
-        <div class="panel-heading">
+        <div class="panel-heading {{$root.currentUser.role}}-panel">
             <h4>Upload Songs</h4>
         </div>
         <div class="panel-body">

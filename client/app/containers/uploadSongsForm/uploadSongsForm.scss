@@ -1,5 +1,22 @@
 .upload-songs {
     margin-top: 20px;
+
+    .panel-default{
+        & > .artist-panel{
+            background-color: #1a1c22;
+            color: #9d9ea1;
+        }
+
+        & > .analyst-panel{
+            background-color: #011d3a;
+            color: #9d9ea1;
+        }
+
+        & > .distributor-panel{
+            background-color: #320122;
+            color: #9d9ea1;
+        }
+    }
 }
 
 .ng-inline-edit--error .ng-inline-edit__input {

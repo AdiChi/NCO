@@ -1,3 +1,7 @@
+<div class="nav-header {{$root.currentUser.role}}-header">
+    <img src="app/images/image_dp_taylor_swift.png" /><h3 class="details-title">{{vm.heading}}</h3>
+    <i class="fa fa-times pull-right" ng-click="vm.closeNav()"></i>
+</div>
 <div class="tabbable">
     <ul class="nav nav-tabs">
         <li class="active"><a href="" data-target="#tab1" data-toggle="tab">Details</a></li>
@@ -7,12 +11,8 @@
     <div class="tab-content">
         <div class="tab-pane active" id="tab1">
             <div class="list-group">
-                <div class="list-inline list-label">First Name</div>
-                <div class="list-inline list-detail">{{vm.data.firstName}}</div>
-            </div>
-            <div class="list-group">
-                <div class="list-inline list-label">Last Name</div>
-                <div class="list-inline list-detail">{{vm.data.lastName}}</div>
+                <div class="list-inline list-label">Name</div>
+                <div class="list-inline list-detail">{{vm.data.artistName}}</div>
             </div>
             <div class="list-group">
                 <div class="list-inline list-label">Genre</div>
@@ -24,14 +24,21 @@
             </div>
             <div class="list-group">
                 <div class="list-inline list-label">Occupation</div>
-                <div class="list-inline list-detail">{{vm.data.occupation}}</div>
+                <div class="list-inline list-detail">{{vm.data.role}}</div>
             </div>
             <div class="list-group">
-                <div class="list-inline list-label">Date of Birth</div>
-                <div class="list-inline list-detail">{{vm.data.dateOfBirth}}</div>
+                <div class="list-inline list-label">Type</div>
+                <div class="list-inline list-detail">{{vm.data.type}}</div>
+            </div>
+            <div class="list-group">
+                <div class="list-inline list-label">Members</div>
+                <div class="list-inline list-detail">{{vm.data.member}}</div>
             </div>
         </div>
         <div class="tab-pane" id="tab2">
+            <div class="profile-picture">
+                <img src="app/images/image_taylor_swift.png" />
+            </div>
             <div class="report-pane">
                 <button type="button" class="btn btn-default btn-report">Artist Sales by Date Range Comparison Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
                 <button type="button" class="btn btn-default btn-report">Artist Date over Date Song Comparison Report <i class="fa fa-arrow-circle-right linkArrow" aria-hidden="true"></i></button>
@@ -41,7 +48,7 @@
         </div>
         <div class="tab-pane" id="tab3">
             <div class="social-pane">
-
+                <img src="app/images/image_tab_social.png" />
             </div>
         </div>
     </div>

@@ -1,11 +1,6 @@
 <div class="side-nav-component" id="divSideNav" ng-class='{ show: vm.visible, left: vm.alignment === "left", right: vm.alignment === "right", animate }'
     ng-show="vm.visible" ng-animate="animate" ng-style="vm.data.setTop();">
     <div class="nav-content {{$root.currentUser.role}}-content">
-        <div class="nav-header {{$root.currentUser.role}}-header">
-            <h3 class="details-title">{{vm.heading}}</h3>
-            <i class="fa fa-times pull-right" ng-click="vm.closeNav()"></i>
-        </div>
-
         <div ng-switch on="vm.name">
             <div ng-switch-when="songs">
                 <div ng-include="'app/templates/songs/songSideNav.html'"></div>
