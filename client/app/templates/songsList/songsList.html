@@ -8,15 +8,15 @@
         <table class="table list-table">
             <thead>
                 <tr>
-                    <th st-ratio="7" st-sort="id">ID/Code <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="12" st-sort="songListName">Song List Name <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="18" st-sort="description">Description <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="9" st-sort="userCount">No. of Users <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="9" st-sort="secWorkGroup">Sec-Work Group <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="9" st-sort="secOrg">Sec Org. <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="9" st-sort="artistsCount">No. of Artists <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="9" st-sort="songsCount">No. of Songs <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
-                    <th st-ratio="7" st-sort="rank">Rank <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="7"><span st-sort="id">ID/Code</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="12"><span st-sort="songListName">Song List Name</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="18"><span st-sort="description">Description</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9"><span st-sort="userCount">No. of Users</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9"><span st-sort="secWorkGroup">Sec-Work Group</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9"><span st-sort="secOrg">Sec Org.</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9"><span st-sort="artistsCount">No. of Artists</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="9"><span st-sort="songsCount">No. of Songs</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="7"><span st-sort="rank">Rank</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
                     <th st-ratio="5">Delete</th>
                     <th st-ratio="5">Edit</th>
                 </tr>
@@ -48,6 +48,8 @@
                     <th>
                         <input st-search="rank" placeholder="Search" class="input-sm form-control" type="search" />
                     </th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

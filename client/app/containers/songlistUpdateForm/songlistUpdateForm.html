@@ -1,84 +1,88 @@
-<form class="form-horizontal" role="form" ng-submit="vm.updateSonglist()">
-    <div class="form-group">
-        <label class="control-label col-sm-2">Name:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Enter song list name" ng-model="vm.songlist.songListName" required>
+<div class="update-list-component">
+    <form class="form-horizontal" role="form" ng-submit="vm.updateSonglist()">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Enter song list name" ng-model="vm.songlist.songListName" required>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-2">Description:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Enter your description" ng-model="vm.songlist.description" required>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Description:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Enter your description" ng-model="vm.songlist.description" required>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <button type="button" style="margin-top:20px" class="col-sm-2 btn btn-primary btn-md" ng-click="vm.addSongs()">Add songs</button>
-        <h3 class=" col-sm-10" ng-if="!vm.songlist.songs.length">No Songs Added to {{vm.songlist.songListName}}</h3>
-        <table st-safe-src="vm.songlist.songs" st-table="vm.displayCollection2" on-filter="onFilter" class="table table-striped" ng-if="vm.songlist.songs.length > 0">
-            <thead>
-                <tr>
-                    <th row-select-all="vm.songlist.songs" selected="vm.selected" ng-click="vm.selectAll(vm.songlist.songs)"></th>
-                    <th st-sort="trackname">Track Name</th>
-                    <th st-sort="albumname">Album Name</th>
-                    <th st-sort="artist">Artist</th>
-                    <th st-sort="artistdesc">Artist Description</th>
-                    <th st-sort="isrc">ISRC</th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th>
-                        <input st-search="trackname" placeholder="search for track name" class="input-sm form-control" type="search" />
-                    </th>
-                    <th>
-                        <input st-search="albumname" placeholder="search for album name" class="input-sm form-control" type="search" />
-                    </th>
-                    <th>
-                        <input st-search="artist" placeholder="search for artist" class="input-sm form-control" type="search" />
-                    </th>
-                    <th>
-                        <input st-search="artistdesc" placeholder="search for artist description" class="input-sm form-control" type="search" />
-                    </th>
-                    <th>
-                        <input st-search="isrc" placeholder="search by ISRC" class="input-sm form-control" type="search" />
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="row in vm.displayCollection2">
-                    <td row-select="row" ng-click="vm.select(row.id)"></td>
-                    <td>{{row.trackname}}</td>
-                    <td>{{row.albumname}}</td>
-                    <td>{{row.artist}}</td>
-                    <td>{{row.artistdesc}}</td>
-                    <td>{{row.isrc}}</td>
-                </tr>
-                <tr>
-                    <td colspan="6" ng-show="vm.displayCollection2.length===0">
-                        Your search query has fetched no results
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="2">
-                        <div>
-                            <span><strong>{{vm.selected.length}} selected</strong></span>
-                            <span style="font-size:small;" ng-hide="vm.selected.length>0">(Select songs to remove from list)</span>
-                            <button ng-show="vm.selected.length>0" type="button" class="btn btn-primary btn-md" ng-click="vm.deleteConfirm()">Remove songs from list</button>
-                        </div>
-                    </td>
-                    <td><a class="btn btn-default" st-export>Export to Excel</a></td>
-                    <td colspan="2" class="text-center">
-                        <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    <div class="form-group">
-        <div class="">
-            <button type="submit" class="btn btn-success ">Confirm Update</button>
-            <button type="button" class="btn btn-default" ng-click="vm.cancelEdit()">Cancel</button>
+        <div class="form-group table-component">
+            <a role="button" style="margin-top:20px" class="col-sm-2 btn btn-primary btn-md" ng-click="vm.addSongs()">Add songs</a>
+            <h3 class=" col-sm-10" ng-if="!vm.songlist.songs.length">No Songs Added to {{vm.songlist.songListName}}</h3>
+            <table st-safe-src="vm.songlist.songs" st-table="vm.displayCollection2" on-filter="onFilter" class="table table-striped"
+                ng-if="vm.songlist.songs.length > 0" id="listTable">
+                <thead>
+                    <tr>
+                        <th st-ratio="2" row-select-all="vm.songlist.songs" selected="vm.selected" ng-click="vm.selectAll(vm.songlist.songs)"></th>
+                        <th st-ratio="12"><span st-sort="trackname">Track Name</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                        <th st-ratio="12"><span st-sort="albumname">Album Name</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                        <th st-ratio="12"><span st-sort="artist">Artist</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                        <th st-ratio="12"><span st-sort="artistdesc">Artist Description</span><i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                        <th st-ratio="12"><span st-sort="isrc">ISRC</span><i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    </tr>
+                    <tr ng-show="vm.showFilter">
+                        <th></th>
+                        <th>
+                            <input st-search="trackname" placeholder="search for track name" class="input-sm form-control" type="search" />
+                        </th>
+                        <th>
+                            <input st-search="albumname" placeholder="search for album name" class="input-sm form-control" type="search" />
+                        </th>
+                        <th>
+                            <input st-search="artist" placeholder="search for artist" class="input-sm form-control" type="search" />
+                        </th>
+                        <th>
+                            <input st-search="artistdesc" placeholder="search for artist description" class="input-sm form-control" type="search" />
+                        </th>
+                        <th>
+                            <input st-search="isrc" placeholder="search by ISRC" class="input-sm form-control" type="search" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in vm.displayCollection2" ng-click="vm.toggleSideNav(row)">
+                        <td st-ratio="2" row-select="row" ng-click="vm.select(row.id)"></td>
+                        <td st-ratio="12">{{row.trackname}}</td>
+                        <td st-ratio="12">{{row.albumname}}</td>
+                        <td st-ratio="12">{{row.artist}}</td>
+                        <td st-ratio="12">{{row.artistdesc}}</td>
+                        <td st-ratio="12">{{row.isrc}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" ng-show="vm.displayCollection2.length===0">
+                            Your search query has fetched no results
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">
+                            <div>
+                                <span><strong>{{vm.selected.length}} selected</strong></span>
+                                <span style="font-size:small;" ng-hide="vm.selected.length>0">(Select songs to remove from list)</span>
+                                <button ng-show="vm.selected.length>0" type="button" class="btn btn-primary btn-md" ng-click="vm.deleteConfirm()">Remove songs from list</button>
+                            </div>
+                        </td>
+                        <td><a class="btn btn-default" st-export>Export to Excel</a></td>
+                        <td colspan="2" class="text-center">
+                            <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <side-nav ng-blur="vm.hideFilter()" name="vm.name" visible="vm.visible" alignment="right" data="vm.detailsData" heading="vm.detailsTitle"></side-nav>
         </div>
-    </div>
-</form>
+        <div class="form-group">
+            <div class="">
+                <button type="submit" class="btn btn-success ">Confirm Update</button>
+                <button type="button" class="btn btn-default" ng-click="vm.cancelEdit()">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
