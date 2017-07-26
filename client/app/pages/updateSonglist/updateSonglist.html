@@ -1,4 +1,11 @@
-<div class="container">
-  <h1>Update Songlist!</h1>
-  <songlist-update-form></songlist-update-form>
+<div class="component-wrapper">
+  <div id="componentHeader" class="component-header {{$root.currentUser.role}}-header">
+    <div class="component-title">
+      <span>Update Songlist</span>
+      <span class="component-banner"><img src="app/images/banner_{{$root.currentUser.role}}.png" /></span>
+    </div>
+  </div>
+  <div class="container">
+    <songlist-update-form></songlist-update-form>
+  </div>
 </div>

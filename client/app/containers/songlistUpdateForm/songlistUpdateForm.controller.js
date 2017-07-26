@@ -1,5 +1,5 @@
 class SonglistUpdateFormController {
-    constructor($state, $stateParams, $scope, SongListsService, ModalService, _) {
+    constructor($state, $stateParams, $scope, SongListsService, SongsService, ModalService, _) {
         "ngInject";
         var vm = this;
         this.$state = $state;
@@ -8,7 +8,7 @@ class SonglistUpdateFormController {
 
         this.id = $stateParams.id;
         vm.songlist = {};
-        this.SongListsService.getSongList(this.id).then(function(res) {
+        this.SongListsService.getSongList(this.id).then(function (res) {
             vm.songlist = res;
             vm.displayCollection2 = [].concat(vm.songlist.songs);
             vm.exportListName = vm.songlist.songListName;
@@ -17,6 +17,25 @@ class SonglistUpdateFormController {
         this.itemsByPage = 7;
 
         vm.selected = [];
+
+        vm.toggleSideNav = (data) => {
+            let id = data.id;
+            let tableContainer = document.getElementById('listTable');
+            SongsService.getSong(id).then((res) => {
+                vm.detailsData = res;
+                vm.detailsTitle = vm.detailsData.trackname;
+                vm.name = 'songs';
+                vm.visible = true;
+                vm.detailsData.setTop = () => {
+                    return {
+                        'top': angular.element(tableContainer).prop('offsetTop') + 'px'
+                    };
+                }
+            }, (e) => {
+                vm.visible = false;
+                console.log(e);
+            });
+        }
 
         vm.selectAll = function (collection) {
             var filteredCollection = ($scope.filtered.length > collection.length) ? collection : $scope.filtered;
@@ -36,7 +55,7 @@ class SonglistUpdateFormController {
         }
 
         // Function to get data by selecting a single row
-        vm.select = function(id) {
+        vm.select = function (id) {
             var found = vm.selected.indexOf(id);
 
             if (found == -1)
@@ -45,36 +64,36 @@ class SonglistUpdateFormController {
                 vm.selected.splice(found, 1);
         };
 
-        vm.cancelEdit = function() {
+        vm.cancelEdit = function () {
             this.$state.go('app.songlists');
         };
-        vm.deleteConfirm = function() {
+        vm.deleteConfirm = function () {
             var toDelete = new Set(this.selected);
             var filteredArr = this.songlist.songs.filter(obj => !toDelete.has(obj.id));
             this.songlist.songs = filteredArr;
             this.displayCollection2 = [].concat(this.songlist.songs);
             this.selected = [];
         };
-        vm.updateSonglist = function() {
+        vm.updateSonglist = function () {
             var vm = this;
             if (!this.songlist.songListName) return alert('Song list Name is Required');
 
             if (!this.songlist.songs) {
                 this.songlist.songs = [];
             }
-            this.SongListsService.updateSongList(vm.songlist).then(function(res) {
+            this.SongListsService.updateSongList(vm.songlist).then(function (res) {
                 console.log(res, "response");
                 vm.songlist = {};
 
                 // go to home page, to see our entry
                 vm.$state.go('app.songlists');
-            }).catch(function(err) {
+            }).catch(function (err) {
                 console.log(err, "error");
             });
 
         };
-        vm.toFormat = function(r) {
-            return r.map(function(item) {
+        vm.toFormat = function (r) {
+            return r.map(function (item) {
                 let list = {
                     "Track name": item.trackname,
                     "Album name": item.albumname,
@@ -85,10 +104,10 @@ class SonglistUpdateFormController {
                 return list;
             });
         };
-        vm.addSongs = function() {
+        vm.addSongs = function () {
             var custMod = {
                 size: 'lg',
-                controller: function($scope, $uibModalInstance) {
+                controller: function ($scope, $uibModalInstance) {
                     "ngInject";
                     $scope.sel = [];
                     $scope.songs = [];
@@ -97,13 +116,13 @@ class SonglistUpdateFormController {
                         actionButtonText: 'Add Songs',
                         headerText: 'Add Songs'
                     };
-                    $scope.modalOptions.ok = function(sel, songs) {
+                    $scope.modalOptions.ok = function (sel, songs) {
                         var toAdd = new Set();
-                        sel.forEach(function(s) {
+                        sel.forEach(function (s) {
                             toAdd.add(s);
                         });
 
-                        var filteredArr = songs.filter(function(obj) {
+                        var filteredArr = songs.filter(function (obj) {
                             delete obj.isSelected;
                             return toAdd.has(obj.id);
                         });
@@ -112,7 +131,7 @@ class SonglistUpdateFormController {
                         $uibModalInstance.close(filteredArr);
                         $scope.sel = [];
                     };
-                    $scope.modalOptions.close = function(result) {
+                    $scope.modalOptions.close = function (result) {
                         $uibModalInstance.dismiss('cancel');
                     };
                 },
@@ -129,10 +148,10 @@ class SonglistUpdateFormController {
 				                  data-ng-click="modalOptions.ok(sel,songs);">{{modalOptions.actionButtonText}}</button>
 				        </div>`
             };
-            ModalService.showModal(custMod, {}).then(function(res) {
+            ModalService.showModal(custMod, {}).then(function (res) {
                 vm.songlist.songs = _.uniq(vm.songlist.songs.concat(res), 'isrc');
                 vm.displayCollection2 = [].concat(vm.songlist.songs);
-            }, function(err) {
+            }, function (err) {
                 console.log(err);
             });
         };
