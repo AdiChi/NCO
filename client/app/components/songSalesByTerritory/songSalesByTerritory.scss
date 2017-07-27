@@ -1,0 +1,38 @@
+.reports {
+    .report-criteria {
+        padding: 20px 10px;
+        .left-content {
+            width: 43%;
+            padding-left: 5px;
+            .sales-period {
+                margin-bottom: 25px;
+                .timepicker {
+                    padding-right: 15px;
+                }
+            }
+            .select {
+                padding: 10px 0;
+                .select-label {
+                    padding: 0px;
+                    font-weight: bold;
+                    width: auto;
+                }
+            }
+        }
+        .right-content {
+            border-left: 1px solid #e2e2e5;
+            width: 57%;
+            padding-right: 0px;
+            .territories,
+            .retailers {
+                display: inline-block;
+                p {
+                    font-weight: bold;
+                }
+            }
+            .territories {
+                padding-bottom: 30px;
+            }
+        }
+    }
+}

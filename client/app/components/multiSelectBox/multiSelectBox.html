@@ -1,0 +1,16 @@
+<div class="col-md-12 multi-select-wrapper">
+    <ul class="col-md-5 left-box ">
+        <li ng-repeat="group in vm.itemGroups" ng-click="vm.toggleSelection(group)" ng-class="{'selected': group.selected}">{{group.name}}</li>
+        <li class="seperator " ng-if="vm.showSeperator()">------------------------</li>
+        <li ng-repeat="item in vm.items" ng-click="vm.toggleSelection(item)" ng-class="{'selected': item.selected}">{{item.name}}</li>
+    </ul>
+    <div class="col-md-2 buttons">
+        <a class="btn btn-default" ng-click="vm.addSelected()" ng-disabled="vm.disableAdd()">Add &gt;&gt;</a>
+        <a class="btn btn-default" ng-click="vm.removeSelected()" ng-disabled="vm.disableRemove()">&lt;&lt; Remove</a>
+    </div>
+    <ul class="col-md-5 right-box ">
+        <li ng-repeat="group in vm.selectedItemGroups" ng-click="vm.toggleSelection(group)" ng-class="{'selected': group.selected}">{{group.name}}</li>
+        <li class="seperator" ng-if="vm.showSelectedSeperator() ">------------------------</li>
+        <li ng-repeat="item in vm.selectedItems" ng-click="vm.toggleSelection(item)" ng-class="{'selected': item.selected}">{{item.name}}</li>
+    </ul>
+</div>

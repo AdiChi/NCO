@@ -1,0 +1,31 @@
+.multi-select-wrapper {
+    padding: 0px!important;
+    .left-box,
+    .right-box {
+        list-style-type: none;
+        padding: 0px;
+        width: 200px;
+        background: #fff;
+        height: 200px;
+        overflow: auto;
+        li {
+            cursor: pointer;
+            padding: 5px;
+            &.selected {
+                background: #e2e2e5;
+            }
+        }
+    }
+    .buttons {
+        padding: 0px;
+        margin-top: 60px;
+        width: 110px;
+        a {
+            display: block;
+            margin: 5px;
+            &:hover {
+                background: #fff;
+            }
+        }
+    }
+}

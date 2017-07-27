@@ -1,0 +1,127 @@
+<div class="panel panel-default reports">
+    <div class="panel-heading">
+        <h3 class="panel-title">Song Sales Comparison By Territory/Territory Groups</h3>
+        <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+    </div>
+    <div class="panel-body">
+        <div class="container-fluid">
+            <h4> Select Song or Song List:</h4>
+        </div>
+        <div class="container-fluid outerdiv">
+            <div class="animated zoomInRight">
+                <div class="input-group search-bar">
+                    <input type="text" ng-model="songsearch" ng-model-options="{ debounce: 800 }" ng-click="select" class="form-control" placeholder="Enter at least 3 characters of song name" autofocus />
+                    <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
+                </div>
+                <div id="main-info" class="col-md-4">
+                    <div ng-if="!details">
+                        Loading results...
+                    </div>
+                    <div ng-if="details.songs.length>0">
+                        <ul class="dropdown-menu rel-results" style="display: block;">
+                            <li ng-repeat="song in details.songs">
+                                <a href id="{{ $index + 1 }}" ng-click="updateSong(song)">{{ song.trackname }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-if="details.songs.length==0">
+                        No results found.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <h4 ng-if="selectedSong" class="selectedSong">
+                Selected song: <span style="color: #F5B041">{{selectedSong}}</span>
+            </h4>
+        </div>
+        <div class="container-fluid">
+            <div id="main-info" class="col-md-12 well report-criteria">
+                <div class="col-md-6 left-content">
+                    <div class="sales-period">
+                        <h4>Sales Period</h4>
+                        <div class="dropdown timepicker">
+                            <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
+                                <label>Start Date</label>
+                                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                            </a> {{dateRangeStart| date:"MMM dd, yyyy"}}
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }" data-on-set-time="startDateOnSetTime()" data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+                            </ul>
+                        </div>
+                        <div class="dropdown timepicker">
+                            <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
+                                <label>End Date</label>
+                                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                            </a> {{dateRangeEnd| date:"MMM dd, yyyy"}}
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="dateRangeEnd" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }" data-on-set-time="endDateOnSetTime()" data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                            </ul>
+                        </div>
+                        <p>{{rangediff || 0}} days</p>
+                    </div>
+                    <div class="time-range">
+                        <h4>Time Range</h4>
+                        <span uib-timepicker ng-model="time1" ng-change="updateTStart()" min="todayStart" max="time2" class="timepicker"></span>
+                        <span uib-timepicker ng-model="time2" ng-change="updateTEnd()" min="time1" max="todayEnd" class="timepicker"></span>
+                    </div>
+                    <div class="col-md-12 select">
+                        <div class="col-md-6 select-label">Break Out By Retailer?</div>
+                        <div class="col-md-6">
+                            <select ng-model="vm.breakRetailer">
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 select">
+                        <div class="col-md-6 select-label">Represent Territory Data As:</div>
+                        <div class="col-md-6">
+                            <select ng-model="vm.representation">
+                                <option value="1">Individual Territories</option>
+                                <option value="2">Terrs/Terr Groups</option>
+                                <option value="3">Completely Aggregated</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 right-content">
+                    <div class="territories">
+                        <p>Select Territories/Territory Groups</p>
+                        <multi-select-box item-groups="vm.territoryGroups" items="vm.territories" selected-item-groups="vm.selectedTerritoryGroups" selected-items="vm.selectedTerritories"></multi-select-box>
+                    </div>
+                    <div class="retailers ">
+                        <p>Select Retailers</p>
+                        <multi-select-box items="vm.retailers" selected-items="vm.selectedRetailers"></multi-select-box>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid error-alert ">
+            <div ng-if="songError ">
+                {{songError}}
+            </div>
+            <div ng-if="rangeError ">
+                {{rangeError}}
+            </div>
+            <div ng-if="range1Error ">
+                {{range1Error}}
+            </div>
+            <div ng-if="range2Error ">
+                {{range2Error}}
+            </div>
+            <div ng-if="timeError ">
+                {{timeError}}
+            </div>
+            <div ng-if="sameRangeError ">
+                {{sameRangeError}}
+            </div>
+        </div>
+        <div class="container-fluid ">
+            <button id="confirmSubmit " type="submit " class="btn btn-success " ng-click="getChart() ">Get Information</button>
+        </div>
+    </div>
+</div>
+<div style="color: red; ">
+    {{NoChartError}}
+</div>
