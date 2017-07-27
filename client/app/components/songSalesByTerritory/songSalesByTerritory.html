@@ -88,37 +88,11 @@
                 <div class="col-md-6 right-content">
                     <div class="territories">
                         <p>Select Territories/Territory Groups</p>
-                        <div class="col-md-12 selector">
-                            <ul class="col-md-5 select-box ">
-                                <li ng-repeat="group in vm.territoryGroups" ng-click="vm.toggleSelection(group)" ng-class="{'selected': group.selected}">{{group.name}}</li>
-                                <li class="seperator " ng-if="vm.showSeperator()">------------------------</li>
-                                <li ng-repeat="territory in vm.territories" ng-click="vm.toggleSelection(territory)" ng-class="{'selected': territory.selected}">{{territory.name}}</li>
-                            </ul>
-                            <div class="col-md-2 buttons">
-                                <a class="btn btn-default" ng-click="vm.addSelected('territory')" ng-disabled="vm.disableAdd('territory')">Add &gt;&gt;</a>
-                                <a class="btn btn-default" ng-click="vm.removeSelected('territory')" ng-disabled="vm.disableRemove('territory')">&lt;&lt; Remove</a>
-                            </div>
-                            <ul class="col-md-5 drop-box ">
-                                <li ng-repeat="group in vm.selectedTerritoryGroups" ng-click="vm.toggleSelection(group)" ng-class="{'selected': group.selected}">{{group.name}}</li>
-                                <li class="seperator" ng-if="vm.showSelectedSeperator() ">------------------------</li>
-                                <li ng-repeat=" territory in vm.selectedTerritories" ng-click="vm.toggleSelection(territory)" ng-class="{'selected': territory.selected}">{{territory.name}}</li>
-                            </ul>
-                        </div>
+                        <multi-select-box item-groups="vm.territoryGroups" items="vm.territories" selected-item-groups="vm.selectedTerritoryGroups" selected-items="vm.selectedTerritories"></multi-select-box>
                     </div>
                     <div class="retailers ">
                         <p>Select Retailers</p>
-                        <div class="col-md-12 selector">
-                            <ul class="col-md-5 select-box ">
-                                <li ng-repeat="retailer in vm.retailers" ng-click="vm.toggleSelection(retailer)" ng-class="{'selected': retailer.selected}">{{retailer.name}}</li>
-                            </ul>
-                            <div class="col-md-2 buttons">
-                                <a class="btn btn-default" ng-click="vm.addSelected('retailer')" ng-disabled="vm.disableAdd('retailer')">Add &gt;&gt;</a>
-                                <a class="btn btn-default" ng-click="vm.removeSelected('retailer')" ng-disabled="vm.disableRemove('retailer')">&lt;&lt; Remove</a>
-                            </div>
-                            <ul class="col-md-5 drop-box ">
-                                <li ng-repeat="retailer in vm.selectedRetailers" ng-click="vm.toggleSelection(retailer)" ng-class="{'selected': retailer.selected}">{{retailer.name}}</li>
-                            </ul>
-                        </div>
+                        <multi-select-box items="vm.retailers" selected-items="vm.selectedRetailers"></multi-select-box>
                     </div>
                 </div>
             </div>

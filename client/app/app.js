@@ -15,6 +15,7 @@ import AppComponent from './app.component';
 import NavigationComponent from './components/navigation/navigation';
 import SonglistsListComponent from './components/songlistsList/songlistsList';
 import LogListComponent from './components/logList/logList';
+import MultiSelectBoxComponent from './components/multiSelectBox/multiSelectBox';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
 import SongSalesByTerritoryComponent from './components/songSalesByTerritory/songSalesByTerritory';
 import LoginComponent from './pages/login/login';
@@ -98,6 +99,7 @@ angular
         UsersComponent.name,
         SonglistsListComponent.name,
         SonglistsComponent.name,
+        MultiSelectBoxComponent.name,
         DateOverDateSongComponent.name,
         SongSalesByTerritoryComponent.name,
         ReportsComponent.name,
