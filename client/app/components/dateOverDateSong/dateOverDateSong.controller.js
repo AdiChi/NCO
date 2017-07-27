@@ -89,7 +89,7 @@ class DateOverDateSongController {
             if ($scope.details)
                 delete $scope.details.songs;
             $scope.selectedSong = song.trackname;
-            $scope.query.songId = song.id;
+            $scope.query.songId = song.songid;
             $scope.songError = "";
             console.log($scope.query);
         };
@@ -609,7 +609,7 @@ class DateOverDateSongController {
                 !$scope.sameRangeError &&
                 !$scope.rangeError) {
                 $scope.query.daysInRange = $scope.range1diff;
-                $scope.query.songId = "Y66000000067";
+                //$scope.query.songId = "Y66000000067";
                 $scope.query.breakByRetailer = $scope.brkByRetailer;
                 $scope.query["territory[]"] = $scope.territory || [] /*getAllTerritories()*/ ;
                 $scope.query["retailer[]"] = $scope.retailer || [] /*getAllRetailers()*/ ;
