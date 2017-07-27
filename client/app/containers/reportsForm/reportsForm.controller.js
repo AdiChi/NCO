@@ -1,5 +1,7 @@
 class ReportsFormController {
-    constructor() {
+    constructor($scope) {
+        "ngInject";
+        this.isFilterApplied = false;
         this.allReports = [
             {
                 reportName: "Songs by City Report",
@@ -138,6 +140,23 @@ class ReportsFormController {
                 return list;
             });
         };
+
+        $scope.onFilter = (stCtrl) => {
+            var filteredCols = [], i;
+            var tableState = stCtrl.tableState();
+            if (stCtrl.tableState().search.predicateObject) {
+                if (Object.keys(stCtrl.tableState().search.predicateObject).length > 0) {
+                    this.isFilterApplied = true;
+                    filteredCols = Object.keys(stCtrl.tableState().search.predicateObject);
+                    for (i in filteredCols) {
+                        this['filtered_' + filteredCols[i]] = true;
+                    }
+                }
+                else {
+                    this.isFilterApplied = false;
+                }
+            }
+        }
     }
 }
 
