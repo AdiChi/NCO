@@ -1,12 +1,12 @@
-<table st-safe-src="vm.allReports" st-table="vm.displayCollection"  class="table list-table">
+<table st-safe-src="vm.allReports" st-table="vm.displayCollection" class="table list-table">
     <thead>
         <tr>
             <th>
-                <span st-sort="reportName">Report Name</span> 
+                <span st-sort="reportName">Report Name</span>
                 <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
             </th>
             <th>
-                <span st-sort="sharedReport"> Shared Report (Y/N)</span> 
+                <span st-sort="sharedReport"> Shared Report (Y/N)</span>
                 <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
             </th>
             <th>
@@ -14,7 +14,7 @@
                 <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
             </th>
             <th>
-                <span st-sort="lastRan"> Last Ran</span> 
+                <span st-sort="lastRan"> Last Ran</span>
                 <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
             </th>
             <th>
@@ -24,19 +24,19 @@
         </tr>
         <tr ng-show="showFilter">
             <th>
-                <input st-search="reportName" placeholder="search" class="input-sm form-control" type="search"/>
+                <input st-search="reportName" placeholder="search" class="input-sm form-control" type="search" />
             </th>
             <th>
-                <input st-search="sharedReport" placeholder="search" class="input-sm form-control" type="search"/>
+                <input st-search="sharedReport" placeholder="search" class="input-sm form-control" type="search" />
             </th>
             <th>
-                <input st-search="lastModified" placeholder="search" class="input-sm form-control" type="search"/>
+                <input st-search="lastModified" placeholder="search" class="input-sm form-control" type="search" />
             </th>
             <th>
-                <input st-search="lastRan" placeholder="search" class="input-sm form-control" type="search"/>
+                <input st-search="lastRan" placeholder="search" class="input-sm form-control" type="search" />
             </th>
             <th>
-                <input st-search="dataset" placeholder="search" class="input-sm form-control" type="search"/>
+                <input st-search="dataset" placeholder="search" class="input-sm form-control" type="search" />
             </th>
         </tr>
     </thead>
@@ -50,7 +50,7 @@
         </tr>
         <tr>
             <td colspan="4" ng-show="vm.displayCollection.length===0">
-               Your search query has fetched no results
+                Your search query has fetched no results
             </td>
         </tr>
     </tbody>
