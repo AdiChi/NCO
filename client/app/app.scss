@@ -283,6 +283,53 @@ body {
 }
 
 .distributor-widget {
+
+    .c3-axis {
+
+        .tick line, .domain {
+            display:none;
+        }
+    }
+    .c3-xgrid, .c3-ygrid {
+        stroke-dasharray: 5 0;
+        stroke: #40333c !important;
+    }
+    #chart3 {
+        .c3-xgrid, .c3-ygrid {
+            stroke-dasharray: 5 0;
+            stroke: #40333c;
+        }
+        .c3-area {
+            opacity:1;
+        }
+        .c3-line {
+            stroke: #fff !important;
+        }
+        .c3-circle {
+            fill: #fff !important;
+        }
+    }
+
+    #chart7 {
+        .c3-xgrid, .c3-ygrid {
+            stroke: #40333c;
+            stroke-dasharray: 5 0;
+        }
+        .c3-line {
+            stroke: #fff !important;
+        }
+        .c3-circle {
+            fill: #fff !important;
+        }
+        .c3-chart-lines {
+            .c3-chart-line .c3-area{
+                opacity:1 !important;
+            }
+            .c3-chart-line:not(:first-child) .c3-area{
+                opacity:0.8 !important;
+            }
+        }
+    }
     .c3 line,
     .c3 path {
         stroke: #fff;
