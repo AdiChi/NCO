@@ -1,7 +1,7 @@
 function ReportService($http, config, superCache) {
     "ngInject";
     var baseUrl = config.apiUrl; //change as per need
-    var getHeaders = function () {
+    var getHeaders = function() {
         var headers = {
             'Accept': 'application/json'
         };
@@ -14,28 +14,28 @@ function ReportService($http, config, superCache) {
                 url: `${baseUrl}/searchsongs/${query}`,
                 method: "GET",
                 headers: getHeaders()
-            }).catch(function (error) {
+            }).catch(function(error) {
                 console.log(error);
             });
             return songs;
         },
         getTerritories() {
             var territories = $http.get(`${baseUrl}/nco/territoryList`, { headers: getHeaders() })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.log(error);
                 });
             return territories;
         },
         getTerritoryGroups() {
             var TGs = $http.get(`${baseUrl}/nco/territoryGroupList`, { headers: getHeaders() })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.log(error);
                 });
             return TGs;
         },
         getRetailers() {
             var retailers = $http.get(`${baseUrl}/nco/orgList`, { headers: getHeaders() })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.log(error);
                 });
 
@@ -48,658 +48,68 @@ function ReportService($http, config, superCache) {
                 params: query,
                 headers: getHeaders()
             });
-            /*var chartDetails = Promise.resolve( {
-              data: {
-                  "songid": "Y66000000067",
-                  "daysInRange": 10,
-                  "firstRange": "Jun 1, 2017 to Jun 10, 2017",
-                  "secondRange": "Jul 1, 2017 to Jul 10, 2017",
-                  "salesFirstRange": [
-                    {
-                      "totalsales": 39000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 10, 17"
-                    },
-                    {
-                      "totalsales": 41000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 08, 17"
-                    },
-                    {
-                      "totalsales": 42000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 07, 17"
-                    },
-                    {
-                      "totalsales": 40000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 09, 17"
-                    },
-                    {
-                      "totalsales": 44000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 05, 17"
-                    },
-                    {
-                      "totalsales": 47000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 02, 17"
-                    },
-                    {
-                      "totalsales": 46000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 03, 17"
-                    },
-                    {
-                      "totalsales": 45000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 04, 17"
-                    },
-                    {
-                      "totalsales": 48000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 01, 17"
-                    },
-                    {
-                      "totalsales": 80000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 37000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 43000
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 80000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 42000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 42000
-                        }
-                      ],
-                      "date": "Jun 06, 17"
-                    }
-                  ],
-                  "salesSecondRange": [
-                    {
-                      "totalsales": 14000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 13000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 13000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 18000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 18000
-                        }
-                      ],
-                      "date": "Jul 05, 17"
-                    },
-                    {
-                      "totalsales": 15000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 13000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 13000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 18000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 18000
-                        }
-                      ],
-                      "date": "Jul 04, 17"
-                    },
-                    {
-                      "totalsales": 13000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 13000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 13000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 18000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 18000
-                        }
-                      ],
-                      "date": "Jul 06, 17"
-                    },
-                    {
-                      "totalsales": 16000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 13000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 13000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 18000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 18000
-                        }
-                      ],
-                      "date": "Jul 03, 17"
-                    },
-                    {
-                      "totalsales": 17000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                             "totalSaleTerr": 13000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 13000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 18000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 18000
-                        }
-                      ],
-                      "date": "Jul 02, 17"
-                    },
-                    {
-                      "totalsales": 18000,
-                      "orgRetailerList": [
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 13000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "1",
-                          "name": "Spotify",
-                          "totalSaleRetailer": 13000
-                        },
-                        {
-                          "territoryList": [
-                            {
-                              "id": 46,
-                              "name": "United States",
-                              "totalSaleTerr": 18000
-                            },
-                            {
-                              "id": 47,
-                              "name": "India",
-                              "totalSaleTerr": 0
-                            }
-                          ],
-                          "id": "2",
-                          "name": "iTunes",
-                          "totalSaleRetailer": 18000
-                        }
-                      ],
-                      "date": "Jul 01, 17"
-                    }
-                  ]
+            /*var chartDetails = Promise.resolve({
+                data: {
+                    "songid": "Y66000000995",
+                    "daysInRange": 1,
+                    "firstRange": "Jul 7, 2016 to Jul 7, 2016",
+                    "secondRange": "Jul 7, 2016 to Jul 7, 2016",
+                    "timerange1": "09:00-12:22",
+                    "timerange2": "19:00-22:11",
+                    "salesFirstRange": [{
+                        "totalsales": 2,
+                        "orgRetailerList": [{
+                            "territoryList": [{
+                                "terrSalesByHour": [{
+                                    "totalSalesByHours": 2,
+                                    "terrId": "46",
+                                    "orgId": "2",
+                                    "date": "Thu Jul 07 05:30:00 IST 2016",
+                                    "range": "9 - 12"
+                                }],
+                                "id": 46,
+                                "name": "United States",
+                                "type": "Territory",
+                                "totalSaleTerr": 2
+                            }],
+                            "id": 2,
+                            "name": "iTunes",
+                            "totalSaleRetailer": 2
+                        }],
+                        "date": "Jul 07, 16"
+                    }],
+                    "salesSecondRange": [{
+                        "totalsales": 4,
+                        "orgRetailerList": [{
+                            "territoryList": [{
+                                "terrSalesByHour": [{
+                                        "totalSalesByHours": 1,
+                                        "terrId": "46",
+                                        "orgId": "2",
+                                        "date": "Thu Jul 07 05:30:00 IST 2016",
+                                        "range": "19 - 20"
+                                    },
+                                    {
+                                        "totalSalesByHours": 1,
+                                        "terrId": "46",
+                                        "orgId": "2",
+                                        "date": "Thu Jul 07 05:30:00 IST 2016",
+                                        "range": "17 - 23"
+                                    }
+                                ],
+                                "id": 46,
+                                "name": "United States",
+                                "type": "Territory",
+                                "totalSaleTerr": 2
+                            }],
+                            "id": 2,
+                            "name": "iTunes",
+                            "totalSaleRetailer": 2
+                        }],
+                        "date": "Jul 07, 16"
+                    }]
                 }
-                });*/
+            });*/
             return chartDetails;
         },
         getTimeRangeData() {
@@ -708,8 +118,7 @@ function ReportService($http, config, superCache) {
                     "songid": "Y66000000067",
                     "timerange": "04:00 to 08:00",
                     "date": "Feb 01, 17",
-                    "salesByHour": [
-                        {
+                    "salesByHour": [{
                             "range": "04:00 - 05:00",
                             "sales": 200
                         },
