@@ -39,33 +39,7 @@
             <div class="container-fluid">
                 <div id="main-info" class="col-md-12 well report-criteria">
                     <div class="col-md-6 left-content">
-                        <div class="sales-period">
-                            <h4>Sales Period</h4>
-                            <div class="dropdown timepicker">
-                                <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
-                                    <label>Start Date</label>
-                                    <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
-                                </a> {{vm.dateRangeStart| date:"MMM dd, yyyy"}}
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker data-ng-model="vm.dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }" data-on-set-time="vm.startDateOnSetTime()" data-before-render="vm.startDateBeforeRender($dates)"></datetimepicker>
-                                </ul>
-                            </div>
-                            <div class="dropdown timepicker">
-                                <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
-                                    <label>End Date</label>
-                                    <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
-                                </a> {{vm.dateRangeEnd| date:"MMM dd, yyyy"}}
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker data-ng-model="vm.dateRangeEnd" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }" data-on-set-time="vm.endDateOnSetTime()" data-before-render="vm.endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
-                                </ul>
-                            </div>
-                            {{vm.rangediff || 0}} days
-                        </div>
-                        <div class="time-range">
-                            <h4>Time Range</h4>
-                            <span uib-timepicker ng-model="vm.time1" ng-change="vm.updateTStart()" min="vm.todayStart" max="vm.time2" class="timepicker"></span>
-                            <span uib-timepicker ng-model="vm.time2" ng-change="vm.updateTEnd()" min="vm.time1" max="vm.todayEnd" class="timepicker"></span>
-                        </div>
+                        <date-time-range range="vm.range"></date-time-range>
                         <div class="col-md-12 select">
                             <div class="col-md-6 select-label">Break Out By Retailer?</div>
                             <div class="col-md-6">

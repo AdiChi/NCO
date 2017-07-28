@@ -191,8 +191,9 @@ class DateOverDateSongController {
             }
         };
 
-        $scope.toggleMap = function (data) {
-            let results = {}, mapObject = [];
+        $scope.toggleMap = function(data) {
+            let results = {},
+                mapObject = [];
             $scope.showNoData = false;
             results = $scope.calculateTotal(data)
 

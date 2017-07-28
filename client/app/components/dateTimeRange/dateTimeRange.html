@@ -1,0 +1,27 @@
+<div class="sales-period">
+    <h4>Sales Period</h4>
+    <div class="dropdown timepicker">
+        <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
+            <label>Start Date</label>
+            <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+        </a> {{vm.range.startDate| date:"MMM dd, yyyy"}}
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <datetimepicker data-ng-model="vm.range.startDate" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }" data-on-set-time="vm.startDateOnSetTime()" data-before-render="vm.startDateBeforeRender($dates)"></datetimepicker>
+        </ul>
+    </div>
+    <div class="dropdown timepicker">
+        <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
+            <label>End Date</label>
+            <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+        </a> {{vm.range.endDate| date:"MMM dd, yyyy"}}
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <datetimepicker data-ng-model="vm.range.endDate" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }" data-on-set-time="vm.endDateOnSetTime()" data-before-render="vm.endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+        </ul>
+    </div>
+    {{vm.range.dateDiff || 0}} days
+</div>
+<div class="time-range">
+    <h4>Time Range</h4>
+    <span uib-timepicker ng-model="vm.range.startTime" min="vm.todayStart" max="vm.range.endTime" class="timepicker"></span>
+    <span uib-timepicker ng-model="vm.range.endTime" min="vm.range.startTime" max="vm.todayEnd" class="timepicker"></span>
+</div>
