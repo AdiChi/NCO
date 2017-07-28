@@ -140,6 +140,14 @@
         .distributor-block {
             background-color: #261521;
             color: #FFFFFF;
+            .widget-info-wrapper {
+                border: 1px solid #40333c;
+                border-left:none;
+                border-right:none;
+                .widget-info {
+                    border-right:1px solid #40333c;
+                }
+            }
             .expenses {
                 background: #fba700;
                 color: #151517;
