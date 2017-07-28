@@ -17,6 +17,7 @@ import SonglistsListComponent from './components/songlistsList/songlistsList';
 import LogListComponent from './components/logList/logList';
 import MultiSelectBoxComponent from './components/multiSelectBox/multiSelectBox';
 import DateTimeRangeComponent from './components/dateTimeRange/dateTimeRange';
+import SelectSongComponent from './components/selectSong/selectSong';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
 import SongSalesByTerritoryComponent from './components/songSalesByTerritory/songSalesByTerritory';
 import LoginComponent from './pages/login/login';
@@ -102,6 +103,7 @@ angular
         SonglistsComponent.name,
         MultiSelectBoxComponent.name,
         DateTimeRangeComponent.name,
+        SelectSongComponent.name,
         DateOverDateSongComponent.name,
         SongSalesByTerritoryComponent.name,
         ReportsComponent.name,

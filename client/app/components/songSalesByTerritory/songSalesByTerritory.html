@@ -9,31 +9,11 @@
                 <h4> Select Song or Song List:</h4>
             </div>
             <div class="container-fluid outerdiv">
-                <div class="animated zoomInRight">
-                    <div class="input-group search-bar">
-                        <input type="text" ng-model="songSearch" ng-model-options="{ debounce: 800 }" class="form-control" placeholder="Enter at least 3 characters of song name" autofocus />
-                        <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
-                    </div>
-                    <div id="main-info" class="col-md-4">
-                        <div ng-if="!vm.details">
-                            Loading results...
-                        </div>
-                        <div ng-if="vm.details.songs.length>0">
-                            <ul class="dropdown-menu rel-results" style="display: block;">
-                                <li ng-repeat="song in vm.details.songs">
-                                    <a href id="{{ $index + 1 }}" ng-click="vm.updateSong(song)">{{ song.trackname }}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div ng-if="vm.details.songs.length==0">
-                            No results found.
-                        </div>
-                    </div>
-                </div>
+                <select-song selected-song="vm.selectedSong"></select-song>
             </div>
             <div class="container-fluid">
                 <h4 ng-if="vm.selectedSong" class="selectedSong">
-                    Selected song: <span style="color: #F5B041">{{vm.selectedSong}}</span>
+                    Selected song: <span style="color: #F5B041">{{vm.selectedSong.trackname}}</span>
                 </h4>
             </div>
             <div class="container-fluid">

@@ -11,7 +11,6 @@ class SongSalesByTerritoryController {
         this.mapData = [];
         this.currentChartType = "bar";
         this.query = {};
-        this.details = {};
         this.displayCollection = [];
         this.range = {};
 
@@ -45,31 +44,6 @@ class SongSalesByTerritoryController {
                 $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
             }
         };
-
-        this.updateSong = function(song) {
-            if (this.details)
-                delete this.details.songs;
-            this.selectedSong = song.trackname;
-            this.query.songId = song.id;
-            this.songError = "";
-        };
-
-        this.fetchSongs = function(name) {
-            ReportService.getSongsBySearch(name)
-                .then((response) => {
-                    this.details.songs = response.data;
-                });
-        };
-
-        $scope.$watch('songSearch', (name) => {
-            if (name && name.length >= 3) {
-                this.fetchSongs(name);
-            } else if (name && name.length === 0) {
-                this.details = {
-                    songs: []
-                };
-            }
-        });
 
         //----Code for Charts-----//
         this.changeChartType = function(type, typeOld) {
@@ -311,7 +285,7 @@ class SongSalesByTerritoryController {
         }
 
         this.getChart = function() {
-            console.log(this.range);
+            console.log(this.selectedSong);
             return;
             // this.theChart = null;
             // this.showHeatMap = false;
