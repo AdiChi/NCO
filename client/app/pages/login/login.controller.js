@@ -5,6 +5,7 @@ class LoginController {
         this.name = 'login';
         $('#leftNav').hide();
         $('#navigationMenu').hide();
+        $('#navigationMenuButton').hide();
         $('#footer').hide();
         UtilService.clearSession();
 

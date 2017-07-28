@@ -4,6 +4,7 @@ class DashboardController {
         this.name = 'dashboard';
         $('#leftNav').show();
         $('#navigationMenu').show();
+        $('#navigationMenuButton').show();
         $('#footer').show();
         this.dashboard = ($rootScope.currentUser) ? $rootScope.currentUser.dashboard : {};
     }
