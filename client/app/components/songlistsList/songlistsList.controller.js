@@ -19,18 +19,22 @@ class SonglistsListController {
 
             if (me.name == 'songs') {
                 let id = row.id;
-                // var res = SongsService.getSong();
-                // me.detailsData = res;
-                // me.detailsTitle = me.detailsData.trackname;
-                // me.visible = true;
+                var top = 0;
 
                 SongsService.getSong(id).then((res) => {
                     me.detailsData = res;
                     me.detailsTitle = me.detailsData.trackname;
                     me.visible = true;
+                    if ($window.scrollY > 0) {
+                        top = '50px';
+                    }
+                    else {
+                        top = '106px';
+                    }
+
                     me.detailsData.setTop = () => {
                         return {
-                            'top': angular.element(tableContainer).prop('offsetTop') + 'px'
+                            'top': top
                         };
                     }
                 }, (e) => {
@@ -45,9 +49,16 @@ class SonglistsListController {
                     me.detailsData = res;
                     me.detailsTitle = me.detailsData.artistName;
                     me.visible = true;
+                    if ($window.scrollY > 0) {
+                        top = '50px';
+                    }
+                    else {
+                        top = '106px';
+                    }
+
                     me.detailsData.setTop = () => {
                         return {
-                            'top': angular.element(tableContainer).prop('offsetTop') + 'px'
+                            'top': top
                         };
                     }
                 }, (e) => {

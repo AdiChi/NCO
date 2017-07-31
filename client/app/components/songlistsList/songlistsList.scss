@@ -7,12 +7,7 @@
     background: aliceblue;
     color: black;
 }
-songlists-list .table.list-table {
-    cursor: default;
-    &>thead>tr>th, tbody tr, tbody td {
-        cursor: default;
-    }
-}
+
 .table.list-table {
     position: relative;
     thead {
@@ -51,6 +46,14 @@ songlists-list .table.list-table {
         .fa-pencil {
             cursor: pointer;
             text-align: center;
+        }
+    }
+    &.songlist-table{
+        tbody tr{
+            cursor: default;
+            &::hover{
+                background-color: #fff;
+            }
         }
     }
 }
