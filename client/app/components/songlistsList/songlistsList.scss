@@ -7,7 +7,12 @@
     background: aliceblue;
     color: black;
 }
-
+songlists-list .table.list-table {
+    cursor: default;
+    &>thead>tr>th, tbody tr, tbody td {
+        cursor: default;
+    }
+}
 .table.list-table {
     position: relative;
     thead {

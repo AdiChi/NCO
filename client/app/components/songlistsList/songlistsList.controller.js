@@ -98,7 +98,7 @@ class SonglistsListController {
         }
 
         this.displayCollection = [].concat(this.songlistslist);
-        this.itemsByPage = 20;
+        this.itemsByPage = 10;
         this.deleteSonglist = function (id) {
             var modalOptions = {
                 closeButtonText: 'No',
