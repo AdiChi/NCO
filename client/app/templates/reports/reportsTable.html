@@ -1,70 +1,65 @@
-<div st-safe-src="vm.allReports" st-table="vm.displayCollection" on-filter="onFilter">
-    <div class="clear-filters text-right">
-        <a st-reset-filter href="javascript:void(0);" ng-disabled="!vm.isFilterApplied"><i class="fa fa-ban" aria-hidden="true"></i> Clear Filters</a>
-    </div>
-    <table class="table list-table">
-        <thead>
-            <tr>
-                <th st-ratio="40">
-                    <span st-sort="reportName">Report Name</span>
-                    <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
-                </th>
-                <th st-ratio="18">
-                    <span st-sort="sharedReport"> Shared Report (Y/N)</span>
-                    <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
-                </th>
-                <th st-ratio="15">
-                    <span st-sort="lastModified"> Last Modified </span>
-                    <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
-                </th>
-                <th st-ratio="12" st-ratio="25">
-                    <span st-sort="lastRan"> Last Ran</span>
-                    <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
-                </th>
-                <th st-ratio="15">
-                    <span st-sort="dataset">Dataset </span>
-                    <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
-                </th>
-            </tr>
-            <tr ng-show="showFilter">
-                <th>
-                    <input st-search="reportName" placeholder="search" class="input-sm form-control" type="search" />
-                </th>
-                <th>
-                    <input st-search="sharedReport" placeholder="search" class="input-sm form-control" type="search" />
-                </th>
-                <th>
-                    <input st-search="lastModified" placeholder="search" class="input-sm form-control" type="search" />
-                </th>
-                <th>
-                    <input st-search="lastRan" placeholder="search" class="input-sm form-control" type="search" />
-                </th>
-                <th>
-                    <input st-search="dataset" placeholder="search" class="input-sm form-control" type="search" />
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="row in vm.displayCollection">
-                <td st-ratio="40"><strong><a target="_blank" href="#!/app/{{row.url}}">{{row.reportName}}</a></strong></td>
-                <td st-ratio="18">{{row.sharedReport}}</td>
-                <td st-ratio="15">{{row.lastModified}}</td>
-                <td st-ratio="12">{{row.lastRan}}</td>
-                <td st-ratio="15">{{row.dataset}}</td>
-            </tr>
-            <tr>
-                <td colspan="4" ng-show="vm.displayCollection.length===0">
-                    Your search query has fetched no results
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td><a class="btn btn-default export" st-export>Export to Excel</a></td>
-                <td colspan="5" class="text-center">
-                    <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+<table st-safe-src="vm.allReports" st-table="vm.displayCollection" class="table list-table">
+    <thead>
+        <tr>
+            <th>
+                <span st-sort="reportName">Report Name</span>
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
+            <th>
+                <span st-sort="sharedReport"> Shared Report (Y/N)</span>
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
+            <th>
+                <span st-sort="lastModified"> Last Modified </span>
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
+            <th>
+                <span st-sort="lastRan"> Last Ran</span>
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
+            <th>
+                <span st-sort="dataset">Dataset </span>
+                <i ng-click="showFilter=showFilter?false:true" class="fa" ng-class="!showFilter ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+            </th>
+        </tr>
+        <tr ng-show="showFilter">
+            <th>
+                <input st-search="reportName" placeholder="search" class="input-sm form-control" type="search" />
+            </th>
+            <th>
+                <input st-search="sharedReport" placeholder="search" class="input-sm form-control" type="search" />
+            </th>
+            <th>
+                <input st-search="lastModified" placeholder="search" class="input-sm form-control" type="search" />
+            </th>
+            <th>
+                <input st-search="lastRan" placeholder="search" class="input-sm form-control" type="search" />
+            </th>
+            <th>
+                <input st-search="dataset" placeholder="search" class="input-sm form-control" type="search" />
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in vm.displayCollection">
+            <td><strong><a target="_blank" href="#!/app/{{row.url}}">{{row.reportName}}</a></strong></td>
+            <td>{{row.sharedReport}}</td>
+            <td>{{row.lastModified}}</td>
+            <td>{{row.lastRan}}</td>
+            <td>{{row.dataset}}</td>
+        </tr>
+        <tr>
+            <td colspan="4" ng-show="vm.displayCollection.length===0">
+                Your search query has fetched no results
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><a class="btn btn-default export" st-export>Export to Excel</a></td>
+            <td colspan="5" class="text-center">
+                <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
