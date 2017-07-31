@@ -6,6 +6,9 @@ class DateOverDateSongController {
         $scope.territories = [];
         $scope.territoryGroups = [];
         $scope.retailers = [];
+        $scope.selectedTG = [];
+        $scope.selectedRet = [];
+        $scope.selectedTer = [];
         $scope.brkByRetailer = false;
         $scope.brkByTerritory = false;
         $scope.showHeatMap = false;
@@ -371,21 +374,23 @@ class DateOverDateSongController {
             console.log(chartObj);
             $scope.theChart2 = chartObj;
         };
-        $scope.onSelectTerritory = function() {
+        $scope.$watch('selectedTer', function(name) {
             $scope.territory = $scope.selectedTer.map(function(terr) {
                 return terr.id;
             });
-        };
-        $scope.onSelectTerritoryGroup = function() {
+        });
+        $scope.$watch('selectedTG', function(name) {
             $scope.territoryGroup = $scope.selectedTG.map(function(tg) {
                 return tg.id;
             });
-        };
-        $scope.onSelectRetailer = function() {
+        });
+
+        $scope.$watch('selectedRet', function(name) {
             $scope.retailer = $scope.selectedRet.map(function(retailer) {
                 return retailer.id;
             });
-        };
+        });
+        
         /*function getAllRetailers() {
             $scope.retailer = $scope.retailers.map(function (r) {
                 return r.id;
@@ -594,6 +599,8 @@ class DateOverDateSongController {
                 firstRange = "Range 1 ("+$scope.getTimeRangeInFormat($scope.chart.timerange1) + ")";
                 secondRange = "Range 2 ("+$scope.getTimeRangeInFormat($scope.chart.timerange2) + ")";
                 $scope.tilt= "45";
+            } else {
+                $scope.tilt= "90";
             }
 
             for (var i = 0; i < $scope.chart.salesFirstRange.length; i++) {
