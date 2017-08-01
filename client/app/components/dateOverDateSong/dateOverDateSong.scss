@@ -52,8 +52,9 @@
 }
 
 .loader {
-    position: absolute;
+    position: relative;
     left: 50%;
+    top:20px;
     border: 10px solid #f3f3f3;
     /* Light grey */
     border-top: 10px solid #F5B041;

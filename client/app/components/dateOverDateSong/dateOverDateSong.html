@@ -269,7 +269,7 @@
                     <table class="table table-hover table-responsive">
                         <tbody ng-init="showTab={};showRet={};">
                             <tr class="tab-head">
-                                <th>Sales Period 1 ({{chart.firstRange}})</th>
+                                <th>Sales Period 1 ({{chart.firstRange}})({{getTimeRangeInFormat(chart.timerange1)}})</th>
                                 <th>Sales</th>
                             </tr>
                             <tr ng-repeat-start="(key, value) in range1sales">
@@ -334,7 +334,7 @@
                     <table st-table="vm.displayCollection" class="table table-hover table-responsive">
                         <tbody ng-init="showTab={};showRet={};">
                             <tr class="tab-head">
-                                <th>Sales Period 2 ({{chart.secondRange}})</th>
+                                <th>Sales Period 2 ({{chart.secondRange}})({{getTimeRangeInFormat(chart.timerange2)}})</th>
                                 <th>Sales</th>
                             </tr>
                             <tr ng-repeat-start="(key, value) in range2sales">
@@ -397,7 +397,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td><a class="btn btn-default" st-export>Export to Excel</a></td>
+                                <td style="border-top: none;"><a class="btn btn-default" st-export>Export to Excel</a></td>
                             </tr>
                         </tfoot>
                     </table>
