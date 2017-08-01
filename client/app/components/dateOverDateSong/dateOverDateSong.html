@@ -95,16 +95,15 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid territories-retailers">
-                <multiselect ng-model="selectedTer" options="territories" id-prop="id" display-prop="name" show-search="true" labels="territoryLabels"
-                    show-select-all="true" show-unselect-all="true" class="col-md-4" ng-change="onSelectTerritory()"> </multiselect>
-                <multiselect ng-model="selectedTG" options="territoryGroups" id-prop="id" display-prop="name" show-search="true" labels="territoryGroupLabels"
-                    show-select-all="true" show-unselect-all="true" class="col-md-4" ng-change="onSelectTerritoryGroup()"> </multiselect>
-                <multiselect ng-model="selectedRet" options="retailers" id-prop="id" display-prop="name" show-search="true" labels="retailerLabels"
-                    show-select-all="true" show-unselect-all="true" class="col-md-4" ng-change="onSelectRetailer()"> </multiselect>
-                <!-- <div class="col-md-3" ng-if="selectedRet.length!== 1">
-              <label><input type="checkbox" ng-model="brkByRetailer">Break out by Retailer</label>
-            </div> -->
+            <div class="container-fluid">
+                <div class="col-md-6 well">
+                    <label>Select Territory Groups/Territories</label>
+                    <multi-select-box item-groups="territoryGroups" items="territories" selected-item-groups="selectedTG" selected-items="selectedTer"></multi-select-box>
+                </div>
+                <div class="col-md-6 well">
+                    <label>Select Retailers</label>
+                    <multi-select-box items="retailers" selected-items="selectedRet"></multi-select-box>
+                </div>
             </div>
             <div class="container-fluid error-alert">
                 <div ng-if="songError">

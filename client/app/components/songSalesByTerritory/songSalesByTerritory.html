@@ -1,0 +1,74 @@
+<div class="report-panel" ng-init="vm.initializeData()">
+    <div class="panel panel-default reports">
+        <div class="panel-heading {{$root.currentUser.role}}-heading">
+            <h3 class="panel-title">Song Sales Comparison By Territory/Territory Groups</h3>
+            <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body">
+            <div class="container-fluid">
+                <h4> Select Song or Song List:</h4>
+            </div>
+            <div class="container-fluid outerdiv">
+                <select-song selected-song="vm.selectedSong"></select-song>
+            </div>
+            <div class="container-fluid">
+                <h4 ng-if="vm.selectedSong" class="selectedSong">
+                    Selected song: <span style="color: #F5B041">{{vm.selectedSong.trackname}}</span>
+                </h4>
+            </div>
+            <div class="container-fluid">
+                <div id="main-info" class="col-md-12 well report-criteria">
+                    <div class="col-md-6 left-content">
+                        <date-time-range range="vm.range"></date-time-range>
+                        <div class="col-md-12 select">
+                            <div class="col-md-6 select-label">Break Out By Retailer?</div>
+                            <div class="col-md-6">
+                                <select ng-model="vm.brkByRetailer">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 select">
+                            <div class="select-label">Represent Territory Data As:</div>
+                            <div class="represent">
+                                <select ng-model="vm.representation">
+                                    <option value="1">Individual Territories</option>
+                                    <option value="2">Terrs/Terr Groups Exactly As Selected</option>
+                                    <option value="3">Completely Aggregated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 right-content">
+                        <div class="territories">
+                            <p>Select Territories/Territory Groups</p>
+                            <multi-select-box item-groups="vm.territoryGroups" items="vm.territories" selected-item-groups="vm.selectedTerritoryGroups" selected-items="vm.selectedTerritories"></multi-select-box>
+                        </div>
+                        <div class="retailers ">
+                            <p>Select Retailers</p>
+                            <multi-select-box items="vm.retailers" selected-items="vm.selectedRetailers"></multi-select-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid error-alert ">
+                <div ng-if="songError ">
+                    {{vm.songError}}
+                </div>
+                <div ng-if="rangeError ">
+                    {{vm.rangeError}}
+                </div>
+                <div ng-if="timeError ">
+                    {{vm.timeError}}
+                </div>
+            </div>
+            <div class="container-fluid ">
+                <button id="confirmSubmit " type="submit " class="btn btn-success " ng-click="vm.getChart() ">Get Information</button>
+            </div>
+        </div>
+    </div>
+    <div style="color: red; ">
+        {{vm.NoChartError}}
+    </div>
+</div>

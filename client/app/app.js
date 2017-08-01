@@ -15,7 +15,11 @@ import AppComponent from './app.component';
 import NavigationComponent from './components/navigation/navigation';
 import SonglistsListComponent from './components/songlistsList/songlistsList';
 import LogListComponent from './components/logList/logList';
+import MultiSelectBoxComponent from './components/multiSelectBox/multiSelectBox';
+import DateTimeRangeComponent from './components/dateTimeRange/dateTimeRange';
+import SelectSongComponent from './components/selectSong/selectSong';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
+import SongSalesByTerritoryComponent from './components/songSalesByTerritory/songSalesByTerritory';
 import LoginComponent from './pages/login/login';
 import DashboardComponent from './pages/dashboard/dashboard';
 import SideNavComponent from './components/sideNav/sideNav';
@@ -98,7 +102,11 @@ angular
         UsersComponent.name,
         SonglistsListComponent.name,
         SonglistsComponent.name,
+        MultiSelectBoxComponent.name,
+        DateTimeRangeComponent.name,
+        SelectSongComponent.name,
         DateOverDateSongComponent.name,
+        SongSalesByTerritoryComponent.name,
         ReportsComponent.name,
         SideNavComponent.name,
         FilterComponent.name
@@ -180,6 +188,10 @@ angular
             .state('app.dateOverDateSong', {
                 url: '/dateOverDateSong',
                 template: '<date-over-date-song></date-over-date-song>'
+            })
+            .state('app.songSalesByTerritory', {
+                url: '/songSalesByTerritory',
+                template: '<song-sales-by-territory></song-sales-by-territory>'
             });
 
         $urlRouterProvider.otherwise('/app/');

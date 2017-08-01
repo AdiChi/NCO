@@ -25,7 +25,7 @@ class ReportsFormController {
                 lastModified: "06/05/2017",
                 lastRan: "12/05/2017",
                 dataset: "Tableau - Historical",
-                url: "reports"
+                url: "songSalesByTerritory"
             },
             {
                 reportName: "Songs Comparison Date Over Date Report",
