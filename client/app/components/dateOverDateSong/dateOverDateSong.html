@@ -184,7 +184,7 @@
             </div>
             <div class="container-fluid" ng-if="!theChart && chart && !showHeatMap" style="padding-top:30px">
                 {{selectedSong}}
-                <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
+                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
                     show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections"
                     ng-if="!showHeatMap">
                     <chart-size chart-height="700" />
@@ -200,7 +200,7 @@
                 </c3chart>
             </div>
             <div class="container-fluid" ng-show="theChart && !showHeatMap" style="padding-top:30px">
-                <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
+                <c3chart  padding-right="60" bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
                     show-subchart="true" callback-function="handleCallback2" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
                     <chart-size chart-height="700" />
