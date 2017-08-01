@@ -31,6 +31,9 @@ body {
     width: 1080px;
 }
 
+ul.pagination li a {
+    color: #000;
+}
 .navbar-default {
     &.navMain {
         background: #2C3E50;

@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="container-fluid">
-                <h4 ng-if="selectedSong" class="selectedSong">
+                <h4 ng-if="selectedSong" class="selectedSong {{$root.currentUser.role}}-heading">
                     Selected song: <span style="color: #F5B041">{{selectedSong}}</span>
                 </h4>
             </div>

@@ -181,8 +181,21 @@
 }
 
 .selectedSong {
-    background: #172a3a;
     color: white;
     padding: 5px 10px;
     border-radius: 15px;
+    &.distributor-heading{
+        background-color: #230118;
+        color: #b9babd;
+    }
+    &.artist-heading{
+        background-color: #1a1c22;
+        color: #b9babd;
+    }
+
+    &.analyst-heading{
+        background-color: #01172d;
+        color: #b9babd;
+    }
+
 }
