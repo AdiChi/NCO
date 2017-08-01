@@ -508,7 +508,7 @@ function LoginService($filter) {
                             }
                         }
                     }
-                    /*, {
+                    , {
                                     header: 'Haunt Me (instrumental) - [Jul 1 - Jul 5]',
                                     info: {
                                         totalSales: '7,676',
@@ -533,10 +533,10 @@ function LoginService($filter) {
                                     },
                                     setWidth: function() {
                                         return {
-                                            'width': '22%'
+                                            'width': '30.5%'
                                         }
                                     }
-                                }*/
+                                }
                     , {
                         header: 'A Fine Day for Sailing [Jun 1 - Jun 5], [Jul 1 - Jul 5]',
                         info: {
