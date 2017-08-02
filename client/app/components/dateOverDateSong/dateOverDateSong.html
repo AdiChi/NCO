@@ -90,8 +90,8 @@
                     {{range2diff || 0}} days
                     <div>
                         <h4>Time Range 2</h4>
-                        <span uib-timepicker ng-model="r2time1" ng-change="updateR2TStart()" min="todayStart" max="r2time2" class="timepicker"></span>
-                        <span uib-timepicker ng-model="r2time2" ng-change="updateR2TEnd()" min="r2time1" max="todayEnd" class="timepicker"></span>
+                        <span uib-timepicker ng-model="time3" ng-change="updateR2TStart()" min="todayStart" max="time4" class="timepicker"></span>
+                        <span uib-timepicker ng-model="time4" ng-change="updateR2TEnd()" min="time3" max="todayEnd" class="timepicker"></span>
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@
                     <chart-axis>
                         <chart-axis-x axis-position="outer-center" axis-type="category" />
                         <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-                        <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                        <chart-axis-x-tick tick-rotate="{{tilt}}" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="inset" />
                 </c3chart>
@@ -222,7 +222,7 @@
             </div>
         </div>
         <div ng-if="chart && drilldown">
-            <label style="padding-left: 10px;"><input type="checkbox" ng-model="timewise">Break out sales by hour</label>
+            <!-- <label style="padding-left: 10px;"><input type="checkbox" ng-model="timewise">Break out sales by hour</label>
             <div class="container drilldown" ng-if="timewise">
                 <h3 class="tab-head">Sales by hour</h3>
                 <h4>{{selectedSong}}</h4>
@@ -262,7 +262,7 @@
                         </tr>
                     </table>
                 </div>
-            </div>
+            </div> -->
             <div class="container drilldown" ng-if=" !timewise">
                 <h3 class="tab-head">Sales</h3>
                 <h4>{{selectedSong}}</h4>
@@ -306,7 +306,7 @@
                                     Sales
                                 </td>
                             </tr>
-                            <tr ng-repeat="ter in ret.territoryList" ng-repeat-end ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <tr ng-repeat-start="ter in ret.territoryList" ng-show="showTab[value.date] && showRet[value.date][ret.name]">
                                 <td>
                                     <i style="padding-left: 65px"></i> {{ter.name}}
                                 </td>
@@ -314,6 +314,15 @@
                                     {{ter.totalSaleTerr}}
                                 </td>
                             </tr>
+                            <tr ng-repeat="time in ter.terrSalesByHour" ng-repeat-end ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                                <td>
+                                    <i style="padding-left: 85px"></i> {{getTimeRangeInFormat(time.range)}}
+                                </td>
+                                <td>
+                                    {{time.totalSalesByHours}}
+                                </td>
+                            </tr>
+                            <tr ng-repeat-end></tr>
                             <tr ng-repeat-end></tr>
                             <tr class="tab-head">
                                 <td><strong>Total Sales</strong></td>
@@ -362,13 +371,23 @@
                                     Sales
                                 </td>
                             </tr>
-                            <tr ng-repeat="ter in ret.territoryList" ng-repeat-end ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <tr ng-repeat-start="ter in ret.territoryList" ng-show="showTab[value.date] && showRet[value.date][ret.name]">
                                 <td>
                                     <i style="padding-left: 65px"></i> {{ter.name}}
                                 </td>
                                 <td>
                                     {{ter.totalSaleTerr}}
                                 </td>
+                            </tr>
+                            <tr ng-repeat="time in ter.terrSalesByHour" ng-repeat-end ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                                <td>
+                                    <i style="padding-left: 85px"></i> {{getTimeRangeInFormat(time.range)}}
+                                </td>
+                                <td>
+                                    {{time.totalSalesByHours}}
+                                </td>
+                            </tr>
+                            <tr ng-repeat-end>
                             </tr>
                             <tr ng-repeat-end>
                             </tr>

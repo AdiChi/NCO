@@ -6,9 +6,9 @@ let multiSelectBoxComponent = {
     restrict: 'E',
     bindings: {
         items: '<',
-        selectedItems: '<',
+        selectedItems: '=',
         itemGroups: '<',
-        selectedItemGroups: '<'
+        selectedItemGroups: '='
     },
     template,
     controller,
