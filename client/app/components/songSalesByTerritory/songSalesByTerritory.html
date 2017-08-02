@@ -53,13 +53,13 @@
                 </div>
             </div>
             <div class="container-fluid error-alert ">
-                <div ng-if="songError ">
+                <div ng-if="vm.songError ">
                     {{vm.songError}}
                 </div>
-                <div ng-if="rangeError ">
+                <div ng-if="vm.rangeError ">
                     {{vm.rangeError}}
                 </div>
-                <div ng-if="timeError ">
+                <div ng-if="vm.timeError ">
                     {{vm.timeError}}
                 </div>
             </div>
@@ -70,5 +70,63 @@
     </div>
     <div style="color: red; ">
         {{vm.NoChartError}}
+    </div>
+    <div class="loader" ng-if="vm.loading"></div>
+    <div ng-if="!vm.loading">
+        <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:30px">
+            <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections">
+                <chart-size chart-height="650" />
+                <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
+                <!-- <chart-bar ratio="0.5" /> -->
+                <chart-axes values-x="x" />
+                <chart-axis>
+                    <chart-axis-x axis-position="outer-center" axis-type="category" />
+                    <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                    <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                </chart-axis>
+                <chart-legend legend-position="inset" />
+            </c3chart>
+        </div>
+        <div class="container-fluid" ng-if="vm.theChart" style="padding-top:30px">
+            <div class="container-fluid">
+                <div class="col-md-7 graph-type-labels">
+                    <a class="btn btn-primary" ng-class="{'active': chartType.isActive}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>
+                </div>
+            </div>
+            <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px">
+                {{selectedSong}}
+                <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
+                    ng-if="!vm.showHeatMap">
+                    <chart-size chart-height="700" />
+                    <chart-tooltip show-tooltip="true" />
+                    <!-- <chart-bar ratio="0.5" /> -->
+                    <chart-axes values-x="x" />
+                    <chart-axis>
+                        <chart-axis-x axis-position="outer-center" axis-type="category" />
+                        <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                        <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                    </chart-axis>
+                    <chart-legend legend-position="inset" />
+                </c3chart>
+            </div>
+            <div class="container-fluid" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px">
+                <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback2" empty-label="No data available for above selections">
+                    <chart-tooltip show-tooltip="true" />
+                    <chart-size chart-height="700" />
+                    <!-- <chart-bar ratio="0.5" /> -->
+                    <chart-axes values-x="x" />
+                    <chart-axis>
+                        <chart-axis-x axis-position="outer-center" axis-type="category" />
+                        <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                        <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                    </chart-axis>
+                    <chart-legend legend-position="inset" />
+                </c3chart>
+            </div>
+            <div class="container-fluid" id="world-map" ng-if="vm.showHeatMap">
+                <div datamap data="vm.heatMapData" id="world-map-container" show-heat-map="vm.showHeatMap" ng-if="!vm.showNoData"> </div>
+                <div ng-if="vm.showNoData" class="no-map-data">No data available for heatmap for the selected Date Range</div>
+            </div>
+        </div>
     </div>
 </div>

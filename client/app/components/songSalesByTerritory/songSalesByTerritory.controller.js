@@ -2,6 +2,14 @@ class SongSalesByTerritoryController {
     constructor($scope, $filter, ReportService) {
         'ngInject'
 
+        this.chartTypes = [
+            { name: "heatmap" },
+            { name: "donut" },
+            { name: "line" },
+            { name: "area-step" },
+            { name: "stacked-bar" },
+            { name: "bar", isActive: true }
+        ];
         this.selectedTerritoryGroups = [];
         this.selectedTerritories = [];
         this.selectedRetailers = [];
@@ -46,26 +54,33 @@ class SongSalesByTerritoryController {
         };
 
         //----Code for Charts-----//
-        this.changeChartType = function(type, typeOld) {
-            if (type == "heatmap") {
+        this.changeChartType = function(currentChart) {
+            angular.forEach(this.chartTypes, (chartType) => {
+                chartType.isActive = false;
+            });
+
+            currentChart.isActive = true;
+            this.currentChartType = currentChart.name;
+
+            if (this.currentChartType == "heatmap") {
                 this.showHeatMap = true;
                 if (!this.heatMapData) {
-                    this.toggleMap(this.range1sales);
-                    this.activefirst = true;
+                    this.toggleMap();
                 }
             } else if (this.theChart2) {
                 this.showHeatMap = false;
-                this.currentChartType = type;
                 this.theChart2.resize({ height: 650 });
                 this.theChart2.groups([]);
-                var chartType = type;
+                var chartType = this.currentChartType;
 
-                if (type == "stacked-bar") {
-                    this.theChart2.groups([
-                        [this.chart.firstRange, this.chart.secondRange]
-                    ]);
+                if (chartType == "stacked-bar") {
+                    var days = [];
+                    angular.forEach(this.chart.salesByTerritory[0].salesByDate, (day) => {
+                        days.push(day.date);
+                    });
+                    this.theChart2.groups([days]);
                     chartType = "bar";
-                } else if (type == "donut") {
+                } else if (this.currentChartType == "donut") {
                     this.theChart2.groups([]);
                     this.theChart2.resize({ height: 400 });
                 }
@@ -74,17 +89,16 @@ class SongSalesByTerritoryController {
         };
 
         this.toggleMap = function(data) {
-            let results = {},
-                mapObject = [];
+            let mapObject = [];
             this.showNoData = false;
-            results = this.calculateTotal(data)
 
-            angular.forEach(results.salesByTerr, (key, value) => {
+            angular.forEach(this.chart.salesByTerritory, (territory) => {
                 mapObject.push({
-                    'Country': value,
-                    'Total Sales': key
+                    'Country': territory.territoryName,
+                    'Total Sales': territory.totalTerritorySales
                 })
-            })
+            });
+
             if (!mapObject.length) {
                 this.showNoData = true;
             }
@@ -92,7 +106,7 @@ class SongSalesByTerritoryController {
             this.heatMapData = mapObject;
         };
 
-        this.formatTooltip = function(name, ratio, id, index) {
+        this.formatTooltip = (name, ratio, id, index) => {
             if (this.currentChartType == "donut") {
                 var format = name === this.datacolumns[0].id ? this.datacolumns[0].id : this.datacolumns[1].id;
             } else {
@@ -101,11 +115,11 @@ class SongSalesByTerritoryController {
             return format;
         };
 
-        this.handleCallback1 = function(chartObj) {
+        this.handleCallback1 = (chartObj) => {
             this.theChart = chartObj;
         };
 
-        this.handleCallback2 = function(chartObj) {
+        this.handleCallback2 = (chartObj) => {
             this.theChart2 = chartObj;
         };
 
@@ -184,30 +198,19 @@ class SongSalesByTerritoryController {
         }
 
         this.addEmptyDateValues = function() {
-
-            this.rangesales = this.chart.salesFirstRange;
-            this.range2sales = this.chart.salesSecondRange;
-            var firstRangeMap, secondRangeMap, range1, range2;
+            this.rangesales = this.chart.salesPerSong.salesFirstRange;
+            var firstRangeMap, range1;
 
             range1 = (this.chart.firstRange).split(" to ");
             firstRangeMap = new Map();
-            this.chart.salesFirstRange.forEach((obj) => {
+            this.rangesales.forEach((obj) => {
                 if (obj.totalsales !== 0) {
                     firstRangeMap.set(obj.date, obj.totalsales);
                 }
             });
 
-            range2 = (this.chart.secondRange).split(" to ");
-            secondRangeMap = new Map();
-            this.chart.salesSecondRange.forEach((obj) => {
-                if (obj.totalsales !== 0) {
-                    secondRangeMap.set(obj.date, obj.totalsales);
-                }
-            });
-
-            if (firstRangeMap.size == 0 && secondRangeMap.size == 0) {
-                this.chart.salesFirstRange = [];
-                this.chart.salesSecondRange = [];
+            if (firstRangeMap.size == 0) {
+                this.chart.salesPerSong.salesFirstRange = [];
             } else {
                 if (firstRangeMap && range1) {
                     var a = moment(range1[0], 'll');
@@ -231,28 +234,6 @@ class SongSalesByTerritoryController {
                     }
                     this.chart.salesFirstRange = salesFirstRange;
                 }
-                if (secondRangeMap && range2) {
-                    var a = moment(range2[0], 'll');
-                    var b = moment(range2[1], 'll');
-                    var salesSecondRange = [];
-
-                    for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
-                        var x = m.format('MMM DD, YY');
-                        if (secondRangeMap.has(x)) {
-                            var y = secondRangeMap.get(x);
-                            salesSecondRange.push({
-                                date: x,
-                                totalsales: y
-                            });
-                        } else {
-                            salesSecondRange.push({
-                                date: x,
-                                totalsales: 0
-                            });
-                        }
-                    }
-                    this.chart.salesSecondRange = salesSecondRange;
-                }
             }
             this.plotChart();
         }
@@ -264,46 +245,60 @@ class SongSalesByTerritoryController {
             this.datapoints = [];
             this.datacolumns = [];
 
-            for (var i = 0; i < this.chart.salesFirstRange.length; i++) {
+            var i = 0;
+            angular.forEach(this.chart.salesByTerritory, (territory) => {
                 this.datapoints[i] = {
-                    x: this.chart.salesFirstRange[i].date + "_" + this.chart.salesSecondRange[i].date
+                    x: territory.territoryName
                 };
-                this.datapoints[i][this.chart.firstRange] = this.chart.salesFirstRange[i].totalsales;
-                this.datapoints[i][this.chart.secondRange] = this.chart.salesSecondRange[i].totalsales;
+                this.datacolumns = [];
+                angular.forEach(territory.salesByDate, (day) => {
+                    this.datapoints[i][day.date] = day.totalDaySales;
 
-                var nameVal = [this.chart.salesFirstRange[i].date, this.chart.salesSecondRange[i].date]
-                this.names.push(nameVal);
+                    //var nameVal = [this.chart.salesFirstRange[i].date, this.chart.salesSecondRange[i].date]
+                    this.names.push(day.date);
 
-                this.datacolumns = [
-                    { "id": this.chart.firstRange, "type": "bar" },
-                    { "id": this.chart.secondRange, "type": "bar" }
-                ];
-
+                    this.datacolumns.push({ "id": day.date, "type": "bar" });
+                });
                 this.datax = { "id": "x" };
-            }
+                i++;
+            });
             this.currentChartType = "bar";
-        }
+        };
+
+        this.setCriteria = function() {
+            this.query.songId = this.selectedSong.songid;
+            this.query.rangeDate1 = this.range.startDate;
+            this.query.rangeDate2 = this.range.endDate;
+            this.query.time1 = this.range.startTime;
+            this.query.time2 = this.range.endTime;
+            this.query.daysInRange = this.range.dateDiff;
+        };
 
         this.getChart = function() {
-            console.log(this.selectedSong);
-            return;
-            // this.theChart = null;
-            // this.showHeatMap = false;
-            // this.loading = true;
-            // this.drilldown = false;
-            // this.heatMapData = null;
-
-            // if (!this.query.songId) {
+            var blnError = false;
+            // if (!this.selectedSong) {
             //     this.songError = "Please select song";
+            //     blnError = true;
             // }
-            // if (!this.query.rangeDate1 ||
-            //     !this.query.rangeDate2) {
+            // if (!this.range.startDate ||
+            //     !this.range.endDate) {
             //     this.rangeError = "Please select date range";
+            //     blnError = true;
             // }
-            // if (!this.query.time1 ||
-            //     !this.query.time2) {
+            // if (!this.range.startTime ||
+            //     !this.range.endTime) {
             //     this.timeError = "Please select time range";
+            //     blnError = true;
             // }
+
+            // if (blnError) return;
+
+            // this.setCriteria();
+            this.theChart = null;
+            this.showHeatMap = false;
+            this.loading = true;
+            this.drilldown = false;
+            this.heatMapData = null;
 
             // if (this.query.songId &&
             //     this.query.rangeDate1 &&
@@ -311,10 +306,8 @@ class SongSalesByTerritoryController {
             //     this.query.time1 &&
             //     this.query.time2 &&
             //     !this.rangeError) {
-            //     this.query.daysInRange = this.rangediff;
-            //     this.query.songId = "Y66000000067";
-            //     this.query.breakByRetailer = this.brkByRetailer;
-            //     this.query["retailer[]"] = this.retailer || [];
+            //     this.query.breakByRetailer = (this.brkByRetailer === 'true');
+            //     this.query["retailer[]"] = this.selectedRetailers || [];
             //     this.query["territory[]"] = this.selectedTerritories || [];
             //     this.query["territoryGroup[]"] = this.selectedTerritoryGroups || [];
 
@@ -329,11 +322,15 @@ class SongSalesByTerritoryController {
             //             this.NoChartError = "Something went wrong!";
             //             console.log(e);
             //             this.loading = false;
-            //         });
+            //         });                
             // } else {
             //     this.loading = false;
             // }
-
+            this.chart = ReportService.getSalesByTerritoryChart();
+            this.loading = false;
+            this.plotChart();
+            this.NoChartError = "";
+            this.drilldown = true;
         }
 
         //----Drill Down Code------//
