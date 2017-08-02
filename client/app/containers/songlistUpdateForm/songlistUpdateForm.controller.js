@@ -1,5 +1,5 @@
 class SonglistUpdateFormController {
-    constructor($state, $stateParams, $scope, SongListsService, SongsService, ModalService, _) {
+    constructor($state, $stateParams, $scope, $window, SongListsService, SongsService, ModalService, _) {
         "ngInject";
         var vm = this;
         this.$state = $state;
@@ -20,17 +20,28 @@ class SonglistUpdateFormController {
 
         vm.toggleSideNav = (data) => {
             let id = data.id;
+            var top = 0;
             let tableContainer = document.getElementById('listTable');
             SongsService.getSong(id).then((res) => {
                 vm.detailsData = res;
                 vm.detailsTitle = vm.detailsData.trackname;
                 vm.name = 'songs';
-                vm.visible = true;
+
+                if ($window.scrollY > 0) {
+                    top = '50px';
+                }
+                else {
+                    top = '106px';
+                }
+
                 vm.detailsData.setTop = () => {
                     return {
-                        'top': angular.element(tableContainer).prop('offsetTop') + 'px'
+                        'top': top
                     };
                 }
+
+                vm.visible = true;
+
             }, (e) => {
                 vm.visible = false;
                 console.log(e);

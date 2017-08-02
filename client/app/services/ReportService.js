@@ -54,69 +54,282 @@ function ReportService($http, config, superCache) {
         params: query,
         headers: getHeaders()
       });
-      /*var chartDetails = Promise.resolve({
-          data: {
-              "songid": "Y66000000995",
-              "daysInRange": 1,
-              "firstRange": "Jul 7, 2016 to Jul 7, 2016",
-              "secondRange": "Jul 7, 2016 to Jul 7, 2016",
-              "timerange1": "09:00-12:22",
-              "timerange2": "19:00-22:11",
-              "salesFirstRange": [{
-                  "totalsales": 2,
-                  "orgRetailerList": [{
-                      "territoryList": [{
-                          "terrSalesByHour": [{
-                              "totalSalesByHours": 2,
-                              "terrId": "46",
-                              "orgId": "2",
-                              "date": "Thu Jul 07 05:30:00 IST 2016",
-                              "range": "9 - 12"
-                          }],
-                          "id": 46,
-                          "name": "United States",
-                          "type": "Territory",
-                          "totalSaleTerr": 2
-                      }],
-                      "id": 2,
-                      "name": "iTunes",
-                      "totalSaleRetailer": 2
-                  }],
-                  "date": "Jul 07, 16"
-              }],
-              "salesSecondRange": [{
-                  "totalsales": 4,
-                  "orgRetailerList": [{
-                      "territoryList": [{
-                          "terrSalesByHour": [{
-                                  "totalSalesByHours": 1,
-                                  "terrId": "46",
-                                  "orgId": "2",
-                                  "date": "Thu Jul 07 05:30:00 IST 2016",
-                                  "range": "19 - 20"
-                              },
-                              {
-                                  "totalSalesByHours": 1,
-                                  "terrId": "46",
-                                  "orgId": "2",
-                                  "date": "Thu Jul 07 05:30:00 IST 2016",
-                                  "range": "17 - 23"
-                              }
-                          ],
-                          "id": 46,
-                          "name": "United States",
-                          "type": "Territory",
-                          "totalSaleTerr": 2
-                      }],
-                      "id": 2,
-                      "name": "iTunes",
-                      "totalSaleRetailer": 2
-                  }],
-                  "date": "Jul 07, 16"
-              }]
-          }
-      });*/
       return chartDetails;
+    },
+    getSalesByTerritoryChart(query) {
+      // var chartDetails = $http({
+      //     url: `${baseUrl}/getDODChart`,
+      //     method: "GET",
+      //     params: query,
+      //     headers: getHeaders()
+      // });
+      // return chartDetails;
+      return {
+        "songid": "123456",
+        "songName": "Apple in Basket",
+        "daysInRange": 10,
+        "dateRange": "Jun 1, 2017 to Jun 10, 2017",
+        "totalSongSales": 260000,
+        "salesByTerritory": [{
+            "territoryid": "123456",
+            "territoryName": "United States",
+            "totalTerritorySales": 160000,
+            "salesByDate": [{
+                "date": "Jun 1",
+                "totalDaySales": 30000,
+                "salesByRetailer": [{
+                    "id": "1",
+                    "retailerName": "Spotify",
+                    "totalRetailerSales": 10000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  },
+                  {
+                    "id": "2",
+                    "retailerName": "iTunes",
+                    "totalRetailerSales": 20000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "date": "Jun 2",
+                "totalDaySales": 25000,
+                "salesByRetailer": [{
+                    "id": "1",
+                    "retailerName": "Spotify",
+                    "totalRetailerSales": 10000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  },
+                  {
+                    "id": "2",
+                    "retailerName": "iTunes",
+                    "totalRetailerSales": "15000",
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "date": "Jun 3",
+                "totalDaySales": 20000,
+                "salesByRetailer": [{
+                    "id": "1",
+                    "retailerName": "Spotify",
+                    "totalRetailerSales": 15000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  },
+                  {
+                    "id": "2",
+                    "retailerName": "iTunes",
+                    "totalRetailerSales": 10000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "territoryid": "78956",
+            "territoryName": "United Kingdom",
+            "totalTerritorySales": 170000,
+            "salesByDate": [{
+                "date": "Jun 1",
+                "totalDaySales": 25000,
+                "salesByRetailer": [{
+                    "id": "1",
+                    "retailerName": "Spotify",
+                    "totalRetailerSales": 10000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  },
+                  {
+                    "id": "2",
+                    "retailerName": "iTunes",
+                    "totalRetailerSales": 22000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "date": "Jun 2",
+                "totalDaySales": 37000,
+                "salesByRetailer": [{
+                    "id": "1",
+                    "retailerName": "Spotify",
+                    "totalRetailerSales": 10000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  },
+                  {
+                    "id": "2",
+                    "retailerName": "iTunes",
+                    "totalRetailerSales": "15000",
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "date": "Jun 3",
+                "totalDaySales": 30000,
+                "salesByRetailer": [{
+                    "id": "1",
+                    "retailerName": "Spotify",
+                    "totalRetailerSales": 15000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  },
+                  {
+                    "id": "2",
+                    "retailerName": "iTunes",
+                    "totalRetailerSales": 10000,
+                    "salesByTime": [{
+                        "timeRange": "04:00 - 05:00",
+                        "totalSales": 3000,
+                      },
+                      {
+                        "timeRange": "05:00 - 06:00",
+                        "totalSales": 1000,
+                      },
+                      {
+                        "timeRange": "06:00 - 07:00",
+                        "totalSales": 2000,
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     getTimeRangeData() {
       var chartDetails = Promise.resolve({
@@ -146,9 +359,7 @@ function ReportService($http, config, superCache) {
 
       return chartDetails;
     },
-
     getDODMulitpleChart(query) {
-
       return {
         "daysInRange": 10,
         "firstRange": "Jun 1, 2017 to Jun 10, 2017",

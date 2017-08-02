@@ -31,6 +31,9 @@ body {
     width: 1080px;
 }
 
+ul.pagination li a {
+    color: #000;
+}
 .navbar-default {
     &.navMain {
         background: #2C3E50;
@@ -202,7 +205,7 @@ body {
             position: fixed;
             top: 50px;
             width: 200px;
-            z-index: 1;
+            z-index: 3;
             height: 100%;
             &.ng-enter,
             &.ng-leave {
@@ -359,6 +362,13 @@ body {
     .c3-ygrid {
         stroke-dasharray: 5 0;
         stroke: #40333c !important;
+    }
+    #chart4 {
+        .c3-chart-lines {
+            .c3-chart-line .c3-area {
+                opacity: 0.8 !important;
+            }
+        }
     }
     #chart3 {
         .c3-xgrid,

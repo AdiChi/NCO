@@ -73,6 +73,13 @@ function DataMap() {
                                 }
                             },
                             highlightBorderWidth: 1
+                        },
+                        done: function () {
+                            d3.select('#world-map-container').call(d3.behavior.zoom().on("zoom", redraw));
+
+                            function redraw() {
+                                d3.select('#world-map-container').selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                            }
                         }
                     });
 

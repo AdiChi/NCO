@@ -38,6 +38,16 @@
             cursor: move
         }
         .widget-wrapper {
+            .c3-axis {
+                .tick line, .domain {
+                    display:none;
+                }
+            }
+            .c3-xgrid, .c3-ygrid {
+                stroke-dasharray: 5 0;
+                stroke: #f3f3f3;
+            }
+
             float: left;
             height: 500px;
             margin: 14px;
