@@ -18,7 +18,7 @@ import LogListComponent from './components/logList/logList';
 import MultiSelectBoxComponent from './components/multiSelectBox/multiSelectBox';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
 import SongSalesByTerritoryComponent from './components/songSalesByTerritory/songSalesByTerritory';
-Mimport DateOverDateMultipleComponent from './components/dateOverDateMultiple/dateOverDateMultiple';
+import DateOverDateMultipleComponent from './components/dateOverDateMultiple/dateOverDateMultiple';
 import LoginComponent from './pages/login/login';
 import DashboardComponent from './pages/dashboard/dashboard';
 import SideNavComponent from './components/sideNav/sideNav';
