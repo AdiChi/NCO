@@ -48,6 +48,14 @@
             text-align: center;
         }
     }
+    &.songlist-table{
+        tbody tr{
+            cursor: default;
+            &::hover{
+                background-color: #fff;
+            }
+        }
+    }
 }
 
 .songs-artist-component {

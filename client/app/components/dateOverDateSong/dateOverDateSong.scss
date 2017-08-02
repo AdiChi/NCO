@@ -52,8 +52,9 @@
 }
 
 .loader {
-    position: absolute;
+    position: relative;
     left: 50%;
+    top:20px;
     border: 10px solid #f3f3f3;
     /* Light grey */
     border-top: 10px solid #F5B041;
@@ -144,15 +145,6 @@
     }
 }
 
-.territories-retailers {
-    padding-bottom: 20px;
-    .dropdown-menu>.active>a,
-    .dropdown-menu>.active>a:hover,
-    .dropdown-menu>.active>a:focus {
-        color: #000;
-        background-color: #F5B041;
-    }
-}
 
 .tab-head {
     color: #337ab7;
@@ -189,8 +181,21 @@
 }
 
 .selectedSong {
-    background: #172a3a;
     color: white;
     padding: 5px 10px;
     border-radius: 15px;
+    &.distributor-heading{
+        background-color: #230118;
+        color: #b9babd;
+    }
+    &.artist-heading{
+        background-color: #1a1c22;
+        color: #b9babd;
+    }
+
+    &.analyst-heading{
+        background-color: #01172d;
+        color: #b9babd;
+    }
+
 }

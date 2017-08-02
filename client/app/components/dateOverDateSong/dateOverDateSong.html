@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="container-fluid">
-                <h4 ng-if="selectedSong" class="selectedSong">
+                <h4 ng-if="selectedSong" class="selectedSong {{$root.currentUser.role}}-heading">
                     Selected song: <span style="color: #F5B041">{{selectedSong}}</span>
                 </h4>
             </div>
@@ -95,16 +95,15 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid territories-retailers">
-                <multiselect ng-model="selectedTer" options="territories" id-prop="id" display-prop="name" show-search="true" labels="territoryLabels"
-                    show-select-all="true" show-unselect-all="true" class="col-md-4" ng-change="onSelectTerritory()"> </multiselect>
-                <multiselect ng-model="selectedTG" options="territoryGroups" id-prop="id" display-prop="name" show-search="true" labels="territoryGroupLabels"
-                    show-select-all="true" show-unselect-all="true" class="col-md-4" ng-change="onSelectTerritoryGroup()"> </multiselect>
-                <multiselect ng-model="selectedRet" options="retailers" id-prop="id" display-prop="name" show-search="true" labels="retailerLabels"
-                    show-select-all="true" show-unselect-all="true" class="col-md-4" ng-change="onSelectRetailer()"> </multiselect>
-                <!-- <div class="col-md-3" ng-if="selectedRet.length!== 1">
-              <label><input type="checkbox" ng-model="brkByRetailer">Break out by Retailer</label>
-            </div> -->
+            <div class="container-fluid">
+                <div class="col-md-6 well">
+                    <label>Select Territory Groups/Territories</label>
+                    <multi-select-box item-groups="territoryGroups" items="territories" selected-item-groups="selectedTG" selected-items="selectedTer"></multi-select-box>
+                </div>
+                <div class="col-md-6 well">
+                    <label>Select Retailers</label>
+                    <multi-select-box items="retailers" selected-items="selectedRet"></multi-select-box>
+                </div>
             </div>
             <div class="container-fluid error-alert">
                 <div ng-if="songError">
@@ -184,7 +183,7 @@
             </div>
             <div class="container-fluid" ng-if="!theChart && chart && !showHeatMap" style="padding-top:30px">
                 {{selectedSong}}
-                <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
+                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
                     show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections"
                     ng-if="!showHeatMap">
                     <chart-size chart-height="700" />
@@ -200,7 +199,7 @@
                 </c3chart>
             </div>
             <div class="container-fluid" ng-show="theChart && !showHeatMap" style="padding-top:30px">
-                <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
+                <c3chart  padding-right="60" bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
                     show-subchart="true" callback-function="handleCallback2" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
                     <chart-size chart-height="700" />
@@ -270,7 +269,7 @@
                     <table class="table table-hover table-responsive">
                         <tbody ng-init="showTab={};showRet={};">
                             <tr class="tab-head">
-                                <th>Sales Period 1 ({{chart.firstRange}})</th>
+                                <th>Sales Period 1 ({{chart.firstRange}})({{getTimeRangeInFormat(chart.timerange1)}})</th>
                                 <th>Sales</th>
                             </tr>
                             <tr ng-repeat-start="(key, value) in range1sales">
@@ -335,7 +334,7 @@
                     <table st-table="vm.displayCollection" class="table table-hover table-responsive">
                         <tbody ng-init="showTab={};showRet={};">
                             <tr class="tab-head">
-                                <th>Sales Period 2 ({{chart.secondRange}})</th>
+                                <th>Sales Period 2 ({{chart.secondRange}})({{getTimeRangeInFormat(chart.timerange2)}})</th>
                                 <th>Sales</th>
                             </tr>
                             <tr ng-repeat-start="(key, value) in range2sales">
@@ -398,7 +397,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td><a class="btn btn-default" st-export>Export to Excel</a></td>
+                                <td style="border-top: none;"><a class="btn btn-default" st-export>Export to Excel</a></td>
                             </tr>
                         </tfoot>
                     </table>

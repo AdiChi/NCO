@@ -129,6 +129,7 @@ class ReportsFormController {
         ];
         this.displayCollection2 = [].concat(this.myReports);
         this.toFormat = function(r) {
+            this.exportListName = "General reports";
             return r.map(function(i) {
                 let list = {
                     "Report Name": i.reportName,

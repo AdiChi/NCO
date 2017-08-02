@@ -19,6 +19,7 @@ function LoginService($filter) {
                         },
                         chart: {
                             id: "chart1", //should be unique
+                            showgrid: true,
                             datapoints: [
                                 { "x": "Jul 1", "New York": 231 },
                                 { "x": "Jul 2", "New York": 110 },
@@ -49,6 +50,7 @@ function LoginService($filter) {
                         },
                         chart: {
                             id: "chart2",
+                            showgrid: true,
                             datapoints: [
                                 { "x": "Jul 1", "Los Angeles": 321 },
                                 { "x": "Jul 2", "Los Angeles": 222 },
@@ -78,6 +80,7 @@ function LoginService($filter) {
                             dailySales: '22',
                         },
                         chart: {
+                            showgrid: true,
                             id: "chart3",
                             datapoints: [
                                 { "x": "Jul 1", "Chicago": 511 },
@@ -109,6 +112,7 @@ function LoginService($filter) {
                         },
                         chart: {
                             id: "chart4",
+                            showgrid: true,
                             datapoints: [
                                 { "x": "Jun 1_Jul 1", "Jun 1 - Jun 5": 300, "Jul 1 - Jul 5": 321 },
                                 { "x": "Jun 2_Jul 2", "Jun 1 - Jun 5": 200, "Jul 1 - Jul 5": 400 },
@@ -140,6 +144,7 @@ function LoginService($filter) {
                         },
                         chart: {
                             id: "chart5",
+                            showgrid: true,
                             datapoints: [
                                 { "x": "Jun 1_Jul 1", "Jun 1 - Jun 5": 500, "Jul 1 - Jul 5": 121 },
                                 { "x": "Jun 2_Jul 2", "Jun 1 - Jun 5": 250, "Jul 1 - Jul 5": 200 },
@@ -162,7 +167,7 @@ function LoginService($filter) {
                             }
                         }
                     }, {
-                        header: 'How Many Apples in the Basket [Jun 5 - Jun 10], [Jun 11 - Jun 16]',
+                        header: 'How Many Apples in the Basket [Jun 5 - Jun 10], [Jun 1 - Jun 6]',
                         info: {
                             totalSales: '7,653',
                             openCampaign: '852',
@@ -171,17 +176,18 @@ function LoginService($filter) {
                         chart: {
                             id: "chart6",
                             datapoints: [
-                                { "x": "Jun 5_Jun 11", "Jun 5 - Jun 10": 131, "Jun 11 - Jun 16": 211 },
-                                { "x": "Jun 6_Jun 12", "Jun 5 - Jun 10": 210, "Jun 11 - Jun 16": 491 },
-                                { "x": "Jun 7_Jun 13", "Jun 5 - Jun 10": 210, "Jun 11 - Jun 16": 321 },
-                                { "x": "Jun 8_Jun 14", "Jun 5 - Jun 10": 324, "Jun 11 - Jun 16": 131 },
-                                { "x": "Jun 9_Jun 15", "Jun 5 - Jun 10": 198, "Jun 11 - Jun 16": 411 },
-                                { "x": "Jun 10_Jun 16", "Jun 5 - Jun 10": 211, "Jun 11 - Jun 16": 110 }
+                                { "x": "Jun 5 _Jun 1", "Jun 5 - Jun 10": 131, "Jun 1 - Jun 6": 211 },
+                                { "x": "Jun 6 _Jun 2", "Jun 5 - Jun 10": 210, "Jun 1 - Jun 6": 491 },
+                                { "x": "Jun 7 _Jun 3", "Jun 5 - Jun 10": 210, "Jun 1 - Jun 6": 321 },
+                                { "x": "Jun 8 _Jun 4", "Jun 5 - Jun 10": 324, "Jun 1 - Jun 6": 131 },
+                                { "x": "Jun 9 _Jun 5", "Jun 5 - Jun 10": 198, "Jun 1 - Jun 6": 411 },
+                                { "x": "Jun 10 _Jun 6", "Jun 5 - Jun 10": 211, "Jun 1 - Jun 6": 110 }
                             ],
                             datacolumns: [
                                 { "id": "Jun 5 - Jun 10", "type": "area-step" },
-                                { "id": "Jun 11 - Jun 16", "type": "area-step" }
+                                { "id": "Jun 1 - Jun 6", "type": "area-step" }
                             ],
+                            showgrid: true,
                             datax: { "id": "x" },
                             colors: "#8a8888,#fba700,#fe6d00",
                             templateUrl: 'app/templates/charts/bar.html'
@@ -220,6 +226,7 @@ function LoginService($filter) {
                         },
                         chart: {
                             id: "chart1",
+                            showgrid: true,
                             datapoints: [
                                 { "x": "Jul 1", "USA": 200 },
                                 { "x": "Jul 2", "USA": 310 },
@@ -257,6 +264,7 @@ function LoginService($filter) {
                                 { "x": "Jul 4", "UK": 290 },
                                 { "x": "Jul 5", "UK": 360 }
                             ],
+                            showgrid: true,
                             datacolumns: [
                                 { "id": "UK", "type": "line" }
                             ],
@@ -277,6 +285,7 @@ function LoginService($filter) {
                             dailySales: '34'
                         },
                         chart: {
+                            showgrid: true,
                             id: "chart3",
                             datapoints: [
                                 { "x": "Jul 1", "Canada": 121 },
@@ -307,12 +316,13 @@ function LoginService($filter) {
                         chart: {
                             id: "chart4",
                             datapoints: [
-                                { "x": "Jun 1_Jul 1", "Jun 1 - Jun 5": 300, "Jul 1 - Jul 5": 321 },
-                                { "x": "Jun 2_Jul 2", "Jun 1 - Jun 5": 200, "Jul 1 - Jul 5": 400 },
-                                { "x": "Jun 3_Jul 3", "Jun 1 - Jun 5": 500, "Jul 1 - Jul 5": 450 },
-                                { "x": "Jun 4_Jul 4", "Jun 1 - Jun 5": 100, "Jul 1 - Jul 5": 120 },
-                                { "x": "Jun 5_Jul 5", "Jun 1 - Jun 5": 150, "Jul 1 - Jul 5": 286 },
+                                { "x": "Jun 1 _Jul 1", "Jun 1 - Jun 5": 300, "Jul 1 - Jul 5": 321 },
+                                { "x": "Jun 2 _Jul 2", "Jun 1 - Jun 5": 200, "Jul 1 - Jul 5": 400 },
+                                { "x": "Jun 3 _Jul 3", "Jun 1 - Jun 5": 500, "Jul 1 - Jul 5": 450 },
+                                { "x": "Jun 4 _Jul 4", "Jun 1 - Jun 5": 100, "Jul 1 - Jul 5": 120 },
+                                { "x": "Jun 5 _Jul 5", "Jun 1 - Jun 5": 150, "Jul 1 - Jul 5": 286 },
                             ],
+                            showgrid: true,
                             datacolumns: [
                                 { "id": "Jun 1 - Jun 5", "type": "line" },
                                 { "id": "Jul 1 - Jul 5", "type": "line" }
@@ -337,12 +347,13 @@ function LoginService($filter) {
                         },
                         chart: {
                             id: "chart5",
+                            showgrid: true,
                             datapoints: [
-                                { "x": "Jun 1_Jul 1", "Jun 1 - Jun 5": 200, "Jul 1 - Jul 5": 121 },
-                                { "x": "Jun 2_Jul 2", "Jun 1 - Jun 5": 250, "Jul 1 - Jul 5": 200 },
-                                { "x": "Jun 3_Jul 3", "Jun 1 - Jun 5": 450, "Jul 1 - Jul 5": 490 },
-                                { "x": "Jun 4_Jul 4", "Jun 1 - Jun 5": 180, "Jul 1 - Jul 5": 160 },
-                                { "x": "Jun 5_Jul 5", "Jun 1 - Jun 5": 100, "Jul 1 - Jul 5": 186 },
+                                { "x": "Jun 1 _Jul 1", "Jun 1 - Jun 5": 200, "Jul 1 - Jul 5": 121 },
+                                { "x": "Jun 2 _Jul 2", "Jun 1 - Jun 5": 250, "Jul 1 - Jul 5": 200 },
+                                { "x": "Jun 3 _Jul 3", "Jun 1 - Jun 5": 450, "Jul 1 - Jul 5": 490 },
+                                { "x": "Jun 4 _Jul 4", "Jun 1 - Jun 5": 180, "Jul 1 - Jul 5": 160 },
+                                { "x": "Jun 5 _Jul 5", "Jun 1 - Jun 5": 100, "Jul 1 - Jul 5": 186 },
                             ],
                             datacolumns: [
                                 { "id": "Jun 1 - Jun 5", "type": "area-step" },
@@ -358,7 +369,7 @@ function LoginService($filter) {
                             }
                         }
                     }, {
-                        header: 'How Many Apples in the Basket [Jun 5 - Jun 10], [Jun 11 - Jun 16]',
+                        header: 'How Many Apples in the Basket [Jun 5 - Jun 9], [Jun 1 - Jun 5]',
                         info: {
                             totalSales: '7,653',
                             openCampaign: '852',
@@ -366,21 +377,20 @@ function LoginService($filter) {
                         },
                         chart: {
                             id: "chart6",
+                            showgrid: true,
                             datapoints: [
-                                { "x": "Jun 5_Jun 11", "Jun 5 - Jun 10": 131, "Jun 11 - Jun 16": 211 },
-                                { "x": "Jun 6_Jun 12", "Jun 5 - Jun 10": 210, "Jun 11 - Jun 16": 491 },
-                                { "x": "Jun 7_Jun 13", "Jun 5 - Jun 10": 210, "Jun 11 - Jun 16": 321 },
-                                { "x": "Jun 8_Jun 14", "Jun 5 - Jun 10": 324, "Jun 11 - Jun 16": 131 },
-                                { "x": "Jun 9_Jun 15", "Jun 5 - Jun 10": 198, "Jun 11 - Jun 16": 411 },
-                                { "x": "Jun 10_Jun 16", "Jun 5 - Jun 10": 211, "Jun 11 - Jun 16": 110 }
+                                { "x": "Jun 5 _Jun 1", "Jun 5 - Jun 9": 131, "Jun 1 - Jun 5": 211 },
+                                { "x": "Jun 6 _Jun 2", "Jun 5 - Jun 9": 219, "Jun 1 - Jun 5": 491 },
+                                { "x": "Jun 7 _Jun 3", "Jun 5 - Jun 9": 210, "Jun 1 - Jun 5": 321 },
+                                { "x": "Jun 8 _Jun 4", "Jun 5 - Jun 9": 324, "Jun 1 - Jun 5": 131 },
+                                { "x": "Jun 9 _Jun 5", "Jun 5 - Jun 9": 198, "Jun 1 - Jun 5": 411 }
                             ],
                             datacolumns: [
-                                { "id": "Jun 5 - Jun 10", "type": "bar" },
-                                { "id": "Jun 11 - Jun 16", "type": "bar" }
+                                { "id": "Jun 5 - Jun 9", "type": "bar" },
+                                { "id": "Jun 1 - Jun 5", "type": "bar" }
                             ],
                             datax: { "id": "x" },
                             colors: "#fba700,#fe6d00,#8a8888",
-                            groups: "Jun 1 - Jun 5,Jul 1 - Jul 5",
                             templateUrl: 'app/templates/charts/bar.html'
                         },
                         setWidth: function() {
@@ -498,7 +508,7 @@ function LoginService($filter) {
                             }
                         }
                     }
-                    /*, {
+                    , {
                                     header: 'Haunt Me (instrumental) - [Jul 1 - Jul 5]',
                                     info: {
                                         totalSales: '7,676',
@@ -523,10 +533,10 @@ function LoginService($filter) {
                                     },
                                     setWidth: function() {
                                         return {
-                                            'width': '22%'
+                                            'width': '30.5%'
                                         }
                                     }
-                                }*/
+                                }
                     , {
                         header: 'A Fine Day for Sailing [Jun 1 - Jun 5], [Jul 1 - Jul 5]',
                         info: {
