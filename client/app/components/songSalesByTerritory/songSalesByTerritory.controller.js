@@ -36,7 +36,7 @@ class SongSalesByTerritoryController {
             });
         };
 
-        $(document).on('click', '.panel-heading span.clickable', function(e) {
+        $(document).on('click', '.panel-heading.clickable', function(e) {
             var $this = $(this);
             collapseSelection($this);
         });
@@ -123,123 +123,8 @@ class SongSalesByTerritoryController {
             this.theChart2 = chartObj;
         };
 
-        this.toggleRows = function(data) {
-            ReportService.getTimeRangeData()
-                .then((response) => {
-                    this.timeCollection = [].concat(response.data.salesByHour);
-                    this.showHours = data.date;
-                }, (e) => {
-                    this.NoChartError = "Something went wrong!";
-                    console.log(e);
-                });
-        };
-
-        // helper method to check if a field is a nested object
-        this.is_object = function(something) {
-            return typeof(something) == 'object' ? true : false;
-        };
-
-        this.calculateTotal = function(object) {
-            var firstMap = [],
-                salesTotal = 0,
-                dateMap = {};
-            // Setting up an array with individual objects
-            object.forEach((dateObj) => {
-                var dateSales = {},
-                    sales = 0;
-                dateObj.orgRetailerList.forEach((retailerObj) => {
-                    retailerObj.territoryList.forEach((territoryObj) => {
-                        sales = sales + parseInt(territoryObj.totalSaleTerr);
-                        var finalObj = {
-                            date: dateObj.date,
-                            territory: territoryObj.name,
-                            retailer: retailerObj.name,
-                            sales: territoryObj.totalSaleTerr
-                        }
-                        firstMap.push(finalObj);
-                    })
-                    dateSales[retailerObj.name] = sales;
-                })
-                salesTotal = salesTotal + sales;
-                dateMap[dateObj.date] = dateSales;
-            })
-            console.log(dateMap);
-            // Calculating Aggregate Territory wise/Retailer wise
-            var sumOfSalesByTer = {},
-                sumOfSalesByRet = {},
-                terrSales = [],
-                retailersSet = new Set(),
-                territoriesSet = new Set(),
-                territory, retailer;
-            for (var i = 0; i < firstMap.length; i++) {
-                territory = firstMap[i].territory;
-                retailer = firstMap[i].retailer;
-                retailersSet.add(retailer);
-                territoriesSet.add(territory);
-
-                if (!(territory in sumOfSalesByTer)) {
-                    sumOfSalesByTer[territory] = 0;
-                }
-                if (!(retailer in sumOfSalesByRet)) {
-                    sumOfSalesByRet[retailer] = 0;
-                }
-                sumOfSalesByTer[territory] += parseInt(firstMap[i].sales);
-                sumOfSalesByRet[retailer] += parseInt(firstMap[i].sales);
-            }
-            return {
-                allMap: firstMap,
-                salesByTerr: sumOfSalesByTer,
-                salesByRet: sumOfSalesByRet,
-                retailersSet: retailersSet,
-                territoriesSet: territoriesSet,
-                dateRetailerMap: dateMap,
-                salesTotal: salesTotal
-            };
-        }
-
-        this.addEmptyDateValues = function() {
-            this.rangesales = this.chart.salesPerSong.salesFirstRange;
-            var firstRangeMap, range1;
-
-            range1 = (this.chart.firstRange).split(" to ");
-            firstRangeMap = new Map();
-            this.rangesales.forEach((obj) => {
-                if (obj.totalsales !== 0) {
-                    firstRangeMap.set(obj.date, obj.totalsales);
-                }
-            });
-
-            if (firstRangeMap.size == 0) {
-                this.chart.salesPerSong.salesFirstRange = [];
-            } else {
-                if (firstRangeMap && range1) {
-                    var a = moment(range1[0], 'll');
-                    var b = moment(range1[1], 'll');
-                    var salesFirstRange = [];
-
-                    for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
-                        var x = m.format('MMM DD, YY');
-                        if (firstRangeMap.has(x)) {
-                            var y = firstRangeMap.get(x);
-                            salesFirstRange.push({
-                                date: x,
-                                totalsales: y
-                            });
-                        } else {
-                            salesFirstRange.push({
-                                date: x,
-                                totalsales: 0
-                            });
-                        }
-                    }
-                    this.chart.salesFirstRange = salesFirstRange;
-                }
-            }
-            this.plotChart();
-        }
-
         this.plotChart = function() {
-            collapseSelection($('.panel-heading span.clickable'));
+            collapseSelection($('.panel-heading.clickable'));
 
             this.names = [];
             this.datapoints = [];
@@ -276,61 +161,48 @@ class SongSalesByTerritoryController {
 
         this.getChart = function() {
             var blnError = false;
-            // if (!this.selectedSong) {
-            //     this.songError = "Please select song";
-            //     blnError = true;
-            // }
-            // if (!this.range.startDate ||
-            //     !this.range.endDate) {
-            //     this.rangeError = "Please select date range";
-            //     blnError = true;
-            // }
-            // if (!this.range.startTime ||
-            //     !this.range.endTime) {
-            //     this.timeError = "Please select time range";
-            //     blnError = true;
-            // }
+            if (!this.selectedSong) {
+                this.songError = "Please select song";
+                blnError = true;
+            }
+            if (!this.range.startDate ||
+                !this.range.endDate) {
+                this.rangeError = "Please select date range";
+                blnError = true;
+            }
+            if (!this.range.startTime ||
+                !this.range.endTime) {
+                this.timeError = "Please select time range";
+                blnError = true;
+            }
 
-            // if (blnError) return;
+            if (blnError) return;
 
-            // this.setCriteria();
+            this.setCriteria();
             this.theChart = null;
             this.showHeatMap = false;
             this.loading = true;
             this.drilldown = false;
             this.heatMapData = null;
+            if (this.query.songId &&
+                this.query.rangeDate1 &&
+                this.query.rangeDate2 &&
+                this.query.time1 &&
+                this.query.time2 &&
+                !this.rangeError) {
+                this.query.breakByRetailer = (this.brkByRetailer === 'true');
+                this.query["retailer[]"] = this.selectedRetailers || [];
+                this.query["territory[]"] = this.selectedTerritories || [];
+                this.query["territoryGroup[]"] = this.selectedTerritoryGroups || [];
 
-            // if (this.query.songId &&
-            //     this.query.rangeDate1 &&
-            //     this.query.rangeDate2 &&
-            //     this.query.time1 &&
-            //     this.query.time2 &&
-            //     !this.rangeError) {
-            //     this.query.breakByRetailer = (this.brkByRetailer === 'true');
-            //     this.query["retailer[]"] = this.selectedRetailers || [];
-            //     this.query["territory[]"] = this.selectedTerritories || [];
-            //     this.query["territoryGroup[]"] = this.selectedTerritoryGroups || [];
-
-            //     ReportService.getDODChart(this.query)
-            //         .then((response) => {
-            //             this.loading = false;
-            //             this.chart = response.data;
-            //             this.addEmptyDateValues();
-            //             this.NoChartError = "";
-            //             this.drilldown = true;
-            //         }, (e) => {
-            //             this.NoChartError = "Something went wrong!";
-            //             console.log(e);
-            //             this.loading = false;
-            //         });                
-            // } else {
-            //     this.loading = false;
-            // }
-            this.chart = ReportService.getSalesByTerritoryChart();
-            this.loading = false;
-            this.plotChart();
-            this.NoChartError = "";
-            this.drilldown = true;
+                this.chart = ReportService.getSalesByTerritoryChart();
+                this.loading = false;
+                this.plotChart();
+                this.NoChartError = "";
+                this.drilldown = true;
+            } else {
+                this.loading = false;
+            }
         }
 
         //----Drill Down Code------//
@@ -341,11 +213,21 @@ class SongSalesByTerritoryController {
             return this.rangeRollUp.allMap;
         };
 
-        $scope.$watch('drilldown', function(val) {
-            if (val == true) {
-                this.rangeRollUp = this.calculateTotal(this.range1sales);
+        this.getTimeRangeInFormat = function(time) {
+            var t1, t2, timestr;
+            if (time.length == 11) {
+                timestr = time.split("-");
+                t1 = moment(timestr[0], "HH:mm").format('hh:mm a');
+                t2 = moment(timestr[1], "HH:mm").format('hh:mm a');
+                timestr = t1 + "-" + t2;
+            } else {
+                timestr = time.split(" - ");
+                t1 = moment(timestr[0] + ":00", "H:mm").format('hh:mm a');
+                t2 = moment(timestr[1] + ":00", "H:mm").format('hh:mm a');
+                timestr = t1 + " to " + t2;
             }
-        });
+            return timestr;
+        }
     }
 }
 

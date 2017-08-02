@@ -14,7 +14,7 @@ class DateOverDateSongController {
         $scope.showHeatMap = false;
         $scope.timewise = false;
         $scope.showNoData = false;
-        $scope.tilt= "90";
+        $scope.tilt = "90";
         $scope.territoryLabels = {
             select: "Select Territories",
             itemsSelected: "Territories Selected"
@@ -62,14 +62,14 @@ class DateOverDateSongController {
         $scope.time4 = $scope.todayEnd;
         $scope.query.time4 = $scope.todayEnd.format('HH:mm');
 
-        $(document).on('click', '.panel-heading span.clickable', function(e) {
+        $(document).on('click', '.panel-heading.clickable', function(e) {
             var $this = $(this);
             collapseSelection($this);
         });
         $scope.toFormat = function(r) {
             $scope.exportListName = $scope.selectedSong + "\r\n\n\"" +
-                $scope.chart.firstRange+ "("+$scope.getTimeRangeInFormat($scope.chart.timerange1) + ") \"" +
-                " \n\"" + $scope.chart.secondRange+ "("+ $scope.getTimeRangeInFormat($scope.chart.timerange2) + ") \"";
+                $scope.chart.firstRange + "(" + $scope.getTimeRangeInFormat($scope.chart.timerange1) + ") \"" +
+                " \n\"" + $scope.chart.secondRange + "(" + $scope.getTimeRangeInFormat($scope.chart.timerange2) + ") \"";
 
             return $scope.range1RollUp.allMap.concat($scope.range2RollUp.allMap);
         };
@@ -187,8 +187,8 @@ class DateOverDateSongController {
                     if ($scope.chart.secondRange == $scope.chart.firstRange) {
                         $scope.theChart2.groups([
                             [
-                            "Range 1 (" + $scope.getTimeRangeInFormat($scope.chart.timerange1) + ")",
-                            "Range 2 (" + $scope.getTimeRangeInFormat($scope.chart.timerange2) + ")"
+                                "Range 1 (" + $scope.getTimeRangeInFormat($scope.chart.timerange1) + ")",
+                                "Range 2 (" + $scope.getTimeRangeInFormat($scope.chart.timerange2) + ")"
                             ]
                         ]);
                     } else {
@@ -205,8 +205,9 @@ class DateOverDateSongController {
                 $scope.theChart2.transform(chartType);
             }
         };
-        $scope.toggleMap = function (data) {
-            let results = {}, mapObject = [];
+        $scope.toggleMap = function(data) {
+            let results = {},
+                mapObject = [];
             $scope.showNoData = false;
             results = $scope.calculateTotal(data)
 
@@ -390,7 +391,7 @@ class DateOverDateSongController {
                 return retailer.id;
             });
         });
-        
+
         /*function getAllRetailers() {
             $scope.retailer = $scope.retailers.map(function (r) {
                 return r.id;
@@ -417,21 +418,21 @@ class DateOverDateSongController {
         }
 
         $scope.getTimeRangeInFormat = function(time) {
-            var t1, t2, timestr;
-            if(time.length==11) {
-                timestr = time.split("-");
-                t1 = moment(timestr[0], "HH:mm").format('hh:mm a');
-                t2 = moment(timestr[1], "HH:mm").format('hh:mm a');
-                timestr = t1+"-"+t2;
-            } else {
-                timestr = time.split(" - ");
-                t1 = moment(timestr[0] + ":00", "H:mm").format('hh:mm a');
-                t2 = moment(timestr[1] + ":00", "H:mm").format('hh:mm a');
-                timestr = t1 + " to "+ t2;
+                var t1, t2, timestr;
+                if (time.length == 11) {
+                    timestr = time.split("-");
+                    t1 = moment(timestr[0], "HH:mm").format('hh:mm a');
+                    t2 = moment(timestr[1], "HH:mm").format('hh:mm a');
+                    timestr = t1 + "-" + t2;
+                } else {
+                    timestr = time.split(" - ");
+                    t1 = moment(timestr[0] + ":00", "H:mm").format('hh:mm a');
+                    t2 = moment(timestr[1] + ":00", "H:mm").format('hh:mm a');
+                    timestr = t1 + " to " + t2;
+                }
+                return timestr;
             }
-            return timestr;
-        }
-        // helper method to check if a field is a nested object
+            // helper method to check if a field is a nested object
         $scope.is_object = function(something) {
             return typeof(something) == 'object' ? true : false;
         };
@@ -447,7 +448,7 @@ class DateOverDateSongController {
                     retailerObj.territoryList.forEach(function(territoryObj) {
                         if (territoryObj.terrSalesByHour.length > 0) {
                             sales = sales + parseInt(territoryObj.totalSaleTerr);
-                            territoryObj.terrSalesByHour.forEach(function (time) {
+                            territoryObj.terrSalesByHour.forEach(function(time) {
                                 var finalObj = {
                                     date: dateObj.date,
                                     territory: territoryObj.name,
@@ -589,24 +590,24 @@ class DateOverDateSongController {
         }
 
         function plotChart() {
-            collapseSelection($('.panel-heading span.clickable'));
+            collapseSelection($('.panel-heading.clickable'));
             var firstRange = $scope.chart.firstRange;
             var secondRange = $scope.chart.secondRange;
             $scope.names = [];
             $scope.datapoints = [];
             $scope.datacolumns = [];
-            if($scope.chart.secondRange == $scope.chart.firstRange) {
-                firstRange = "Range 1 ("+$scope.getTimeRangeInFormat($scope.chart.timerange1) + ")";
-                secondRange = "Range 2 ("+$scope.getTimeRangeInFormat($scope.chart.timerange2) + ")";
-                $scope.tilt= "45";
+            if ($scope.chart.secondRange == $scope.chart.firstRange) {
+                firstRange = "Range 1 (" + $scope.getTimeRangeInFormat($scope.chart.timerange1) + ")";
+                secondRange = "Range 2 (" + $scope.getTimeRangeInFormat($scope.chart.timerange2) + ")";
+                $scope.tilt = "45";
             } else {
-                $scope.tilt= "90";
+                $scope.tilt = "90";
             }
 
             for (var i = 0; i < $scope.chart.salesFirstRange.length; i++) {
-                if($scope.chart.secondRange == $scope.chart.firstRange) {
+                if ($scope.chart.secondRange == $scope.chart.firstRange) {
                     $scope.datapoints[i] = {
-                        x: $scope.chart.salesFirstRange[i].date + "(" + $scope.getTimeRangeInFormat($scope.chart.timerange1)+") ("+$scope.getTimeRangeInFormat($scope.chart.timerange2)+")"
+                        x: $scope.chart.salesFirstRange[i].date + "(" + $scope.getTimeRangeInFormat($scope.chart.timerange1) + ") (" + $scope.getTimeRangeInFormat($scope.chart.timerange2) + ")"
                     };
                     var nameVal = [$scope.getTimeRangeInFormat($scope.chart.timerange1), $scope.getTimeRangeInFormat($scope.chart.timerange2)]
                     $scope.names.push(nameVal);
@@ -652,7 +653,7 @@ class DateOverDateSongController {
             if (!$scope.query.time1 ||
                 !$scope.query.time2 ||
                 !$scope.query.time3 ||
-                !$scope.query.time4 ) {
+                !$scope.query.time4) {
                 $scope.timeError = "Please select time range";
             }
             if (($scope.query.range1Date1 == $scope.query.range2Date1 &&
