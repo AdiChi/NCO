@@ -151,80 +151,197 @@ function ReportService($http, config, superCache) {
 
       return {
         "daysInRange": 10,
-        "firstRange": "Jun 1, 2017 to Jun 3, 2017",
-        "secondRange": "Jul 1, 2017 to Jul 3, 2017",
+        "firstRange": "Jun 1, 2017 to Jun 10, 2017",
+        "secondRange": "Jul 1, 2017 to Jul 10, 2017",
         "salesPerSong": [{
             "songid": "123456",
             "songName": "Apple in Basket",
             "totalSongSales": 160000,
             "salesFirstRange": [{
-                "date": "Jun 01, 2017",
+                "date": "Jun 1",
                 "totalDaySales": 30000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "10000",
+                    "totalRetailerSales": 10000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "3",
                         "territoryName": "France",
-                        "totalTerrSales": "2000",
+                        "totalTerrSales": 2000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 600,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 400,
+                          }
+                        ]
                       }
                     ]
                   },
                   {
                     "id": "2",
                     "retailerName": "iTunes",
-                    "totalRetailerSales": "20000",
+                    "totalRetailerSales": 20000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "10000",
+                        "totalTerrSales": 10000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 4000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 3000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "6000",
+                        "totalTerrSales": 6000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "4",
                         "territoryName": "UK",
-                        "totalTerrSales": "4000",
+                        "totalTerrSales": 4000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       }
                     ]
                   }
                 ]
               },
               {
-                "date": "Jun 02, 2017",
+                "date": "Jun 2",
                 "totalDaySales": 25000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "10000",
+                    "totalRetailerSales": 10000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       },
                       {
                         "id": "3",
                         "territoryName": "France",
-                        "totalTerrSales": "2000",
+                        "totalTerrSales": 2000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 200,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 800,
+                          }
+                        ]
                       }
                     ]
                   },
@@ -252,47 +369,125 @@ function ReportService($http, config, superCache) {
                 ]
               },
               {
-                "date": "Jun 03, 2017",
+                "date": "Jun 3",
                 "totalDaySales": 25000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "15000",
+                    "totalRetailerSales": 15000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1500,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1500,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1200,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 800,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "3",
                         "territoryName": "France",
-                        "totalTerrSales": "7000",
+                        "totalTerrSales": 7000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 3000,
+                          }
+                        ]
                       }
                     ]
                   },
                   {
                     "id": "2",
                     "retailerName": "iTunes",
-                    "totalRetailerSales": "10000",
+                    "totalRetailerSales": 10000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "4",
                         "territoryName": "UK",
-                        "totalTerrSales": "4000",
+                        "totalTerrSales": 4000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1200,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1100,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 700,
+                          }
+                        ]
                       }
                     ]
                   }
@@ -300,73 +495,190 @@ function ReportService($http, config, superCache) {
               }
             ],
             "salesSecondRange": [{
-                "date": "Jul 01, 2017",
+                "date": "Jul 1",
                 "totalDaySales": 32000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "18000",
+                    "totalRetailerSales": 18000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "8000",
+                        "totalTerrSales": 8000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "7000",
+                        "totalTerrSales": 7000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 2500,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1500,
+                          }
+                        ]
                       },
                       {
                         "id": "3",
                         "territoryName": "France",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2200,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 800,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       }
                     ]
                   },
                   {
                     "id": "2",
                     "retailerName": "iTunes",
-                    "totalRetailerSales": "14000",
+                    "totalRetailerSales": 14000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "7000",
+                        "totalTerrSales": 7000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 4000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 3000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "2000",
+                        "totalTerrSales": 2000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 200,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 800,
+                          }
+                        ]
                       },
                       {
                         "id": "4",
                         "territoryName": "UK",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       }
                     ]
                   }
                 ]
               },
               {
-                "date": "Jul 02, 2017",
+                "date": "Jul 2",
                 "totalDaySales": 22000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "10000",
+                    "totalRetailerSales": 10000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "4000",
+                        "totalTerrSales": 4000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "3",
                         "territoryName": "France",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1200,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1200,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 600,
+                          }
+                        ]
                       }
                     ]
                   },
@@ -377,64 +689,181 @@ function ReportService($http, config, superCache) {
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "6000",
+                        "totalTerrSales": 6000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "4000",
+                        "totalTerrSales": 4000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "4",
                         "territoryName": "UK",
-                        "totalTerrSales": "2000",
+                        "totalTerrSales": 2000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       }
                     ]
                   }
                 ]
               },
               {
-                "date": "Jul 03, 2017",
+                "date": "Jul 3",
                 "totalDaySales": 26000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "12000",
+                    "totalRetailerSales": 12000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "8000",
+                        "totalTerrSales": 8000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 4000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       },
                       {
                         "id": "3",
                         "territoryName": "France",
-                        "totalTerrSales": "1000",
+                        "totalTerrSales": 1000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 500,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 200,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 300,
+                          }
+                        ]
                       }
                     ]
                   },
                   {
                     "id": "2",
                     "retailerName": "iTunes",
-                    "totalRetailerSales": "14000",
+                    "totalRetailerSales": 14000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "7000",
+                        "totalTerrSales": 7000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 3000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "2000",
+                        "totalTerrSales": 2000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1200,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 800,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       },
                       {
                         "id": "4",
                         "territoryName": "UK",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       }
                     ]
                   }
@@ -447,73 +876,315 @@ function ReportService($http, config, superCache) {
             "songName": "Fine Day",
             "totalSongSales": 200000,
             "salesFirstRange": [{
-                "date": "Jun 01, 2017",
+                "date": "Jun 1",
                 "totalDaySales": 30000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "10000",
+                    "totalRetailerSales": 10000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "5",
                         "territoryName": "Italy",
-                        "totalTerrSales": "2000",
+                        "totalTerrSales": 2000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1200,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 800,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       }
                     ]
                   },
                   {
                     "id": "2",
                     "retailerName": "iTunes",
-                    "totalRetailerSales": "20000",
+                    "totalRetailerSales": 20000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "10000",
+                        "totalTerrSales": 10000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 4000,
+                          }
+                        ]
                       },
                       {
                         "id": "3",
                         "territoryName": "France",
-                        "totalTerrSales": "6000",
+                        "totalTerrSales": 6000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "4",
                         "territoryName": "UK",
-                        "totalTerrSales": "4000",
+                        "totalTerrSales": 4000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       }
                     ]
                   }
                 ]
               },
               {
-                "date": "Jun 02, 2017",
+                "date": "Jun 2",
                 "totalDaySales": 35000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "20000",
+                    "totalRetailerSales": 20000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "12000",
+                        "totalTerrSales": 12000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 5000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 4000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       },
                       {
                         "id": "3",
                         "territoryName": "France",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "2",
+                    "retailerName": "iTunes",
+                    "totalRetailerSales": 15000,
+                    "salesByTerritory": [{
+                        "id": "1",
+                        "territoryName": "USA",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
+                      },
+                      {
+                        "id": "2",
+                        "territoryName": "India",
+                        "totalTerrSales": 6000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
+                      },
+                      {
+                        "id": "4",
+                        "territoryName": "UK",
+                        "totalTerrSales": 4000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "date": "Jun 3",
+                "totalDaySales": 35000,
+                "salesByRetailer": [{
+                    "id": "1",
+                    "retailerName": "Spotify",
+                    "totalRetailerSales": 20000,
+                    "salesByTerritory": [{
+                        "id": "1",
+                        "territoryName": "USA",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
+                      },
+                      {
+                        "id": "2",
+                        "territoryName": "India",
+                        "totalTerrSales": 8000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 3000,
+                          }
+                        ]
+                      },
+                      {
+                        "id": "4",
+                        "territoryName": "UK",
+                        "totalTerrSales": 7000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       }
                     ]
                   },
@@ -524,64 +1195,56 @@ function ReportService($http, config, superCache) {
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 4000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "6000",
-                      },
-                      {
-                        "id": "4",
-                        "territoryName": "UK",
-                        "totalTerrSales": "4000",
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "date": "Jun 03, 2017",
-                "totalDaySales": 35000,
-                "salesByRetailer": [{
-                    "id": "1",
-                    "retailerName": "Spotify",
-                    "totalRetailerSales": "20000",
-                    "salesByTerritory": [{
-                        "id": "1",
-                        "territoryName": "USA",
-                        "totalTerrSales": "5000",
-                      },
-                      {
-                        "id": "2",
-                        "territoryName": "India",
-                        "totalTerrSales": "8000",
-                      },
-                      {
-                        "id": "4",
-                        "territoryName": "UK",
-                        "totalTerrSales": "7000",
-                      }
-                    ]
-                  },
-                  {
-                    "id": "2",
-                    "retailerName": "iTunes",
-                    "totalRetailerSales": "15000",
-                    "salesByTerritory": [{
-                        "id": "1",
-                        "territoryName": "USA",
-                        "totalTerrSales": "4000",
-                      },
-                      {
-                        "id": "2",
-                        "territoryName": "India",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "5",
                         "territoryName": "Italy",
-                        "totalTerrSales": "6000",
+                        "totalTerrSales": 6000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       }
                     ]
                   }
@@ -589,73 +1252,190 @@ function ReportService($http, config, superCache) {
               }
             ],
             "salesSecondRange": [{
-                "date": "Jul 01, 2017",
+                "date": "Jul 1",
                 "totalDaySales": 42000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "22000",
+                    "totalRetailerSales": 22000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "9000",
+                        "totalTerrSales": 9000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 3000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "8000",
+                        "totalTerrSales": 8000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 4000,
+                          }
+                        ]
                       },
                       {
                         "id": "4",
                         "territoryName": "UK",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       }
                     ]
                   },
                   {
                     "id": "2",
                     "retailerName": "iTunes",
-                    "totalRetailerSales": "20000",
+                    "totalRetailerSales": 20000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "7000",
+                        "totalTerrSales": 7000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "5",
                         "territoryName": "Italy",
-                        "totalTerrSales": "2000",
+                        "totalTerrSales": 2000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       },
                       {
                         "id": "4",
                         "territoryName": "UK",
-                        "totalTerrSales": "11000",
+                        "totalTerrSales": 11000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 8000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 8000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 5000,
+                          }
+                        ]
                       }
                     ]
                   }
                 ]
               },
               {
-                "date": "Jul 02, 2017",
+                "date": "Jul 2",
                 "totalDaySales": 26000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "10000",
+                    "totalRetailerSales": 10000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "4000",
+                        "totalTerrSales": 4000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 4000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       },
                       {
                         "id": "5",
                         "territoryName": "Italy",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       }
                     ]
                   },
@@ -666,64 +1446,181 @@ function ReportService($http, config, superCache) {
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "6000",
+                        "totalTerrSales": 6000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 3000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "4000",
+                        "totalTerrSales": 4000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "4",
                         "territoryName": "UK",
-                        "totalTerrSales": "6000",
+                        "totalTerrSales": 6000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       }
                     ]
                   }
                 ]
               },
               {
-                "date": "Jul 03, 2017",
+                "date": "Jul 3",
                 "totalDaySales": 32000,
                 "salesByRetailer": [{
                     "id": "1",
                     "retailerName": "Spotify",
-                    "totalRetailerSales": "18000",
+                    "totalRetailerSales": 18000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "8000",
+                        "totalTerrSales": 8000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 4000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 2000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "3000",
+                        "totalTerrSales": 3000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       },
                       {
                         "id": "3",
                         "territoryName": "France",
-                        "totalTerrSales": "7000",
+                        "totalTerrSales": 7000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 2000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 3000,
+                          }
+                        ]
                       }
                     ]
                   },
                   {
                     "id": "2",
                     "retailerName": "iTunes",
-                    "totalRetailerSales": "14000",
+                    "totalRetailerSales": 14000,
                     "salesByTerritory": [{
                         "id": "1",
                         "territoryName": "USA",
-                        "totalTerrSales": "7000",
+                        "totalTerrSales": 7000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 4000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 0,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 3000,
+                          }
+                        ]
                       },
                       {
                         "id": "2",
                         "territoryName": "India",
-                        "totalTerrSales": "2000",
+                        "totalTerrSales": 2000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 0,
+                          }
+                        ]
                       },
                       {
                         "id": "5",
                         "territoryName": "Italy",
-                        "totalTerrSales": "5000",
+                        "totalTerrSales": 5000,
+                        "salesByTime": [{
+                            "timeRange": "04:00 - 05:00",
+                            "totalSales": 3000,
+                          },
+                          {
+                            "timeRange": "05:00 - 06:00",
+                            "totalSales": 1000,
+                          },
+                          {
+                            "timeRange": "06:00 - 07:00",
+                            "totalSales": 1000,
+                          }
+                        ]
                       }
                     ]
                   }
