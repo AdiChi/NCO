@@ -18,6 +18,7 @@ import LogListComponent from './components/logList/logList';
 import MultiSelectBoxComponent from './components/multiSelectBox/multiSelectBox';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
 import SongSalesByTerritoryComponent from './components/songSalesByTerritory/songSalesByTerritory';
+Mimport DateOverDateMultipleComponent from './components/dateOverDateMultiple/dateOverDateMultiple';
 import LoginComponent from './pages/login/login';
 import DashboardComponent from './pages/dashboard/dashboard';
 import SideNavComponent from './components/sideNav/sideNav';
@@ -102,6 +103,7 @@ angular
         MultiSelectBoxComponent.name,
         DateOverDateSongComponent.name,
         SongSalesByTerritoryComponent.name,
+        DateOverDateMultipleComponent.name,
         ReportsComponent.name,
         SideNavComponent.name,
         FilterComponent.name
@@ -187,6 +189,10 @@ angular
             .state('app.songSalesByTerritory', {
                 url: '/songSalesByTerritory',
                 template: '<song-sales-by-territory></song-sales-by-territory>'
+            })
+            .state('app.dateOverDateMultiple', {
+                url: '/dateOverDateMultiple',
+                template: '<date-over-date-multiple></date-over-date-multiple>'
             });
 
         $urlRouterProvider.otherwise('/app/');

@@ -1,0 +1,370 @@
+<div class="date-over-date-multiple report-panel" ng-init="vm.initializeController()">
+    <div class="panel panel-default reports">
+        <div class="panel-heading {{$root.currentUser.role}}-heading clickable">
+            <h3 class="panel-title">Date Over Date Mutiple Songs / Songlist</h3>
+            <span class="pull-right"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="txtSearchSong" class="heading">Select Songs/Song List</label>
+                </div>
+                <div class="col-md-12">
+                    <div class="animated zoomInRight">
+                        <div class="input-group search-bar">
+                            <input type="text" id="txtSearchSong" ng-model="songsearch" ng-model-options="{ debounce: 800 }" class="form-control" placeholder="Enter at least 3 characters of song name"
+                                autofocus />
+                            <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
+                        </div>
+                        <div id="main-info" class="col-md-9">
+                            <div ng-if="!vm.details">
+                                <ul class="dropdown-menu rel-results" style="display: block;">
+                                    <li class="loading-results">Loading results...</li>
+                                </ul>
+                            </div>
+                            <div ng-if="vm.details.songs.length>0">
+                                <ul class="dropdown-menu rel-results" style="display: block;">
+                                    <li ng-repeat="song in vm.details.songs">
+                                        <a href id="{{ $index + 1 }}" ng-click="vm.updateSong(song)">{{ song.trackname }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div ng-if="vm.details.songs.length==0">
+                                <ul class="dropdown-menu rel-results" style="display: block;">
+                                    <li class="no-results">No results found.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-if="vm.songError">
+                    <div class="alert alert-danger" role="alert">
+                        {{vm.songError}}
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-if="vm.selectedSongs.length">
+                <div class="col-md-12">
+                    <label class="heading">Selected song:</label>
+                    <ul class="selected-song-list">
+                        <li class="selected-song" ng-repeat="song in vm.selectedSongs">{{song}} <i class="fa fa-times pull-right" ng-click="vm.removeSong($index)"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="main-info" class="well">
+                        <h4 class="heading">Sales Period 1</h4>
+                        <div class="dropdown form-group timepicker">
+                            <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
+                                <label>Start Date</label>
+                                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                            </a> {{vm.dateRangeStart| date:"MMM dd, yyyy"}}
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="vm.dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
+                                    data-on-set-time="vm.startDateOnSetTime()" data-before-render="vm.startDateBeforeRender($dates)"></datetimepicker>
+                            </ul>
+                        </div>
+                        <div class="dropdown form-group timepicker">
+                            <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
+                                <label>End Date</label>
+                                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                            </a> {{vm.dateRangeEnd| date:"MMM dd, yyyy"}}
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="vm.dateRangeEnd" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }"
+                                    data-on-set-time="vm.endDateOnSetTime()" data-before-render="vm.endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                            </ul>
+                        </div>
+                        {{vm.range1diff || 0}} days
+                        <div class="alert alert-danger" role="alert" ng-if="vm.range1Error">
+                            {{vm.range1Error}}
+                        </div>
+                        <div>
+                            <h4 class="heading">Time Range 1</h4>
+                            <span uib-timepicker ng-model="vm.time1" ng-change="vm.updateTStart()" min="vm.todayStart" max="vm.time2" class="timepicker"></span>
+                            <span uib-timepicker ng-model="vm.time2" ng-change="vm.updateTEnd()" min="vm.time1" max="vm.todayEnd" class="timepicker"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="main-info2" class="well">
+                        <h4 class="heading">Sales Period 2</h4>
+                        <div class="dropdown form-group timepicker">
+                            <a class="dropdown-toggle" id="dropdownStart2" role="button" data-toggle="dropdown" data-target="" href="">
+                                <label>Start Date</label>
+                                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                            </a> {{vm.dateRange2Start| date:"MMM dd, yyyy"}}
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="vm.dateRange2Start" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart2', renderOn: 'end-date2-changed' }"
+                                    data-on-set-time="vm.startDate2OnSetTime()" data-before-render="vm.startDate2BeforeRender($dates)"></datetimepicker>
+                            </ul>
+                        </div>
+                        <div class="dropdown form-group timepicker">
+                            <a class="dropdown-toggle" id="dropdownEnd2" role="button" data-toggle="dropdown" data-target="" href="">
+                                <label>End Date</label>
+                                <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                            </a> {{vm.dateRange2End| date:"MMM dd, yyyy"}}
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="vm.dateRange2End" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd2', renderOn: 'start-date2-changed' }"
+                                    data-on-set-time="vm.endDate2OnSetTime()" data-before-render="vm.endDate2BeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                            </ul>
+                        </div>
+                        {{vm.range2diff || 0}} days
+                        <div class="alert alert-danger" role="alert" ng-if="vm.range2Error">
+                            {{vm.range2Error}}
+                        </div>
+                        <div>
+                            <h4 class="heading">Time Range 2</h4>
+                            <span uib-timepicker ng-model="vm.r2time1" ng-change="vm.updateR2TStart()" min="vm.todayStart" max="vm.r2time2" class="timepicker"></span>
+                            <span uib-timepicker ng-model="vm.r2time2" ng-change="vm.updateR2TEnd()" min="vm.r2time1" max="vm.todayEnd" class="timepicker"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-if="vm.rangeError">
+                    <div class="alert alert-danger" role="alert">
+                        {{vm.rangeError}}
+                    </div>
+                </div>
+                <div class="col-md-12" ng-if="vm.timeError">
+                    <div class="alert alert-danger" role="alert">
+                        {{vm.timeError}}
+                    </div>
+                </div>
+                <div class="col-md-12" ng-if="vm.sameRangeError">
+                    <div class="alert alert-danger" role="alert">
+                        {{vm.sameRangeError}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="territories">
+                        <label class="heading">Select Territories/Territory Groups</label>
+                        <multi-select-box item-groups="vm.territoryGroups" items="vm.territories" selected-item-groups="vm.selectedTerritoryGroups"
+                            selected-items="vm.selectedTerritories"></multi-select-box>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="retailers ">
+                        <label class="heading">Select Retailers</label>
+                        <multi-select-box items="vm.retailers" selected-items="vm.selectedRetailers"></multi-select-box>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="chkBrkByRet">Break Out by Retailer:</label>
+                    <input type="checkbox" id="chkBrkByRet" class="retailer-break-check" />
+                </div>
+                <div class="col-md-6">
+                    <label for="optDataRepresent">Represent Data as:</label>
+                    <select id="optDataRepresent" ng-model="vm.representData">
+                        <option value="1">Aggregate Songs Data</option>
+                        <option value="2" selected>Seperate Song Data</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="confirmSubmit" type="submit" class="btn btn-success" ng-click="vm.getChart()">Get Information</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:30px">
+        <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
+            show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections">
+            <chart-size chart-height="650" />
+            <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
+            <!-- <chart-bar ratio="0.5" /> -->
+            <chart-axes values-x="x" />
+            <chart-axis>
+                <chart-axis-x axis-position="outer-center" axis-type="category" />
+                <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+            </chart-axis>
+            <chart-legend legend-position="inset" />
+        </c3chart>
+    </div>
+    <div class="container-fluid" ng-if="vm.theChart" style="padding-top:30px">
+        <div class="container-fluid">
+            <div class="col-md-12 graph-type-labels">
+                <!-- NG-REPEAT doesn't give correct active btns hence this approach -->
+                <label class="btn btn-primary" ng-model="vm.currentChartType" uib-btn-radio="'{{vm.chartTypes[0]}}'" ng-click="vm.changeChartType(vm.currentChartType, '{{vm.currentChartType}}')">
+                    {{vm.chartTypes[0]}}
+                </label>
+                <label class="btn btn-primary" ng-model="vm.currentChartType" uib-btn-radio="'{{vm.chartTypes[1]}}'" ng-click="vm.changeChartType(vm.currentChartType, '{{vm.currentChartType}}')">
+                    {{vm.chartTypes[1]}}
+                </label>
+                <label class="btn btn-primary" ng-model="vm.currentChartType" uib-btn-radio="'{{vm.chartTypes[2]}}'" ng-click="vm.changeChartType(vm.currentChartType, '{{vm.currentChartType}}')">
+                    {{vm.chartTypes[2]}}
+                </label>
+                <label class="btn btn-primary" ng-model="vm.currentChartType" uib-btn-radio="'{{vm.chartTypes[3]}}'" ng-click="vm.changeChartType(vm.currentChartType, '{{vm.currentChartType}}')">
+                    {{vm.chartTypes[3]}}
+                </label>
+                <label class="btn btn-primary" ng-model="vm.currentChartType" uib-btn-radio="'{{vm.chartTypes[4]}}'" ng-click="vm.changeChartType(vm.currentChartType, '{{vm.currentChartType}}')">
+                    {{vm.chartTypes[4]}}
+                </label>
+                <label class="btn btn-primary" ng-model="vm.currentChartType" uib-btn-radio="'{{vm.chartTypes[5]}}'" ng-click="vm.changeChartType(vm.currentChartType, '{{vm.currentChartType}}')">
+                    {{vm.chartTypes[5]}}
+                </label>
+            </div>
+        </div>
+        <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px">
+            {{selectedSong}}
+            <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
+                show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
+                ng-if="!vm.showHeatMap">
+                <chart-size chart-height="700" />
+                <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
+                <!-- <chart-bar ratio="0.5" /> -->
+                <chart-axes values-x="x" />
+                <chart-axis>
+                    <chart-axis-x axis-position="outer-center" axis-type="category" />
+                    <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                    <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                </chart-axis>
+                <chart-legend legend-position="inset" />
+            </c3chart>
+        </div>
+        <div class="container-fluid" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px">
+            <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
+                show-subchart="true" callback-function="vm.handleCallback2" empty-label="No data available for above selections">
+                <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
+                <chart-size chart-height="700" />
+                <!-- <chart-bar ratio="0.5" /> -->
+                <chart-axes values-x="x" />
+                <chart-axis>
+                    <chart-axis-x axis-position="outer-center" axis-type="category" />
+                    <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                    <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                </chart-axis>
+                <chart-legend legend-position="inset" />
+            </c3chart>
+        </div>
+    </div>
+    <div ng-if="chart && drilldown">
+        <div class="container drilldown" ng-if=" !timewise">
+            <h3 class="tab-head">Sales</h3>
+            <h4>{{selectedSong}}</h4>
+            <div class="col-xs-6">
+                <table class="table table-hover table-responsive">
+                    <tbody ng-init="showTab={};showRet={};">
+                        <tr class="tab-head">
+                            <th>Sales Period 1 ({{chart.firstRange}})</th>
+                            <th>Sales</th>
+                        </tr>
+                        <tr ng-repeat-start="(key, value) in range1sales">
+                            <td ng-click="value.totalsales>0 ?(showTab[value.date] = !showTab[value.date]): null">
+                                <i style="padding-left: 18px; " ng-if="value.totalsales==0"></i>
+                                <i class="glyphicon" ng-if="value.totalsales>0" ng-class=" showTab[value.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                {{value.date}}
+                            </td>
+                            <td><strong>{{value.totalsales}}</strong></td>
+                        </tr>
+                        <tr class="tab-head" ng-show="showTab[value.date]">
+                            <td style="padding-left: 30px">
+                                Retailers
+                            </td>
+                            <td>
+                                Sales
+                            </td>
+                        </tr>
+                        <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="showTab[value.date]">
+                            <td ng-click="ret.totalSaleRetailer?showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null" ng-if="ret.totalSaleRetailer>0">
+                                <i style="padding-left: 20px"></i>
+                                <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
+                                <i class="glyphicon" ng-if="ret.totalSaleRetailer>0" ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                {{ret.name}}
+                            </td>
+                            <td ng-if="ret.totalSaleRetailer>0">
+                                <strong>{{ret.totalSaleRetailer}}</strong>
+                            </td>
+                        </tr>
+                        <tr class="tab-head" ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <td style="padding-left: 45px">
+                                Territories
+                            </td>
+                            <td>
+                                Sales
+                            </td>
+                        </tr>
+                        <tr ng-repeat="ter in ret.territoryList" ng-repeat-end ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <td>
+                                <i style="padding-left: 65px"></i> {{ter.name}}
+                            </td>
+                            <td>
+                                {{ter.totalSaleTerr}}
+                            </td>
+                        </tr>
+                        <tr ng-repeat-end></tr>
+                        <tr class="tab-head">
+                            <td><strong>Total Sales</strong></td>
+                            <td><strong>{{range1RollUp.salesTotal}}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table st-table="vm.displayCollection" class="table table-hover table-responsive">
+                    <tbody ng-init="showTab={};showRet={};">
+                        <tr class="tab-head">
+                            <th>Sales Period 2 ({{chart.secondRange}})</th>
+                            <th>Sales</th>
+                        </tr>
+                        <tr ng-repeat-start="(key, value) in range2sales">
+                            <td ng-click="value.totalsales>0 ?(showTab[value.date] = !showTab[value.date]): null">
+                                <i style="padding-left: 18px; " ng-if="value.totalsales==0"></i>
+                                <i class="glyphicon" ng-if="value.totalsales>0" ng-class=" showTab[value.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                {{value.date}}
+                            </td>
+                            <td><strong>{{value.totalsales}}</strong></td>
+                        </tr>
+                        <tr class="tab-head" ng-show="showTab[value.date]">
+                            <td style="padding-left: 30px">
+                                Retailers
+                            </td>
+                            <td>
+                                Sales
+                            </td>
+                        </tr>
+                        <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="showTab[value.date]">
+                            <td ng-click="ret.totalSaleRetailer>0 ? showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null" ng-if="ret.totalSaleRetailer>0">
+                                <i style="padding-left:20px"></i>
+                                <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
+                                <i class="glyphicon" ng-if="ret.totalSaleRetailer>0" ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                {{ret.name}}
+                            </td>
+                            <td ng-if="ret.totalSaleRetailer>0">
+                                <strong> {{ret.totalSaleRetailer}}</strong>
+                            </td>
+                        </tr>
+                        <tr class="tab-head" ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <td style="padding-left: 45px">
+                                Territories
+                            </td>
+                            <td>
+                                Sales
+                            </td>
+                        </tr>
+                        <tr ng-repeat="ter in ret.territoryList" ng-repeat-end ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <td>
+                                <i style="padding-left: 65px"></i> {{ter.name}}
+                            </td>
+                            <td>
+                                {{ter.totalSaleTerr}}
+                            </td>
+                        </tr>
+                        <tr ng-repeat-end>
+                        </tr>
+                        <tr class="tab-head">
+                            <td><strong>Total Sales</strong></td>
+                            <td><strong>{{range2RollUp.salesTotal}}</strong></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><a class="btn btn-default" st-export>Export to Excel</a></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
