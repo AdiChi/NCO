@@ -36,6 +36,9 @@ import CreateSonglistComponent from './pages/createSonglist/createSonglist';
 import UploadSongsComponent from './pages/uploadSongs/uploadSongs';
 import EditAllSongsComponent from './pages/editAllSongs/editAllSongs';
 
+import EmailService from './services/EmailService';
+import c3StyleService from './services/c3StyleService';
+import c3ExportService from './services/c3ExportService';
 import UsersService from './services/UsersService';
 import SongsService from './services/SongsService';
 import ArtistService from './services/ArtistService';
@@ -210,6 +213,9 @@ angular
     .factory('UsersService', UsersService)
     .factory('SongsService', SongsService)
     .factory('SongListsService', SongListsService)
+    .factory('c3ExportService', c3ExportService)
+    .factory('c3StyleService', c3StyleService)
+    .factory('EmailService', EmailService)
     .factory('ArtistService', ArtistService)
     .factory('LogService', LogService)
     .factory('ModalService', ModalService)

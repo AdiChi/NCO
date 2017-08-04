@@ -1,5 +1,5 @@
 class DateOverDateSongController {
-    constructor($scope, $filter, ReportService) {
+    constructor($scope, $filter, ReportService, c3ExportService, EmailService) {
         "ngInject";
 
         $scope.chartTypes = ["heatmap", "donut", "line", "area-step", "stacked-bar", "bar"];
@@ -507,6 +507,27 @@ class DateOverDateSongController {
             };
         }
 
+        $scope.getPDF = function() {
+            var myImage = c3ExportService.createChartImages($(".c3graph"), {});
+            // window.open(myImage);
+            var docDefinition = {
+                content: [{
+                    image: myImage,
+                    fit: [500, 700]
+                }]
+            };
+            // pdfMake.createPdf(docDefinition).open();
+            var data = pdfMake.createPdf(docDefinition)._bufferToBlob();
+            var formData = new FormData();
+            formData.append("pdf", data, "mygraph.pdf");
+
+            /*EmailService.sendAttachment(formData).then((res) => {
+                console.log('PDF uploaded res', res);
+                return res;
+            }).catch(function(e) {
+                console.log(e);
+            });*/
+        };
         function addEmptyDateValues() {
 
             $scope.range1sales = $scope.chart.salesFirstRange;

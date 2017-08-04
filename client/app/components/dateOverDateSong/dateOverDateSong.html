@@ -198,7 +198,8 @@
                     <chart-legend legend-position="inset" />
                 </c3chart>
             </div>
-            <div class="container-fluid" ng-show="theChart && !showHeatMap" style="padding-top:30px">
+            <div class="c3graph container-fluid" ng-show="theChart && !showHeatMap" style="padding-top:30px">
+            <button ng-click="getPDF()">get PDF</button>
                 <c3chart  padding-right="60" bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
                     show-subchart="true" callback-function="handleCallback2" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
@@ -213,7 +214,8 @@
                     <chart-legend legend-position="inset" />
                 </c3chart>
             </div>
-            <div class="container-fluid" id="world-map" ng-if="showHeatMap">
+            <div class="container-fluid " id="world-map" ng-if="showHeatMap">
+            <button ng-click="getPDF()">get PDF</button>
                 <button type="button" class="btn btn-primary" ng-class="{active: activefirst}" ng-click="activefirst=true;toggleMap(range1sales);">{{chart.firstRange}}</button>
                 <button type="button" class="btn btn-primary" ng-class="{active: !activefirst}" ng-click="activefirst=false;toggleMap(range2sales);">{{chart.secondRange}}</button>
                 <div datamap data="heatMapData" id="world-map-container" show-heat-map="showHeatMap" ng-if="!showNoData"> </div>
