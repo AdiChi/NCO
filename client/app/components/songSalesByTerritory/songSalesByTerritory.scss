@@ -43,3 +43,60 @@
         }
     }
 }
+
+.modal-dialog.modal-md {
+    margin-top: 200px;
+    .break-out {
+        padding: 25px;
+        .modal-header {
+            padding: 20px 5px;
+            padding-top: 0px;
+            .title {
+                font-size: 20px;
+                font-weight: bold;
+                padding: 0px;
+            }
+            .close-button {
+                cursor: pointer;
+                padding: 0px;
+            }
+        }
+        .break-out-content {
+            padding: 20px 10px;
+            ul.retailer-list {
+                list-style-type: none;
+                padding: 0px;
+                li {
+                    padding: 5px 0;
+                    display: inline-block;
+                    width: 100%;
+                    div.retailer-wrapper {
+                        display: inline-block;
+                        width: 100%;
+                        div {
+                            cursor: pointer;
+                            font-weight: bold;
+                            padding: 0px;
+                        }
+                    }
+                    ul.time-list {
+                        list-style-type: none;
+                        padding: 0px;
+                        li {
+                            padding-left: 35px;
+                            display: inline-block;
+                            width: 100%;
+                            div.time-wrapper {
+                                div {
+                                    font-weight: normal;
+                                    cursor: default;
+                                    padding: 0px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

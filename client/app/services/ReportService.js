@@ -69,7 +69,7 @@ function ReportService($http, config, superCache) {
                         "territoryName": "United States",
                         "totalTerritorySales": 160000,
                         "salesByDate": [{
-                                "date": "Jun 1",
+                                "date": "June 1",
                                 "totalDaySales": 30000,
                                 "salesByRetailer": [{
                                         "id": "1",
@@ -110,7 +110,7 @@ function ReportService($http, config, superCache) {
                                 ]
                             },
                             {
-                                "date": "Jun 2",
+                                "date": "June 2",
                                 "totalDaySales": 25000,
                                 "salesByRetailer": [{
                                         "id": "1",
@@ -151,7 +151,7 @@ function ReportService($http, config, superCache) {
                                 ]
                             },
                             {
-                                "date": "Jun 3",
+                                "date": "June 3",
                                 "totalDaySales": 20000,
                                 "salesByRetailer": [{
                                         "id": "1",
@@ -198,7 +198,7 @@ function ReportService($http, config, superCache) {
                         "territoryName": "United Kingdom",
                         "totalTerritorySales": 170000,
                         "salesByDate": [{
-                                "date": "Jun 1",
+                                "date": "June 1",
                                 "totalDaySales": 25000,
                                 "salesByRetailer": [{
                                         "id": "1",
@@ -239,7 +239,7 @@ function ReportService($http, config, superCache) {
                                 ]
                             },
                             {
-                                "date": "Jun 2",
+                                "date": "June 2",
                                 "totalDaySales": 37000,
                                 "salesByRetailer": [{
                                         "id": "1",
@@ -280,7 +280,7 @@ function ReportService($http, config, superCache) {
                                 ]
                             },
                             {
-                                "date": "Jun 3",
+                                "date": "June 3",
                                 "totalDaySales": 30000,
                                 "salesByRetailer": [{
                                         "id": "1",

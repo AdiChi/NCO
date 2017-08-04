@@ -62,6 +62,9 @@
                 <div ng-if="vm.timeError ">
                     {{vm.timeError}}
                 </div>
+                <div ng-if="vm.terrError ">
+                    {{vm.terrError}}
+                </div>
             </div>
             <div class="container-fluid ">
                 <button id="confirmSubmit " type="submit " class="btn btn-success " ng-click="vm.getChart() ">Get Information</button>
@@ -94,7 +97,7 @@
                 </div>
             </div>
             <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px">
-                {{selectedSong}}
+                {{vm.selectedSong.trackname}}
                 <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
                     ng-if="!vm.showHeatMap">
                     <chart-size chart-height="700" />
@@ -107,6 +110,7 @@
                         <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="inset" />
+                    <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
                 </c3chart>
             </div>
             <div class="container-fluid" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px">
@@ -121,6 +125,7 @@
                         <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="inset" />
+                    <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
                 </c3chart>
             </div>
             <div class="container-fluid" id="world-map" ng-if="vm.showHeatMap">

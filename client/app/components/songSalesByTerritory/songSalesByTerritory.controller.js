@@ -1,5 +1,6 @@
+import BreakOutByRetailerController from './breakOutByRetailer.controller';
 class SongSalesByTerritoryController {
-    constructor($scope, $filter, ReportService) {
+    constructor($scope, $filter, $uibModal, ReportService) {
         'ngInject'
 
         this.chartTypes = [
@@ -175,6 +176,10 @@ class SongSalesByTerritoryController {
                 this.timeError = "Please select time range";
                 blnError = true;
             }
+            if (this.selectedTerritories.length === 0 && this.selectedTerritoryGroups.length === 0) {
+                this.terrError = "Please select a territory or territory group";
+                blnError = true;
+            }
 
             if (blnError) return;
 
@@ -203,6 +208,19 @@ class SongSalesByTerritoryController {
             } else {
                 this.loading = false;
             }
+        };
+
+        this.showRetailerBreakOut = (data) => {
+            var dateData = $filter('filter')(this.chart.salesByTerritory[data.x].salesByDate, { date: data.name })[0];
+            dateData.territory = this.chart.salesByTerritory[data.x].territoryName;
+            $scope.dateData = dateData;
+            $uibModal.open({
+                templateUrl: 'app/components/songSalesByTerritory/breakOutByRetailer.html',
+                controller: BreakOutByRetailerController,
+                controllerAs: 'vm',
+                size: 'md',
+                scope: $scope
+            });
         };
 
         //----Drill Down Code------//
@@ -248,7 +266,7 @@ class SongSalesByTerritoryController {
                 timestr = t1 + " to " + t2;
             }
             return timestr;
-        }
+        };
     }
 }
 
