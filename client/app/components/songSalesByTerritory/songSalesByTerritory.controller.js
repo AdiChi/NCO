@@ -203,14 +203,35 @@ class SongSalesByTerritoryController {
             } else {
                 this.loading = false;
             }
-        }
+        };
 
         //----Drill Down Code------//
-        this.toFormat = function(r) {
-            this.exportListName = this.selectedSong + "\r\n\n\"" +
-                this.chart.firstRange + "\"" +
-                " \n\"" + this.chart.secondRange + "\"";
-            return this.rangeRollUp.allMap;
+
+        this.prepareReportData = function() {
+            var allMap = [];
+            angular.forEach(this.chart.salesByTerritory, (territory) => {
+                angular.forEach(territory.salesByDate, (day) => {
+                    angular.forEach(day.salesByRetailer, (retailer) => {
+                        angular.forEach(retailer.salesByTime, (time) => {
+                            var finalObj = {
+                                Territory: territory.territoryName,
+                                Date: day.date,
+                                Retailer: retailer.retailerName,
+                                TimeRange: time.timeRange,
+                                Sales: time.totalSales
+                            };
+                            allMap.push(finalObj);
+                        });
+                    });
+                });
+            });
+            this.chart.allMap = allMap;
+        };
+
+        this.toFormat = function() {
+            this.exportListName = this.selectedSong.trackname + "\r\n\n\"" + this.chart.dateRange + "\r\n\n\"";
+            this.prepareReportData();
+            return this.chart.allMap;
         };
 
         this.getTimeRangeInFormat = function(time) {
