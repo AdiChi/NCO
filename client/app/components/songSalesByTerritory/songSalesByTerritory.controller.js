@@ -14,7 +14,6 @@ class SongSalesByTerritoryController {
         this.selectedTerritoryGroups = [];
         this.selectedTerritories = [];
         this.selectedRetailers = [];
-        this.brkByRetailer = 'false';
         this.representation = '2';
 
         this.mapData = [];
@@ -161,53 +160,52 @@ class SongSalesByTerritoryController {
         };
 
         this.getChart = function() {
-            var blnError = false;
-            if (!this.selectedSong) {
-                this.songError = "Please select song";
-                blnError = true;
-            }
-            if (!this.range.startDate ||
-                !this.range.endDate) {
-                this.rangeError = "Please select date range";
-                blnError = true;
-            }
-            if (!this.range.startTime ||
-                !this.range.endTime) {
-                this.timeError = "Please select time range";
-                blnError = true;
-            }
-            if (this.selectedTerritories.length === 0 && this.selectedTerritoryGroups.length === 0) {
-                this.terrError = "Please select a territory or territory group";
-                blnError = true;
-            }
+            // var blnError = false;
+            // if (!this.selectedSong) {
+            //     this.songError = "Please select song";
+            //     blnError = true;
+            // }
+            // if (!this.range.startDate ||
+            //     !this.range.endDate) {
+            //     this.rangeError = "Please select date range";
+            //     blnError = true;
+            // }
+            // if (!this.range.startTime ||
+            //     !this.range.endTime) {
+            //     this.timeError = "Please select time range";
+            //     blnError = true;
+            // }
+            // if (this.selectedTerritories.length === 0 && this.selectedTerritoryGroups.length === 0) {
+            //     this.terrError = "Please select a territory or territory group";
+            //     blnError = true;
+            // }
 
-            if (blnError) return;
+            // if (blnError) return;
 
-            this.setCriteria();
-            this.theChart = null;
-            this.showHeatMap = false;
-            this.loading = true;
-            this.drilldown = false;
-            this.heatMapData = null;
-            if (this.query.songId &&
-                this.query.rangeDate1 &&
-                this.query.rangeDate2 &&
-                this.query.time1 &&
-                this.query.time2 &&
-                !this.rangeError) {
-                this.query.breakByRetailer = (this.brkByRetailer === 'true');
-                this.query["retailer[]"] = this.selectedRetailers || [];
-                this.query["territory[]"] = this.selectedTerritories || [];
-                this.query["territoryGroup[]"] = this.selectedTerritoryGroups || [];
+            // this.setCriteria();
+            // this.theChart = null;
+            // this.showHeatMap = false;
+            // this.loading = true;
+            // this.drilldown = false;
+            // this.heatMapData = null;
+            // if (this.query.songId &&
+            //     this.query.rangeDate1 &&
+            //     this.query.rangeDate2 &&
+            //     this.query.time1 &&
+            //     this.query.time2 &&
+            //     !this.rangeError) {
+            //     this.query["retailer[]"] = this.selectedRetailers || [];
+            //     this.query["territory[]"] = this.selectedTerritories || [];
+            //     this.query["territoryGroup[]"] = this.selectedTerritoryGroups || [];
 
-                this.chart = ReportService.getSalesByTerritoryChart();
-                this.loading = false;
-                this.plotChart();
-                this.NoChartError = "";
-                this.drilldown = true;
-            } else {
-                this.loading = false;
-            }
+            this.chart = ReportService.getSalesByTerritoryChart();
+            this.loading = false;
+            this.plotChart();
+            this.NoChartError = "";
+            this.drilldown = true;
+            // } else {
+            //     this.loading = false;
+            // }
         };
 
         this.showRetailerBreakOut = (data) => {

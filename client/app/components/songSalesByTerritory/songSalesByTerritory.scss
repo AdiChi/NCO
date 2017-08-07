@@ -44,6 +44,15 @@
     }
 }
 
+.chart-container {
+    .container-fluid {
+        path {
+            pointer-events: all;
+            cursor: pointer;
+        }
+    }
+}
+
 .modal-dialog.modal-md {
     margin-top: 200px;
     .break-out {

@@ -21,15 +21,6 @@
                     <div class="col-md-6 left-content">
                         <date-time-range range="vm.range"></date-time-range>
                         <div class="col-md-12 select">
-                            <div class="col-md-6 select-label">Break Out By Retailer?</div>
-                            <div class="col-md-6">
-                                <select ng-model="vm.brkByRetailer">
-                                <option value="true">Yes</option>
-                                <option value="false">No</option>
-                            </select>
-                            </div>
-                        </div>
-                        <div class="col-md-12 select">
                             <div class="select-label">Represent Territory Data As:</div>
                             <div class="represent">
                                 <select ng-model="vm.representation">
@@ -75,7 +66,7 @@
         {{vm.NoChartError}}
     </div>
     <div class="loader" ng-if="vm.loading"></div>
-    <div ng-if="!vm.loading">
+    <div ng-if="!vm.loading" class="chart-container">
         <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:30px">
             <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections">
                 <chart-size chart-height="650" />
