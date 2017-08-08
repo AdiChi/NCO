@@ -63,47 +63,47 @@ function ReportService($http, config, superCache) {
                 "songName": "Apple in Basket",
                 "daysInRange": 10,
                 "dateRange": "Jun 1, 2017 to Jun 10, 2017",
-                "totalSongSales": 260000,
+                "totalSongSales": 350,
                 "salesByTerritory": [{
                         "territoryid": "123456",
                         "territoryName": "United States",
-                        "totalTerritorySales": 160000,
+                        "totalTerritorySales": 150,
                         "salesByDate": [{
                                 "date": "June 1",
-                                "totalDaySales": 30000,
+                                "totalDaySales": 70,
                                 "salesByRetailer": [{
                                         "id": "1",
                                         "retailerName": "Spotify",
-                                        "totalRetailerSales": 10000,
+                                        "totalRetailerSales": 40,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 12
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 12
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 16
                                             }
                                         ]
                                     },
                                     {
                                         "id": "2",
                                         "retailerName": "iTunes",
-                                        "totalRetailerSales": 20000,
+                                        "totalRetailerSales": 30,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 7
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 9
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 14
                                             }
                                         ]
                                     }
@@ -111,40 +111,40 @@ function ReportService($http, config, superCache) {
                             },
                             {
                                 "date": "June 2",
-                                "totalDaySales": 25000,
+                                "totalDaySales": 50,
                                 "salesByRetailer": [{
                                         "id": "1",
                                         "retailerName": "Spotify",
-                                        "totalRetailerSales": 10000,
+                                        "totalRetailerSales": 20,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 10
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 5
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 5
                                             }
                                         ]
                                     },
                                     {
                                         "id": "2",
                                         "retailerName": "iTunes",
-                                        "totalRetailerSales": "15000",
+                                        "totalRetailerSales": 30,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 15
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 7
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 8
                                             }
                                         ]
                                     }
@@ -152,40 +152,40 @@ function ReportService($http, config, superCache) {
                             },
                             {
                                 "date": "June 3",
-                                "totalDaySales": 20000,
+                                "totalDaySales": 30,
                                 "salesByRetailer": [{
                                         "id": "1",
                                         "retailerName": "Spotify",
-                                        "totalRetailerSales": 15000,
+                                        "totalRetailerSales": 20,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 10
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 4
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 6
                                             }
                                         ]
                                     },
                                     {
                                         "id": "2",
                                         "retailerName": "iTunes",
-                                        "totalRetailerSales": 10000,
+                                        "totalRetailerSales": 10,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 3
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 2
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 5
                                             }
                                         ]
                                     }
@@ -196,43 +196,43 @@ function ReportService($http, config, superCache) {
                     {
                         "territoryid": "78956",
                         "territoryName": "United Kingdom",
-                        "totalTerritorySales": 170000,
+                        "totalTerritorySales": 200,
                         "salesByDate": [{
                                 "date": "June 1",
-                                "totalDaySales": 25000,
+                                "totalDaySales": 40,
                                 "salesByRetailer": [{
                                         "id": "1",
                                         "retailerName": "Spotify",
-                                        "totalRetailerSales": 10000,
+                                        "totalRetailerSales": 25,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 10
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 10
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 5
                                             }
                                         ]
                                     },
                                     {
                                         "id": "2",
                                         "retailerName": "iTunes",
-                                        "totalRetailerSales": 22000,
+                                        "totalRetailerSales": 15,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 3
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 7
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 5
                                             }
                                         ]
                                     }
@@ -240,40 +240,40 @@ function ReportService($http, config, superCache) {
                             },
                             {
                                 "date": "June 2",
-                                "totalDaySales": 37000,
+                                "totalDaySales": 90,
                                 "salesByRetailer": [{
                                         "id": "1",
                                         "retailerName": "Spotify",
-                                        "totalRetailerSales": 10000,
+                                        "totalRetailerSales": 35,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 15
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 12
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 8
                                             }
                                         ]
                                     },
                                     {
                                         "id": "2",
                                         "retailerName": "iTunes",
-                                        "totalRetailerSales": "15000",
+                                        "totalRetailerSales": 55,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 17
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 15
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 23
                                             }
                                         ]
                                     }
@@ -281,40 +281,40 @@ function ReportService($http, config, superCache) {
                             },
                             {
                                 "date": "June 3",
-                                "totalDaySales": 30000,
+                                "totalDaySales": 70,
                                 "salesByRetailer": [{
                                         "id": "1",
                                         "retailerName": "Spotify",
-                                        "totalRetailerSales": 15000,
+                                        "totalRetailerSales": 40,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 10
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 10
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 20
                                             }
                                         ]
                                     },
                                     {
                                         "id": "2",
                                         "retailerName": "iTunes",
-                                        "totalRetailerSales": 10000,
+                                        "totalRetailerSales": 30,
                                         "salesByTime": [{
                                                 "timeRange": "04:00 - 05:00",
-                                                "totalSales": 3000,
+                                                "totalSales": 12
                                             },
                                             {
                                                 "timeRange": "05:00 - 06:00",
-                                                "totalSales": 1000,
+                                                "totalSales": 8
                                             },
                                             {
                                                 "timeRange": "06:00 - 07:00",
-                                                "totalSales": 2000,
+                                                "totalSales": 10
                                             }
                                         ]
                                     }
