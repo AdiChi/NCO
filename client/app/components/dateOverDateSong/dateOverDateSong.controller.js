@@ -520,13 +520,15 @@ class DateOverDateSongController {
             var data = pdfMake.createPdf(docDefinition)._bufferToBlob();
             var formData = new FormData();
             formData.append("pdf", data, "mygraph.pdf");
+            formData.append("email[]", ['abc.cde@dummy.com']);
+            formData.append("isLink", false);
 
-            /*EmailService.sendAttachment(formData).then((res) => {
+            EmailService.sendAttachment(formData).then((res) => {
                 console.log('PDF uploaded res', res);
                 return res;
             }).catch(function(e) {
                 console.log(e);
-            });*/
+            });
         };
         function addEmptyDateValues() {
 
