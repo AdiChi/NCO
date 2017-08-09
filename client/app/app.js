@@ -59,6 +59,7 @@ import DataMap from './directives/datamap.directive';
 import StResetFiltersDirective from './directives/stResetFilters.directive';
 import StRatioDirective from './directives/stRatio.directive';
 import CustomOnScrollDirective from './directives/customOnScroll.directive'
+import MultipleEmailsDirective from './directives/multipleEmails.directive'
 
 // import our default styles for the whole application
 import 'normalize.css';
@@ -210,6 +211,7 @@ angular
     .directive('stResetFilter', StResetFiltersDirective)
     .directive('stRatio', StRatioDirective)
     .directive('customOnScroll', CustomOnScrollDirective)
+    .directive('multipleEmails', MultipleEmailsDirective)
     .factory('UsersService', UsersService)
     .factory('SongsService', SongsService)
     .factory('SongListsService', SongListsService)
