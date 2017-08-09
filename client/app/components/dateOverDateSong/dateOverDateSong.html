@@ -223,50 +223,12 @@
             </div>
         </div>
         <div ng-if="chart && drilldown">
-            <!-- <label style="padding-left: 10px;"><input type="checkbox" ng-model="timewise">Break out sales by hour</label>
-            <div class="container drilldown" ng-if="timewise">
-                <h3 class="tab-head">Sales by hour</h3>
-                <h4>{{selectedSong}}</h4>
-                <div class="col-md-6">
-                    <table class="table table-responsive">
-                        <tr class="tab-head">
-                            <th>Sales Period 1 ({{chart.firstRange}})</th>
-                            <th>Sales</th>
-                        </tr>
-                        <tr ng-repeat-start="(key, range1) in range1sales">
-                            <td ng-click="toggleRows(range1)">
-                                <i class="glyphicon" ng-class=" showHours == range1.date ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                {{range1.date}}
-                            </td>
-                            <td><span>{{range1.totalsales}}</span></td>
-                        </tr>
-                        <tr ng-repeat="(key, value) in timeCollection" ng-repeat-end ng-if="showHours == range1.date">
-                            <td style="padding-left: 45px">{{value.range}}</td>
-                            <td>{{value.sales}}</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                    <table class="table table-responsive">
-                        <tr class="tab-head">
-                            <th>Sales Period 2 ({{chart.secondRange}})</th>
-                            <th>Sales</th>
-                        </tr>
-                        <tr ng-repeat-start="(key, range2) in range2sales">
-                            <td ng-click="toggleRows(range2)">
-                                <i class="glyphicon " ng-class=" showHours == range2.date ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                {{range2.date}}
-                            </td>
-                            <td><span>{{range2.totalsales}}</span></td>
-                        </tr>
-                        <tr ng-repeat="(key, value) in timeCollection" ng-repeat-end ng-if="showHours == range2.date">
-                            <td style="padding-left: 45px">{{value.range}}</td>
-                            <td>{{value.sales}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div> -->
             <div class="container drilldown" ng-if=" !timewise">
                 <h3 class="tab-head">Sales</h3>
                 <h4>{{selectedSong}}</h4>
+                <h5><label>Expand all:
+                    <input type="checkbox" ng-model="expandAll">
+                </label></h5>
                 <div class="col-xs-6">
                     <table class="table table-hover table-responsive">
                         <tbody ng-init="showTab={};showRet={};">
@@ -281,7 +243,7 @@
                                 </td>
                                 <td><strong>{{value.totalsales}}</strong></td>
                             </tr>
-                            <tr class="tab-head" ng-show="showTab[value.date]">
+                            <tr class="tab-head" ng-show="(expandAll && value.totalsales>0) || showTab[value.date]">
                                 <td style="padding-left: 30px">
                                     Retailers
                                 </td>
@@ -289,7 +251,7 @@
                                     Sales
                                 </td>
                             </tr>
-                            <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="showTab[value.date]">
+                            <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="expandAll || showTab[value.date]">
                                 <td ng-click="ret.totalSaleRetailer?showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null" ng-if="ret.totalSaleRetailer>0">
                                     <i style="padding-left: 20px"></i>
                                     <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
@@ -299,7 +261,7 @@
                                     <strong>{{ret.totalSaleRetailer}}</strong>
                                 </td>
                             </tr>
-                            <tr class="tab-head" ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <tr class="tab-head" ng-show="(expandAll && ret.totalSaleRetailer>0) || (showTab[value.date] && showRet[value.date][ret.name])">
                                 <td style="padding-left: 45px">
                                     Territories
                                 </td>
@@ -307,7 +269,7 @@
                                     Sales
                                 </td>
                             </tr>
-                            <tr ng-repeat-start="ter in ret.territoryList" ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <tr ng-repeat-start="ter in ret.territoryList" ng-show="expandAll || (showTab[value.date] && showRet[value.date][ret.name])">
                                 <td>
                                     <i style="padding-left: 65px"></i> {{ter.name}}
                                 </td>
@@ -315,7 +277,7 @@
                                     {{ter.totalSaleTerr}}
                                 </td>
                             </tr>
-                            <tr ng-repeat="time in ter.terrSalesByHour" ng-repeat-end ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <tr ng-repeat="time in ter.terrSalesByHour" ng-repeat-end ng-show="expandAll || (showTab[value.date] && showRet[value.date][ret.name])">
                                 <td>
                                     <i style="padding-left: 85px"></i> {{getTimeRangeInFormat(time.range)}}
                                 </td>
@@ -346,7 +308,7 @@
                                 </td>
                                 <td><strong>{{value.totalsales}}</strong></td>
                             </tr>
-                            <tr class="tab-head" ng-show="showTab[value.date]">
+                            <tr class="tab-head" ng-show="(expandAll && value.totalsales>0) || showTab[value.date]">
                                 <td style="padding-left: 30px">
                                     Retailers
                                 </td>
@@ -354,7 +316,7 @@
                                     Sales
                                 </td>
                             </tr>
-                            <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="showTab[value.date]">
+                            <tr ng-repeat-start="ret in value.orgRetailerList" ng-show="expandAll || showTab[value.date]">
                                 <td ng-click="ret.totalSaleRetailer>0 ? showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null" ng-if="ret.totalSaleRetailer>0">
                                     <i style="padding-left:20px"></i>
                                     <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
@@ -364,7 +326,7 @@
                                     <strong> {{ret.totalSaleRetailer}}</strong>
                                 </td>
                             </tr>
-                            <tr class="tab-head" ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <tr class="tab-head" ng-show="(expandAll && ret.totalSaleRetailer>0) || (showTab[value.date] && showRet[value.date][ret.name])">
                                 <td style="padding-left: 45px">
                                     Territories
                                 </td>
@@ -372,7 +334,7 @@
                                     Sales
                                 </td>
                             </tr>
-                            <tr ng-repeat-start="ter in ret.territoryList" ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <tr ng-repeat-start="ter in ret.territoryList" ng-show="expandAll || (showTab[value.date] && showRet[value.date][ret.name])">
                                 <td>
                                     <i style="padding-left: 65px"></i> {{ter.name}}
                                 </td>
@@ -380,7 +342,7 @@
                                     {{ter.totalSaleTerr}}
                                 </td>
                             </tr>
-                            <tr ng-repeat="time in ter.terrSalesByHour" ng-repeat-end ng-show="showTab[value.date] && showRet[value.date][ret.name]">
+                            <tr ng-repeat="time in ter.terrSalesByHour" ng-repeat-end ng-show="expandAll || (showTab[value.date] && showRet[value.date][ret.name])">
                                 <td>
                                     <i style="padding-left: 85px"></i> {{getTimeRangeInFormat(time.range)}}
                                 </td>

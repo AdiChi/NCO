@@ -1,12 +1,6 @@
 function EmailService($http, config) {
     "ngInject";
-    var baseUrl = config.apiUrl; //change as per need
-    /*var getHeaders = function() {
-        var headers = {
-            'Content-Type':  'multipart/form-data'
-        };
-        return headers;
-    };*/
+    var baseUrl = config.apiUrl; 
 
     return {
         sendAttachment(formData) {

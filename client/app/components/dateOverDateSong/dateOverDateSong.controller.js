@@ -11,6 +11,7 @@ class DateOverDateSongController {
         $scope.selectedTer = [];
         $scope.brkByRetailer = false;
         $scope.brkByTerritory = false;
+        $scope.expandAll = false;
         $scope.showHeatMap = false;
         $scope.timewise = false;
         $scope.showNoData = false;
@@ -507,27 +508,78 @@ class DateOverDateSongController {
             };
         }
 
+        function crop(can, a, b) {
+            var ctx = can.getContext('2d');
+            var imageData = ctx.getImageData(a.x, a.y, b.x, b.y);
+            var newCan = document.createElement('canvas');
+            newCan.width = b.x - a.x;
+            newCan.height = b.y - a.y;
+            var newCtx = newCan.getContext('2d');
+            newCtx.putImageData(imageData, 0, 0);
+
+            return newCan.toDataURL();
+        }
+
         $scope.getPDF = function() {
             var myImage = c3ExportService.createChartImages($(".c3graph"), {});
-            // window.open(myImage);
-            var docDefinition = {
-                content: [{
-                    image: myImage,
-                    fit: [500, 700]
-                }]
-            };
-            // pdfMake.createPdf(docDefinition).open();
-            var data = pdfMake.createPdf(docDefinition)._bufferToBlob();
-            var formData = new FormData();
-            formData.append("pdf", data, "mygraph.pdf");
-            formData.append("email[]", ['abc.cde@dummy.com']);
-            formData.append("isLink", false);
+            $scope.expandAll = true;
+            html2canvas($(".drilldown"), {
+                onrendered: function (canvas) {
+                    var dataSrc = canvas.toDataURL();
+                    var i = new Image(); 
 
-            EmailService.sendAttachment(formData).then((res) => {
-                console.log('PDF uploaded res', res);
-                return res;
-            }).catch(function(e) {
-                console.log(e);
+                    var docDefinition = {
+                        content: [{
+                            image: myImage,
+                            fit: [500,700]
+                        }]
+                    };
+                    $scope.expandAll = false;
+                    i.onload = function() {
+                        if(i.height > 800) {
+                        var remHeigth = i.height;
+                        var topleft = 0;
+                        while(remHeigth > 800) {
+                            var newCrop = crop(canvas, {x: 0, y: topleft}, {x: canvas.width, y: topleft+800});
+                            remHeigth-=800;
+                            topleft+=800;
+                            docDefinition.content.push({
+                                image: newCrop,
+                                width:500
+                            });
+                        }
+                        if(remHeigth>0) {
+                            var newCrop = crop(canvas, {x: 0, y: topleft}, {x: canvas.width, y: canvas.height});
+                            docDefinition.content.push({
+                                image: newCrop,
+                                width:500
+                            });
+                        }
+                        } else {
+                        docDefinition.content.push({
+                            image: dataSrc,
+                            width:500
+                        });
+                        }
+                        console.log(docDefinition);
+
+                        // pdfMake.createPdf(docDefinition).open();
+                        pdfMake.createPdf(docDefinition).getBlob(function(data) {
+                            var formData = new FormData();
+                            formData.append("pdf", data, "mygraph.pdf");
+                            formData.append("email[]", ['abc.cde@dummy.com']);
+                            formData.append("isLink", false);
+
+                            EmailService.sendAttachment(formData).then((res) => {
+                                console.log('PDF uploaded res', res);
+                                return res;
+                            }).catch(function(e) {
+                                console.log(e);
+                            });
+                        });
+                    };
+                    i.src = dataSrc;
+                }
             });
         };
         function addEmptyDateValues() {
