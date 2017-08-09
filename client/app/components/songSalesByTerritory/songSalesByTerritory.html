@@ -23,7 +23,7 @@
                         <div class="col-md-12 select">
                             <div class="select-label">Represent Territory Data As:</div>
                             <div class="represent">
-                                <select ng-model="vm.representation">
+                                <select ng-model="vm.territoryRepresentation">
                                     <option value="1">Individual Territories</option>
                                     <option value="2">Terrs/Terr Groups Exactly As Selected</option>
                                     <option value="3">Completely Aggregated</option>
@@ -67,7 +67,7 @@
     </div>
     <div class="loader" ng-if="vm.loading"></div>
     <div ng-if="!vm.loading" class="chart-container">
-        <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:30px">
+        <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:25px">
             <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections">
                 <chart-size chart-height="650" />
                 <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
@@ -76,19 +76,19 @@
                 <chart-axis>
                     <chart-axis-x axis-position="outer-center" axis-type="category" />
                     <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-                    <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                    <chart-axis-x-tick tick-rotate="0" tick-multiline="false" />
                 </chart-axis>
                 <chart-legend legend-position="inset" />
             </c3chart>
         </div>
-        <div class="container-fluid" ng-if="vm.theChart" style="padding-top:30px">
+        <div class="container-fluid" ng-if="vm.theChart" style="padding-top:25px">
             <div class="container-fluid">
                 <div class="col-md-12 graph-type-labels">
                     <a class="btn btn-primary" ng-class="{'active': chartType.isActive}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>
                 </div>
             </div>
-            <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px">
-                {{vm.selectedSong.trackname}}
+            <div class="graph-song-label">{{vm.selectedSong.trackname}}</div>
+            <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:25px">
                 <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
                     ng-if="!vm.showHeatMap">
                     <chart-size chart-height="700" />
@@ -96,15 +96,15 @@
                     <!-- <chart-bar ratio="0.5" /> -->
                     <chart-axes values-x="x" />
                     <chart-axis>
-                        <chart-axis-x axis-position="outer-center" axis-type="category" />
+                        <chart-axis-x axis-position="outer-center" axis-label="Aggreagate" axis-type="category" />
                         <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-                        <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                        <chart-axis-x-tick tick-rotate="0" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="inset" />
                     <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
                 </c3chart>
             </div>
-            <div class="container-fluid" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px">
+            <div class="container-fluid" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:25px">
                 <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback2" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" />
                     <chart-size chart-height="700" />
@@ -113,7 +113,7 @@
                     <chart-axis>
                         <chart-axis-x axis-position="outer-center" axis-type="category" />
                         <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-                        <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                        <chart-axis-x-tick tick-rotate="45" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="inset" />
                     <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
@@ -132,34 +132,34 @@
             <div class="col-xs-12">
                 <table st-table class="table table-hover table-responsive">
                     <tbody ng-init="showTer={};showDate={};showRet={};">
-                        <tr ng-repeat-start="territory in vm.chart.salesByTerritory">
-                            <td ng-click="territory.totalTerritorySales > 0 ?(showTer[territory.territoryName] = !showTer[territory.territoryName]): null">
-                                <i style="padding-left: 18px; " ng-if="territory.totalTerritorySales == 0"></i>
-                                <i class="glyphicon" ng-if="territory.totalTerritorySales>0" ng-class=" showTer[territory.territoryName] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{territory.territoryName}}
+                        <tr ng-repeat-start="geography in vm.chart.salesByGeography">
+                            <td ng-click="geography.totalGeographySales > 0 ?(showTer[geography.geographyName] = !showTer[geography.geographyName]): null">
+                                <i style="padding-left: 18px; " ng-if="geography.totalGeographySales == 0"></i>
+                                <i class="glyphicon" ng-if="geography.totalGeographySales>0" ng-class=" showTer[geography.geographyName] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{geography.geographyName}}
                             </td>
-                            <td class="text-right"><strong>{{territory.totalTerritorySales}}</strong></td>
+                            <td class="text-right"><strong>{{geography.totalGeographySales}}</strong></td>
                         </tr>
-                        <tr ng-repeat-start="day in territory.salesByDate" ng-show="showTer[territory.territoryName]">
-                            <td ng-click="day.totalDaySales?showDate[territory.territoryName][day.date] = !showDate[territory.territoryName][day.date]:null" ng-if="day.totalDaySales>0">
+                        <tr ng-repeat-start="day in geography.salesByDate" ng-show="showTer[geography.geographyName]">
+                            <td ng-click="day.totalDaySales?showDate[geography.geographyName][day.date] = !showDate[geography.geographyName][day.date]:null" ng-if="day.totalDaySales>0">
                                 <i style="padding-left: 20px"></i>
                                 <i style="padding-left:18px" ng-if="day.totalDaySales==0"></i>
-                                <i class="glyphicon" ng-if="day.totalDaySales>0" ng-class=" showDate[territory.territoryName][day.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{day.date}}
+                                <i class="glyphicon" ng-if="day.totalDaySales>0" ng-class=" showDate[geography.geographyName][day.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{day.date}}
                             </td>
                             <td class="text-right" ng-if="day.totalDaySales>0">
                                 <strong>{{day.totalDaySales}}</strong>
                             </td>
                         </tr>
-                        <tr ng-repeat-start="retailer in day.salesByRetailer" ng-show="showTer[territory.territoryName] && showDate[territory.territoryName][day.date]">
-                            <td ng-click="retailer.totalRetailerSales?showRet[territory.territoryName][day.date][retailer.retailerName] = !showRet[territory.territoryName][day.date][retailer.retailerName]:null" ng-if="retailer.totalRetailerSales>0">
+                        <tr ng-repeat-start="retailer in day.salesByRetailer" ng-show="showTer[geography.geographyName] && showDate[geography.geographyName][day.date]">
+                            <td ng-click="retailer.totalRetailerSales?showRet[geography.geographyName][day.date][retailer.retailerName] = !showRet[geography.geographyName][day.date][retailer.retailerName]:null" ng-if="retailer.totalRetailerSales>0">
                                 <i style="padding-left: 40px"></i>
                                 <i style="padding-left:18px" ng-if="retailer.totalRetailerSales==0"></i>
-                                <i class="glyphicon" ng-if="retailer.totalRetailerSales>0" ng-class=" showRet[territory.territoryName][day.date][retailer.retailerName] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{retailer.retailerName}}
+                                <i class="glyphicon" ng-if="retailer.totalRetailerSales>0" ng-class=" showRet[geography.geographyName][day.date][retailer.retailerName] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{retailer.retailerName}}
                             </td>
                             <td class="text-right" ng-if="retailer.totalRetailerSales>0">
                                 <strong>{{retailer.totalRetailerSales}}</strong>
                             </td>
                         </tr>
-                        <tr ng-repeat-start="time in retailer.salesByTime" ng-show="showTer[territory.territoryName] && showDate[territory.territoryName][day.date] && showRet[territory.territoryName][day.date][retailer.retailerName]">
+                        <tr ng-repeat-start="time in retailer.salesByTime" ng-show="showTer[geography.geographyName] && showDate[geography.geographyName][day.date] && showRet[geography.geographyName][day.date][retailer.retailerName]">
                             <td>
                                 <i style="padding-left: 80px"></i> {{vm.getTimeRangeInFormat(time.timeRange)}}
                             </td>

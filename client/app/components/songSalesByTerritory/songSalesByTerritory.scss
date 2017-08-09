@@ -44,6 +44,17 @@
     }
 }
 
+.chart-container {
+    .container-fluid {
+        .graph-song-label {
+            font-size: 16px;
+            font-weight: bold;
+            padding-left: 6%;
+            padding-top: 20px;
+        }
+    }
+}
+
 .modal-dialog.modal-md {
     margin-top: 200px;
     .break-out {
