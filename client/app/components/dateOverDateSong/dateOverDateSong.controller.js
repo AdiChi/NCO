@@ -582,6 +582,8 @@ class DateOverDateSongController {
                     if ($('.expandAll:checkbox:checked').length > 0) {
                         html2canvas($(".drilldown"), {
                             onrendered: function(canvas) {
+                                var sendingMsg = '<div class="alerts"><div class="alert alert-info">Sending Mail...</div></div>'; 
+                                $( ".c3graph" ).append(sendingMsg);
                                 var dataSrc = canvas.toDataURL();
                                 var i = new Image();
 
@@ -620,12 +622,14 @@ class DateOverDateSongController {
                                     }
                                     /*pdfMake.createPdf(docDefinition).open();*/
                                     pdfMake.createPdf(docDefinition).getBlob(function(data) {
+
                                         var formData = new FormData();
                                         formData.append("pdf", data, "mygraph.pdf");
                                         formData.append("email[]", emails);
                                         formData.append("isLink", false);
 
                                         EmailService.sendAttachment(formData).then((res) => {
+                                            $('.c3graph .alerts').remove();
                                             console.log('PDF uploaded', res.data);
 
                                             var alerts = '<div class="alerts">'+ (res.data.failure.length>0 ? 
@@ -634,10 +638,13 @@ class DateOverDateSongController {
                                               '<div class="alert alert-success"> Successfully sent to '+res.data.success+' <button type="button" class="close" data-dismiss="alert">×</button></div>' : "") +
                                               '</div>';
                                             $( ".c3graph" ).append(alerts);
+
                                             setTimeout(function () {
                                                 $('.c3graph .alerts').remove();
                                             }, 5000);
+
                                         }).catch(function(e) {
+                                            $('.c3graph .alerts').remove();
                                             console.log(e);
                                         });
                                     }, function(e) {
