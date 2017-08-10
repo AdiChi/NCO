@@ -1,8 +1,9 @@
 class SelectSongController {
-    constructor($scope, ReportService) {
+    constructor($scope, $q, ReportService) {
         'ngInject'
 
         this.details = {};
+        this.showData = false;
 
         $scope.$watch('songSearch', (name) => {
             if (name && name.length >= 3) {
@@ -14,14 +15,33 @@ class SelectSongController {
             }
         });
 
-        this.fetchSongs = function(name) {
-            ReportService.getSongsBySearch(name)
+        this.fetchSongs = function (name) {
+            this.details = {
+                songs: []
+            };
+            $q.all([ReportService.getSongsBySearch(name)
                 .then((response) => {
-                    this.details.songs = response.data;
-                });
+                    if (!this.details.songs) {
+                        this.details.songs = [].concat(response.data);
+                    } else {
+                        this.details.songs = this.details.songs.concat(response.data);
+                    }
+                }),
+
+                ReportService.getSongListBySearch(name)
+                .then((response) => {
+                    if (!this.details.songs) {
+                        this.details.songs = [].concat(response.data);
+                    } else {
+                        this.details.songs = this.details.songs.concat(response.data);
+                    }
+                })
+            ]).then(() => {
+                this.showData = true;
+            })
         };
 
-        this.updateSong = function(song) {
+        this.updateSong = function (song) {
             if (this.details)
                 delete this.details.songs;
             if (this.multipleSongs) {

@@ -10,9 +10,9 @@ function DataMap() {
         link: function (scope, element, attrs) {
             var containerid = document.getElementById('world-map-container');
             var margin = 20,
-                padding = 50;
+                padding = 60;
             var map;
-            var minValue = 0, maxValue = 0, delta = 10;;
+            var minValue = 0, maxValue = 0, delta = 10;
             var colorScale, color;
             scope.$watch('data', function (newVal, oldVal) {
                 if (newVal.length > 0) {
@@ -22,11 +22,11 @@ function DataMap() {
                 }
                 color = d3.scale.linear().domain([1, delta])
                     .interpolate(d3.interpolateHcl)
-                    .range([d3.rgb("#70B5DC"), d3.rgb('#0075B4')]);
+                    .range([d3.rgb("#0474DC"), d3.rgb('#022A50')]);
 
                 colorScale = d3.scale.linear().domain([minValue, maxValue])
                     .interpolate(d3.interpolateHcl)
-                    .range([d3.rgb("#70B5DC"), d3.rgb('#0075B4')]);
+                    .range([d3.rgb("#0474DC"), d3.rgb('#022A50')]);
                 // colorScale = d3.scale.ordinal()
                 //     .domain(newVal)
                 //     .range(d3.range(newVal.length).map(d3.scale.linear()
@@ -59,7 +59,8 @@ function DataMap() {
                         setProjection: function (element) {
                             var projection = d3.geo.mercator()
                                 .center([0, padding])
-                                .scale(105)
+                                .translate([element.offsetWidth / 2, element.offsetHeight /2])
+                                .scale(130)
                             var path = d3.geo.path()
                                 .projection(projection);
                             return { path: path, projection: projection };
