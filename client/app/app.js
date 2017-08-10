@@ -20,6 +20,7 @@ import DateTimeRangeComponent from './components/dateTimeRange/dateTimeRange';
 import SelectSongComponent from './components/selectSong/selectSong';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
 import SongSalesByTerritoryComponent from './components/songSalesByTerritory/songSalesByTerritory';
+import DateOverDateMultipleComponent from './components/dateOverDateMultiple/dateOverDateMultiple';
 import LoginComponent from './pages/login/login';
 import DashboardComponent from './pages/dashboard/dashboard';
 import SideNavComponent from './components/sideNav/sideNav';
@@ -36,6 +37,10 @@ import CreateSonglistComponent from './pages/createSonglist/createSonglist';
 import UploadSongsComponent from './pages/uploadSongs/uploadSongs';
 import EditAllSongsComponent from './pages/editAllSongs/editAllSongs';
 
+import EmailPdfService from './services/EmailPdfService';
+import EmailService from './services/EmailService';
+import c3StyleService from './services/c3StyleService';
+import c3ExportService from './services/c3ExportService';
 import UsersService from './services/UsersService';
 import SongsService from './services/SongsService';
 import ArtistService from './services/ArtistService';
@@ -56,6 +61,7 @@ import DataMap from './directives/datamap.directive';
 import StResetFiltersDirective from './directives/stResetFilters.directive';
 import StRatioDirective from './directives/stRatio.directive';
 import CustomOnScrollDirective from './directives/customOnScroll.directive'
+import MultipleEmailsDirective from './directives/multipleEmails.directive'
 
 // import our default styles for the whole application
 import 'normalize.css';
@@ -107,6 +113,7 @@ angular
         SelectSongComponent.name,
         DateOverDateSongComponent.name,
         SongSalesByTerritoryComponent.name,
+        DateOverDateMultipleComponent.name,
         ReportsComponent.name,
         SideNavComponent.name,
         FilterComponent.name
@@ -192,6 +199,10 @@ angular
             .state('app.songSalesByTerritory', {
                 url: '/songSalesByTerritory',
                 template: '<song-sales-by-territory></song-sales-by-territory>'
+            })
+            .state('app.dateOverDateMultiple', {
+                url: '/dateOverDateMultiple',
+                template: '<date-over-date-multiple></date-over-date-multiple>'
             });
 
         $urlRouterProvider.otherwise('/app/');
@@ -207,9 +218,13 @@ angular
     .directive('stResetFilter', StResetFiltersDirective)
     .directive('stRatio', StRatioDirective)
     .directive('customOnScroll', CustomOnScrollDirective)
+    .directive('multipleEmails', MultipleEmailsDirective)
     .factory('UsersService', UsersService)
     .factory('SongsService', SongsService)
     .factory('SongListsService', SongListsService)
+    .factory('c3ExportService', c3ExportService)
+    .factory('c3StyleService', c3StyleService)
+    .factory('EmailService', EmailService)
     .factory('ArtistService', ArtistService)
     .factory('LogService', LogService)
     .factory('ModalService', ModalService)
@@ -217,6 +232,7 @@ angular
     .factory('ExportToCsvService', ExportToCsvService)
     .factory('UtilService', UtilService)
     .factory('LoginService', LoginService)
+    .factory('EmailPdfService', EmailPdfService)
     .factory('superCache', ['$cacheFactory', function($cacheFactory) {
         return $cacheFactory('super-cache');
     }])

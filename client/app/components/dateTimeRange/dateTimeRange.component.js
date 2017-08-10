@@ -5,7 +5,8 @@ import './dateTimeRange.scss';
 let dateTimeRangeComponent = {
     restrict: 'E',
     bindings: {
-        range: '='
+        range: '=',
+        index: '@'
     },
     template,
     controller,

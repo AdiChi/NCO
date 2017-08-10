@@ -1,21 +1,26 @@
 <div class="animated zoomInRight">
     <div class="input-group search-bar">
-        <input type="text" ng-model="songSearch" ng-model-options="{ debounce: 800 }" class="form-control" placeholder="Enter at least 3 characters of song name" autofocus />
+        <input type="text" ng-model="songSearch" ng-model-options="{ debounce: 800 }" class="form-control" placeholder="Enter at least 3 characters of song name"
+            autofocus />
         <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
     </div>
-    <div id="main-info" class="col-md-4">
+    <div id="main-info" class="col-md-9">
         <div ng-if="!vm.details">
-            Loading results...
+            <ul class="dropdown-menu rel-results" style="display: block;">
+                <li class="loading-results">Loading results...</li>
+            </ul>
         </div>
         <div ng-if="vm.details.songs.length>0">
             <ul class="dropdown-menu rel-results" style="display: block;">
-                <li ng-repeat="song in vm.details.songs">
-                    <a href id="{{ $index + 1 }}" ng-click="vm.updateSong(song)">{{ song.trackname }}</a>
+                <li ng-repeat="song in vm.details.songs" ng-if="vm.showData">
+                    <a href id="{{ $index + 1 }}" ng-click="vm.updateSong(song)"><span ng-if="song.type=='list'"><i class="fa fa-th-list"></i>{{song.songListName}}</span><span ng-if="!song.type"><i class="fa fa-music" aria-hidden="true"></i>{{song.trackname}}</span></a>
                 </li>
             </ul>
         </div>
         <div ng-if="vm.details.songs.length==0">
-            No results found.
+            <ul class="dropdown-menu rel-results" style="display: block;">
+                <li class="no-results">No results found.</li>
+            </ul>
         </div>
     </div>
 </div>

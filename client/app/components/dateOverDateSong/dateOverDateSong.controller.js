@@ -1,5 +1,5 @@
 class DateOverDateSongController {
-    constructor($scope, $filter, ReportService) {
+    constructor($scope, $filter, ReportService, EmailPdfService) {
         "ngInject";
 
         $scope.chartTypes = ["heatmap", "donut", "line", "area-step", "stacked-bar", "bar"];
@@ -11,6 +11,7 @@ class DateOverDateSongController {
         $scope.selectedTer = [];
         $scope.brkByRetailer = false;
         $scope.brkByTerritory = false;
+        $scope.expandAll = false;
         $scope.showHeatMap = false;
         $scope.timewise = false;
         $scope.showNoData = false;
@@ -86,9 +87,6 @@ class DateOverDateSongController {
             }
         };
 
-        $scope.select = function() {
-            this.setSelectionRange(0, this.value.length);
-        };
         $scope.updateSong = function(song) {
             if ($scope.details)
                 delete $scope.details.songs;
@@ -507,7 +505,10 @@ class DateOverDateSongController {
                 salesTotal: salesTotal
             };
         }
-
+        $scope.sendMail = function () {
+            $scope.expandAll = true;
+            EmailPdfService.sendMail($(".c3graph"), $('.drilldown'), $('.expandAll'));
+        };
         function addEmptyDateValues() {
 
             $scope.range1sales = $scope.chart.salesFirstRange;

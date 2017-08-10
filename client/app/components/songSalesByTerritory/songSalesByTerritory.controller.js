@@ -379,7 +379,7 @@ class SongsalesByGeographyController {
                 timestr = t1 + " to " + t2;
             }
             return timestr;
-        };
+        }
     }
 }
 
