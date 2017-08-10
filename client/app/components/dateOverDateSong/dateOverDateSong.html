@@ -1,6 +1,6 @@
 <div class="report-panel">
     <div class="panel panel-default reports">
-        <div class="panel-heading {{$root.currentUser.role}}-heading">
+        <div class="panel-heading {{$root.currentUser.role}}-heading clickable">
             <h3 class="panel-title">Date over date song comparison</h3>
             <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
@@ -42,22 +42,20 @@
                     <h4>Sales Period 1</h4>
                     <div class="dropdown form-group timepicker">
                         <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
-                        <label>Start Date</label>
-                        <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
-                    </a> {{dateRangeStart| date:"MMM dd, yyyy"}}
+                            <label>Start Date</label>
+                            <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                        </a> {{dateRangeStart| date:"MMM dd, yyyy"}}
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <datetimepicker data-ng-model="dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
-                                data-on-set-time="startDateOnSetTime()" data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+                            <datetimepicker data-ng-model="dateRangeStart" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }" data-on-set-time="startDateOnSetTime()" data-before-render="startDateBeforeRender($dates)"></datetimepicker>
                         </ul>
                     </div>
                     <div class="dropdown form-group timepicker">
                         <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
-                        <label>End Date</label>
-                        <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
-                    </a> {{dateRangeEnd| date:"MMM dd, yyyy"}}
+                            <label>End Date</label>
+                            <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                        </a> {{dateRangeEnd| date:"MMM dd, yyyy"}}
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <datetimepicker data-ng-model="dateRangeEnd" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }"
-                                data-on-set-time="endDateOnSetTime()" data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                            <datetimepicker data-ng-model="dateRangeEnd" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed' }" data-on-set-time="endDateOnSetTime()" data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
                         </ul>
                     </div>
                     {{range1diff || 0}} days
@@ -69,22 +67,20 @@
                     <h4>Sales Period 2</h4>
                     <div class="dropdown form-group timepicker">
                         <a class="dropdown-toggle" id="dropdownStart2" role="button" data-toggle="dropdown" data-target="" href="">
-                        <label>Start Date</label>
-                        <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
-                    </a> {{dateRange2Start| date:"MMM dd, yyyy"}}
+                            <label>Start Date</label>
+                            <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                        </a> {{dateRange2Start| date:"MMM dd, yyyy"}}
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <datetimepicker data-ng-model="dateRange2Start" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart2', renderOn: 'end-date2-changed' }"
-                                data-on-set-time="startDate2OnSetTime()" data-before-render="startDate2BeforeRender($dates)"></datetimepicker>
+                            <datetimepicker data-ng-model="dateRange2Start" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownStart2', renderOn: 'end-date2-changed' }" data-on-set-time="startDate2OnSetTime()" data-before-render="startDate2BeforeRender($dates)"></datetimepicker>
                         </ul>
                     </div>
                     <div class="dropdown form-group timepicker">
                         <a class="dropdown-toggle" id="dropdownEnd2" role="button" data-toggle="dropdown" data-target="" href="">
-                        <label>End Date</label>
-                        <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
-                    </a> {{dateRange2End| date:"MMM dd, yyyy"}}
+                            <label>End Date</label>
+                            <span class=""><i class="glyphicon glyphicon-calendar"></i></span>
+                        </a> {{dateRange2End| date:"MMM dd, yyyy"}}
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <datetimepicker data-ng-model="dateRange2End" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd2', renderOn: 'start-date2-changed' }"
-                                data-on-set-time="endDate2OnSetTime()" data-before-render="endDate2BeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                            <datetimepicker data-ng-model="dateRange2End" data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdownEnd2', renderOn: 'start-date2-changed' }" data-on-set-time="endDate2OnSetTime()" data-before-render="endDate2BeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
                         </ul>
                     </div>
                     {{range2diff || 0}} days
@@ -139,8 +135,7 @@
     <div ng-if="!loading">
         <div class="container-fluid" ng-if="!theChart && chart" style="padding-top:30px">
             {{selectedSong}}
-            <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
-                show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections">
+            <c3chart bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections">
                 <chart-size chart-height="650" />
                 <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
                 <!-- <chart-bar ratio="0.5" /> -->
@@ -184,8 +179,7 @@
             </div>
             <div class="container-fluid" ng-if="!theChart && chart && !showHeatMap" style="padding-top:30px">
                 {{selectedSong}}
-                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
-                    show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections"
+                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true" show-subchart="true" callback-function="handleCallback1" empty-label="No data available for above selections"
                     ng-if="!showHeatMap">
                     <chart-size chart-height="700" />
                     <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
@@ -238,7 +232,7 @@
                             <tr ng-repeat-start="(key, value) in range1sales">
                                 <td ng-click="value.totalsales>0 ?(showTab[value.date] = !showTab[value.date]): null">
                                     <i style="padding-left: 18px; " ng-if="value.totalsales==0"></i>
-                                    <i class="glyphicon" ng-if="value.totalsales>0" ng-class=" showTab[value.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                    {{value.date}}
+                                    <i class="glyphicon" ng-if="value.totalsales>0" ng-class=" showTab[value.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{value.date}}
                                 </td>
                                 <td><strong>{{value.totalsales}}</strong></td>
                             </tr>
@@ -254,7 +248,7 @@
                                 <td ng-click="ret.totalSaleRetailer?showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null" ng-if="ret.totalSaleRetailer>0">
                                     <i style="padding-left: 20px"></i>
                                     <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
-                                    <i class="glyphicon" ng-if="ret.totalSaleRetailer>0" ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                    {{ret.name}}
+                                    <i class="glyphicon" ng-if="ret.totalSaleRetailer>0" ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{ret.name}}
                                 </td>
                                 <td ng-if="ret.totalSaleRetailer>0">
                                     <strong>{{ret.totalSaleRetailer}}</strong>
@@ -303,7 +297,7 @@
                             <tr ng-repeat-start="(key, value) in range2sales">
                                 <td ng-click="value.totalsales>0 ?(showTab[value.date] = !showTab[value.date]): null">
                                     <i style="padding-left: 18px; " ng-if="value.totalsales==0"></i>
-                                    <i class="glyphicon" ng-if="value.totalsales>0" ng-class=" showTab[value.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                    {{value.date}}
+                                    <i class="glyphicon" ng-if="value.totalsales>0" ng-class=" showTab[value.date] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{value.date}}
                                 </td>
                                 <td><strong>{{value.totalsales}}</strong></td>
                             </tr>
@@ -319,7 +313,7 @@
                                 <td ng-click="ret.totalSaleRetailer>0 ? showRet[value.date][ret.name] = !showRet[value.date][ret.name]:null" ng-if="ret.totalSaleRetailer>0">
                                     <i style="padding-left:20px"></i>
                                     <i style="padding-left:18px" ng-if="ret.totalSaleRetailer==0"></i>
-                                    <i class="glyphicon" ng-if="ret.totalSaleRetailer>0" ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>                                    {{ret.name}}
+                                    <i class="glyphicon" ng-if="ret.totalSaleRetailer>0" ng-class=" showRet[value.date][ret.name] ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{ret.name}}
                                 </td>
                                 <td ng-if="ret.totalSaleRetailer>0">
                                     <strong> {{ret.totalSaleRetailer}}</strong>

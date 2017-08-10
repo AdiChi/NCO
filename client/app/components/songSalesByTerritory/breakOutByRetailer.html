@@ -1,0 +1,29 @@
+<div class="break-out">
+    <div class="modal-header">
+        <div class="col-lg-8 title">
+            <span>{{vm.dateData.date}} - {{vm.dateData.territory}}</h4>
+        </div>
+        <div class="col-lg-4 close-button" align="right" ng-click="vm.cancel()"><i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i></div>
+    </div>
+    <div class="break-out-content">
+        <ul class="retailer-list">
+            <li ng-repeat="retailer in vm.dateData.salesByRetailer">
+                <div class="retailer-wrapper">
+                    <div class="col-lg-6" ng-click="vm.toggleRetailer(retailer)">
+                        <i class="fa" ng-class="{'fa-minus-square': retailer.expanded, 'fa-plus-square': !retailer.expanded}" aria-hidden="true"></i>
+                        &nbsp;{{retailer.retailerName}}
+                    </div>
+                    <div class="col-lg-6 text-right">{{retailer.totalRetailerSales}}</div>
+                </div>
+                <ul class="time-list" ng-if="retailer.expanded">
+                    <li ng-repeat="time in retailer.salesByTime">
+                        <div class="time-wrapper">
+                            <div class="col-lg-6">{{vm.getTimeRangeInFormat(time.timeRange)}}</div>
+                            <div class="col-lg-6 text-right">{{time.totalSales}}</div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>    
+</div>

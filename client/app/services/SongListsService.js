@@ -20,7 +20,6 @@ function SongListsService($http, config) {
         });
     }
     return {
-
         getSongLists() {
             var songlists = $http.get(`${baseUrl}/songlist`,{headers: getHeaders()})
                 .then(toSongList)
@@ -51,16 +50,12 @@ function SongListsService($http, config) {
             const tempSongList = {
                 songListName, description, songs
             };
-
             return $http.post(`${baseUrl}/songlist`, (tempSongList), {headers: getHeaders()});
         },
-
         updateSongList(songlist) {
             return $http.put(`${baseUrl}/songlist/song`, (songlist), {headers: getHeaders()});
         },
-        
         deleteSongList(id) {
-
             return $http.delete(`${baseUrl}/songlist/${id}`, {headers: getHeaders()});
         }
     }
