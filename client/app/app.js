@@ -36,6 +36,7 @@ import CreateSonglistComponent from './pages/createSonglist/createSonglist';
 import UploadSongsComponent from './pages/uploadSongs/uploadSongs';
 import EditAllSongsComponent from './pages/editAllSongs/editAllSongs';
 
+import EmailPdfService from './services/EmailPdfService';
 import EmailService from './services/EmailService';
 import c3StyleService from './services/c3StyleService';
 import c3ExportService from './services/c3ExportService';
@@ -225,6 +226,7 @@ angular
     .factory('ExportToCsvService', ExportToCsvService)
     .factory('UtilService', UtilService)
     .factory('LoginService', LoginService)
+    .factory('EmailPdfService', EmailPdfService)
     .factory('superCache', ['$cacheFactory', function($cacheFactory) {
         return $cacheFactory('super-cache');
     }])
