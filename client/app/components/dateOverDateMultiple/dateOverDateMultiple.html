@@ -17,7 +17,10 @@
                 <div class="col-md-12">
                     <label class="heading">Selected song:</label>
                     <ul class="selected-song-list">
-                        <li class="selected-song {{$root.currentUser.role}}-list" ng-repeat="song in vm.selectedSong"><span ng-if="song.type=='list'"><i class="fa fa-th-list"></i>{{song.songListName}}</span><span ng-if="!song.type"><i class="fa fa-music" aria-hidden="true"></i>{{song.trackname}}</span>                            <i class="fa fa-times pull-right" ng-click="vm.removeSong($index)"></i></li>
+                        <li class="selected-song {{$root.currentUser.role}}-list" ng-repeat="song in vm.selectedSong"><span ng-if="song.type=='list'"><i class="fa fa-th-list"></i>{{song.songListName}}</span><span ng-if="!song.type"><i class="fa fa-music" aria-hidden="true"></i>{{song.trackname}}</span>
+                            <i
+                                class="fa fa-times pull-right" ng-click="vm.removeSong($index)"></i>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -120,12 +123,16 @@
         </div>
         <div class="container-fluid" ng-if="vm.theChart" style="padding-top:30px">
             <div class="container-fluid">
-                <div class="col-md-12 graph-type-labels">
+                <div class="col-md-5">
+                    <ul class="selected-song-label">
+                        <li class="selected-song" ng-repeat="song in vm.selectedSong"><span ng-if="song.type=='list'"><i class="fa fa-th-list"></i>{{song.songListName}}</span><span ng-if="!song.type"><i class="fa fa-music" aria-hidden="true"></i>{{song.trackname}}</span></li>
+                    </ul>
+                </div>
+                <div class="col-md-7 graph-type-labels">
                     <a class="btn btn-primary" ng-class="{'active': chartType.isActive}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>
                 </div>
             </div>
             <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px">
-                {{selectedSong}}
                 <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
                     show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
                     ng-if="!vm.showHeatMap">
@@ -343,7 +350,7 @@
                     </div>
                 </div>
                 <div ng-repeat-end> </div>
-                <a class="btn btn-default" st-export>Export to Excel</a>
+                <a class="btn btn-default btn-export" st-export>Export to Excel</a>
             </div>
         </div>
     </div>

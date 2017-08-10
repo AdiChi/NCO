@@ -169,7 +169,7 @@
         display: inline-block;
     }
     .graph-type-labels {
-        margin-top: 20px;
+        margin-top: 2px;
         .btn.btn-primary {
             background-color: gray;
             border-color: gray;
@@ -208,7 +208,21 @@
     .tab-head {
         color: #337ab7;
     }
+    .selected-song-label {
+        padding: 0;
+        list-style-type: none;
+        margin: 0 0 2px 0;
+        font-weight: 600;
+        .selected-song {
+            .fa-th-list::before, .fa-music::before {
+                margin: 0 8px 0 0;
+            }
+        }
+    }
     .drilldown {
+        .btn-export {
+            margin-top: 10px;
+        }
         table tr td {
             cursor: pointer;
             i {
