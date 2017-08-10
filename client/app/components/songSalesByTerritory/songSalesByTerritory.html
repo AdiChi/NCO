@@ -84,7 +84,7 @@
         <div class="container-fluid" ng-if="vm.theChart" style="padding-top:25px">
             <div class="container-fluid">
                 <div class="col-md-12 graph-type-labels">
-                    <a class="btn btn-primary" ng-class="{'active': chartType.isActive}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>
+                    <a class="btn btn-primary" ng-class="{'active': chartType.isActive, 'disable': chartType.isDisabled}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>
                 </div>
             </div>
             <div class="graph-song-label">{{vm.selectedSong.trackname}}</div>

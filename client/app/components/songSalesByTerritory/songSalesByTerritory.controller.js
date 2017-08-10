@@ -140,6 +140,9 @@ class SongsalesByGeographyController {
             this.datacolumns = [];
 
             if (this.territoryRepresentation === '3') { // Aggregate Data
+                // Disable line chart for aggregate option
+                this.chartTypes[2].isDisabled = true;
+
                 var days = [];
                 var i = 0;
                 angular.forEach(this.chart.salesByGeography, (geography) => {
@@ -167,8 +170,10 @@ class SongsalesByGeographyController {
                     this.datacolumns.push({ "id": day.date, "type": "bar" });
                 });
                 this.datax = { "id": "x" };
-
             } else {
+                // Enable line chart for other options
+                this.chartTypes[2].isDisabled = false;
+
                 var i = 0;
                 angular.forEach(this.chart.salesByGeography, (geography) => {
                     this.datapoints[i] = {
@@ -196,6 +201,10 @@ class SongsalesByGeographyController {
             this.query.time1 = this.range.startTime;
             this.query.time2 = this.range.endTime;
             this.query.daysInRange = this.range.dateDiff;
+            this.query["retailer[]"] = this.selectedRetailers || [];
+            this.query["territory[]"] = this.selectedTerritories || [];
+            this.query["territoryGroup[]"] = this.selectedTerritoryGroups || [];
+            this.query.territoryRepresentation = this.territoryRepresentation;
         };
 
         this.getChart = function() {
@@ -219,34 +228,24 @@ class SongsalesByGeographyController {
                 blnError = true;
             }
 
-            if (blnError) return;
+            if (blnError) {
+                return;
+            } else {
+                this.songError = this.rangeError = this.timeError = this.terrError = '';
+            }
 
-            this.setCriteria();
             this.theChart = null;
             this.showHeatMap = false;
             this.loading = true;
             this.drilldown = false;
             this.heatMapData = null;
-            if (this.query.songId &&
-                this.query.rangeDate1 &&
-                this.query.rangeDate2 &&
-                this.query.time1 &&
-                this.query.time2 &&
-                !this.rangeError) {
 
-                this.query["retailer[]"] = this.selectedRetailers || [];
-                this.query["territory[]"] = this.selectedTerritories || [];
-                this.query["territoryGroup[]"] = this.selectedTerritoryGroups || [];
-                this.query.territoryRepresentation = this.territoryRepresentation;
-
-                this.chart = ReportService.getSalesByGeographyChart(this.query);
-                this.loading = false;
-                this.plotChart();
-                this.NoChartError = "";
-                this.drilldown = true;
-            } else {
-                this.loading = false;
-            }
+            this.setCriteria();
+            this.chart = ReportService.getSalesByGeographyChart(this.query);
+            this.loading = false;
+            this.plotChart();
+            this.NoChartError = "";
+            this.drilldown = true;
         };
 
         this.showRetailerBreakOut = (data) => {
