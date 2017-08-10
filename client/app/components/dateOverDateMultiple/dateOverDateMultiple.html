@@ -247,7 +247,7 @@
                                     </tr>
                                     <tr ng-repeat="time in territory.terrSalesByHour" ng-show="showDay[date.date] && showRet[date.date][retailer.name] && showTer[date.date][retailer.name][territory.name]">
                                         <td>
-                                            <i style="padding-left: 60px"></i> {{time.range}}
+                                            <i style="padding-left: 60px"></i> {{vm.getTimeRangeInFormat(time.range)}}
                                         </td>
                                         <td class="text-right">
                                             {{time.totalSalesByHours}}
