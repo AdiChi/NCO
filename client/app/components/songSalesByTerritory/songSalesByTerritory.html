@@ -98,6 +98,7 @@
                         <chart-axis-x-tick tick-rotate="0" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="inset" />
+                    <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
                 </c3chart>
             </div>
             <div class="container-fluid" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:25px">
@@ -112,6 +113,7 @@
                         <chart-axis-x-tick tick-rotate="45" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="inset" />
+                    <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
                 </c3chart>
             </div>
             <div class="container-fluid" id="world-map" ng-if="vm.showHeatMap">
