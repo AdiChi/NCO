@@ -73,14 +73,14 @@ function ReportService($http, config, superCache) {
                             "totalGeographySales": 250,
                             "salesByDate": [{
                                     "date": "Aug 1",
-                                    "totalDaySales": 60,
+                                    "totalDaySales": 35,
                                     "salesByRetailer": [{
                                             "id": "1",
                                             "retailerName": "Spotify",
-                                            "totalRetailerSales": 40,
+                                            "totalRetailerSales": 15,
                                             "salesByTime": [{
                                                     "timeRange": "04:00 - 05:00",
-                                                    "totalSales": 30
+                                                    "totalSales": 5
                                                 },
                                                 {
                                                     "timeRange": "05:00 - 06:00",
@@ -94,11 +94,11 @@ function ReportService($http, config, superCache) {
                                             "totalRetailerSales": 20,
                                             "salesByTime": [{
                                                     "timeRange": "04:00 - 05:00",
-                                                    "totalSales": 15
+                                                    "totalSales": 10
                                                 },
                                                 {
                                                     "timeRange": "05:00 - 06:00",
-                                                    "totalSales": 5
+                                                    "totalSales": 10
                                                 }
                                             ]
                                         }
@@ -139,14 +139,14 @@ function ReportService($http, config, superCache) {
                                 },
                                 {
                                     "date": "Aug 3",
-                                    "totalDaySales": 35,
+                                    "totalDaySales": 60,
                                     "salesByRetailer": [{
                                             "id": "1",
                                             "retailerName": "Spotify",
-                                            "totalRetailerSales": 15,
+                                            "totalRetailerSales": 40,
                                             "salesByTime": [{
                                                     "timeRange": "04:00 - 05:00",
-                                                    "totalSales": 5
+                                                    "totalSales": 30
                                                 },
                                                 {
                                                     "timeRange": "05:00 - 06:00",
@@ -160,11 +160,11 @@ function ReportService($http, config, superCache) {
                                             "totalRetailerSales": 20,
                                             "salesByTime": [{
                                                     "timeRange": "04:00 - 05:00",
-                                                    "totalSales": 10
+                                                    "totalSales": 15
                                                 },
                                                 {
                                                     "timeRange": "05:00 - 06:00",
-                                                    "totalSales": 10
+                                                    "totalSales": 5
                                                 }
                                             ]
                                         }
@@ -311,39 +311,6 @@ function ReportService($http, config, superCache) {
                             "totalGeographySales": 150,
                             "salesByDate": [{
                                     "date": "Aug 1",
-                                    "totalDaySales": 40,
-                                    "salesByRetailer": [{
-                                            "id": "1",
-                                            "retailerName": "Spotify",
-                                            "totalRetailerSales": 30,
-                                            "salesByTime": [{
-                                                    "timeRange": "04:00 - 05:00",
-                                                    "totalSales": 14
-                                                },
-                                                {
-                                                    "timeRange": "05:00 - 06:00",
-                                                    "totalSales": 16
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": "2",
-                                            "retailerName": "iTunes",
-                                            "totalRetailerSales": 10,
-                                            "salesByTime": [{
-                                                    "timeRange": "04:00 - 05:00",
-                                                    "totalSales": 0
-                                                },
-                                                {
-                                                    "timeRange": "05:00 - 06:00",
-                                                    "totalSales": 10
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "date": "Aug 2",
                                     "totalDaySales": 25,
                                     "salesByRetailer": [{
                                             "id": "1",
@@ -370,6 +337,39 @@ function ReportService($http, config, superCache) {
                                                 {
                                                     "timeRange": "05:00 - 06:00",
                                                     "totalSales": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "date": "Aug 2",
+                                    "totalDaySales": 40,
+                                    "salesByRetailer": [{
+                                            "id": "1",
+                                            "retailerName": "Spotify",
+                                            "totalRetailerSales": 30,
+                                            "salesByTime": [{
+                                                    "timeRange": "04:00 - 05:00",
+                                                    "totalSales": 14
+                                                },
+                                                {
+                                                    "timeRange": "05:00 - 06:00",
+                                                    "totalSales": 16
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": "2",
+                                            "retailerName": "iTunes",
+                                            "totalRetailerSales": 10,
+                                            "salesByTime": [{
+                                                    "timeRange": "04:00 - 05:00",
+                                                    "totalSales": 0
+                                                },
+                                                {
+                                                    "timeRange": "05:00 - 06:00",
+                                                    "totalSales": 10
                                                 }
                                             ]
                                         }
