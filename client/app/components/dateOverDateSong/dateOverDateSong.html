@@ -11,9 +11,9 @@
             <div class="container-fluid outerdiv">
                 <div class="animated zoomInRight">
                     <div class="input-group search-bar">
-                        <input type="text" ng-model="songsearch" ng-model-options="{ debounce: 800 }" ng-click="select" class="form-control" placeholder="Enter at least 3 characters of song name"
+                        <input type="text" ng-model="songsearch" ng-model-options="{ debounce: 800 }" class="form-control" placeholder="Enter at least 3 characters of song name"
                             autofocus />
-                        <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
+                        <span class="input-group-addon bar-style" ng-click="fetchSongs(songsearch)"><i class="glyphicon glyphicon-search"></i></span>
                     </div>
                     <div id="main-info" class="col-md-4">
                         <div ng-if="!details">
@@ -180,6 +180,7 @@
             </div>
             <div class="container-fluid">
                 <i class="fa fa-heart fa-2x fav" aria-hidden="true" ng-click="fav = fav ? false:true" ng-class="{selected: fav}" title="Add to favorites"></i>
+                <span ng-click="sendMail()"><i class="fa fa-2x fa-share-square-o mail" aria-hidden="true"></i></span>
             </div>
             <div class="container-fluid" ng-if="!theChart && chart && !showHeatMap" style="padding-top:30px">
                 {{selectedSong}}
@@ -199,7 +200,6 @@
                 </c3chart>
             </div>
             <div class="c3graph container-fluid" ng-show="theChart && !showHeatMap" style="padding-top:30px">
-                <button class="btn btn-default" ng-click="sendMail()"><i class="fa fa-share-square-o" aria-hidden="true"></i></button>
                 <c3chart  padding-right="60" bindto-id="chartGroupDataPoints" chart-data="datapoints" chart-columns="datacolumns" chart-x="datax" enable-zoom="true"
                     show-subchart="true" callback-function="handleCallback2" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" name-format-function="formatTooltip" />
@@ -215,7 +215,6 @@
                 </c3chart>
             </div>
             <div class="container-fluid " id="world-map" ng-if="showHeatMap">
-            <button class="btn btn-default" ng-click="sendMail()"><i class="fa fa-share-square-o " aria-hidden="true"></i></button>
                 <button type="button" class="btn btn-primary" ng-class="{active: activefirst}" ng-click="activefirst=true;toggleMap(range1sales);">{{chart.firstRange}}</button>
                 <button type="button" class="btn btn-primary" ng-class="{active: !activefirst}" ng-click="activefirst=false;toggleMap(range2sales);">{{chart.secondRange}}</button>
                 <div datamap data="heatMapData" id="world-map-container" show-heat-map="showHeatMap" ng-if="!showNoData"> </div>

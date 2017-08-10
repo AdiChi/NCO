@@ -87,9 +87,6 @@ class DateOverDateSongController {
             }
         };
 
-        $scope.select = function() {
-            this.setSelectionRange(0, this.value.length);
-        };
         $scope.updateSong = function(song) {
             if ($scope.details)
                 delete $scope.details.songs;
@@ -637,7 +634,9 @@ class DateOverDateSongController {
                                               '<div class="alert alert-success"> Successfully sent to '+res.data.success+' <button type="button" class="close" data-dismiss="alert">×</button></div>' : "") +
                                               '</div>';
                                             $( ".c3graph" ).append(alerts);
-
+                                            setTimeout(function () {
+                                                $('.c3graph .alerts').remove();
+                                            }, 5000);
                                         }).catch(function(e) {
                                             console.log(e);
                                         });

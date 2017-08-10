@@ -200,10 +200,18 @@
 
 }
 
+i.mail {
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
 .c3graph {
     .alerts {
+        .close {
+            padding-left:10px;
+        }
       position: absolute;
-      top: 30px;
+      top: 60px;
       left: 20px;
     }
 }
