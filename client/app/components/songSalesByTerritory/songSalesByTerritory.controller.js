@@ -74,8 +74,14 @@ class SongsalesByGeographyController {
                 var chartType = this.currentChartType;
 
                 if (chartType == "stacked-bar") {
-                    var days = [];
-                    angular.forEach(this.chart.salesByGeography[0].salesByDate, (day) => {
+                    var days = [],
+                        salesByDate;
+                    if (this.chart.salesByGeography[0].geographyType === 'territoryGroup') {
+                        salesByDate = this.chart.salesByGeography[0].salesByTerritory[0].salesByDate;
+                    } else {
+                        salesByDate = this.chart.salesByGeography[0].salesByDate;
+                    }
+                    angular.forEach(salesByDate, (day) => {
                         days.push(day.date);
                     });
                     this.theChart2.groups([days]);
@@ -132,66 +138,114 @@ class SongsalesByGeographyController {
             this.theChart2 = chartObj;
         };
 
+        this.plotIndividualTerritories = function(index, territoryName, salesByDate) {
+            this.datapoints[index] = {
+                x: territoryName
+            };
+            this.datacolumns = [];
+            angular.forEach(salesByDate, (day) => {
+                this.datapoints[index][day.date] = day.totalDaySales;
+
+                this.names.push(day.date);
+
+                this.datacolumns.push({ "id": day.date, "type": "bar" });
+            });
+            this.datax = { "id": "x" };
+        };
+
+        this.plotCummulativeData = function(index, days) {
+            this.datacolumns = [];
+            angular.forEach(days, (day) => {
+                this.datapoints[index][day.date] = day.totalDaySales;
+
+                this.names.push(day.date);
+
+                this.datacolumns.push({ "id": day.date, "type": "bar" });
+            });
+            this.datax = { "id": "x" };
+        };
+
+        this.getAggregateData = function(index, salesByDate, days) {
+            var j = 0;
+            angular.forEach(salesByDate, (day) => {
+                if (index > 0) {
+                    days[j].totalDaySales = days[j].totalDaySales + day.totalDaySales;
+                } else {
+                    days.push({ date: day.date, totalDaySales: day.totalDaySales });
+                }
+                j++;
+            });
+        };
+
         this.plotChart = function() {
             collapseSelection($('.panel-heading.clickable'));
+
+            // Disable line chart for aggregate option
+            this.chartTypes[2].isDisabled = (this.territoryRepresentation === '3');
 
             this.names = [];
             this.datapoints = [];
             this.datacolumns = [];
 
-            if (this.territoryRepresentation === '3') { // Aggregate Data
-                // Disable line chart for aggregate option
-                this.chartTypes[2].isDisabled = true;
+            if (this.territoryRepresentation === '1') {
+                var i = 0;
+                angular.forEach(this.chart.salesByGeography, (geography) => {
+                    if (geography.geographyType === 'territoryGroup') {
+                        angular.forEach(geography.salesByTerritory, (territory) => {
+                            this.plotIndividualTerritories(i, territory.territoryName, territory.salesByDate);
+                            i++;
+                        });
+                    } else {
+                        this.plotIndividualTerritories(i, geography.geographyName, geography.salesByDate);
+                        i++;
+                    }
+                });
+            } else if (this.territoryRepresentation === '2') {
+                var i = 0;
+                angular.forEach(this.chart.salesByGeography, (geography) => {
+                    var days = [];
+                    this.datapoints[i] = {
+                        x: geography.geographyName
+                    };
+                    if (geography.geographyType === 'territoryGroup') {
+                        var j = 0;
+                        angular.forEach(geography.salesByTerritory, (territory) => {
+                            this.getAggregateData(j, territory.salesByDate, days);
+                            j++;
+                        });
+                    } else {
+                        days = geography.salesByDate;
+                    }
 
+                    this.plotCummulativeData(i, days);
+                    i++;
+                });
+            } else { // Aggregate Data              
                 var days = [];
                 var i = 0;
                 angular.forEach(this.chart.salesByGeography, (geography) => {
-                    var j = 0;
-                    angular.forEach(geography.salesByDate, (day) => {
-                        if (i > 0) {
-                            days[j].sales = days[j].sales + day.totalDaySales;
-                        } else {
-                            days.push({ date: day.date, sales: day.totalDaySales });
-                        }
-                        j++;
-                    });
-                    i++;
+                    if (geography.geographyType === 'territoryGroup') {
+                        angular.forEach(geography.salesByTerritory, (territory) => {
+                            this.getAggregateData(i, territory.salesByDate, days);
+                            i++;
+                        });
+                    } else {
+                        this.getAggregateData(i, geography.salesByDate, days);
+                        i++;
+                    }
                 });
 
                 this.datapoints[0] = {
                     x: 'Aggregate Territories/Territory Groups'
                 };
-                this.datacolumns = [];
-                angular.forEach(days, (day) => {
-                    this.datapoints[0][day.date] = day.sales;
-
-                    this.names.push(day.date);
-
-                    this.datacolumns.push({ "id": day.date, "type": "bar" });
-                });
-                this.datax = { "id": "x" };
-            } else {
-                // Enable line chart for other options
-                this.chartTypes[2].isDisabled = false;
-
-                var i = 0;
-                angular.forEach(this.chart.salesByGeography, (geography) => {
-                    this.datapoints[i] = {
-                        x: geography.geographyName
-                    };
-                    this.datacolumns = [];
-                    angular.forEach(geography.salesByDate, (day) => {
-                        this.datapoints[i][day.date] = day.totalDaySales;
-
-                        this.names.push(day.date);
-
-                        this.datacolumns.push({ "id": day.date, "type": "bar" });
-                    });
-                    this.datax = { "id": "x" };
-                    i++;
-                });
+                this.plotCummulativeData(0, days);
             }
+
+            angular.forEach(this.chartTypes, (chartType) => {
+                chartType.isActive = false;
+            });
             this.currentChartType = "bar";
+            this.chartTypes[5].isActive = true;
         };
 
         this.setCriteria = function() {
@@ -266,20 +320,41 @@ class SongsalesByGeographyController {
         this.prepareReportData = function() {
             var allMap = [];
             angular.forEach(this.chart.salesByGeography, (geography) => {
-                angular.forEach(geography.salesByDate, (day) => {
-                    angular.forEach(day.salesByRetailer, (retailer) => {
-                        angular.forEach(retailer.salesByTime, (time) => {
-                            var finalObj = {
-                                Territory: geography.geographyName,
-                                Date: day.date,
-                                Retailer: retailer.retailerName,
-                                TimeRange: time.timeRange,
-                                Sales: time.totalSales
-                            };
-                            allMap.push(finalObj);
+                if (geography.geographyType === 'territoryGroup') {
+                    angular.forEach(geography.salesByTerritory, (territory) => {
+                        angular.forEach(territory.salesByDate, (day) => {
+                            angular.forEach(day.salesByRetailer, (retailer) => {
+                                angular.forEach(retailer.salesByTime, (time) => {
+                                    var finalObj = {
+                                        TerritoryGroup: geography.geographyName,
+                                        Territory: territory.territoryName,
+                                        Date: day.date,
+                                        Retailer: retailer.retailerName,
+                                        TimeRange: time.timeRange,
+                                        Sales: time.totalSales
+                                    };
+                                    allMap.push(finalObj);
+                                });
+                            });
                         });
                     });
-                });
+                } else {
+                    angular.forEach(geography.salesByDate, (day) => {
+                        angular.forEach(day.salesByRetailer, (retailer) => {
+                            angular.forEach(retailer.salesByTime, (time) => {
+                                var finalObj = {
+                                    TerritoryGroup: '',
+                                    Territory: geography.geographyName,
+                                    Date: day.date,
+                                    Retailer: retailer.retailerName,
+                                    TimeRange: time.timeRange,
+                                    Sales: time.totalSales
+                                };
+                                allMap.push(finalObj);
+                            });
+                        });
+                    });
+                }
             });
             this.chart.allMap = allMap;
         };
