@@ -80,12 +80,16 @@
         </div>
         <div class="container-fluid" ng-if="vm.theChart" style="padding-top:25px">
             <div class="container-fluid">
-                <div class="col-md-12 graph-type-labels">
+                <h3 class="col-md-12 graph-song-label">{{vm.selectedSong.trackname}}</h3>
+                <div class="col-md-2 icon-wrapper">
+                    <i class="fa fa-heart fa-2x fav" aria-hidden="true" ng-click="fav = !fav" ng-class="{selected: fav}" title="Add to favorites"></i>
+                    <i class="fa fa-2x fa-share-square-o mail" ng-click="vm.sendMail()" aria-hidden="true"></i>
+                </div>
+                <div class="col-md-10 graph-type-labels text-right">
                     <a class="btn btn-primary" ng-class="{'active': chartType.isActive, 'disable': chartType.isDisabled}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>
                 </div>
             </div>
-            <div class="graph-song-label"><i class="fa fa-heart fav" aria-hidden="true" ng-click="fav = !fav" ng-class="{selected: fav}" title="Add to favorites"></i> {{vm.selectedSong.trackname}}</div>
-            <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:25px">
+            <div class="container-fluid c3graph" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:25px">
                 <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
                     ng-if="!vm.showHeatMap">
                     <chart-size chart-height="700" />
@@ -101,7 +105,7 @@
                     <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
                 </c3chart>
             </div>
-            <div class="container-fluid" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:25px">
+            <div class="container-fluid c3graph" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:25px">
                 <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback2" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" />
                     <chart-size chart-height="700" />
@@ -125,44 +129,46 @@
     <div ng-if="vm.chart && vm.drilldown">
         <div class="container drilldown">
             <h3 class="tab-head">Sales - <span style="color: #000">{{vm.selectedSong.trackname}}</span></h3>
+            <!--<h5><label>Expand all: <input class="expandAll" type="checkbox" ng-model="vm.expandAll"></label>-->
+            </h5>
             <div st-table class="drilldown-wrapper" ng-if="vm.chart.totalSongSales > 0">
                 <div ng-repeat="geography in vm.chart.salesByGeography | orderBy: 'geographyName'" ng-if="geography.totalGeographySales > 0">
                     <div class="content-wrapper" ng-click="geography.isExpanded = !geography.isExpanded">
-                        <div class="col-lg-10" style="padding-left: 0px"><i class="glyphicon" ng-class="geography.isExpanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{geography.geographyName}}</div>
+                        <div class="col-lg-10" style="padding-left: 0px"><i class="glyphicon" ng-class="(geography.isExpanded || vm.expandAll) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{geography.geographyName}}</div>
                         <div class="col-lg-2 text-right">{{geography.totalGeographySales}}</div>
                     </div>
-                    <div class="content-header" ng-if="geography.geographyType === 'territoryGroup' && geography.isExpanded">
+                    <div class="content-header" ng-if="geography.geographyType === 'territoryGroup' && (geography.isExpanded || vm.expandAll)">
                         <div class="col-lg-10" style="padding-left: 30px">Territory</div>
                         <div class="col-lg-2 text-right">Sales</div>
                     </div>
-                    <div ng-repeat="territory in geography.salesByTerritory | orderBy: 'territoryName'" ng-if="geography.geographyType === 'territoryGroup' && geography.isExpanded && territory.totalTerritorySales > 0">
+                    <div ng-repeat="territory in geography.salesByTerritory | orderBy: 'territoryName'" ng-if="geography.geographyType === 'territoryGroup' && (geography.isExpanded || vm.expandAll) && territory.totalTerritorySales > 0">
                         <div class="content-wrapper" ng-click="territory.isExpanded = !territory.isExpanded">
-                            <div class="col-lg-10" style="padding-left: 30px"><i class="glyphicon" ng-class="territory.isExpanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{territory.territoryName}}</div>
+                            <div class="col-lg-10" style="padding-left: 30px"><i class="glyphicon" ng-class="(territory.isExpanded || vm.expandAll) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{territory.territoryName}}</div>
                             <div class="col-lg-2 text-right">{{territory.totalTerritorySales}}</div>
                         </div>
-                        <div class="content-header" ng-if="territory.isExpanded">
+                        <div class="content-header" ng-if="(territory.isExpanded || vm.expandAll)">
                             <div class="col-lg-10" style="padding-left: 60px">Date</div>
                             <div class="col-lg-2 text-right">Sales</div>
                         </div>
-                        <div ng-repeat="day in territory.salesByDate | orderBy: 'date'" ng-if="territory.isExpanded">
+                        <div ng-repeat="day in territory.salesByDate | orderBy: 'date'" ng-if="(territory.isExpanded || vm.expandAll)">
                             <div class="content-wrapper" ng-click="day.isExpanded = !day.isExpanded">
-                                <div class="col-lg-10" style="padding-left: 60px"><i class="glyphicon" ng-class="day.isExpanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{day.date}}</div>
+                                <div class="col-lg-10" style="padding-left: 60px"><i class="glyphicon" ng-class="(day.isExpanded || vm.expandAll) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{day.date}}</div>
                                 <div class="col-lg-2 text-right">{{day.totalDaySales}}</div>
                             </div>
-                            <div class="content-header" ng-if="day.isExpanded">
+                            <div class="content-header" ng-if="(day.isExpanded || vm.expandAll)">
                                 <div class="col-lg-10" style="padding-left: 90px">Retailer</div>
                                 <div class="col-lg-2 text-right">Sales</div>
                             </div>
-                            <div ng-repeat="retailer in day.salesByRetailer | orderBy: 'retailerName'" ng-if="day.isExpanded && retailer.totalRetailerSales > 0">
+                            <div ng-repeat="retailer in day.salesByRetailer | orderBy: 'retailerName'" ng-if="(day.isExpanded || vm.expandAll) && retailer.totalRetailerSales > 0">
                                 <div class="content-wrapper" ng-click="retailer.isExpanded = !retailer.isExpanded">
-                                    <div class="col-lg-10" style="padding-left: 90px"><i class="glyphicon" ng-class="retailer.isExpanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{retailer.retailerName}}</div>
+                                    <div class="col-lg-10" style="padding-left: 90px"><i class="glyphicon" ng-class="(retailer.isExpanded || vm.expandAll) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{retailer.retailerName}}</div>
                                     <div class="col-lg-2 text-right">{{retailer.totalRetailerSales}}</div>
                                 </div>
-                                <div class="content-header" ng-if="retailer.isExpanded">
+                                <div class="content-header" ng-if="(retailer.isExpanded || vm.expandAll)">
                                     <div class="col-lg-10" style="padding-left: 130px">Time Range</div>
                                     <div class="col-lg-2 text-right">Sales</div>
                                 </div>
-                                <div ng-repeat="time in retailer.salesByTime | orderBy: 'timeRange'" ng-if="retailer.isExpanded && time.totalSales > 0">
+                                <div ng-repeat="time in retailer.salesByTime | orderBy: 'timeRange'" ng-if="(retailer.isExpanded || vm.expandAll) && time.totalSales > 0">
                                     <div class="content-wrapper">
                                         <div class="col-lg-10" style="padding-left: 130px">{{vm.getTimeRangeInFormat(time.timeRange)}}</div>
                                         <div class="col-lg-2 text-right">{{time.totalSales}}</div>
@@ -171,29 +177,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content-header" ng-if="geography.geographyType === 'territory' && geography.isExpanded">
+                    <div class="content-header" ng-if="geography.geographyType === 'territory' && (geography.isExpanded || vm.expandAll)">
                         <div class="col-lg-10" style="padding-left: 30px">Date</div>
                         <div class="col-lg-2 text-right">Sales</div>
                     </div>
-                    <div ng-repeat="day in geography.salesByDate" ng-if="geography.geographyType === 'territory' && geography.isExpanded && day.totalDaySales > 0">
+                    <div ng-repeat="day in geography.salesByDate" ng-if="geography.geographyType === 'territory' && (geography.isExpanded || vm.expandAll) && day.totalDaySales > 0">
                         <div class="content-wrapper" ng-click="day.isExpanded = !day.isExpanded">
-                            <div class="col-lg-10" style="padding-left: 30px"><i class="glyphicon" ng-class="day.isExpanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{day.date}}</div>
+                            <div class="col-lg-10" style="padding-left: 30px"><i class="glyphicon" ng-class="(day.isExpanded || vm.expandAll) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{day.date}}</div>
                             <div class="col-lg-2 text-right">{{day.totalDaySales}}</div>
                         </div>
-                        <div class="content-header" ng-if="day.isExpanded">
+                        <div class="content-header" ng-if="(day.isExpanded || vm.expandAll)">
                             <div class="col-lg-10" style="padding-left: 60px">Retailer</div>
                             <div class="col-lg-2 text-right">Sales</div>
                         </div>
-                        <div ng-repeat="retailer in day.salesByRetailer" ng-if="day.isExpanded && retailer.totalRetailerSales > 0">
+                        <div ng-repeat="retailer in day.salesByRetailer" ng-if="(day.isExpanded || vm.expandAll) && retailer.totalRetailerSales > 0">
                             <div class="content-wrapper" ng-click="retailer.isExpanded = !retailer.isExpanded">
-                                <div class="col-lg-10" style="padding-left: 60px"><i class="glyphicon" ng-class="retailer.isExpanded ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{retailer.retailerName}}</div>
+                                <div class="col-lg-10" style="padding-left: 60px"><i class="glyphicon" ng-class="(retailer.isExpanded || vm.expandAll) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{retailer.retailerName}}</div>
                                 <div class="col-lg-2 text-right">{{retailer.totalRetailerSales}}</div>
                             </div>
-                            <div class="content-header" ng-if="retailer.isExpanded">
+                            <div class="content-header" ng-if="(retailer.isExpanded || vm.expandAll)">
                                 <div class="col-lg-10" style="padding-left: 100px">Time Range</div>
                                 <div class="col-lg-2 text-right">Sales</div>
                             </div>
-                            <div ng-repeat="time in retailer.salesByTime" ng-if="retailer.isExpanded && time.totalSales > 0">
+                            <div ng-repeat="time in retailer.salesByTime" ng-if="(retailer.isExpanded || vm.expandAll) && time.totalSales > 0">
                                 <div class="content-wrapper">
                                     <div class="col-lg-10" style="padding-left: 100px">{{vm.getTimeRangeInFormat(time.timeRange)}}</div>
                                     <div class="col-lg-2 text-right">{{time.totalSales}}</div>

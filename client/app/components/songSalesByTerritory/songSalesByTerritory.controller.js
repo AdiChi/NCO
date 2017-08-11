@@ -1,6 +1,6 @@
 import BreakOutByRetailerController from './breakOutByRetailer.controller';
 class SongsalesByGeographyController {
-    constructor($scope, $filter, $uibModal, ReportService) {
+    constructor($scope, $filter, $uibModal, ReportService, EmailPdfService) {
         'ngInject'
 
         this.chartTypes = [
@@ -377,7 +377,15 @@ class SongsalesByGeographyController {
                 timestr = t1 + " to " + t2;
             }
             return timestr;
-        }
+        };
+
+        // Send Email
+
+        this.sendMail = function() {
+            this.expandAll = true;
+            EmailPdfService.sendMail($(".c3graph"), $('.drilldown'), this.expandAll);
+            this.expandAll = false;
+        };
     }
 }
 

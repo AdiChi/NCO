@@ -22,14 +22,14 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
                     graphElement.append(sendingMsg);
                     var dataSrc = canvas.toDataURL();
                     var i = new Image();
-                    var docDefinition={ content: []};
+                    var docDefinition = { content: [] };
 
                     for (var val in details) {
-                        docDefinition.content.push({ text: details[val] , style: 'header'});
+                        docDefinition.content.push({ text: details[val], style: 'header' });
                     }
 
                     i.onload = function() {
-                        if(graphElement.hasClass("c3graph")) {
+                        if (graphElement.hasClass("c3graph")) {
                             var myImage = c3ExportService.createChartImages(graphElement, {});
                             docDefinition.content.push({
                                 image: myImage,
@@ -111,29 +111,25 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
                 }
             });
         }
-        if (expandAllElement.length > 0) {
-            var checkExist = setInterval(function() {
-                if (expandAllElement.prop('checked')) {
-                    if(graphElement.hasClass("c3graph")) {
-                        sendingPdf();
-                    } else {
-                        html2canvas($(".legend"), {
-                            onrendered: function(legendCanvas) {
-                                sendingPdf(legendCanvas);
-                            }
-                        });
-                    }
-                    clearInterval(checkExist);
+        var checkExist = setInterval(function() {
+            if (expandAllElement) {
+                if (graphElement.hasClass("c3graph")) {
+                    sendingPdf();
                 } else {
-                    console.log("Not Exists!");
+                    html2canvas($(".legend"), {
+                        onrendered: function(legendCanvas) {
+                            sendingPdf(legendCanvas);
+                        }
+                    });
                 }
-            }, 100);
-        } else {
-            console.log("expandAll is missing");
-        }
+                clearInterval(checkExist);
+            } else {
+                console.log("Not Exists!");
+            }
+        }, 100);
     }
     return {
-        sendMail(graphElement, drilldownElement, expandAllElement,details) {
+        sendMail(graphElement, drilldownElement, expandAllElement, details) {
             var custMod = {
                 size: 'md',
                 controller: function($scope, $uibModalInstance) {
@@ -186,7 +182,7 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
                 var emails = res.split(",").map(function(item) {
                     return item.trim();
                 });
-                getPDF(emails,graphElement, drilldownElement, expandAllElement,details);
+                getPDF(emails, graphElement, drilldownElement, expandAllElement, details);
             }, function(err) {
                 console.log(err);
             });
