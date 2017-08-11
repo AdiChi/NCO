@@ -54,6 +54,7 @@ function DataMap() {
                 if (scope.showHeatMap) {
                     map = new Datamap({
                         element: containerid,
+                        height:670,
                         responsive: true,
                         projection: 'mercator',
                         setProjection: function (element) {

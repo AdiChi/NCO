@@ -13,83 +13,116 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
         return newCan.toDataURL();
     }
 
-    function getPDF(emails, graphElement, drilldownElement, expandAllElement) {
-        var myImage = c3ExportService.createChartImages(graphElement, {});
+    function getPDF(emails, graphElement, drilldownElement, expandAllElement, details) {
+
+        function sendingPdf(legendCanvas) {
+            html2canvas(drilldownElement, {
+                onrendered: function(canvas) {
+                    var sendingMsg = '<div class="alerts"><div class="alert alert-info">Sending Mail...</div></div>';
+                    graphElement.append(sendingMsg);
+                    var dataSrc = canvas.toDataURL();
+                    var i = new Image();
+                    var docDefinition={ content: []};
+
+                    for (var val in details) {
+                        docDefinition.content.push({ text: details[val] , style: 'header'});
+                    }
+
+                    i.onload = function() {
+                        if(graphElement.hasClass("c3graph")) {
+                            var myImage = c3ExportService.createChartImages(graphElement, {});
+                            docDefinition.content.push({
+                                image: myImage,
+                                fit: [525, 750]
+                            });
+                        } else {
+                            var svgEl = $(graphElement.find('svg')).first()[0];
+                            var svgCopyEl = angular.element(svgEl.outerHTML)[0];
+                            var canvasEl = angular.element('<canvas id="canvasOriginal"></canvas>')[0];
+                            $(graphElement).parent().append(canvasEl);
+                            canvg(canvasEl, new XMLSerializer().serializeToString(svgCopyEl));
+                            var image2 = canvasEl.toDataURL();
+                            docDefinition.content.push({
+                                image: legendCanvas.toDataURL(),
+                                width: 525
+                            });
+                            docDefinition.content.push({
+                                image: image2,
+                                width: 525
+                            });
+                            $(canvasEl).remove();
+                        }
+                        if (i.height > 800) {
+                            var remHeigth = i.height;
+                            var topleft = 0;
+                            while (remHeigth > 800) {
+                                var newCrop = crop(canvas, { x: 0, y: topleft }, { x: canvas.width, y: topleft + 800 });
+                                remHeigth -= 800;
+                                topleft += 800;
+                                docDefinition.content.push({
+                                    image: newCrop,
+                                    width: 525
+                                });
+                            }
+                            if (remHeigth > 0) {
+                                var newCrop = crop(canvas, { x: 0, y: topleft }, { x: canvas.width, y: canvas.height });
+                                docDefinition.content.push({
+                                    image: newCrop,
+                                    width: 525
+                                });
+                            }
+                        } else {
+                            docDefinition.content.push({
+                                image: dataSrc,
+                                width: 525
+                            });
+                        }
+                        /*pdfMake.createPdf(docDefinition).open();*/
+                        pdfMake.createPdf(docDefinition).getBlob(function(data) {
+
+                            var formData = new FormData();
+                            formData.append("pdf", data, "mygraph.pdf");
+                            formData.append("email[]", emails);
+                            formData.append("isLink", false);
+
+                            EmailService.sendAttachment(formData).then((res) => {
+                                graphElement.find('.alerts').remove();
+                                console.log('PDF uploaded', res.data);
+
+                                var alerts = '<div class="alerts">' + (res.data.failure.length > 0 ?
+                                        '<div class="alert alert-danger"> Failed to send to ' + res.data.failure + ' <button type="button" class="close" data-dismiss="alert">×</button></div>' : "") +
+                                    (res.data.success.length > 0 ?
+                                        '<div class="alert alert-success"> Successfully sent to ' + res.data.success + ' <button type="button" class="close" data-dismiss="alert">×</button></div>' : "") +
+                                    '</div>';
+                                graphElement.append(alerts);
+
+                                setTimeout(function() {
+                                    graphElement.find('.alerts').remove();
+                                }, 8000);
+                            }).catch(function(e) {
+                                graphElement.find('.alerts').remove();
+                                console.log(e);
+                            });
+                        }, function(e) {
+                            console.log(e);
+                        });
+                    };
+                    i.src = dataSrc;
+                }
+            });
+        }
         if (expandAllElement.length > 0) {
             var checkExist = setInterval(function() {
                 if (expandAllElement.prop('checked')) {
-                    html2canvas(drilldownElement, {
-                        onrendered: function(canvas) {
-                            var sendingMsg = '<div class="alerts"><div class="alert alert-info">Sending Mail...</div></div>';
-                            graphElement.append(sendingMsg);
-                            var dataSrc = canvas.toDataURL();
-                            var i = new Image();
-
-                            var docDefinition = {
-                                content: [{
-                                    image: myImage,
-                                    fit: [525, 750]
-                                }]
-                            };
-                            i.onload = function() {
-                                if (i.height > 800) {
-                                    var remHeigth = i.height;
-                                    var topleft = 0;
-                                    while (remHeigth > 800) {
-                                        var newCrop = crop(canvas, { x: 0, y: topleft }, { x: canvas.width, y: topleft + 800 });
-                                        remHeigth -= 800;
-                                        topleft += 800;
-                                        docDefinition.content.push({
-                                            image: newCrop,
-                                            width: 525
-                                        });
-                                    }
-                                    if (remHeigth > 0) {
-                                        var newCrop = crop(canvas, { x: 0, y: topleft }, { x: canvas.width, y: canvas.height });
-                                        docDefinition.content.push({
-                                            image: newCrop,
-                                            width: 525
-                                        });
-                                    }
-                                } else {
-                                    docDefinition.content.push({
-                                        image: dataSrc,
-                                        width: 525
-                                    });
-                                }
-                                /*pdfMake.createPdf(docDefinition).open();*/
-                                pdfMake.createPdf(docDefinition).getBlob(function(data) {
-
-                                    var formData = new FormData();
-                                    formData.append("pdf", data, "mygraph.pdf");
-                                    formData.append("email[]", emails);
-                                    formData.append("isLink", false);
-
-                                    EmailService.sendAttachment(formData).then((res) => {
-                                        graphElement.find('.alerts').remove();
-                                        console.log('PDF uploaded', res.data);
-
-                                        var alerts = '<div class="alerts">' + (res.data.failure.length > 0 ?
-                                                '<div class="alert alert-danger"> Failed to send to ' + res.data.failure + ' <button type="button" class="close" data-dismiss="alert">×</button></div>' : "") +
-                                            (res.data.success.length > 0 ?
-                                                '<div class="alert alert-success"> Successfully sent to ' + res.data.success + ' <button type="button" class="close" data-dismiss="alert">×</button></div>' : "") +
-                                            '</div>';
-                                        graphElement.append(alerts);
-
-                                        setTimeout(function() {
-                                            graphElement.find('.alerts').remove();
-                                        }, 8000);
-                                    }).catch(function(e) {
-                                        graphElement.find('.alerts').remove();
-                                        console.log(e);
-                                    });
-                                }, function(e) {
-                                    console.log(e);
-                                });
-                            };
-                            i.src = dataSrc;
-                        }
-                    });
+                    if(graphElement.hasClass("c3graph")) {
+                        sendingPdf();
+                    } else {
+                        html2canvas($(".legend"), {
+                            onrendered: function(legendCanvas) {
+                                sendingPdf(legendCanvas);
+                            }
+                        });
+                    }
                     clearInterval(checkExist);
                 } else {
                     console.log("Not Exists!");
@@ -100,7 +133,7 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
         }
     }
     return {
-        sendMail(graphElement, drilldownElement, expandAllElement) {
+        sendMail(graphElement, drilldownElement, expandAllElement,details) {
             var custMod = {
                 size: 'md',
                 controller: function($scope, $uibModalInstance) {
@@ -153,7 +186,7 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
                 var emails = res.split(",").map(function(item) {
                     return item.trim();
                 });
-                getPDF(emails,graphElement, drilldownElement, expandAllElement);
+                getPDF(emails,graphElement, drilldownElement, expandAllElement,details);
             }, function(err) {
                 console.log(err);
             });

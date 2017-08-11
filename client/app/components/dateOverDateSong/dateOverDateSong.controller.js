@@ -507,7 +507,16 @@ class DateOverDateSongController {
         }
         $scope.sendMail = function () {
             $scope.expandAll = true;
-            EmailPdfService.sendMail($(".c3graph"), $('.drilldown'), $('.expandAll'));
+            if ($scope.showHeatMap) {
+                var elem = $("#world-map-container");
+            } else {
+                var elem = $(".c3graph");
+            }
+            var details = {
+                chartType: "Date Over Date Song Comparison",
+                song: $scope.selectedSong
+            };
+            EmailPdfService.sendMail(elem, $('.drilldown'), $('.expandAll'), details);
         };
         function addEmptyDateValues() {
 
