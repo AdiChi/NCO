@@ -200,6 +200,7 @@ class SongsalesByGeographyController {
                         i++;
                     }
                 });
+                this.datapoints = $filter('orderBy')(this.datapoints, 'x');
             } else if (this.territoryRepresentation === '2') {
                 var i = 0;
                 angular.forEach(this.chart.salesByGeography, (geography) => {
@@ -220,6 +221,7 @@ class SongsalesByGeographyController {
                     this.plotCummulativeData(i, days);
                     i++;
                 });
+                this.datapoints = $filter('orderBy')(this.datapoints, 'x');
             } else { // Aggregate Data              
                 var days = [];
                 var i = 0;
