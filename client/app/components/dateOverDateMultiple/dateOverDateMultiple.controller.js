@@ -309,8 +309,13 @@ class DateOverDateMultipleController {
           k = 0,
           sales = 0;
         angular.forEach(vm.chart.salesPerSong, (songObj) => {
-          mapObj['song' + (k + 1) + '_Sales'] = (vm.chart.salesPerSong[k].dateRange1[i].totalsales > 0) ? vm.chart.salesPerSong[k].dateRange1[i].totalsales : 0;
-          sales += mapObj['song' + (k + 1) + '_Sales'];
+          if (vm.chart.salesPerSong[k].dateRange1[i]) {
+            mapObj['song' + (k + 1) + '_Sales'] = (vm.chart.salesPerSong[k].dateRange1[i].totalsales > 0) ? vm.chart.salesPerSong[k].dateRange1[i].totalsales : 0;
+            sales += mapObj['song' + (k + 1) + '_Sales'];
+          } else {
+            mapObj['song' + (k + 1) + '_Sales'] = 0
+            sales = 0;
+          }
           mapObj['song' + (k + 1) + '_Name'] = songObj.name;
           mapObj['song' + (k + 1) + '_Id'] = songObj.id;
           k++;
@@ -326,8 +331,13 @@ class DateOverDateMultipleController {
           k = 0,
           sales = 0;
         angular.forEach(vm.chart.salesPerSong, (songObj) => {
-          mapObj['song' + (k + 1) + '_Sales'] = (vm.chart.salesPerSong[k].dateRange2[j].totalsales > 0) ? vm.chart.salesPerSong[k].dateRange2[j].totalsales : 0;
-          sales += mapObj['song' + (k + 1) + '_Sales'];
+          if (vm.chart.salesPerSong[k].dateRange2[j]) {
+            mapObj['song' + (k + 1) + '_Sales'] = (vm.chart.salesPerSong[k].dateRange2[j].totalsales > 0) ? vm.chart.salesPerSong[k].dateRange2[j].totalsales : 0;
+            sales += mapObj['song' + (k + 1) + '_Sales'];
+          } else {
+            mapObj['song' + (k + 1) + '_Sales'] = 0
+            sales = 0;
+          }
           mapObj['song' + (k + 1) + '_Name'] = songObj.name;
           mapObj['song' + (k + 1) + '_Id'] = songObj.id;
           k++;
@@ -473,10 +483,9 @@ class DateOverDateMultipleController {
       });
 
       angular.forEach(vm.selectedSong, (obj) => {
-        if(obj.type == 'list'){
+        if (obj.type == 'list') {
           vm.query['songId[]'].push(obj.id + 'l');
-        }
-        else{
+        } else {
           vm.query['songId[]'].push(obj.songid);
         }
       });
@@ -496,6 +505,7 @@ class DateOverDateMultipleController {
       vm.showHeatMap = false;
       vm.drilldown = false;
       vm.heatMapData = null;
+      vm.totalSongSales = 0;
 
       if (!vm.query["songId[]"].length) {
         vm.songError = "Please select song";
@@ -673,7 +683,8 @@ class DateOverDateMultipleController {
     //Send Report as Mail
     vm.sendMail = () => {
       vm.expandAll = true;
-      EmailPdfService.sendMail($(".c3graph"), $('.drilldown'), $('.expandAll'));
+      EmailPdfService.sendMail($(".c3graph"), $('.drilldown'), vm.expandAll);
+      vm.expandAll = false;
     }
   }
 }

@@ -107,7 +107,7 @@
     <div ng-if="!vm.loading">
         <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:30px">
             <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
-                show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections">
+                show-subchart="true" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections">
                 <chart-size chart-height="650" />
                 <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
                 <!-- <chart-bar ratio="0.5" /> -->
@@ -137,7 +137,7 @@
             </div>
             <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px">
                 <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
-                    show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
+                    show-subchart="true" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections"
                     ng-if="!vm.showHeatMap">
                     <chart-size chart-height="700" />
                     <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
@@ -153,7 +153,7 @@
             </div>
             <div class="container-fluid c3graph" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px">
                 <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
-                    show-subchart="true" callback-function="vm.handleCallback2" empty-label="No data available for above selections">
+                    show-subchart="true" callback-function="vm.handleCallback2" sort-data="null" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
                     <chart-size chart-height="700" />
                     <!-- <chart-bar ratio="0.5" /> -->
@@ -186,9 +186,9 @@
         <div ng-if="vm.chart && vm.drilldown">
             <div class="container drilldown" st-table="vm.chart.salesPerSong">
                 <h3>Sales</h3>
-                <h5><label>Expand all:
+                <!-- <h5><label>Expand all:
                     <input class="expandAll" type="checkbox" ng-model="vm.expandAll">
-                </label></h5>
+                </label></h5> -->
                 <div ng-repeat-start="song in vm.chart.salesPerSong" ng-init="parentIndex = $index; vm.initRangeTotal(parentIndex); vm.setSongTotal(song, parentIndex);">
                     <div class="row song-header" ng-click="showDrilldown = showDrilldown ? false : true; vm.initRangeTotal(parentIndex);" ng-class="{drilldownOpen: (vm.expandAll || showDrilldown)}">
                         <div class="col-md-6">

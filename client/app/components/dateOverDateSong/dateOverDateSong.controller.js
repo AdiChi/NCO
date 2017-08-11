@@ -516,7 +516,8 @@ class DateOverDateSongController {
                 chartType: "Date Over Date Song Comparison",
                 song: $scope.selectedSong
             };
-            EmailPdfService.sendMail(elem, $('.drilldown'), $('.expandAll'), details);
+            EmailPdfService.sendMail(elem, $('.drilldown'), $scope.expandAll, details);
+            $scope.expandAll = false;
         };
         function addEmptyDateValues() {
 
