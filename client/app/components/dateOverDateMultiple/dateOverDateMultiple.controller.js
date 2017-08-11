@@ -1,5 +1,5 @@
 class DateOverDateMultipleController {
-  constructor($scope, $filter, $window, ReportService, ModalService) {
+  constructor($scope, $filter, $window, ReportService, ModalService, EmailPdfService) {
     "ngInject";
 
     var vm = this;
@@ -185,6 +185,11 @@ class DateOverDateMultipleController {
       vm.totalSongSales += data.totalSongSales
     }
 
+    vm.initRangeTotal = (index) => {
+      vm['range1Song' + index + 'Sales'] = 0;
+      vm['range2Song' + index + 'Sales'] = 0;
+    }
+
     vm.toggleMap = (data, isAggregate, range) => {
       let results = {},
         mapObject = [];
@@ -333,8 +338,13 @@ class DateOverDateMultipleController {
         vm.secondRangeMap.push(mapObj);
       });
 
-      addEmptySales(range1, 'firstRangeMap');
-      addEmptySales(range2, 'secondRangeMap');
+      if (!vm.firstRangeMap.length && !vm.secondRangeMap.length) {
+        vm.firstRangeMap = [];
+        vm.secondRangeMap = [];
+      } else {
+        addEmptySales(range1, 'firstRangeMap');
+        addEmptySales(range2, 'secondRangeMap');
+      }
 
       plotChart();
     }
@@ -344,7 +354,6 @@ class DateOverDateMultipleController {
       var b = moment(range[1], 'll');
       var r = index || 0;
 
-      console.log(vm[rangeObj]);
       for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
         let mapObj = {};
         var x = m.format('MMM DD');
@@ -429,10 +438,9 @@ class DateOverDateMultipleController {
       vm.loading = false;
       vm.currentChartType = "bar";
       angular.forEach(vm.chartTypes, (chartType) => {
-        if(chartType.name == vm.currentChartType){
+        if (chartType.name == vm.currentChartType) {
           chartType.isActive = true;
-        }
-        else{
+        } else {
           chartType.isActive = false;
         }
       });
@@ -465,8 +473,17 @@ class DateOverDateMultipleController {
       });
 
       angular.forEach(vm.selectedSong, (obj) => {
-        vm.query["songId[]"].push(obj.songid);
+        if(obj.type == 'list'){
+          vm.query['songId[]'].push(obj.id + 'l');
+        }
+        else{
+          vm.query['songId[]'].push(obj.songid);
+        }
       });
+
+      // angular.forEach(vm.selectedSong, (obj) => {
+      //   vm.query['songId[]'].push(obj.songid);
+      // });
     }
 
     vm.getChart = function () {
@@ -640,6 +657,7 @@ class DateOverDateMultipleController {
       return timestr;
     }
 
+    //Duplicate Song Validation
     function hasDuplicateSong(songCollection) {
       var i, j, n;
       n = songCollection.length;
@@ -650,6 +668,12 @@ class DateOverDateMultipleController {
         }
       }
       return false;
+    }
+
+    //Send Report as Mail
+    vm.sendMail = () => {
+      vm.expandAll = true;
+      EmailPdfService.sendMail($(".c3graph"), $('.drilldown'), $('.expandAll'));
     }
   }
 }

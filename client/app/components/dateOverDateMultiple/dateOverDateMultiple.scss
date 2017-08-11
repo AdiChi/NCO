@@ -223,8 +223,9 @@
         }
     }
     .fav-panel{
-        width:auto;
-        padding: 0;
+        i{
+            cursor: pointer;
+        }
     }
     .report-heading{
         h3{

@@ -34,7 +34,7 @@ class DateTimeRangeController {
                 this.range.startDate &&
                 this.range.endDate.valueOf() < this.range.startDate.valueOf()) {
                 this.range.endDate = this.range.startDate;
-                endDateOnSetTime();
+                this.endDateOnSetTime();
             }
             for (var i = 0; i < $dates.length; i++) {
                 if (new Date().getTime() < $dates[i].utcDateValue) {
