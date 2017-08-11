@@ -82,7 +82,8 @@
     }
     .fav {
         color: grey;
-        padding-left: 15px;
+        padding-left: 0;
+        cursor: pointer;
         &:hover {
             color: #bf2d2d;
         }
@@ -207,6 +208,7 @@
     }
     .tab-head {
         color: #337ab7;
+        font-weight: 600;
     }
     .selected-song-label {
         padding: 0;
@@ -214,9 +216,20 @@
         margin: 0 0 2px 0;
         font-weight: 600;
         .selected-song {
-            .fa-th-list::before, .fa-music::before {
+            .fa-th-list::before,
+            .fa-music::before {
                 margin: 0 8px 0 0;
             }
+        }
+    }
+    .fav-panel{
+        width:auto;
+        padding: 0;
+    }
+    .report-heading{
+        h3{
+            margin-top: 0;
+            margin-bottom: 15px;
         }
     }
     .drilldown {
@@ -246,25 +259,38 @@
                 }
             }
         }
+        .footer {
+            font-size: 16px;
+            padding: 10px 0;
+            margin: 0;
+            div{
+                padding: 0;
+            }
+            div:first-child{
+padding: 0 0 0 5px;
+            }
+        }
         .drilldown-content {
             padding: 0;
         }
         .glyphicon {
             padding: 0 7px 0 0;
         }
-        .list-inline {
-            & ul {
-                list-style-type: none;
-                padding-left: 30px;
-                &>li {
-                    padding: 10px 5px;
-                    border-bottom: 1px solid #d3d3d3;
-                }
-            }
-        }
         .row {
             margin-top: 0;
             margin-bottom: 0;
+        }
+        .content-wrapper {
+            display: inline-block;
+            width: 100%;
+            cursor: pointer;
+            &.tab-head{
+                cursor: default;
+            }
+            div {
+                padding: 8px;
+                border-bottom: 1px solid #ddd;
+            }
         }
     }
     .song-select-panel {

@@ -7,7 +7,9 @@ import timepicker from 'angular-ui-bootstrap/src/timepicker';
 import buttons from 'angular-ui-bootstrap/src/buttons';
 import ngAnimate from 'angular-animate'
 import ngInlineEdit from 'ng-inline-edit';
-import { default as multiselect } from 'angular-bootstrap-multiselect';
+import {
+    default as multiselect
+} from 'angular-bootstrap-multiselect';
 
 import FooterComponent from './components/footernco/footernco';
 import LeftNavComponent from './components/leftNav/leftNav';
@@ -130,8 +132,8 @@ angular
                 template: '<app></app>'
             })
 
-        // Login page
-        .state('app.login', {
+            // Login page
+            .state('app.login', {
                 url: '/',
                 template: '<login></login>'
             })
@@ -153,8 +155,8 @@ angular
                 template: '<users></users>'
             })
 
-        // Create route for our user listings creator
-        .state('app.create', {
+            // Create route for our user listings creator
+            .state('app.create', {
                 url: '/create',
                 template: '<create></create>'
             })
@@ -233,17 +235,17 @@ angular
     .factory('UtilService', UtilService)
     .factory('LoginService', LoginService)
     .factory('EmailPdfService', EmailPdfService)
-    .factory('superCache', ['$cacheFactory', function($cacheFactory) {
+    .factory('superCache', ['$cacheFactory', function ($cacheFactory) {
         return $cacheFactory('super-cache');
     }])
     .constant('config', {
         apiUrl: 'http://172.27.108.135:8090',
         baseUrl: '/'
     })
-    .factory('_', ['$window', function($window) {
+    .factory('_', ['$window', function ($window) {
         return $window._;
     }])
-    .run(['$rootScope', '$timeout', '$state', '$templateCache', 'c3Service', 'UtilService', function($rootScope, $timeout, $state, $templateCache, c3Service, UtilService) {
+    .run(['$rootScope', '$timeout', '$state', '$templateCache', '$window', 'c3Service', 'UtilService', function ($rootScope, $timeout, $state, $templateCache, $window, c3Service, UtilService) {
         $templateCache.put('template/smart-table/pagination.html',
             '<div class=" plain" ng-if="pages.length >= 2">' +
             '<st-summary style="display: inherit;"></st-summary>' +
@@ -258,8 +260,11 @@ angular
             if (!$rootScope.currentUser) {
                 $rootScope.currentUser = UtilService.getFromSession('currentUser');
                 if (!$rootScope.currentUser && toState.name !== 'app.login') {
-                    $timeout(() => { $state.go('app.login') }, 100);
+                    $timeout(() => {
+                        $state.go('app.login')
+                    }, 100);
                 }
             }
+            $window.scrollTo(0, 0);
         });
     }]);

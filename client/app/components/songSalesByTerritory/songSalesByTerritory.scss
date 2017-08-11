@@ -51,6 +51,38 @@
             font-weight: bold;
             padding-left: 6%;
             padding-top: 20px;
+            .fav {
+                padding-left: 0px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.drilldown {
+    .drilldown-wrapper {
+        margin-top: 15px;
+        .content-header,
+        .content-wrapper {
+            display: inline-block;
+            width: 100%;
+            border-top: 1px solid #e5e5e2;
+            padding-top: 8px;
+            padding-bottom: 3px;
+            div {
+                padding-right: 0px;
+            }
+        }
+        .content-wrapper {
+            cursor: pointer;
+        }
+        .content-header {
+            font-weight: bold;
+            color: #337ab7;
+        }
+        .content-wrapper.total-sales {
+            font-weight: bold;
+            font-size: 16px;
         }
     }
 }
