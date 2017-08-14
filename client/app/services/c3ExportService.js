@@ -48,6 +48,7 @@ function c3ExportService(c3StyleService) {
         } catch(e) {
             svg_str = svg.xml;
         }
+
         canvg(canvas, svg_str);
     }
 

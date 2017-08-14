@@ -23,19 +23,47 @@ function EmailPdfService(c3ExportService, EmailService, ModalService, $q) {
                     var sendingMsg = '<div class="alerts"><div class="alert alert-info">Sending Mail...</div></div>';
                     ($(graphElement).length>0) ? graphElement.append(sendingMsg) : $(".view-main").append(sendingMsg);
                     var dataSrc = canvas.toDataURL();
-                    var i = new Image();
+                    var header = "header", 
+                        i = new Image();
                     var docDefinition = { content: [] };
 
                     for (var val in details) {
-                        docDefinition.content.push({ text: details[val], style: 'header' });
+                        if(val == "chartType") {
+                            header = "h1";
+                        } else if(val == "song") {
+                            header = "h2";
+                        } else {
+                            header = "h3"
+                        }
+                        docDefinition.content.push({
+                            text: details[val],
+                            style: header
+                        });
                     }
 
+                    docDefinition.styles = {
+                        h1: {
+                            fontSize: 18,
+                            bold: true,
+                            color: '#337ab7'
+                        },
+                        h2: {
+                            fontSize: 16,
+                            bold: true,
+                            color: '#F5B041'
+                        },
+                        h3: {
+                            fontSize: 12,
+                            bold: false,
+                            color: '#000'
+                        }
+                    };
                     i.onload = function() {
                         if (graphElement.hasClass("c3graph")) {
                             var myImage = c3ExportService.createChartImages(graphElement, {});
                             docDefinition.content.push({
                                 image: myImage,
-                                fit: [525, 750]
+                                fit: [525, 950]
                             });
                         } else {
                             if ($(graphElement).length>0) {
