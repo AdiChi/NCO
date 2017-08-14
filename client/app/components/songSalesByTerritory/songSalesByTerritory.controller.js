@@ -486,9 +486,26 @@ class SongsalesByGeographyController {
         // Send Email
 
         this.sendMail = function () {
+            var vm = this;
             this.expandAll = true;
-            EmailPdfService.sendMail($(".c3graph"), $('.drilldown'), this.expandAll);
-            this.expandAll = false;
+
+            if (this.showHeatMap) {
+                var elem = $("#world-map-container");
+            } else {
+                var elem = $(".c3graph");
+            }
+            var details = {
+                chartType: "Song Sales Comparison By Territory/Territory Groups",
+                song: this.selectedSong.trackname,
+                range1: "Date Range: " + this.chart.dateRange
+            };
+
+            var s = EmailPdfService.sendMail(elem, $('.drilldown'), this.expandAll , details);
+            s.then(function(r) {
+                vm.expandAll = false;
+            }).catch(function(e) {
+                vm.expandAll = false;
+            });
         };
     }
 }
