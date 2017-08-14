@@ -99,7 +99,7 @@ class DateOverDateMultipleController {
       if (vm.currentChartType == "heatmap") {
         if (vm.chart.firstRange == vm.chart.secondRange) {
           vm.firstRange = "Range 1 (" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")";
-          vm.secondRange = "Range 1 (" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
+          vm.secondRange = "Range 2 (" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
         } else {
           vm.firstRange = vm.chart.firstRange;
           vm.firstRange = vm.chart.secondRange;
@@ -725,7 +725,7 @@ class DateOverDateMultipleController {
     //Send Report as Mail
     vm.sendMail = () => {
       vm.expandAll = true;
-      let selectedSong;
+      let selectedSong, firstRange, secondRange;
 
       if (vm.showHeatMap) {
         var elem = $("#world-map-container");
@@ -741,9 +741,19 @@ class DateOverDateMultipleController {
         }
       });
 
+      if (vm.chart.firstRange == vm.chart.secondRange) {
+        firstRange = vm.getTimeRangeInFormat(vm.chart.timerange1) + ")";
+        secondRange =vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
+      } else {
+        firstRange = vm.chart.firstRange;
+        firstRange = vm.chart.secondRange;
+      }
+
       var details = {
         chartType: "Date Over Date Songs/SongList Comparison",
-        song: selectedSong
+        song: selectedSong,
+        range1: "Range 1: " + firstRange,
+        range2: "Range 2: " + secondRange
       };
 
       EmailPdfService.sendMail(elem, $('.drilldown'), vm.expandAll, details).then((r) => {
