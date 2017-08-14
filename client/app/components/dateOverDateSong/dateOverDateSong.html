@@ -175,7 +175,7 @@
             </div>
             <div class="container-fluid">
                 <i class="fa fa-heart fa-2x fav" aria-hidden="true" ng-click="fav = fav ? false:true" ng-class="{selected: fav}" title="Add to favorites"></i>
-                <span ng-click="sendMail()"><i class="fa fa-2x fa-share-square-o mail" aria-hidden="true"></i></span>
+                <span title="Send via email" ng-click="sendMail()" style="cursor: pointer;"><i class="fa fa-2x fa-share-square-o mail" aria-hidden="true"></i></span>
             </div>
             <div class="container-fluid" ng-if="!theChart && chart && !showHeatMap" style="padding-top:30px">
                 {{selectedSong}}
@@ -236,7 +236,7 @@
                                 </td>
                                 <td><strong>{{value.totalsales}}</strong></td>
                             </tr>
-                            <tr class="tab-head" ng-show="(expandAll && value.totalsales>0) || showTab[value.date]">
+                            <tr class="tab-head" ng-if="(expandAll && value.totalsales>0) || showTab[value.date]">
                                 <td style="padding-left: 30px">
                                     Retailers
                                 </td>
@@ -254,7 +254,7 @@
                                     <strong>{{ret.totalSaleRetailer}}</strong>
                                 </td>
                             </tr>
-                            <tr class="tab-head" ng-show="(expandAll && ret.totalSaleRetailer>0) || (showTab[value.date] && showRet[value.date][ret.name])">
+                            <tr class="tab-head" ng-if="(expandAll && ret.totalSaleRetailer>0) || (showTab[value.date] && showRet[value.date][ret.name])">
                                 <td style="padding-left: 45px">
                                     Territories
                                 </td>
@@ -301,7 +301,7 @@
                                 </td>
                                 <td><strong>{{value.totalsales}}</strong></td>
                             </tr>
-                            <tr class="tab-head" ng-show="(expandAll && value.totalsales>0) || showTab[value.date]">
+                            <tr class="tab-head" ng-if="(expandAll && value.totalsales>0) || showTab[value.date]">
                                 <td style="padding-left: 30px">
                                     Retailers
                                 </td>
@@ -319,7 +319,7 @@
                                     <strong> {{ret.totalSaleRetailer}}</strong>
                                 </td>
                             </tr>
-                            <tr class="tab-head" ng-show="(expandAll && ret.totalSaleRetailer>0) || (showTab[value.date] && showRet[value.date][ret.name])">
+                            <tr class="tab-head" ng-if="(expandAll && ret.totalSaleRetailer>0) || (showTab[value.date] && showRet[value.date][ret.name])">
                                 <td style="padding-left: 45px">
                                     Territories
                                 </td>

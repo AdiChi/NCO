@@ -1,4 +1,4 @@
-function EmailPdfService(c3ExportService, EmailService, ModalService) {
+function EmailPdfService(c3ExportService, EmailService, ModalService, $q) {
     "ngInject";
 
     function crop(can, a, b) {
@@ -16,10 +16,12 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
     function getPDF(emails, graphElement, drilldownElement, expandAllElement, details) {
 
         function sendingPdf(legendCanvas) {
+            var deferred = $q.defer();
+
             html2canvas(drilldownElement, {
                 onrendered: function(canvas) {
                     var sendingMsg = '<div class="alerts"><div class="alert alert-info">Sending Mail...</div></div>';
-                    graphElement.append(sendingMsg);
+                    ($(graphElement).length>0) ? graphElement.append(sendingMsg) : $(".view-main").append(sendingMsg);
                     var dataSrc = canvas.toDataURL();
                     var i = new Image();
                     var docDefinition = { content: [] };
@@ -36,21 +38,34 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
                                 fit: [525, 750]
                             });
                         } else {
-                            var svgEl = $(graphElement.find('svg')).first()[0];
-                            var svgCopyEl = angular.element(svgEl.outerHTML)[0];
-                            var canvasEl = angular.element('<canvas id="canvasOriginal"></canvas>')[0];
-                            $(graphElement).parent().append(canvasEl);
-                            canvg(canvasEl, new XMLSerializer().serializeToString(svgCopyEl));
-                            var image2 = canvasEl.toDataURL();
-                            docDefinition.content.push({
-                                image: legendCanvas.toDataURL(),
-                                width: 525
-                            });
-                            docDefinition.content.push({
-                                image: image2,
-                                width: 525
-                            });
-                            $(canvasEl).remove();
+                            if ($(graphElement).length>0) {
+                                var svg_str, svgEl = $(graphElement.find('svg')).first()[0];
+                                var svgCopyEl = svgEl.outerHTML ? angular.element(svgEl.outerHTML)[0] : $(svgEl).clone()[0];
+                                var canvasEl = angular.element('<canvas id="canvasOriginal"></canvas>')[0];
+                                $(graphElement).parent().append(canvasEl);
+                                try {
+                                    svg_str = new XMLSerializer().serializeToString(svgCopyEl);
+                                } catch(e) {
+                                    svg_str = svgCopyEl.xml;
+                                }
+                                canvg(canvasEl, svg_str);
+
+                                var image2 = canvasEl.toDataURL();
+                                docDefinition.content.push({
+                                    image: legendCanvas.toDataURL(),
+                                    width: 525
+                                });
+                                docDefinition.content.push({
+                                    image: image2,
+                                    width: 525
+                                });
+                                $(canvasEl).remove(); 
+                            } else {
+                                docDefinition.content.push({
+                                    text: $(".no-map-data").text(), style: 'header'
+                                });
+                                
+                            }
                         }
                         if (i.height > 800) {
                             var remHeigth = i.height;
@@ -87,6 +102,7 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
 
                             EmailService.sendAttachment(formData).then((res) => {
                                 graphElement.find('.alerts').remove();
+                                $(".view-main").find('.alerts').remove();
                                 console.log('PDF uploaded', res.data);
 
                                 var alerts = '<div class="alerts">' + (res.data.failure.length > 0 ?
@@ -94,39 +110,56 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
                                     (res.data.success.length > 0 ?
                                         '<div class="alert alert-success"> Successfully sent to ' + res.data.success + ' <button type="button" class="close" data-dismiss="alert">×</button></div>' : "") +
                                     '</div>';
-                                graphElement.append(alerts);
+                                    ($(graphElement).length>0) ? graphElement.append(alerts) : $(".view-main").append(alerts);
 
                                 setTimeout(function() {
                                     graphElement.find('.alerts').remove();
+                                    $(".view-main").find('.alerts').remove();
                                 }, 8000);
+
+                                deferred.resolve(true);
                             }).catch(function(e) {
-                                graphElement.find('.alerts').remove();
+                                deferred.reject(false);
+                                $(".view-main").find('.alerts').remove();
                                 console.log(e);
                             });
                         }, function(e) {
+                            deferred.reject(false);
                             console.log(e);
                         });
                     };
                     i.src = dataSrc;
                 }
             });
+            return deferred.promise;
         }
-        var checkExist = setInterval(function() {
+        // var checkExist = setInterval(function() {
+            var deferred2 = $q.defer();
             if (expandAllElement) {
                 if (graphElement.hasClass("c3graph")) {
-                    sendingPdf();
-                } else {
+                    sendingPdf().then(function(r) {
+                        deferred2.resolve(true);
+                    });
+                } else if($(".legend").length>0) {
                     html2canvas($(".legend"), {
                         onrendered: function(legendCanvas) {
-                            sendingPdf(legendCanvas);
+                            sendingPdf(legendCanvas).then(function(r) {
+                                deferred2.resolve(true);
+                            });
                         }
                     });
+                } else {
+                    sendingPdf().then(function(r) {
+                        deferred2.resolve(true);
+                    });
                 }
-                clearInterval(checkExist);
+                // clearInterval(checkExist);
             } else {
+                deferred2.reject(false);
                 console.log("Not Exists!");
             }
-        }, 100);
+        // }, 100);
+        return deferred2.promise;
     }
     return {
         sendMail(graphElement, drilldownElement, expandAllElement, details) {
@@ -158,7 +191,7 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
                 },
                 template: `
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">×</span></button>
                     <h4 class="modal-title" id="myModalLabel">{{modalOptions.headerText}}</h4>
                 </div>
                 <form name="form.userForm" ng-submit="submitForm()" novalidate>
@@ -178,11 +211,11 @@ function EmailPdfService(c3ExportService, EmailService, ModalService) {
                     </div>
                 </form>`
             };
-            ModalService.showModal(custMod, {}).then(function(res) {
+            return ModalService.showModal(custMod, {}).then(function(res) {
                 var emails = res.split(",").map(function(item) {
                     return item.trim();
                 });
-                getPDF(emails, graphElement, drilldownElement, expandAllElement, details);
+                return getPDF(emails, graphElement, drilldownElement, expandAllElement, details);
             }, function(err) {
                 console.log(err);
             });

@@ -5,7 +5,7 @@ function c3ExportService(c3StyleService) {
         var chartEl = $(element);
 
         var svgEl = $(element.find('svg')).first()[0];
-        var svgCopyEl = angular.element(svgEl.outerHTML)[0];
+        var svgCopyEl = svgEl.outerHTML ? angular.element(svgEl.outerHTML)[0] : $(svgEl).clone()[0];
         var canvasEl = angular.element('<canvas id="canvasOriginal"></canvas>')[0];
         var emptySvgEl = angular.element('<svg id="emptysvg" xmlns="http://www.w3.org/2000/svg" version="1.1" height="2" />')[0];
         var emptyCanvasEl = angular.element('<canvas id="canvasComputed"></canvas>')[0];
@@ -34,15 +34,21 @@ function c3ExportService(c3StyleService) {
 
         var image = exportCanvasToPng(canvasComputed);
 
-        canvasEl.remove();
-        emptyCanvasEl.remove();
-        emptySvgEl.remove();
-        svgCopyEl.remove();
+        $(canvasEl).remove();
+        $(emptyCanvasEl).remove();
+        $(emptySvgEl).remove();
+        $(svgCopyEl).remove();
 
         return image;
     }
     function exportSvgToCanvas(svg, canvas) {
-        canvg(canvas, new XMLSerializer().serializeToString(svg));
+        var svg_str;
+        try {
+            svg_str = new XMLSerializer().serializeToString(svg);
+        } catch(e) {
+            svg_str = svg.xml;
+        }
+        canvg(canvas, svg_str);
     }
 
     function exportCanvasToPng(canvasEl) {

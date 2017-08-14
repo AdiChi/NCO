@@ -507,6 +507,7 @@ class DateOverDateSongController {
         }
         $scope.sendMail = function () {
             $scope.expandAll = true;
+
             if ($scope.showHeatMap) {
                 var elem = $("#world-map-container");
             } else {
@@ -516,8 +517,14 @@ class DateOverDateSongController {
                 chartType: "Date Over Date Song Comparison",
                 song: $scope.selectedSong
             };
-            EmailPdfService.sendMail(elem, $('.drilldown'), $scope.expandAll, details);
-            $scope.expandAll = false;
+
+            var s = EmailPdfService.sendMail(elem, $('.drilldown'), $scope.expandAll , details);
+            // $scope.expandAll = false;
+            s.then(function(r) {
+                $scope.expandAll = false;
+            }).catch(function(e) {
+                $scope.expandAll = false;
+            });
         };
         function addEmptyDateValues() {
 
