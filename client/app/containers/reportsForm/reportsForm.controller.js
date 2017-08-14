@@ -33,7 +33,7 @@ class ReportsFormController {
                 lastModified: "08/11/2017",
                 lastRan: "02/11/2017",
                 dataset: "MediaMelt",
-                url: "reports"
+                url: "dateOverDateMultiple"
             },
             {
                 reportName: "Songs by Date Range comparison report",
@@ -41,7 +41,7 @@ class ReportsFormController {
                 lastModified: "08/09/2017",
                 lastRan: "02/05/2017",
                 dataset: "Tableau - Historical",
-                url: "dateOverDateMultiple"
+                url: "reports"
             }
         ];
         this.displayCollection = [].concat(this.allReports);

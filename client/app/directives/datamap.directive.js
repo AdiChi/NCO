@@ -12,9 +12,12 @@ function DataMap() {
             var margin = 20,
                 padding = 60;
             var map;
-            var minValue = 0, maxValue = 0, delta = 10;
+            var delta = 10, minValue = 0, maxValue = 0;
             var colorScale, color;
             scope.$watch('data', function (newVal, oldVal) {
+                minValue = 0;
+                maxValue = 0;
+                
                 if (newVal.length > 0) {
                     minValue = Math.min.apply(Math, newVal.map(function (o) { return o['Total Sales']; }))
                     maxValue = Math.max.apply(Math, newVal.map(function (o) { return o['Total Sales']; }))
@@ -93,17 +96,17 @@ function DataMap() {
                         }
 
                         var html = '<ul class="list-inline">';
-                        var label = '';
+                        var label;
                         if (data.legendTitle) {
                             html = '<h4>' + data.legendTitle + '</h4>' + html;
                         }
                         for (var i = 0; i < delta; i++) {
                             fill.push(color(i));
                             if (i == 0) {
-                                label = minValue;
+                                label = data.minValue;
                             }
                             else if (i == (delta - 1)) {
-                                label = maxValue;
+                                label = data.maxValue;
                             }
                             else {
                                 label = "";
@@ -119,7 +122,7 @@ function DataMap() {
 
                     map.addPlugin("mylegend", addLegend2);
 
-                    map.mylegend({ legendTitle: "Total Sales" })
+                    map.mylegend({ legendTitle: "Total Sales", minValue: minValue, maxValue: maxValue });
                 }
 
                 d3.select(window).on('resize', function () {

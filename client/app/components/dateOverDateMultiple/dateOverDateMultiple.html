@@ -1,7 +1,7 @@
 <div class="date-over-date-multiple report-panel" ng-init="vm.initializeController()">
     <div class="panel panel-default reports">
         <div class="panel-heading {{$root.currentUser.role}}-heading clickable">
-            <h3 class="panel-title">Date Over Date Mutiple Songs / Songlist</h3>
+            <h3 class="panel-title">Song Comparison – Date over Date Report</h3>
             <span class="pull-right"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
         <div class="panel-body">
@@ -201,8 +201,8 @@
                     <div class="row drilldown-content" ng-if="vm.expandAll || showDrilldown">
                         <div class="col-md-6">
                             <div class="content-wrapper tab-head">
-                                <div class="col-lg-9" style="padding-left: 0px">Sales Period 1 ({{vm.chart.firstRange}})</div>
-                                <div class="col-lg-3 text-right">Sales</div>
+                                <div class="col-lg-10" style="padding-left: 0px">Sales Period 1 ({{vm.chart.firstRange}}) - ({{vm.getTimeRangeInFormat(vm.chart.timerange1)}})</div>
+                                <div class="col-lg-2 text-right">Sales</div>
                             </div>
                             <div ng-repeat="date in song.dateRange1" ng-init="vm.setRange1Total(date, parentIndex)">
                                 <div class="content-wrapper" ng-click="date.isExpanded = !date.isExpanded" ng-if="date.totalsales > 0">
@@ -247,8 +247,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="content-wrapper tab-head">
-                                <div class="col-lg-9" style="padding-left: 0px">Sales Period 2 ({{vm.chart.secondRange}})</div>
-                                <div class="col-lg-3 text-right">Sales</div>
+                                <div class="col-lg-10" style="padding-left: 0px">Sales Period 2 ({{vm.chart.secondRange}}) - ({{vm.getTimeRangeInFormat(vm.chart.timerange2)}})</div>
+                                <div class="col-lg-2 text-right">Sales</div>
                             </div>
                             <div ng-repeat="date in song.dateRange2" ng-init="vm.setRange2Total(date, parentIndex)">
                                 <div class="content-wrapper" ng-click="date.isExpanded = !date.isExpanded" ng-if="date.totalsales > 0">

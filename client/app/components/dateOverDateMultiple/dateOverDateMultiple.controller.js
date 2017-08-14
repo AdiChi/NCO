@@ -97,15 +97,13 @@ class DateOverDateMultipleController {
       vm.currentChartType = currentChart.name;
 
       if (vm.currentChartType == "heatmap") {
-        if (!vm.heatMapData) {
-          if (vm.representData == "2") {
-            vm.selectedValue = vm.chart.salesPerSong[0];
-            vm.toggleMap(vm.chart.salesPerSong[0], false, 'dateRange1');
-          } else {
-            vm.toggleMap(vm.chart.salesPerSong, true, 'dateRange1');
-          }
-          vm.activefirst = true;
+        if (vm.representData == "2") {
+          vm.selectedValue = vm.chart.salesPerSong[0];
+          vm.toggleMap(vm.chart.salesPerSong[0], false, 'dateRange1');
+        } else {
+          vm.toggleMap(vm.chart.salesPerSong, true, 'dateRange1');
         }
+        vm.activefirst = true;
         vm.showHeatMap = true;
       } else if (vm.theChart2) {
         vm.showHeatMap = false;
@@ -514,7 +512,7 @@ class DateOverDateMultipleController {
       }
 
       if (hasDuplicateSong(vm.query["songId[]"])) {
-        vm.duplicateSongError = "Please select unique songs";
+        vm.duplicateSongError = "Please select unique Songs / Songlists";
       } else {
         vm.duplicateSongError = "";
       }
@@ -637,15 +635,15 @@ class DateOverDateMultipleController {
       vm.exportListName = "";
       angular.forEach(vm.selectedSong, (song) => {
         if (!vm.exportListName) {
-          vm.exportListName = (song.type == 'list') ? song.songListName : song.trackname + "\"" + " \n\""
+          vm.exportListName = (song.type == 'list') ? song.songListName : song.trackname + "\n"
         } else {
-          vm.exportListName += (song.type == 'list') ? song.songListName : song.trackname + "\r\n\n\""
+          vm.exportListName += (song.type == 'list') ? song.songListName : song.trackname + "\n"
         }
       });
 
       vm.exportListName = vm.exportListName + "\r\n\n\"" +
-        vm.chart.firstRange + "\"" +
-        " \n\"" + vm.chart.secondRange + "\"";
+        vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ") \"" +
+        " \n\"" + vm.chart.secondRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ") \"" + "\n";
 
       return vm.range1RollUp.concat(vm.range2RollUp);
     };
