@@ -22,10 +22,6 @@
             background-color: #230118;
             color: #b9babd;
         }
-        .row {
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
         .rel-results {
             max-height: 500px;
             overflow: auto;
@@ -38,7 +34,7 @@
             }
         }
         .heading {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
         }
         .selected-song-list {
@@ -77,9 +73,6 @@
             }
         }
     }
-    .retailer-break-check {
-        vertical-align: top;
-    }
     .fav {
         color: grey;
         padding-left: 0;
@@ -92,11 +85,24 @@
         }
     }
     .row {
-        margin-top: 40px;
+        margin-top: 0px;
         padding: 0 10px;
+        margin-bottom: 15px;
     }
     .well {
         padding: 19px 12px;
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 0;
+    }
+    .left-panel {
+        padding-right: 0;
+    }
+    .right-panel {
+        padding-left: 0;
+    }
+    .time-range {
+        margin: 15px 0 0;
     }
     .alert {
         padding: 5px;
@@ -231,6 +237,7 @@
         h3 {
             margin-top: 0;
             margin-bottom: 15px;
+            font-size: 18px;
         }
     }
     .drilldown {
@@ -314,11 +321,10 @@
             opacity: 0.8;
         }
         .legend {
-            margin-top: 14px;
-            display: inline-block;
             h4 {
                 font-size: 16px;
                 font-weight: 600;
+                margin-top: 20px;
             }
             ul li {
                 text-align: center;

@@ -97,6 +97,13 @@ class DateOverDateMultipleController {
       vm.currentChartType = currentChart.name;
 
       if (vm.currentChartType == "heatmap") {
+        if (vm.chart.firstRange == vm.chart.secondRange) {
+          vm.firstRange = "Range 1 (" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")";
+          vm.secondRange = "Range 1 (" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
+        } else {
+          vm.firstRange = vm.chart.firstRange;
+          vm.firstRange = vm.chart.secondRange;
+        }
         if (vm.representData == "2") {
           vm.selectedValue = vm.chart.salesPerSong[0];
           vm.toggleMap(vm.chart.salesPerSong[0], false, 'dateRange1');
@@ -117,16 +124,24 @@ class DateOverDateMultipleController {
           let stackedArr = [],
             i = 0,
             j = 0;
+          var firstRange = vm.chart.firstRange;
+          var secondRange = vm.chart.secondRange;
+          if (vm.chart.firstRange == vm.chart.secondRange) {
+            firstRange = "Range 1 (" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")";
+            secondRange = "Range 2 (" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
+          }
           if (vm.representData == '2') {
-            angular.forEach(vm.chart.salesPerSong, () => {
-              stackedArr.push(
-                vm.firstRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + vm.chart.firstRange + '-Range_1',
-                vm.secondRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + vm.chart.secondRange + '-Range_2'
-              );
-              j++;
-            });
+            if (vm.firstRangeMap.length && vm.secondRangeMap.length) {
+              angular.forEach(vm.chart.salesPerSong, () => {
+                stackedArr.push(
+                  vm.firstRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + firstRange,
+                  vm.secondRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + secondRange
+                );
+                j++;
+              });
+            }
           } else {
-            stackedArr = [vm.chart.firstRange, vm.chart.secondRange];
+            stackedArr = [firstRange, secondRange];
           }
 
           vm.theChart2.groups([
@@ -399,42 +414,65 @@ class DateOverDateMultipleController {
       let rangeId = [],
         i = 0;
 
+      let firstRange = vm.chart.firstRange,
+        secondRange = vm.chart.secondRange;
+
+      if (vm.chart.secondRange == vm.chart.firstRange) {
+        firstRange = "Range 1 (" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")";
+        secondRange = "Range 2 (" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
+        vm.tilt = "45";
+      } else {
+        vm.tilt = "90";
+      }
+
       angular.forEach(vm.firstRangeMap, (rangeObj) => {
         let j = 0;
         let nameVal = [];
-        vm.datapoints[i] = {
-          x: vm.firstRangeMap[i].date + "_" + vm.secondRangeMap[i].date
-        };
+        if (vm.chart.secondRange == vm.chart.firstRange) {
+          vm.datapoints[i] = {
+            x: vm.firstRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")" + "_" + vm.secondRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")"
+          }
+        } else {
+          vm.datapoints[i] = {
+            x: vm.firstRangeMap[i].date + "_" + vm.secondRangeMap[i].date
+          };
+        }
         if (vm.representData == "2") {
           angular.forEach(vm.chart.salesPerSong, () => {
-            vm.datapoints[i][vm.firstRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + vm.chart.firstRange + '-Range_1'] = vm.firstRangeMap[i]['song' + (j + 1) + '_Sales'];
-            vm.datapoints[i][vm.secondRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + vm.chart.secondRange + '-Range_2'] = vm.secondRangeMap[i]['song' + (j + 1) + '_Sales'];
+            vm.datapoints[i][vm.firstRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + firstRange] = vm.firstRangeMap[i]['song' + (j + 1) + '_Sales'];
+            vm.datapoints[i][vm.secondRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + secondRange] = vm.secondRangeMap[i]['song' + (j + 1) + '_Sales'];
             if (i == 0) {
               vm.datacolumns.push({
-                "id": vm.firstRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + vm.chart.firstRange + '-Range_1',
+                "id": vm.firstRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + firstRange,
                 "type": "bar"
               }, {
-                "id": vm.secondRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + vm.chart.secondRange + '-Range_2',
+                "id": vm.secondRangeMap[i]['song' + (j + 1) + '_Name'] + '_' + secondRange,
                 "type": "bar"
               });
             }
-            nameVal.push(vm.firstRangeMap[i]['song' + (j + 1) + '_Name'] + ' - ' + vm.firstRangeMap[i].date, vm.secondRangeMap[i]['song' + (j + 1) + '_Name'] + ' - ' + vm.secondRangeMap[i].date);
+            if (vm.chart.secondRange == vm.chart.firstRange) {
+              nameVal.push(vm.firstRangeMap[i]['song' + (j + 1) + '_Name'] + ' - ' + vm.firstRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")", vm.secondRangeMap[i]['song' + (j + 1) + '_Name'] + ' - ' + vm.secondRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")");
+            } else {
+              nameVal.push(vm.firstRangeMap[i]['song' + (j + 1) + '_Name'] + ' - ' + vm.firstRangeMap[i].date, vm.secondRangeMap[i]['song' + (j + 1) + '_Name'] + ' - ' + vm.secondRangeMap[i].date);
+            }
             j++;
           });
-          vm.reportTitle = "Individual Song Sales - "
         } else {
-          vm.datapoints[i][vm.chart.firstRange] = vm.firstRangeMap[i]['aggregateSongSales'];
-          vm.datapoints[i][vm.chart.secondRange] = vm.secondRangeMap[i]['aggregateSongSales'];
+          vm.datapoints[i][firstRange] = vm.firstRangeMap[i]['aggregateSongSales'];
+          vm.datapoints[i][secondRange] = vm.secondRangeMap[i]['aggregateSongSales'];
 
           vm.datacolumns = [{
-            "id": vm.chart.firstRange,
+            "id": firstRange,
             "type": "bar"
           }, {
-            "id": vm.chart.secondRange,
+            "id": secondRange,
             "type": "bar"
           }]
-          nameVal = [vm.firstRangeMap[i].date, vm.secondRangeMap[i].date];
-          vm.reportTitle = "Aggregate Song Sales - "
+          if (vm.chart.firstRange == vm.chart.secondRange) {
+            nameVal = [vm.firstRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")", vm.secondRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")"];
+          } else {
+            nameVal = [vm.firstRangeMap[i].date, vm.secondRangeMap[i].date];
+          }
         }
         vm.names.push(nameVal);
         i++;
@@ -452,6 +490,12 @@ class DateOverDateMultipleController {
           chartType.isActive = false;
         }
       });
+
+      if (vm.representData == '2') {
+        vm.reportTitle = "Individual Song Sales - ";
+      } else {
+        vm.reportTitle = "Aggregate Song Sales - ";
+      }
     }
 
     vm.getInputQuery = () => {

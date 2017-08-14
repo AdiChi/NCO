@@ -24,27 +24,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 left-panel">
                     <div id="main-info" class="well">
                         <date-time-range range="vm.range1" index="1"></date-time-range>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 right-panel">
                     <div id="main-info2" class="well">
                         <date-time-range range="vm.range2" index="2"></date-time-range>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="territories">
+                <div class="col-md-6 left-panel">
+                    <div class="territories well">
                         <label class="heading">Select Territories/Territory Groups</label>
                         <multi-select-box item-groups="vm.territoryGroups" items="vm.territories" selected-item-groups="vm.selectedTerritoryGroups"
                             selected-items="vm.selectedTerritories"></multi-select-box>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="retailers ">
+                <div class="col-md-6 right-panel">
+                    <div class="retailers well">
                         <label class="heading">Select Retailers</label>
                         <multi-select-box items="vm.retailers" selected-items="vm.selectedRetailers"></multi-select-box>
                     </div>
@@ -106,7 +106,7 @@
     <div class="loader" ng-if="vm.loading"></div>
     <div ng-if="!vm.loading">
         <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:30px">
-            <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
+            <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
                 show-subchart="true" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections">
                 <chart-size chart-height="650" />
                 <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
@@ -115,7 +115,7 @@
                 <chart-axis>
                     <chart-axis-x axis-position="outer-center" axis-type="category" />
                     <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-                    <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                    <chart-axis-x-tick tick-rotate="{{vm.tilt}}" tick-multiline="false" />
                 </chart-axis>
                 <chart-legend legend-position="bottom" />
             </c3chart>
@@ -136,7 +136,7 @@
                 </div>
             </div>
             <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px">
-                <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
+                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
                     show-subchart="true" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections"
                     ng-if="!vm.showHeatMap">
                     <chart-size chart-height="700" />
@@ -146,13 +146,13 @@
                     <chart-axis>
                         <chart-axis-x axis-position="outer-center" axis-type="category" />
                         <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-                        <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                        <chart-axis-x-tick tick-rotate="{{vm.tilt}}" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="bottom" />
                 </c3chart>
             </div>
             <div class="container-fluid c3graph" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px">
-                <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
+                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
                     show-subchart="true" callback-function="vm.handleCallback2" sort-data="null" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
                     <chart-size chart-height="700" />
@@ -161,7 +161,7 @@
                     <chart-axis>
                         <chart-axis-x axis-position="outer-center" axis-type="category" />
                         <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
-                        <chart-axis-x-tick tick-rotate="90" tick-multiline="false" />
+                        <chart-axis-x-tick tick-rotate="{{vm.tilt}}" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="bottom" />
                 </c3chart>
@@ -175,8 +175,8 @@
                         <label>Individual Song Sales:</label>
                         <select ng-model="vm.selectedValue" ng-options="item as item.name for item in vm.chart.salesPerSong" ng-change="vm.activefirst=true; vm.toggleMap(vm.selectedValue, false, 'dateRange1');"></select>
                     </div>
-                    <button class="btn btn-primary" ng-class="{active: vm.activefirst}" ng-click="vm.activefirst=true; (vm.representData=='2' ? vm.toggleMap(vm.selectedValue, false, 'dateRange1') : vm.toggleMap(vm.chart.salesPerSong, true, 'dateRange1'))">{{vm.chart.firstRange}}</button>
-                    <button class="btn btn-primary" ng-class="{active: !vm.activefirst}" ng-click="vm.activefirst=false; (vm.representData=='2' ? vm.toggleMap(vm.selectedValue, false, 'dateRange2') : vm.toggleMap(vm.chart.salesPerSong, true, 'dateRange2'))">{{vm.chart.secondRange}}</button>
+                    <button class="btn btn-primary" ng-class="{active: vm.activefirst}" ng-click="vm.activefirst=true; (vm.representData=='2' ? vm.toggleMap(vm.selectedValue, false, 'dateRange1') : vm.toggleMap(vm.chart.salesPerSong, true, 'dateRange1'))">{{vm.firstRange}}</button>
+                    <button class="btn btn-primary" ng-class="{active: !vm.activefirst}" ng-click="vm.activefirst=false; (vm.representData=='2' ? vm.toggleMap(vm.selectedValue, false, 'dateRange2') : vm.toggleMap(vm.chart.salesPerSong, true, 'dateRange2'))">{{vm.secondRange}}</button>
                 </div>
                 <div class="clearfix"></div>
                 <div datamap data="vm.heatMapData" id="world-map-container" show-heat-map="vm.showHeatMap" ng-if="!vm.showNoData"> </div>
@@ -190,7 +190,7 @@
                     <input class="expandAll" type="checkbox" ng-model="vm.expandAll">
                 </label></h5> -->
                 <div ng-repeat-start="song in vm.chart.salesPerSong" ng-init="parentIndex = $index; vm.initRangeTotal(parentIndex); vm.setSongTotal(song, parentIndex);">
-                    <div class="row song-header" ng-click="showDrilldown = showDrilldown ? false : true; vm.initRangeTotal(parentIndex);" ng-class="{drilldownOpen: (vm.expandAll || showDrilldown)}">
+                    <div class="row song-header" ng-click="showDrilldown = showDrilldown ? false : true; vm.initRangeTotal(parentIndex)" ng-class="{drilldownOpen: (vm.expandAll || showDrilldown)}">
                         <div class="col-md-6">
                             <i class="glyphicon" ng-if="song.totalSongSales > 0" ng-class="(vm.expandAll || showDrilldown) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>{{song.name}}
                         </div>
@@ -198,10 +198,10 @@
                             {{song.totalSongSales}}
                         </div>
                     </div>
-                    <div class="row drilldown-content" ng-if="vm.expandAll || showDrilldown">
+                    <div class="row drilldown-content" ng-if="(vm.expandAll && song.totalSongSales > 0) || (showDrilldown && song.totalSongSales > 0)">
                         <div class="col-md-6">
                             <div class="content-wrapper tab-head">
-                                <div class="col-lg-10" style="padding-left: 0px">Sales Period 1 ({{vm.chart.firstRange}}) - ({{vm.getTimeRangeInFormat(vm.chart.timerange1)}})</div>
+                                <div class="col-lg-10" style="padding-left: 0px; padding-right: 0px">Sales Period 1 ({{vm.chart.firstRange}}) - ({{vm.getTimeRangeInFormat(vm.chart.timerange1)}})</div>
                                 <div class="col-lg-2 text-right">Sales</div>
                             </div>
                             <div ng-repeat="date in song.dateRange1" ng-init="vm.setRange1Total(date, parentIndex)">
@@ -209,29 +209,29 @@
                                     <div class="col-lg-9" style="padding-left: 0px"><i class="glyphicon" ng-if="date.totalsales > 0" ng-class="(vm.expandAll || date.isExpanded) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>{{date.date}}</div>
                                     <div class="col-lg-3 text-right">{{date.totalsales}}</div>
                                 </div>
-                                <div class="content-wrapper tab-head" ng-if="vm.expandAll || date.isExpanded">
+                                <div class="content-wrapper tab-head" ng-if="(vm.expandAll && date.totalsales > 0) || date.isExpanded">
                                     <div class="col-lg-9" style="padding-left: 30px">Retailers</div>
                                     <div class="col-lg-3 text-right">Sales</div>
                                 </div>
-                                <div ng-repeat="retailer in date.orgRetailerList" ng-if="vm.expandAll || date.isExpanded">
+                                <div ng-repeat="retailer in date.orgRetailerList" ng-if="(vm.expandAll && date.totalsales > 0) || date.isExpanded">
                                     <div class="content-wrapper" ng-click="retailer.isExpanded = !retailer.isExpanded" ng-if="retailer.totalSaleRetailer > 0">
                                         <div class="col-lg-9" style="padding-left: 30px"><i class="glyphicon" ng-if="retailer.totalSaleRetailer > 0" ng-class="(vm.expandAll || retailer.isExpanded) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>{{retailer.name}}</div>
                                         <div class="col-lg-3 text-right">{{retailer.totalSaleRetailer}}</div>
                                     </div>
-                                    <div class="content-wrapper tab-head" ng-if="vm.expandAll || retailer.isExpanded">
+                                    <div class="content-wrapper tab-head" ng-if="(vm.expandAll && retailer.totalSaleRetailer > 0) || retailer.isExpanded">
                                         <div class="col-lg-9" style="padding-left: 60px">Territories</div>
                                         <div class="col-lg-3 text-right">Sales</div>
                                     </div>
-                                    <div ng-repeat="territory in retailer.territoryList" ng-if="vm.expandAll || retailer.isExpanded">
+                                    <div ng-repeat="territory in retailer.territoryList" ng-if="(vm.expandAll && retailer.totalSaleRetailer > 0) || retailer.isExpanded">
                                         <div class="content-wrapper" ng-click="territory.isExpanded = !territory.isExpanded" ng-if="territory.totalSaleTerr > 0">
                                             <div class="col-lg-9" style="padding-left: 60px"><i class="glyphicon" ng-if="territory.totalSaleTerr > 0" ng-class="(vm.expandAll || territory.isExpanded) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>{{territory.name}}</div>
                                             <div class="col-lg-3 text-right">{{territory.totalSaleTerr}}</div>
                                         </div>
-                                        <div class="content-wrapper tab-head" ng-if="vm.expandAll || territory.isExpanded">
+                                        <div class="content-wrapper tab-head" ng-if="(vm.expandAll && territory.totalSaleTerr > 0) || territory.isExpanded">
                                             <div class="col-lg-9" style="padding-left: 90px">Time</div>
                                             <div class="col-lg-3 text-right">Sales</div>
                                         </div>
-                                        <div ng-repeat="time in territory.terrSalesByHour" ng-if="vm.expandAll || territory.isExpanded">
+                                        <div ng-repeat="time in territory.terrSalesByHour" ng-if="(vm.expandAll && territory.totalSaleTerr > 0) || territory.isExpanded">
                                             <div class="content-wrapper" ng-if="time.totalSalesByHours > 0">
                                                 <div class="col-lg-9" style="padding-left: 90px">{{vm.getTimeRangeInFormat(time.range)}}</div>
                                                 <div class="col-lg-3 text-right">{{time.totalSalesByHours}}</div>
@@ -247,7 +247,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="content-wrapper tab-head">
-                                <div class="col-lg-10" style="padding-left: 0px">Sales Period 2 ({{vm.chart.secondRange}}) - ({{vm.getTimeRangeInFormat(vm.chart.timerange2)}})</div>
+                                <div class="col-lg-10" style="padding-left: 0px; padding-right: 0px">Sales Period 2 ({{vm.chart.secondRange}}) - ({{vm.getTimeRangeInFormat(vm.chart.timerange2)}})</div>
                                 <div class="col-lg-2 text-right">Sales</div>
                             </div>
                             <div ng-repeat="date in song.dateRange2" ng-init="vm.setRange2Total(date, parentIndex)">
@@ -255,29 +255,29 @@
                                     <div class="col-lg-9" style="padding-left: 0px"><i class="glyphicon" ng-if="date.totalsales > 0" ng-class="(vm.expandAll || date.isExpanded) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>{{date.date}}</div>
                                     <div class="col-lg-3 text-right">{{date.totalsales}}</div>
                                 </div>
-                                <div class="content-wrapper tab-head" ng-if="vm.expandAll || date.isExpanded">
+                                <div class="content-wrapper tab-head" ng-if="(vm.expandAll && date.totalsales > 0) || date.isExpanded">
                                     <div class="col-lg-9" style="padding-left: 30px">Retailers</div>
                                     <div class="col-lg-3 text-right">Sales</div>
                                 </div>
-                                <div ng-repeat="retailer in date.orgRetailerList" ng-if="vm.expandAll || date.isExpanded">
+                                <div ng-repeat="retailer in date.orgRetailerList" ng-if="(vm.expandAll && date.totalsales > 0) || date.isExpanded">
                                     <div class="content-wrapper" ng-click="retailer.isExpanded = !retailer.isExpanded" ng-if="retailer.totalSaleRetailer > 0">
                                         <div class="col-lg-9" style="padding-left: 30px"><i class="glyphicon" ng-if="retailer.totalSaleRetailer > 0" ng-class="(vm.expandAll || retailer.isExpanded) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>{{retailer.name}}</div>
                                         <div class="col-lg-3 text-right">{{retailer.totalSaleRetailer}}</div>
                                     </div>
-                                    <div class="content-wrapper tab-head" ng-if="vm.expandAll || retailer.isExpanded">
+                                    <div class="content-wrapper tab-head" ng-if="(vm.expandAll && retailer.totalSaleRetailer > 0) || retailer.isExpanded">
                                         <div class="col-lg-9" style="padding-left: 60px">Territories</div>
                                         <div class="col-lg-3 text-right">Sales</div>
                                     </div>
-                                    <div ng-repeat="territory in retailer.territoryList" ng-if="vm.expandAll || retailer.isExpanded">
+                                    <div ng-repeat="territory in retailer.territoryList" ng-if="(vm.expandAll && retailer.totalSaleRetailer > 0) || retailer.isExpanded">
                                         <div class="content-wrapper" ng-click="territory.isExpanded = !territory.isExpanded" ng-if="territory.totalSaleTerr > 0">
                                             <div class="col-lg-9" style="padding-left: 60px"><i class="glyphicon" ng-if="territory.totalSaleTerr > 0" ng-class="(vm.expandAll || territory.isExpanded) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i>{{territory.name}}</div>
                                             <div class="col-lg-3 text-right">{{territory.totalSaleTerr}}</div>
                                         </div>
-                                        <div class="content-wrapper tab-head" ng-if="vm.expandAll || territory.isExpanded">
+                                        <div class="content-wrapper tab-head" ng-if="(vm.expandAll && territory.totalSaleTerr > 0) || territory.isExpanded">
                                             <div class="col-lg-9" style="padding-left: 90px">Time</div>
                                             <div class="col-lg-3 text-right">Sales</div>
                                         </div>
-                                        <div ng-repeat="time in territory.terrSalesByHour" ng-if="vm.expandAll || territory.isExpanded">
+                                        <div ng-repeat="time in territory.terrSalesByHour" ng-if="(vm.expandAll && territory.totalSaleTerr > 0) || territory.isExpanded">
                                             <div class="content-wrapper" ng-if="time.totalSalesByHours > 0">
                                                 <div class="col-lg-9" style="padding-left: 90px">{{vm.getTimeRangeInFormat(time.range)}}</div>
                                                 <div class="col-lg-3 text-right">{{time.totalSalesByHours}}</div>
