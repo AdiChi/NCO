@@ -222,13 +222,13 @@
             }
         }
     }
-    .fav-panel{
-        i{
+    .fav-panel {
+        i {
             cursor: pointer;
         }
     }
-    .report-heading{
-        h3{
+    .report-heading {
+        h3 {
             margin-top: 0;
             margin-bottom: 15px;
         }
@@ -264,11 +264,11 @@
             font-size: 16px;
             padding: 10px 0;
             margin: 0;
-            div{
+            div {
                 padding: 0;
             }
-            div:first-child{
-padding: 0 0 0 5px;
+            div:first-child {
+                padding: 0 0 0 5px;
             }
         }
         .drilldown-content {
@@ -285,7 +285,7 @@ padding: 0 0 0 5px;
             display: inline-block;
             width: 100%;
             cursor: pointer;
-            &.tab-head{
+            &.tab-head {
                 cursor: default;
             }
             div {
@@ -314,13 +314,17 @@ padding: 0 0 0 5px;
             opacity: 0.8;
         }
         .legend {
-            text-align: right;
+            margin-top: 14px;
+            display: inline-block;
             h4 {
                 font-size: 16px;
                 font-weight: 600;
             }
             ul li {
                 text-align: center;
+            }
+            .list-inline {
+                margin-left: 0;
             }
         }
         padding-top: 20px;
@@ -330,5 +334,10 @@ padding: 0 0 0 5px;
         color: white;
         padding: 5px 10px;
         border-radius: 15px;
+    }
+    .c3-brush {
+        .extent {
+            fill-opacity: 0;
+        }
     }
 }

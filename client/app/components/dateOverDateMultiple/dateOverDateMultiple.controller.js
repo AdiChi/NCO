@@ -97,15 +97,13 @@ class DateOverDateMultipleController {
       vm.currentChartType = currentChart.name;
 
       if (vm.currentChartType == "heatmap") {
-        if (!vm.heatMapData) {
-          if (vm.representData == "2") {
-            vm.selectedValue = vm.chart.salesPerSong[0];
-            vm.toggleMap(vm.chart.salesPerSong[0], false, 'dateRange1');
-          } else {
-            vm.toggleMap(vm.chart.salesPerSong, true, 'dateRange1');
-          }
-          vm.activefirst = true;
+        if (vm.representData == "2") {
+          vm.selectedValue = vm.chart.salesPerSong[0];
+          vm.toggleMap(vm.chart.salesPerSong[0], false, 'dateRange1');
+        } else {
+          vm.toggleMap(vm.chart.salesPerSong, true, 'dateRange1');
         }
+        vm.activefirst = true;
         vm.showHeatMap = true;
       } else if (vm.theChart2) {
         vm.showHeatMap = false;
@@ -295,7 +293,7 @@ class DateOverDateMultipleController {
       };
     }
 
-    function addEmptyDateValues() {
+    function prepareChartData() {
       let i = 0,
         j = 0,
         range1 = (vm.chart.firstRange).split(" to "),
@@ -514,7 +512,7 @@ class DateOverDateMultipleController {
       }
 
       if (hasDuplicateSong(vm.query["songId[]"])) {
-        vm.duplicateSongError = "Please select unique songs";
+        vm.duplicateSongError = "Please select unique Songs / Songlists";
       } else {
         vm.duplicateSongError = "";
       }
@@ -568,14 +566,14 @@ class DateOverDateMultipleController {
         // vm.loading = false;
         // vm.drilldown = true;
 
-        // addEmptyDateValues();
+        // prepareChartData();
         // vm.currentChartType = "bar";
         // vm.NoChartError = "";
 
         ReportService.getDODMulitpleChart(vm.query).then((response) => {
           vm.drilldown = true;
           vm.chart = response.data;
-          addEmptyDateValues();
+          prepareChartData();
           vm.currentChartType = "bar";
 
           vm.NoChartError = "";
@@ -637,15 +635,15 @@ class DateOverDateMultipleController {
       vm.exportListName = "";
       angular.forEach(vm.selectedSong, (song) => {
         if (!vm.exportListName) {
-          vm.exportListName = song.trackname + "\"" + " \n\""
+          vm.exportListName = (song.type == 'list') ? song.songListName : song.trackname + "\n"
         } else {
-          vm.exportListName += song.trackname + "\r\n\n\""
+          vm.exportListName += (song.type == 'list') ? song.songListName : song.trackname + "\n"
         }
       });
 
       vm.exportListName = vm.exportListName + "\r\n\n\"" +
-        vm.chart.firstRange + "\"" +
-        " \n\"" + vm.chart.secondRange + "\"";
+        vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ") \"" +
+        " \n\"" + vm.chart.secondRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ") \"" + "\n";
 
       return vm.range1RollUp.concat(vm.range2RollUp);
     };
@@ -683,8 +681,32 @@ class DateOverDateMultipleController {
     //Send Report as Mail
     vm.sendMail = () => {
       vm.expandAll = true;
-      EmailPdfService.sendMail($(".c3graph"), $('.drilldown'), vm.expandAll);
-      vm.expandAll = false;
+      let selectedSong;
+
+      if (vm.showHeatMap) {
+        var elem = $("#world-map-container");
+      } else {
+        var elem = $(".c3graph");
+      }
+
+      angular.forEach(vm.selectedSong, (song) => {
+        if (!selectedSong) {
+          selectedSong = (song.type == 'list') ? song.songListName : song.trackname + ", "
+        } else {
+          selectedSong += (song.type == 'list') ? song.songListName : song.trackname + ", "
+        }
+      });
+
+      var details = {
+        chartType: "Date Over Date Songs/SongList Comparison",
+        song: selectedSong
+      };
+
+      EmailPdfService.sendMail(elem, $('.drilldown'), vm.expandAll, details).then((r) => {
+        vm.expandAll = false;
+      }).catch(function (e) {
+        vm.expandAll = false;
+      });
     }
   }
 }
