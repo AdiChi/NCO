@@ -515,7 +515,9 @@ class DateOverDateSongController {
             }
             var details = {
                 chartType: "Date Over Date Song Comparison",
-                song: $scope.selectedSong
+                song: $scope.selectedSong,
+                range1: "Range 1: " +$scope.chart.firstRange,
+                range2: "Range 2: " +$scope.chart.secondRange
             };
 
             var s = EmailPdfService.sendMail(elem, $('.drilldown'), $scope.expandAll , details);

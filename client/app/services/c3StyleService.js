@@ -28,6 +28,9 @@ function c3StyleService() {
                 }
             }
         }
+        if ($(element).hasClass("tick")) {
+            computedStyleStr += "font-size:11px;";
+        }
         element.setAttribute('style', computedStyleStr);
     }
 
