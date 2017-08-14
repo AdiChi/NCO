@@ -123,7 +123,7 @@
         <div class="container-fluid" ng-if="vm.theChart" style="padding-top:30px">
             <div class="container-fluid">
                 <div class="col-md-12 report-heading">
-                    <h3>{{vm.reportTitle}} - (<span ng-repeat="song in vm.selectedSong"><span ng-if="!$last">{{song.trackname}}, </span><span ng-if="$last">{{song.trackname}}</span></span>)</h3>
+                    <h3>{{vm.reportTitle}} - (<span ng-repeat="song in vm.selectedSong"><span ng-if="!$last">{{(song.type=='list') ? song.songListName : song.trackname}}, </span><span ng-if="$last">{{(song.type=='list') ? song.songListName : song.trackname}}</span></span>)</h3>
                 </div>
             </div>
             <div class="container-fluid">

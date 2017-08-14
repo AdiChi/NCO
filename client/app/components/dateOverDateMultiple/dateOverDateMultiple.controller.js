@@ -295,7 +295,7 @@ class DateOverDateMultipleController {
       };
     }
 
-    function addEmptyDateValues() {
+    function prepareChartData() {
       let i = 0,
         j = 0,
         range1 = (vm.chart.firstRange).split(" to "),
@@ -568,14 +568,14 @@ class DateOverDateMultipleController {
         // vm.loading = false;
         // vm.drilldown = true;
 
-        // addEmptyDateValues();
+        // prepareChartData();
         // vm.currentChartType = "bar";
         // vm.NoChartError = "";
 
         ReportService.getDODMulitpleChart(vm.query).then((response) => {
           vm.drilldown = true;
           vm.chart = response.data;
-          addEmptyDateValues();
+          prepareChartData();
           vm.currentChartType = "bar";
 
           vm.NoChartError = "";
@@ -637,9 +637,9 @@ class DateOverDateMultipleController {
       vm.exportListName = "";
       angular.forEach(vm.selectedSong, (song) => {
         if (!vm.exportListName) {
-          vm.exportListName = song.trackname + "\"" + " \n\""
+          vm.exportListName = (song.type == 'list') ? song.songListName : song.trackname + "\"" + " \n\""
         } else {
-          vm.exportListName += song.trackname + "\r\n\n\""
+          vm.exportListName += (song.type == 'list') ? song.songListName : song.trackname + "\r\n\n\""
         }
       });
 
@@ -683,8 +683,32 @@ class DateOverDateMultipleController {
     //Send Report as Mail
     vm.sendMail = () => {
       vm.expandAll = true;
-      EmailPdfService.sendMail($(".c3graph"), $('.drilldown'), vm.expandAll);
-      vm.expandAll = false;
+      let selectedSong;
+
+      if (vm.showHeatMap) {
+        var elem = $("#world-map-container");
+      } else {
+        var elem = $(".c3graph");
+      }
+
+      angular.forEach(vm.selectedSong, (song) => {
+        if (!selectedSong) {
+          selectedSong = (song.type == 'list') ? song.songListName : song.trackname + ", "
+        } else {
+          selectedSong += (song.type == 'list') ? song.songListName : song.trackname + ", "
+        }
+      });
+
+      var details = {
+        chartType: "Date Over Date Songs/SongList Comparison",
+        song: selectedSong
+      };
+
+      EmailPdfService.sendMail(elem, $('.drilldown'), vm.expandAll, details).then((r) => {
+        vm.expandAll = false;
+      }).catch(function (e) {
+        vm.expandAll = false;
+      });
     }
   }
 }
