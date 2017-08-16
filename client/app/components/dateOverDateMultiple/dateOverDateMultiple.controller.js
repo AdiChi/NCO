@@ -88,6 +88,10 @@ class DateOverDateMultipleController {
 
     //Code for c3 Chart
     vm.changeChartType = (currentChart) => {
+      vm.names = [];
+      vm.datapoints = [];
+      vm.datacolumns = [];
+      vm.datax = {};
 
       angular.forEach(vm.chartTypes, (chartType) => {
         chartType.isActive = false;
@@ -102,7 +106,7 @@ class DateOverDateMultipleController {
           vm.secondRange = "Range 2 (" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
         } else {
           vm.firstRange = vm.chart.firstRange;
-          vm.firstRange = vm.chart.secondRange;
+          vm.secondRange = vm.chart.secondRange;
         }
         if (vm.representData == "2") {
           vm.selectedValue = vm.chart.salesPerSong[0];
@@ -119,6 +123,15 @@ class DateOverDateMultipleController {
         });
         vm.theChart2.groups([]);
         var chartType = vm.currentChartType;
+
+        vm.datapoints = vm.chartData.datapoints;
+        vm.datacolumns = vm.chartData.datacolumns;
+        vm.names = vm.chartData.names;
+        vm.datax = vm.chartData.datax;
+
+        angular.forEach(this.datacolumns, (column) => {
+          column.type = chartType;
+        });
 
         if (chartType == "stacked-bar") {
           let stackedArr = [],
@@ -483,6 +496,7 @@ class DateOverDateMultipleController {
 
       vm.loading = false;
       vm.currentChartType = "bar";
+
       angular.forEach(vm.chartTypes, (chartType) => {
         if (chartType.name == vm.currentChartType) {
           chartType.isActive = true;
@@ -490,6 +504,13 @@ class DateOverDateMultipleController {
           chartType.isActive = false;
         }
       });
+
+      vm.chartData = {
+        datapoints: vm.datapoints,
+        datacolumns: vm.datacolumns,
+        names: vm.names,
+        datax: vm.datax
+      }
 
       if (vm.representData == '2') {
         vm.reportTitle = "Individual Song Sales - ";
@@ -743,7 +764,7 @@ class DateOverDateMultipleController {
 
       if (vm.chart.firstRange == vm.chart.secondRange) {
         firstRange = vm.getTimeRangeInFormat(vm.chart.timerange1) + ")";
-        secondRange =vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
+        secondRange = vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
       } else {
         firstRange = vm.chart.firstRange;
         firstRange = vm.chart.secondRange;
