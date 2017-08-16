@@ -6,7 +6,8 @@ function ExportToCsvDirective(ExportToCsvService) {
 	      	element.bind('click', function() {
 		      var data = scope.vm ? scope.vm.toFormat(ctrl.getFilteredCollection()) : scope.toFormat(ctrl.getFilteredCollection());
 		      var header = (scope.vm ? scope.vm.exportListName : scope.exportListName) || "Table data";
-		      ExportToCsvService.JSONToCSVConvertor(data, header , true);
+		      var shortName = scope.vm.shortName ? scope.vm.shortName : undefined;
+		      ExportToCsvService.JSONToCSVConvertor(data, header , true, shortName);
 	 		});
 		}
 	};

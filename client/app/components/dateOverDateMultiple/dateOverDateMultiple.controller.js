@@ -710,6 +710,9 @@ class DateOverDateMultipleController {
         vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ") \"" +
         " \n\"" + vm.chart.secondRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ") \"" + "\n";
 
+      vm.shortName = "Song Comparison-Date over Date Report--"+
+        vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")-" +
+        vm.chart.secondRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
       return vm.range1RollUp.concat(vm.range2RollUp);
     };
 

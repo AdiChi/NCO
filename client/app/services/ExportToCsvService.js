@@ -1,7 +1,7 @@
 function ExportToCsvService() {
     
     return {
-        JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
+        JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel, ShortName) {
             //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
             var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
             
@@ -50,7 +50,11 @@ function ExportToCsvService() {
             //Generate a file name
             var fileName = "NCO_";
             //this will remove the blank-spaces from the title and replace it with an underscore
-            fileName += ReportTitle.replace(/ /g,"_");   
+            if (ShortName) {
+                fileName += ShortName.replace(/ /g,"_");
+            } else {
+                fileName += ReportTitle.replace(/ /g,"_");
+            }
             
             if (navigator.msSaveBlob) { // IE 10+
                 var blob = new Blob([CSV],{type: "text/csv;charset=utf-8;"});
