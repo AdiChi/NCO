@@ -381,11 +381,15 @@ class SongsalesByGeographyController {
                 this.timeError = "Please select time range";
                 blnError = true;
             }
+            if (this.selectedTerritories.length === 0 && this.selectedTerritoryGroups.length === 0) {
+                this.terError = "Please select a territory or territory group";
+                blnError = true;
+            }
 
             if (blnError) {
                 return;
             } else {
-                this.songError = this.rangeError = this.timeError = '';
+                this.songError = this.rangeError = this.timeError = this.terError = '';
             }
 
             this.theChart = null;
