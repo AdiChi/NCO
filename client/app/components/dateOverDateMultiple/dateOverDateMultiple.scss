@@ -341,9 +341,11 @@
         padding: 5px 10px;
         border-radius: 15px;
     }
-    .c3-brush {
-        .extent {
-            fill-opacity: 0;
+    .donutChart {
+        .c3-brush {
+            .extent {
+                fill-opacity: 0;
+            }
         }
     }
 }

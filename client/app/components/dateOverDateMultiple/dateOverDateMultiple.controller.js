@@ -121,6 +121,8 @@ class DateOverDateMultipleController {
         vm.theChart2.resize({
           height: 650
         });
+        vm.toggleSubChart = true;
+        vm.enableZoom = true;
         vm.theChart2.groups([]);
         var chartType = vm.currentChartType;
 
@@ -162,6 +164,9 @@ class DateOverDateMultipleController {
           ]);
           chartType = "bar";
         } else if (chartType == "donut") {
+          vm.toggleSubChart = false;
+          vm.enableZoom = false;
+
           vm.theChart2.groups([]);
           vm.theChart2.resize({
             height: 400
@@ -334,46 +339,55 @@ class DateOverDateMultipleController {
         let mapObj = {},
           k = 0,
           sales = 0;
+
         angular.forEach(vm.chart.salesPerSong, (songObj) => {
-          if (vm.chart.salesPerSong[k].dateRange1[i]) {
-            mapObj['song' + (k + 1) + '_Sales'] = (vm.chart.salesPerSong[k].dateRange1[i].totalsales > 0) ? vm.chart.salesPerSong[k].dateRange1[i].totalsales : 0;
-            sales += mapObj['song' + (k + 1) + '_Sales'];
-          } else {
-            mapObj['song' + (k + 1) + '_Sales'] = 0
-            sales = 0;
+          if (vm.chart.salesPerSong[k].totalSongSales > 0) {
+            if (vm.chart.salesPerSong[k].dateRange1[i]) {
+              mapObj['song' + (k + 1) + '_Sales'] = (vm.chart.salesPerSong[k].dateRange1[i].totalsales > 0) ? vm.chart.salesPerSong[k].dateRange1[i].totalsales : 0;
+              sales += mapObj['song' + (k + 1) + '_Sales'];
+            } else {
+              mapObj['song' + (k + 1) + '_Sales'] = 0
+              sales = 0;
+            }
+            mapObj['song' + (k + 1) + '_Name'] = songObj.name;
+            mapObj['song' + (k + 1) + '_Id'] = songObj.id;
           }
-          mapObj['song' + (k + 1) + '_Name'] = songObj.name;
-          mapObj['song' + (k + 1) + '_Id'] = songObj.id;
           k++;
         });
-        mapObj['aggregateSongSales'] = sales;
-        mapObj['date'] = dateObj.date;
+        if (sales > 0) {
+          mapObj['aggregateSongSales'] = sales;
+          mapObj['date'] = dateObj.date;
+          vm.firstRangeMap.push(mapObj);
+        }
         i++;
-        vm.firstRangeMap.push(mapObj);
       });
 
       angular.forEach(vm.chart.salesPerSong[j].dateRange2, (dateObj) => {
         let mapObj = {},
           k = 0,
           sales = 0;
+
         angular.forEach(vm.chart.salesPerSong, (songObj) => {
-          if (vm.chart.salesPerSong[k].dateRange2[j]) {
-            mapObj['song' + (k + 1) + '_Sales'] = (vm.chart.salesPerSong[k].dateRange2[j].totalsales > 0) ? vm.chart.salesPerSong[k].dateRange2[j].totalsales : 0;
-            sales += mapObj['song' + (k + 1) + '_Sales'];
-          } else {
-            mapObj['song' + (k + 1) + '_Sales'] = 0
-            sales = 0;
+          if (vm.chart.salesPerSong[k].totalSongSales > 0) {
+            if (vm.chart.salesPerSong[k].dateRange2[j]) {
+              mapObj['song' + (k + 1) + '_Sales'] = (vm.chart.salesPerSong[k].dateRange2[j].totalsales > 0) ? vm.chart.salesPerSong[k].dateRange2[j].totalsales : 0;
+              sales += mapObj['song' + (k + 1) + '_Sales'];
+            } else {
+              mapObj['song' + (k + 1) + '_Sales'] = 0
+              sales = 0;
+            }
+            mapObj['song' + (k + 1) + '_Name'] = songObj.name;
+            mapObj['song' + (k + 1) + '_Id'] = songObj.id;
           }
-          mapObj['song' + (k + 1) + '_Name'] = songObj.name;
-          mapObj['song' + (k + 1) + '_Id'] = songObj.id;
           k++;
         });
-        mapObj['aggregateSongSales'] = sales;
-        mapObj['date'] = dateObj.date;
+        if (sales > 0) {
+          mapObj['aggregateSongSales'] = sales;
+          mapObj['date'] = dateObj.date;
+          vm.secondRangeMap.push(mapObj);
+        }
         j++;
-        vm.secondRangeMap.push(mapObj);
       });
-
       if (!vm.firstRangeMap.length && !vm.secondRangeMap.length) {
         vm.firstRangeMap = [];
         vm.secondRangeMap = [];
@@ -392,7 +406,7 @@ class DateOverDateMultipleController {
 
       for (var m = moment(a); m.diff(b, 'days') <= 0; m.add(1, 'days')) {
         let mapObj = {};
-        var x = m.format('MMM DD');
+        var x = m.format('MMM DD, YY');
         let s = 0;
         if (vm[rangeObj].length && !vm[rangeObj][r]) {
           angular.forEach(vm.chart.salesPerSong, (songObj) => {
@@ -511,6 +525,9 @@ class DateOverDateMultipleController {
         names: vm.names,
         datax: vm.datax
       }
+
+      vm.toggleSubChart = true;
+      vm.enableZoom = true;
 
       if (vm.representData == '2') {
         vm.reportTitle = "Individual Song Sales - ";

@@ -106,8 +106,8 @@
     <div class="loader" ng-if="vm.loading"></div>
     <div ng-if="!vm.loading">
         <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:30px">
-            <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
-                show-subchart="true" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections">
+            <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="{{vm.enableZoom}}"
+                show-subchart="{{vm.toggleSubChart}}" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections">
                 <chart-size chart-height="650" />
                 <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
                 <!-- <chart-bar ratio="0.5" /> -->
@@ -135,9 +135,9 @@
                     <a class="btn btn-primary" ng-class="{'active': chartType.isActive}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>
                 </div>
             </div>
-            <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px">
-                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
-                    show-subchart="true" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections"
+            <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px" ng-class="{donutChart: vm.currentChartType == 'donut'}">
+                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="{{vm.enableZoom}}"
+                    show-subchart="{{vm.toggleSubChart}}" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections"
                     ng-if="!vm.showHeatMap">
                     <chart-size chart-height="700" />
                     <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
@@ -151,9 +151,9 @@
                     <chart-legend legend-position="bottom" />
                 </c3chart>
             </div>
-            <div class="container-fluid c3graph" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px">
-                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true"
-                    show-subchart="true" callback-function="vm.handleCallback2" sort-data="null" empty-label="No data available for above selections">
+            <div class="container-fluid c3graph" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px" ng-class="{donutChart: vm.currentChartType == 'donut'}">
+                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="{{vm.enableZoom}}"
+                    show-subchart="{{vm.toggleSubChart}}" callback-function="vm.handleCallback2" sort-data="null" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
                     <chart-size chart-height="700" />
                     <!-- <chart-bar ratio="0.5" /> -->

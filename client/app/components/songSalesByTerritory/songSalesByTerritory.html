@@ -68,7 +68,7 @@
     <div class="loader" ng-if="vm.loading"></div>
     <div ng-if="!vm.loading" class="chart-container">
         <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:25px">
-            <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections">
+            <c3chart bindto-id="chartGroupDataPoints" sort-data="null" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections">
                 <chart-size chart-height="650" />
                 <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
                 <!-- <chart-bar ratio="0.5" /> -->
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="container-fluid c3graph" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:25px">
-                <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
+                <c3chart bindto-id="chartGroupDataPoints" sort-data="null" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
                     ng-if="!vm.showHeatMap">
                     <chart-size chart-height="700" />
                     <chart-tooltip show-tooltip="true" />
@@ -109,7 +109,7 @@
                 </c3chart>
             </div>
             <div class="container-fluid c3graph" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:25px">
-                <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback2" empty-label="No data available for above selections">
+                <c3chart bindto-id="chartGroupDataPoints" sort-data="null" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback2" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" />
                     <chart-size chart-height="700" />
                     <!-- <chart-bar ratio="0.5" /> -->
