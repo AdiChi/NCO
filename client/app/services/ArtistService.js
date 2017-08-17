@@ -1,4 +1,4 @@
-function ArtistService($http, config, superCache) {
+function ArtistService($http, config, superCache, $q) {
     "ngInject";
     var baseUrl = config.apiUrl;//change as per need
     var getHeaders = function () {
@@ -36,7 +36,9 @@ function ArtistService($http, config, superCache) {
                     });
                 return artists;
             } else {
-                return Promise.resolve(cachedVal);
+                var defer = $q.defer();
+                defer.resolve(cachedVal);
+                return defer.promise;
             }
         },
         getArtist(id) {

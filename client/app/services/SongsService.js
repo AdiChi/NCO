@@ -1,4 +1,4 @@
-function SongsService($http, config, superCache) {
+function SongsService($http, config, superCache, $q) {
     "ngInject";
     var baseUrl = config.apiUrl;//change as per need
     var getHeaders= function() {
@@ -70,7 +70,9 @@ function SongsService($http, config, superCache) {
                     });
                 return songs;
             } else {
-                return Promise.resolve(cachedVal);
+                var defer = $q.defer();
+                defer.resolve(cachedVal);
+                return defer.promise;
             }
         },
         getMasterSongs() {
@@ -83,7 +85,9 @@ function SongsService($http, config, superCache) {
                     });
                 return songs;
             } else {
-                return Promise.resolve(cachedVal);
+                var defer = $q.defer();
+                defer.resolve(cachedVal);
+                return defer.promise;
             }
         },
         getSong(id) {
