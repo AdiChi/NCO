@@ -9,7 +9,7 @@ class ReportsFormController {
                 lastModified: "08/09/2017",
                 lastRan: "02/11/2017",
                 dataset: "MediaMelt",
-                url: "reports"
+                url: "songSalesByCity"
             },
             {
                 reportName: "Date over date song comparison report",
