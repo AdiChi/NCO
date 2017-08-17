@@ -53,6 +53,20 @@ class DateOverDateSongController {
         $scope.todayStart = moment().startOf('day');
         $scope.todayEnd = moment().endOf('day');
 
+        var date = new Date(),
+        y = date.getFullYear(),
+        m = date.getMonth();
+        
+        $scope.dateRangeStart = new Date(y, m, 1);
+        $scope.query.range1Date1 = moment($scope.dateRangeStart).format("MM/DD/YYYY");
+        $scope.dateRangeEnd = date;
+        $scope.query.range1Date2 = moment($scope.dateRangeEnd).format("MM/DD/YYYY");
+
+        var a = moment($scope.dateRangeEnd);
+        var b = moment($scope.dateRangeStart);
+
+        $scope.range1diff = a.diff(b, 'days') + 1;        
+
         $scope.time1 = $scope.todayStart;
         $scope.query.time1 = $scope.todayStart.format('HH:mm');
         $scope.time2 = $scope.todayEnd;

@@ -46,6 +46,18 @@ class SongsalesByGeographyController {
             ReportService.getRetailers().then((res) => {
                 this.retailers = $filter('orderBy')(res.data, 'name');
             });
+
+            var date = new Date(),
+                y = date.getFullYear(),
+                m = date.getMonth();
+
+            this.range.startDate = new Date(y, m, 1);
+            this.range.endDate = date;
+
+            var a = moment(this.range.endDate);
+            var b = moment(this.range.startDate);
+
+            this.range.dateDiff = a.diff(b, 'days') + 1;
         };
 
         $(document).on('click', '.panel-heading.clickable', function (e) {
@@ -504,10 +516,10 @@ class SongsalesByGeographyController {
                 range1: "Date Range: " + this.chart.dateRange
             };
 
-            var s = EmailPdfService.sendMail(elem, $('.drilldown'), this.expandAll , details);
-            s.then(function(r) {
+            var s = EmailPdfService.sendMail(elem, $('.drilldown'), this.expandAll, details);
+            s.then(function (r) {
                 vm.expandAll = false;
-            }).catch(function(e) {
+            }).catch(function (e) {
                 vm.expandAll = false;
             });
         };

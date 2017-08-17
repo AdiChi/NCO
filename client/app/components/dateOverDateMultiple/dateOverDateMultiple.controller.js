@@ -57,6 +57,18 @@ class DateOverDateMultipleController {
         vm.retailers = res.data;
       });
       vm.totalSongSales = 0;
+
+      var date = new Date(),
+        y = date.getFullYear(),
+        m = date.getMonth();
+
+      vm.range1.startDate = new Date(y, m, 1);
+      vm.range1.endDate = date;
+
+      var a = moment(vm.range1.endDate);
+      var b = moment(vm.range1.startDate);
+
+      vm.range1.dateDiff = a.diff(b, 'days') + 1;
     }
 
     //Panel Collapse
@@ -408,16 +420,28 @@ class DateOverDateMultipleController {
         let mapObj = {};
         var x = m.format('MMM DD, YY');
         let s = 0;
-        if (vm[rangeObj].length && !vm[rangeObj][r]) {
-          angular.forEach(vm.chart.salesPerSong, (songObj) => {
-            mapObj['song' + (s + 1) + '_Sales'] = 0;
-            mapObj['song' + (s + 1) + '_Name'] = songObj.name;
-            mapObj['song' + (s + 1) + '_Id'] = songObj.id;
-            s++;
-          });
-          mapObj['aggregateSongSales'] = 0;
-          mapObj['date'] = x;
-          vm[rangeObj].push(mapObj);
+        if (vm[rangeObj].length) {
+          if (vm[rangeObj][r] && vm[rangeObj][r].date != x) {
+            angular.forEach(vm.chart.salesPerSong, (songObj) => {
+              mapObj['song' + (s + 1) + '_Sales'] = 0;
+              mapObj['song' + (s + 1) + '_Name'] = songObj.name;
+              mapObj['song' + (s + 1) + '_Id'] = songObj.id;
+              s++;
+            });
+            mapObj['aggregateSongSales'] = 0;
+            mapObj['date'] = x;
+            vm[rangeObj].splice(r, 0, mapObj);
+          } else if (!vm[rangeObj][r]) {
+            angular.forEach(vm.chart.salesPerSong, (songObj) => {
+              mapObj['song' + (s + 1) + '_Sales'] = 0;
+              mapObj['song' + (s + 1) + '_Name'] = songObj.name;
+              mapObj['song' + (s + 1) + '_Id'] = songObj.id;
+              s++;
+            });
+            mapObj['aggregateSongSales'] = 0;
+            mapObj['date'] = x;
+            vm[rangeObj].splice(r, 0, mapObj);
+          }
         } else if (!vm[rangeObj].length) {
           angular.forEach(vm.chart.salesPerSong, (songObj) => {
             mapObj['song' + (s + 1) + '_Sales'] = 0;
@@ -457,7 +481,7 @@ class DateOverDateMultipleController {
         let nameVal = [];
         if (vm.chart.secondRange == vm.chart.firstRange) {
           vm.datapoints[i] = {
-            x: vm.firstRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")" + "_" + vm.secondRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")"
+            x: vm.firstRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")" + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")"
           }
         } else {
           vm.datapoints[i] = {
@@ -727,7 +751,7 @@ class DateOverDateMultipleController {
         vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ") \"" +
         " \n\"" + vm.chart.secondRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ") \"" + "\n";
 
-      vm.shortName = "Song Comparison-Date over Date Report--"+
+      vm.shortName = "Song Comparison-Date over Date Report--" +
         vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")-" +
         vm.chart.secondRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
       return vm.range1RollUp.concat(vm.range2RollUp);
