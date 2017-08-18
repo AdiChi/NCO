@@ -26,6 +26,19 @@ class SonglistCreatorFormController {
             $scope.filtered = stCtrl.getFilteredCollection();
         };
 
+        vm.deleteConfirm = function () {
+            var toDelete = new Set();
+            this.selected.forEach(function(e) 
+            {
+                toDelete.add(e);
+            });
+            var filteredArr = this.songlist.songs.filter(function(obj) {
+                return !toDelete.has(obj.id);
+            });
+            this.songlist.songs = filteredArr;
+            this.displayCollection2 = [].concat(this.songlist.songs);
+            this.selected = [];
+        };
         vm.toggleSideNav = (data) => {
             let id = data.id;
             var top = 0;
