@@ -1,31 +1,87 @@
+<div class="update-list-component">
 <form class="form-horizontal" role="form" ng-submit="vm.addSonglist()">
-  <div class="form-group">
-    <label class="control-label col-sm-2">Song list Name:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="Enter Song list name" ng-model="vm.songlist.songListName" required>
+    <div class="form-group">
+        <label class="control-label col-sm-2">Song list Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Enter Song list name" ng-model="vm.songlist.songListName" required>
+        </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2">Song list Description:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="Enter the Description" ng-model="vm.songlist.description" required>
+    <div class="form-group">
+        <label class="control-label col-sm-2">Song list Description:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Enter the Description" ng-model="vm.songlist.description" required>
+        </div>
     </div>
-  </div>
-<!--   <div class="form-group">
-    <label class="control-label col-sm-2">Photo:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="Enter photo URL:" ng-model="vm.songlist.photo">
+    <div class="form-group table-component">
+        <a role="button" style="margin-top:20px" class="col-sm-2 btn btn-primary btn-md" ng-click="vm.addSongs()">Add songs</a>
+        <h3 class=" col-sm-10" ng-if="!vm.songlist.songs.length">No Songs Added to song list {{vm.songlist.songListName}}</h3>
+        <table st-safe-src="vm.songlist.songs" st-table="vm.displayCollection2" on-filter="onFilter" class="table table-striped" ng-if="vm.songlist.songs.length > 0" id="listTable">
+            <thead>
+                <tr>
+                    <th st-ratio="2" row-select-all="vm.songlist.songs" selected="vm.selected" ng-click="vm.selectAll(vm.songlist.songs)"></th>
+                    <th st-ratio="12"><span st-sort="trackname">Track Name</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="12"><span st-sort="albumname">Album Name</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="12"><span st-sort="artist">Artist</span> <i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="12"><span st-sort="artistdesc">Artist Description</span><i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                    <th st-ratio="12"><span st-sort="isrc">ISRC</span><i class="fa fa-angle-down" ng-click="vm.showFilter=vm.showFilter?false:true" aria-hidden="true"></i></th>
+                </tr>
+                <tr ng-show="vm.showFilter">
+                    <th></th>
+                    <th>
+                        <input st-search="trackname" placeholder="search for track name" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="albumname" placeholder="search for album name" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="artist" placeholder="search for artist" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="artistdesc" placeholder="search for artist description" class="input-sm form-control" type="search" />
+                    </th>
+                    <th>
+                        <input st-search="isrc" placeholder="search by ISRC" class="input-sm form-control" type="search" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in vm.displayCollection2" ng-click="vm.toggleSideNav(row)">
+                    <td st-ratio="2" row-select="row" ng-click="vm.select(row.id)"></td>
+                    <td st-ratio="12">{{row.trackname}}</td>
+                    <td st-ratio="12">{{row.albumname}}</td>
+                    <td st-ratio="12">{{row.artist}}</td>
+                    <td st-ratio="12">{{row.artistdesc}}</td>
+                    <td st-ratio="12">{{row.isrc}}</td>
+                </tr>
+                <tr>
+                    <td colspan="6" ng-show="vm.displayCollection2.length===0">
+                        Your search query has fetched no results
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <div>
+                            <span><strong>{{vm.selected.length}} selected</strong></span>
+                            <span style="font-size:small;" ng-hide="vm.selected.length>0">(Select songs to remove from list)</span>
+                            <button ng-show="vm.selected.length>0" type="button" class="btn btn-primary btn-md" ng-click="vm.deleteConfirm()">Remove songs from list</button>
+                        </div>
+                    </td>
+                    <td><!-- <a class="btn btn-default" st-export>Export to Excel</a> --></td>
+                    <td colspan="2" class="text-center">
+                        <div st-pagination="" st-items-by-page="vm.itemsByPage"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <side-nav ng-blur="vm.hideFilter()" name="vm.name" visible="vm.visible" alignment="right" data="vm.detailsData" heading="vm.detailsTitle"></side-nav>
     </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2">About:</label>
-    <div class="col-sm-10">
-      <textarea name="" class="form-control" cols="30" rows="10" ng-model="vm.songlist.about"></textarea>
+    <div class="form-group">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-success">Create</button>
+            <button type="button" class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+        </div>
     </div>
-  </div>
- -->  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-  </div>
 </form>
+</div>

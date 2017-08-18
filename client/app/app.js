@@ -272,5 +272,6 @@ angular
                 }
             }
             $window.scrollTo(0, 0);
+            $rootScope.showMenu = false;
         });
     }]);

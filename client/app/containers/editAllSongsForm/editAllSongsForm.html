@@ -27,7 +27,8 @@
                 <tbody>
                     <tr ng-repeat="(key,row) in vm.displayCollection">
                         <td ng-repeat="(k,val) in vm.displayCollection[key]">
-                            <div inline-edit="vm.displayCollection[key][k]" inline-edit-btn-save="Save" inline-edit-btn-cancel="Cancel" inline-edit-on-click inline-edit-textarea></div>
+                            <div ng-if="vm.notIE" inline-edit="vm.displayCollection[key][k]" inline-edit-btn-save="Save" inline-edit-btn-cancel="Cancel" inline-edit-on-click inline-edit-textarea></div>
+                            <div ng-if="!vm.notIE" inline-edit="vm.displayCollection[key][k]" inline-edit-btn-save="Save" inline-edit-btn-cancel="Cancel" inline-edit-on-click></div>
                         </td>
                     </tr>
                     <tr>

@@ -33,6 +33,10 @@ class SongsalesByGeographyController {
         this.query = {};
         this.displayCollection = [];
         this.range = {};
+        this.rangeError = {
+            'dateError': "",
+            'timeError': ""
+        }
 
         this.initializeData = function () {
             ReportService.getTerritories().then((res) => {
@@ -373,12 +377,12 @@ class SongsalesByGeographyController {
             }
             if (!this.range.startDate ||
                 !this.range.endDate) {
-                this.rangeError = "Please select date range";
+                this.rangeError.dateError = "Please select date range";
                 blnError = true;
             }
             if (!this.range.startTime ||
                 !this.range.endTime) {
-                this.timeError = "Please select time range";
+                this.rangeError.timeError = "Please select time range";
                 blnError = true;
             }
             if (this.selectedTerritories.length === 0 && this.selectedTerritoryGroups.length === 0) {
@@ -413,7 +417,7 @@ class SongsalesByGeographyController {
             dateData.geography = this.chart.salesByGeography[data.x].geographyName;
             $scope.dateData = dateData;
             $uibModal.open({
-                templateUrl: 'app/components/songsalesByGeography/breakOutByRetailer.html',
+                templateUrl: 'app/components/songSalesByTerritory/breakOutByRetailer.html',
                 controller: BreakOutByRetailerController,
                 controllerAs: 'vm',
                 size: 'md',
@@ -504,10 +508,10 @@ class SongsalesByGeographyController {
                 range1: "Date Range: " + this.chart.dateRange
             };
 
-            var s = EmailPdfService.sendMail(elem, $('.drilldown'), this.expandAll , details);
-            s.then(function(r) {
+            var s = EmailPdfService.sendMail(elem, $('.drilldown'), this.expandAll, details);
+            s.then(function (r) {
                 vm.expandAll = false;
-            }).catch(function(e) {
+            }).catch(function (e) {
                 vm.expandAll = false;
             });
         };

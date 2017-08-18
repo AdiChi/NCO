@@ -10,7 +10,7 @@
                     <label for="txtSearchSong" class="heading">Select Songs/Song List</label>
                 </div>
                 <div class="col-md-12">
-                    <select-song selected-song="vm.selectedSong" multiple-songs="true"></select-song>
+                    <select-song selected-song="vm.selectedSong" multiple-songs="true" error-message="vm.songError"></select-song>
                 </div>
             </div>
             <div class="row" ng-if="vm.selectedSong.length">
@@ -26,12 +26,12 @@
             <div class="row">
                 <div class="col-md-6 left-panel">
                     <div id="main-info" class="well">
-                        <date-time-range range="vm.range1" index="1"></date-time-range>
+                        <date-time-range range="vm.range1" index="1" range1-error="vm.range1Error" range-error="vm.rangeError"></date-time-range>
                     </div>
                 </div>
                 <div class="col-md-6 right-panel">
                     <div id="main-info2" class="well">
-                        <date-time-range range="vm.range2" index="2"></date-time-range>
+                        <date-time-range range="vm.range2" index="2" range2-error="vm.range2Error" range-error="vm.rangeError"></date-time-range>
                     </div>
                 </div>
             </div>
@@ -75,29 +75,34 @@
                         {{vm.duplicateSongError}}
                     </div>
                 </div>
-                <div class="col-md-12" ng-if="vm.range1Error">
+                <div class="col-md-12" ng-if="vm.range1Error.dateError">
                     <div class="alert alert-danger" role="alert">
-                        {{vm.range1Error}}
+                        {{vm.range1Error.dateError}}
                     </div>
                 </div>
-                <div class="col-md-12" ng-if="vm.range2Error">
+                <div class="col-md-12" ng-if="vm.range2Error.dateError">
                     <div class="alert alert-danger" role="alert">
-                        {{vm.range2Error}}
+                        {{vm.range2Error.dateError}}
                     </div>
                 </div>
-                <div class="col-md-12" ng-if="vm.rangeError">
+                <div class="col-md-12" ng-if="vm.rangeError.dateDiffError">
                     <div class="alert alert-danger" role="alert">
-                        {{vm.rangeError}}
+                        {{vm.rangeError.dateDiffError}}
                     </div>
                 </div>
-                <div class="col-md-12" ng-if="vm.timeError">
+                <div class="col-md-12" ng-if="vm.range1Error.timeError">
                     <div class="alert alert-danger" role="alert">
-                        {{vm.timeError}}
+                        {{vm.range1Error.timeError}}
                     </div>
                 </div>
-                <div class="col-md-12" ng-if="vm.sameRangeError">
+                <div class="col-md-12" ng-if="vm.range2Error.timeError">
                     <div class="alert alert-danger" role="alert">
-                        {{vm.sameRangeError}}
+                        {{vm.range2Error.timeError}}
+                    </div>
+                </div>
+                <div class="col-md-12" ng-if="vm.rangeError.sameRangeError">
+                    <div class="alert alert-danger" role="alert">
+                        {{vm.rangeError.sameRangeError}}
                     </div>
                 </div>
             </div>
@@ -106,7 +111,7 @@
     <div class="loader" ng-if="vm.loading"></div>
     <div ng-if="!vm.loading">
         <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:30px">
-            <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="{{vm.enableZoom}}"
+            <c3chart padding-right="60" padding-top="{{vm.legend.y}}" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="{{vm.enableZoom}}"
                 show-subchart="{{vm.toggleSubChart}}" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections">
                 <chart-size chart-height="650" />
                 <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
@@ -114,10 +119,10 @@
                 <chart-axes values-x="x" />
                 <chart-axis>
                     <chart-axis-x axis-position="outer-center" axis-type="category" />
-                    <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                    <chart-axis-y axis-position="outer-middle" padding-bottom="0" axis-label="Sales" axis-type="category" axis-min="0" />
                     <chart-axis-x-tick tick-rotate="{{vm.tilt}}" tick-multiline="false" />
                 </chart-axis>
-                <chart-legend legend-position="bottom" />
+                <chart-legend legend-position="inset" legend-inset="{{vm.legend.position}}" legend-inset-x="{{vm.legend.x}}" legend-inset-y="-{{vm.legend.y}}" legend-inset-step="{{vm.legend.step}}" />
             </c3chart>
         </div>
         <div class="container-fluid" ng-if="vm.theChart" style="padding-top:30px">
@@ -136,7 +141,7 @@
                 </div>
             </div>
             <div class="container-fluid" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:30px" ng-class="{donutChart: vm.currentChartType == 'donut'}">
-                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="{{vm.enableZoom}}"
+                <c3chart padding-right="60" padding-top="{{vm.legend.y}}" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="{{vm.enableZoom}}"
                     show-subchart="{{vm.toggleSubChart}}" callback-function="vm.handleCallback1" sort-data="null" empty-label="No data available for above selections"
                     ng-if="!vm.showHeatMap">
                     <chart-size chart-height="700" />
@@ -145,14 +150,14 @@
                     <chart-axes values-x="x" />
                     <chart-axis>
                         <chart-axis-x axis-position="outer-center" axis-type="category" />
-                        <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                        <chart-axis-y axis-position="outer-middle" padding-bottom="0" axis-label="Sales" axis-type="category" axis-min="0" />
                         <chart-axis-x-tick tick-rotate="{{vm.tilt}}" tick-multiline="false" />
                     </chart-axis>
-                    <chart-legend legend-position="bottom" />
+                    <chart-legend legend-position="inset" legend-inset="{{vm.legend.position}}" legend-inset-x="{{vm.legend.x}}" legend-inset-y="-{{vm.legend.y}}" legend-inset-step="{{vm.legend.step}}" />
                 </c3chart>
             </div>
             <div class="container-fluid c3graph" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px" ng-class="{donutChart: vm.currentChartType == 'donut'}">
-                <c3chart padding-right="60" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="{{vm.enableZoom}}"
+                <c3chart padding-right="60" padding-top="{{vm.legend.y}}" bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="{{vm.enableZoom}}"
                     show-subchart="{{vm.toggleSubChart}}" callback-function="vm.handleCallback2" sort-data="null" empty-label="No data available for above selections">
                     <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
                     <chart-size chart-height="700" />
@@ -160,10 +165,10 @@
                     <chart-axes values-x="x" />
                     <chart-axis>
                         <chart-axis-x axis-position="outer-center" axis-type="category" />
-                        <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                        <chart-axis-y axis-position="outer-middle" padding-bottom="0" axis-label="Sales" axis-type="category" axis-min="0" />
                         <chart-axis-x-tick tick-rotate="{{vm.tilt}}" tick-multiline="false" />
                     </chart-axis>
-                    <chart-legend legend-position="bottom" />
+                    <chart-legend legend-position="inset" legend-inset="{{vm.legend.position}}" legend-inset-x="{{vm.legend.x}}" legend-inset-y="-{{vm.legend.y}}" legend-inset-step="{{vm.legend.step}}" />
                 </c3chart>
             </div>
             <div class="container-fluid" id="world-map" ng-if="vm.showHeatMap">

@@ -7,6 +7,11 @@ class EditAllSongsFormController {
         vm.jsonSongs = vm.jsonSongs || [];
         vm.sel = vm.sel || [];
         vm.itemsByPage = 10;
+        function isIE () {
+          var ua = navigator.userAgent;
+          return (ua.indexOf('Trident') > 0 || navigator.userAgent.indexOf('MSIE') > 0) ? true : false;
+        }
+        vm.notIE = !(isIE());
 
         vm.updateConfirm = function() {
             vm.dataLoading = true;

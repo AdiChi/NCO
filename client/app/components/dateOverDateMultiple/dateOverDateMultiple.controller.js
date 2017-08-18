@@ -44,7 +44,19 @@ class DateOverDateMultipleController {
       "songId[]": []
     };
     vm.details = {};
-    vm.displayCollection = [];
+    vm.range1Error = {
+      dateError: "",
+      timeError: ""
+    };
+    vm.range2Error = {
+      dateError: "",
+      timeError: ""
+    }
+    vm.rangeError = {
+      dateDiffError: "",
+      sameRangeError: ""
+    }
+
 
     vm.initializeController = function () {
       ReportService.getTerritories().then((res) => {
@@ -77,14 +89,33 @@ class DateOverDateMultipleController {
       }
     };
 
-    $scope.$watch('vm.selectedSong', (song) => {
-      console.log(song);
-    })
-
     // Deletion
     vm.removeSong = (index) => {
       vm.selectedSong.splice(index, 1);
+      if (vm.duplicateSongError) {
+        if (!hasDuplicateSong(vm.query["songId[]"])) {
+          vm.duplicateSongError = "";
+        }
+      }
     }
+
+    $scope.$watch('vm.range2', (rangeObj) => {
+      if(vm.range1.dateDiff && rangeObj.dateDiff != vm.range1.dateDiff && rangeObj.dateDiff > 0){
+        vm.rangeError.dateDiffError = "Please select same number of days in both ranges";
+      }
+      else{
+        vm.rangeError.dateDiffError = "";
+      }
+    }, true);
+
+    $scope.$watch('vm.range1', (rangeObj) => {
+      if(vm.range2.dateDiff && rangeObj.dateDiff != vm.range2.dateDiff && rangeObj.dateDiff > 0){
+        vm.rangeError.dateDiffError = "Please select same number of days in both ranges";
+      }
+      else{
+        vm.rangeError.dateDiffError = "";
+      }
+    }, true);
 
     //Code for c3 Chart
     vm.changeChartType = (currentChart) => {
@@ -135,6 +166,8 @@ class DateOverDateMultipleController {
           column.type = chartType;
         });
 
+        positionLegend();
+
         if (chartType == "stacked-bar") {
           let stackedArr = [],
             i = 0,
@@ -166,10 +199,15 @@ class DateOverDateMultipleController {
         } else if (chartType == "donut") {
           vm.toggleSubChart = false;
           vm.enableZoom = false;
-
+          vm.legend = {
+            position: "",
+            x: "0",
+            y: "0",
+            step: "0"
+          };
           vm.theChart2.groups([]);
           vm.theChart2.resize({
-            height: 400
+            height: 450
           });
         }
 
@@ -408,16 +446,28 @@ class DateOverDateMultipleController {
         let mapObj = {};
         var x = m.format('MMM DD, YY');
         let s = 0;
-        if (vm[rangeObj].length && !vm[rangeObj][r]) {
-          angular.forEach(vm.chart.salesPerSong, (songObj) => {
-            mapObj['song' + (s + 1) + '_Sales'] = 0;
-            mapObj['song' + (s + 1) + '_Name'] = songObj.name;
-            mapObj['song' + (s + 1) + '_Id'] = songObj.id;
-            s++;
-          });
-          mapObj['aggregateSongSales'] = 0;
-          mapObj['date'] = x;
-          vm[rangeObj].push(mapObj);
+        if (vm[rangeObj].length) {
+          if (vm[rangeObj][r] && vm[rangeObj][r].date != x) {
+            angular.forEach(vm.chart.salesPerSong, (songObj) => {
+              mapObj['song' + (s + 1) + '_Sales'] = 0;
+              mapObj['song' + (s + 1) + '_Name'] = songObj.name;
+              mapObj['song' + (s + 1) + '_Id'] = songObj.id;
+              s++;
+            });
+            mapObj['aggregateSongSales'] = 0;
+            mapObj['date'] = x;
+            vm[rangeObj].splice(r, 0, mapObj);
+          } else if (!vm[rangeObj][r]) {
+            angular.forEach(vm.chart.salesPerSong, (songObj) => {
+              mapObj['song' + (s + 1) + '_Sales'] = 0;
+              mapObj['song' + (s + 1) + '_Name'] = songObj.name;
+              mapObj['song' + (s + 1) + '_Id'] = songObj.id;
+              s++;
+            });
+            mapObj['aggregateSongSales'] = 0;
+            mapObj['date'] = x;
+            vm[rangeObj].splice(r, 0, mapObj);
+          }
         } else if (!vm[rangeObj].length) {
           angular.forEach(vm.chart.salesPerSong, (songObj) => {
             mapObj['song' + (s + 1) + '_Sales'] = 0;
@@ -457,7 +507,7 @@ class DateOverDateMultipleController {
         let nameVal = [];
         if (vm.chart.secondRange == vm.chart.firstRange) {
           vm.datapoints[i] = {
-            x: vm.firstRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")" + "_" + vm.secondRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")"
+            x: vm.firstRangeMap[i].date + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")" + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")"
           }
         } else {
           vm.datapoints[i] = {
@@ -534,6 +584,29 @@ class DateOverDateMultipleController {
       } else {
         vm.reportTitle = "Aggregate Song Sales - ";
       }
+
+      positionLegend();
+    }
+
+    function positionLegend() {
+      let x = 20,
+        y = 60;
+
+      if (vm.representData == '2') {
+        vm.legend = {
+          position: "top-left",
+          x: "-" + x,
+          y: (vm.chart.salesPerSong.length <= 2) ? y : y + (10 * vm.chart.salesPerSong.length),
+          step: (vm.chart.salesPerSong.length > 1) ? vm.chart.salesPerSong.length : 0
+        }
+      } else {
+        vm.legend = {
+          position: "top-left",
+          x: "0",
+          y: y,
+          step: 0
+        }
+      }
     }
 
     vm.getInputQuery = () => {
@@ -542,10 +615,10 @@ class DateOverDateMultipleController {
       vm.query["retailer[]"] = [];
       vm.query["territoryGroup[]"] = [];
 
-      vm.query.range1Date1 = moment(vm.range1.startDate).format("MM/DD/YYYY");
-      vm.query.range1Date2 = moment(vm.range1.endDate).format("MM/DD/YYYY");
-      vm.query.range2Date1 = moment(vm.range2.startDate).format("MM/DD/YYYY");
-      vm.query.range2Date2 = moment(vm.range2.endDate).format("MM/DD/YYYY");
+      vm.query.range1Date1 = !vm.range1.startDate ? "" : moment(vm.range1.startDate).format("MM/DD/YYYY");
+      vm.query.range1Date2 = !vm.range1.endDate ? "" : moment(vm.range1.endDate).format("MM/DD/YYYY");
+      vm.query.range2Date1 = !vm.range2.startDate ? "" : moment(vm.range2.startDate).format("MM/DD/YYYY");
+      vm.query.range2Date2 = !vm.range2.endDate ? "" : moment(vm.range2.endDate).format("MM/DD/YYYY");
 
       vm.query.time1 = moment(vm.range1.startTime).format('HH:mm');
       vm.query.time2 = moment(vm.range1.endTime).format('HH:mm');
@@ -601,32 +674,37 @@ class DateOverDateMultipleController {
 
       if (!vm.query.range1Date1 ||
         !vm.query.range1Date2) {
-        vm.range1Error = "Please select first date range";
+        vm.range1Error.dateError = "Please select first date range";
       } else {
-        vm.range1Error = "";
+        vm.range1Error.dateError = "";
       }
       if (!vm.query.range2Date1 ||
         !vm.query.range2Date2) {
-        vm.range2Error = "Please select second date range";
+          vm.range2Error.dateError = "Please select second date range";
       } else {
-        vm.range2Error = "";
+        vm.range2Error.dateError = "";
       }
       if (!vm.query.time1 ||
-        !vm.query.time2 || !vm.query.time3 || !vm.query.time4) {
-        vm.timeError = "Please select time range";
+        !vm.query.time2) {
+          vm.range1Error.timeError = "Please select first time range";
       } else {
-        vm.timeError = "";
+        vm.range1Error.timeError = "";
       }
-      if (vm.range1.dateDiff != vm.range2.dateDiff) {
-        vm.rangeError = "Please select same number of days in both ranges";
+      if(!vm.query.time3 || !vm.query.time4){
+        vm.range2Error.timeError = "Please select second time range";
       } else {
-        vm.rangeError = "";
+        vm.range2Error.timeError = "";
+      }
+      if ((!vm.range1Error.dateError && !vm.range2Error.dateError) && vm.range1.dateDiff != vm.range2.dateDiff) {
+        vm.rangeError.dateDiffError = "Please select same number of days in both ranges";
+      } else {
+        vm.rangeError.dateDiffError = "";
       }
       if ((vm.query.range1Date1 == vm.query.range2Date1 &&
           vm.query.range1Date2 == vm.query.range2Date2) && (vm.query.time1 == vm.query.time3 && vm.query.time2 == vm.query.time4)) {
-        vm.sameRangeError = "Please select different sales periods";
+            vm.rangeError.sameRangeError = "Please select different sales periods";
       } else {
-        vm.sameRangeError = "";
+        vm.rangeError.sameRangeError = "";
       }
 
       if (vm.query["songId[]"].length &&
@@ -638,8 +716,8 @@ class DateOverDateMultipleController {
         vm.query.time2 &&
         vm.query.time3 &&
         vm.query.time4 &&
-        !vm.sameRangeError &&
-        !vm.rangeError &&
+        !vm.rangeError.sameRangeError &&
+        !vm.rangeError.dateDiffError &&
         !vm.duplicateSongError) {
         vm.query.daysInRange = vm.range1.dateDiff;
         collapseSelection($('.panel-heading.clickable'));
@@ -727,7 +805,7 @@ class DateOverDateMultipleController {
         vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ") \"" +
         " \n\"" + vm.chart.secondRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ") \"" + "\n";
 
-      vm.shortName = "Song Comparison-Date over Date Report--"+
+      vm.shortName = "Song Comparison-Date over Date Report--" +
         vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")-" +
         vm.chart.secondRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange2) + ")";
       return vm.range1RollUp.concat(vm.range2RollUp);

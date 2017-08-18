@@ -1,5 +1,11 @@
-<div class="container">
-  <h1>Songlist creation page!</h1>
-
-  <songlist-creator-form></songlist-creator-form>
+<div class="component-wrapper">
+  <div id="componentHeader" class="component-header {{$root.currentUser.role}}-header">
+    <div class="component-title">
+      <span>Create Songlist</span>
+      <span class="component-banner"><img src="app/images/banner_{{$root.currentUser.role}}.png" /></span>
+    </div>
+  </div>
+  <div class="container">
+    <songlist-creator-form></songlist-creator-form>
+  </div>
 </div>
