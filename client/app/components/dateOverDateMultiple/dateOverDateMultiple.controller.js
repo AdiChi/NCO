@@ -716,8 +716,8 @@ class DateOverDateMultipleController {
         vm.query.time2 &&
         vm.query.time3 &&
         vm.query.time4 &&
-        !vm.dateTimeError.sameRangeError &&
-        !vm.dateTimeError.rangeError &&
+        !vm.rangeError.sameRangeError &&
+        !vm.rangeError.dateDiffError &&
         !vm.duplicateSongError) {
         vm.query.daysInRange = vm.range1.dateDiff;
         collapseSelection($('.panel-heading.clickable'));
