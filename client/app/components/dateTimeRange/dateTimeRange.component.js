@@ -6,7 +6,10 @@ let dateTimeRangeComponent = {
     restrict: 'E',
     bindings: {
         range: '=',
-        index: '@'
+        index: '@',
+        range1Error: '=',
+        range2Error: '=',
+        rangeError: '='
     },
     template,
     controller,

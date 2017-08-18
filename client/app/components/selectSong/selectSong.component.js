@@ -6,7 +6,8 @@ let selectSongComponent = {
     restrict: 'E',
     bindings: {
         multipleSongs: '<',
-        selectedSong: '='
+        selectedSong: '=',
+        errorMessage: '='
     },
     template,
     controller,

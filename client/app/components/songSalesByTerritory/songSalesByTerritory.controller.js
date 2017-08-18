@@ -33,6 +33,10 @@ class SongsalesByGeographyController {
         this.query = {};
         this.displayCollection = [];
         this.range = {};
+        this.rangeError = {
+            'dateError': "",
+            'timeError': ""
+        }
 
         this.initializeData = function () {
             ReportService.getTerritories().then((res) => {
@@ -46,18 +50,6 @@ class SongsalesByGeographyController {
             ReportService.getRetailers().then((res) => {
                 this.retailers = $filter('orderBy')(res.data, 'name');
             });
-
-            var date = new Date(),
-                y = date.getFullYear(),
-                m = date.getMonth();
-
-            this.range.startDate = new Date(y, m, 1);
-            this.range.endDate = date;
-
-            var a = moment(this.range.endDate);
-            var b = moment(this.range.startDate);
-
-            this.range.dateDiff = a.diff(b, 'days') + 1;
         };
 
         $(document).on('click', '.panel-heading.clickable', function (e) {
@@ -385,12 +377,12 @@ class SongsalesByGeographyController {
             }
             if (!this.range.startDate ||
                 !this.range.endDate) {
-                this.rangeError = "Please select date range";
+                this.rangeError.dateError = "Please select date range";
                 blnError = true;
             }
             if (!this.range.startTime ||
                 !this.range.endTime) {
-                this.timeError = "Please select time range";
+                this.rangeError.timeError = "Please select time range";
                 blnError = true;
             }
             if (this.selectedTerritories.length === 0 && this.selectedTerritoryGroups.length === 0) {

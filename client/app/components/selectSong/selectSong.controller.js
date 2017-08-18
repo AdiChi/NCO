@@ -49,7 +49,7 @@ class SelectSongController {
             } else {
                 this.selectedSong = song;
             }
-            this.songError = "";
+            this.errorMessage = "";
         };
     }
 }

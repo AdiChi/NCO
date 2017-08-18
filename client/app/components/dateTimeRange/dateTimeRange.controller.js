@@ -8,28 +8,43 @@ class DateTimeRangeController {
         $timeout(() => {
             this.range.startTime = this.todayStart;
             this.range.endTime = this.todayEnd;
+
+            if (this.index == '1') {
+                var date = new Date(),
+                    y = date.getFullYear(),
+                    m = date.getMonth();
+
+                this.range.startDate = new Date(y, m, 1);
+                this.range.endDate = date;
+
+                var a = moment(this.range.endDate);
+                var b = moment(this.range.startDate);
+
+                this.range.dateDiff = a.diff(b, 'days') + 1;
+            }
         }, 100);
 
-        this.startDateOnSetTime = function() {
+        this.startDateOnSetTime = function () {
             if (this.range.endDate) {
                 var a = moment(this.range.endDate);
                 var b = moment(this.range.startDate);
                 this.range.dateDiff = a.diff(b, 'days') + 1;
             }
+            this.clearErrorMessage(this.index);
             $scope.$broadcast('start-date-changed');
         };
 
-        this.endDateOnSetTime = function() {
+        this.endDateOnSetTime = function () {
             if (this.range.startDate) {
                 var a = moment(this.range.endDate);
                 var b = moment(this.range.startDate);
                 this.range.dateDiff = a.diff(b, 'days') + 1;
             }
-            this.rangeError = "";
+            this.clearErrorMessage(this.index);
             $scope.$broadcast('end-date-changed');
         };
 
-        this.startDateBeforeRender = function($dates) {
+        this.startDateBeforeRender = function ($dates) {
             if (this.range.endDate &&
                 this.range.startDate &&
                 this.range.endDate.valueOf() < this.range.startDate.valueOf()) {
@@ -43,7 +58,7 @@ class DateTimeRangeController {
             }
         };
 
-        this.endDateBeforeRender = function($view, $dates) {
+        this.endDateBeforeRender = function ($view, $dates) {
             if (this.range.startDate) {
                 var activeDate = moment(this.range.startDate).subtract(1, $view).add(1, 'minute');
 
@@ -58,6 +73,13 @@ class DateTimeRangeController {
                     $dates[i].selectable = false;
                 }
             }
+        };
+
+        this.clearErrorMessage = (index) => {
+            if (this.range.startDate || this.range.endDate) {
+                this['range' + index + 'Error']['dateError'] = "";
+            }
+            if(this.rangeError) this.rangeError.sameRangeError = "";
         };
     }
 }

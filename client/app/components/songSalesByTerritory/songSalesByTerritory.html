@@ -9,7 +9,7 @@
                 <h4> Select Song or Song List:</h4>
             </div>
             <div class="container-fluid outerdiv">
-                <select-song selected-song="vm.selectedSong"></select-song>
+                <select-song selected-song="vm.selectedSong" error-message="vm.songError"></select-song>
             </div>
             <div class="container-fluid">
                 <h4 ng-if="vm.selectedSong" class="selectedSong {{$root.currentUser.role}}-heading">
@@ -19,7 +19,7 @@
             <div class="container-fluid">
                 <div id="main-info" class="col-md-12 well report-criteria">
                     <div class="col-md-6 left-content">
-                        <date-time-range range="vm.range"></date-time-range>
+                        <date-time-range range="vm.range" index="1" range1-error="vm.rangeError"></date-time-range>
                         <div class="col-md-12 select">
                             <div class="select-label">Represent Territory Data As:</div>
                             <div class="represent">
@@ -47,11 +47,11 @@
                 <div ng-if="vm.songError ">
                     {{vm.songError}}
                 </div>
-                <div ng-if="vm.rangeError ">
-                    {{vm.rangeError}}
+                <div ng-if="vm.rangeError.dateError">
+                    {{vm.rangeError.dateError}}
                 </div>
-                <div ng-if="vm.timeError ">
-                    {{vm.timeError}}
+                <div ng-if="vm.rangeError.timeError">
+                    {{vm.rangeError.timeError}}
                 </div>
                 <div ng-if="vm.terError ">
                     {{vm.terError}}

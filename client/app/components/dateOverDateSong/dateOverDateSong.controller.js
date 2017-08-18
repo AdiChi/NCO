@@ -158,7 +158,7 @@ class DateOverDateSongController {
         });
 
         $scope.$watch('range1diff', function(diff) {
-            if ($scope.range2diff && diff !== $scope.range2diff) {
+            if ($scope.range2diff && diff !== $scope.range2diff && diff > 0) {
                 $scope.rangeError = "Please select same number of days in both ranges";
             } else {
                 $scope.rangeError = "";
@@ -166,7 +166,7 @@ class DateOverDateSongController {
         });
 
         $scope.$watch('range2diff', function(diff) {
-            if ($scope.range1diff && diff !== $scope.range1diff) {
+            if ($scope.range1diff && diff !== $scope.range1diff && diff > 0) {
                 $scope.rangeError = "Please select same number of days in both ranges";
             } else {
                 $scope.rangeError = "";
