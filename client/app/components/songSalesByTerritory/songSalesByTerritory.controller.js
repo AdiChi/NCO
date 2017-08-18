@@ -417,7 +417,7 @@ class SongsalesByGeographyController {
             dateData.territory = this.chart.salesByGeography[data.x].geographyName;
             $scope.dateData = dateData;
             $uibModal.open({
-                templateUrl: 'app/components/songsalesByGeography/breakOutByRetailer.html',
+                templateUrl: 'app/components/songSalesByTerritory/breakOutByRetailer.html',
                 controller: BreakOutByRetailerController,
                 controllerAs: 'vm',
                 size: 'md',
