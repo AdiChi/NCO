@@ -13,7 +13,7 @@ function EmailPdfService(c3ExportService, EmailService, ModalService, $q) {
         return newCan.toDataURL();
     }
 
-    function getPDF(emails, graphElement, drilldownElement, expandAllElement, details) {
+    function getPDF(info, graphElement, drilldownElement, expandAllElement, details) {
 
         function sendingPdf(legendCanvas) {
             var deferred = $q.defer();
@@ -125,8 +125,12 @@ function EmailPdfService(c3ExportService, EmailService, ModalService, $q) {
 
                             var formData = new FormData();
                             formData.append("pdf", data, "mygraph.pdf");
-                            formData.append("email[]", emails);
-                            formData.append("isLink", false);
+                            formData.append("email[]", info.emails);
+                            formData.append("isLink", info.isLink);
+                            if (info.isLink) {
+                                formData.append("expDate", info.expDate);
+                                formData.append("expTime", info.expTime);
+                            }
 
                             EmailService.sendAttachment(formData).then((res) => {
                                 graphElement.find('.alerts').remove();
@@ -199,11 +203,57 @@ function EmailPdfService(c3ExportService, EmailService, ModalService, $q) {
                     $scope.modalOptions = {
                         closeButtonText: 'Cancel',
                         actionButtonText: 'Send',
-                        headerText: 'Send Reports'
+                        headerText: 'Send Report'
                     };
+                    $scope.s = {
+                        options: 'Attachment'
+                    }
+
+                    $scope.dateBeforeRender = function($view, $dates, $leftDate, $upDate, $rightDate) {
+                        $dates.filter((date) => {
+                            return date.localDateValue() < moment().startOf('day').valueOf()
+                        }).forEach((date) => {
+                            date.selectable = false;
+                        });
+                        /*for (var i = 0; i < $dates.length; i++) {
+                            if (new Date().getTime() < $dates[i].utcDateValue) {
+                                $dates[i].selectable = false;
+                            }
+                        }*/
+                    };
+                    $scope.onSetTime = function() {
+                        $scope.expDateOrig = undefined;
+                        $scope.$broadcast('date-changed');
+                    };
+                    $scope.$watch('expTime', function(time) {
+                        if(moment($scope.expDate, 'MM/D/YYYY').isSame(moment(new Date(), 'MM/D/YYYY'),'date')) {
+                            $scope.timeError = moment(time).valueOf() < moment().valueOf();
+                        } else {
+                            $scope.timeError = false;
+                        }
+                    });
+                    $scope.$watch('expDate', function(date) {
+                        if(moment(date, 'MM/D/YYYY').isSame(moment(new Date(), 'MM/D/YYYY'),'date')) {
+                            $scope.timeError = moment($scope.expTime).valueOf() < moment().valueOf();
+                        } else {
+                            $scope.timeError = false;
+                        }
+                    });
+                    $scope.todayStart = moment().startOf('day');
+                    $scope.expDateOrig = moment().format('ll');
+                    $scope.expDate = moment();
+                    $scope.$broadcast('date-changed');
+                    $scope.expTime = moment().add(5,"minutes");
                     $scope.submitForm = function() {
                         if ($scope.form.userForm.$valid) {
-                            console.log('user form is in scope');
+                            var isLink = ($scope.s.options == "Link") ? true:false;
+                            var info = {
+                                emails: $scope.email,
+                                isLink: isLink,
+                                expDate: moment($scope.expDate).format("MM/DD/YYYY"),
+                                expTime: moment($scope.expTime).format("HH:mm")
+                            };
+                            console.log(info);
                             $uibModalInstance.close($scope.email);
                         } else {
                             console.log('userform is not in scope');
@@ -230,20 +280,71 @@ function EmailPdfService(c3ExportService, EmailService, ModalService, $q) {
                             <input type="text" name="email" class="form-control" 
                                 ng-model="email" multiple-emails required
                                 placeholder="jane.doe1@mediamelt.com,jane.doe2@mediamelt.com...">
-                            <p ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block">Enter valid email ids</p>
+                            <p ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block" style="color:darkred;">
+                            Enter valid email ids
+                            </p>
                         </div>
+                        <div class="form-group">
+                        <div class="btn-group choose-type">
+                            <div><label>I want to send this report as:</label></div>
+                            <label class="btn btn-option">
+                              <input type="radio" data-ng-model="s.options" name="options" value="Attachment" />
+                              <span>Attachment</span>
+                            </label>
+                            <label class="btn btn-option">
+                              <input type="radio" data-ng-model="s.options" name="options" value="Link" />
+                              <span>Link</span>
+                            </label>
+                          </div>
+                          </div>
+                        <div class="panel-group" ng-show="s.options == 'Link'">
+                          <div class="panel panel-default">
+                          <div class="panel-heading"><label>Set link expiry:</label></div>
+                            <div class="panel-body">
+                                <div class="form-group" >
+                                        <div class="dropdown timepicker">
+                                            <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
+                                                <label>Date:</label> <br>
+                                                <span class=""><i style="font-size:1.5em;" class="glyphicon glyphicon-calendar"></i></span>
+                                            </a> {{expDateOrig|| (expDate | date:"MMM dd, yyyy")}}
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker ng-model="expDate" min-date="todayStart" 
+                                                 data-datetimepicker-config="{ startView:'day', minView:'day',
+                                                 dropdownSelector: '#dropdownStart', renderOn: 'date-changed' }" 
+                                                 data-on-set-time="onSetTime()" 
+                                                 data-before-render="dateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)">
+                                                 </datetimepicker>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="time-range form-group">
+                                        <label>Time:</label><br/>
+                                        <span uib-timepicker ng-model="expTime" class="timepicker"></span>
+                                    </div>
+                                    <div ng-if="timeError" style="color:darkred;">Please select future expiry time</div>
+                                    </div>
+                            </div>
+                          </div>
+                        </div>
+                          
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" ng-disabled="form.userForm.$invalid">Send</button>
-                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                        <button type="submit" class="mail-submit btn" ng-disabled="form.userForm.$invalid || timeError">Send</button>
+                        <button class="btn" ng-click="cancel()">Cancel</button>
                     </div>
                 </form>`
             };
             return ModalService.showModal(custMod, {}).then(function(res) {
-                var emails = res.split(",").map(function(item) {
+                var emails = res.emails.split(",").map(function(item) {
                     return item.trim();
-                });
-                return getPDF(emails, graphElement, drilldownElement, expandAllElement, details);
+                }),
+                info = {
+                    emails: emails,
+                    isLink: res.isLink,
+                    expDate: res.expDate,
+                    expTime: res.expTime
+                };
+                return getPDF(info, graphElement, drilldownElement, expandAllElement, details);
             }, function(err) {
                 console.log(err);
             });

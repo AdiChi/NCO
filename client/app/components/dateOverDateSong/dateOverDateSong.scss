@@ -208,9 +208,13 @@
 i.mail {
     padding-left: 10px;
     margin-top: 5px;
-    color:grey;
 }
 
+.choose-type .btn-option, .mail-submit {
+    color: #fff;
+    background-color: #c28103;
+    border-color: white;
+}
 .c3graph, #world-map-container, .view-main {
     .alerts {
         .close {
