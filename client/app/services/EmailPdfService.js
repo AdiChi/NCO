@@ -1,4 +1,4 @@
-function EmailPdfService(c3ExportService, EmailService, ModalService, $q) {
+function EmailPdfService(c3ExportService, EmailService, ModalService, $q,$rootScope) {
     "ngInject";
 
     function crop(can, a, b) {
@@ -127,6 +127,7 @@ function EmailPdfService(c3ExportService, EmailService, ModalService, $q) {
                             formData.append("pdf", data, "mygraph.pdf");
                             formData.append("email[]", info.emails);
                             formData.append("isLink", info.isLink);
+                            formData.append("username", $rootScope.currentUser.firstName);
                             if (info.isLink) {
                                 formData.append("expDate", info.expDate);
                                 formData.append("expTime", info.expTime);
