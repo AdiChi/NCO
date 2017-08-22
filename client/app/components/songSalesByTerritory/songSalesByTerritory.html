@@ -86,7 +86,7 @@
                 <h3 class="col-md-12 graph-song-label">{{vm.selectedSong.trackname}}</h3>
                 <div class="col-md-2 icon-wrapper">
                     <i class="fa fa-heart fa-2x fav" aria-hidden="true" ng-click="fav = !fav" ng-class="{selected: fav}" title="Add to favorites"></i>
-                    <i class="fa fa-2x fa-share-square-o mail" ng-click="vm.sendMail()" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-share-alt mail" ng-click="vm.sendMail()" aria-hidden="true"></i>
                 </div>
                 <div class="col-md-10 graph-type-labels text-right">
                     <a class="btn btn-primary" ng-class="{'active': chartType.isActive, 'disable': chartType.isDisabled}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>

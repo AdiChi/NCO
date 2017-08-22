@@ -254,7 +254,7 @@ function EmailPdfService(c3ExportService, EmailService, ModalService, $q) {
                                 expTime: moment($scope.expTime).format("HH:mm")
                             };
                             console.log(info);
-                            $uibModalInstance.close($scope.email);
+                            $uibModalInstance.close(info);
                         } else {
                             console.log('userform is not in scope');
                         }
