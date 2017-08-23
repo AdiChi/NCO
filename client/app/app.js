@@ -23,6 +23,7 @@ import SelectSongComponent from './components/selectSong/selectSong';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
 import SongSalesByTerritoryComponent from './components/songSalesByTerritory/songSalesByTerritory';
 import DateOverDateMultipleComponent from './components/dateOverDateMultiple/dateOverDateMultiple';
+import SongOverSongComponent from './components/songOverSong/songOverSong';
 import LoginComponent from './pages/login/login';
 import DashboardComponent from './pages/dashboard/dashboard';
 import SideNavComponent from './components/sideNav/sideNav';
@@ -118,7 +119,8 @@ angular
         DateOverDateMultipleComponent.name,
         ReportsComponent.name,
         SideNavComponent.name,
-        FilterComponent.name
+        FilterComponent.name,
+        SongOverSongComponent.name
     ])
     .config(($locationProvider, $stateProvider, $urlRouterProvider) => {
         "ngInject";
@@ -205,6 +207,10 @@ angular
             .state('app.dateOverDateMultiple', {
                 url: '/dateOverDateMultiple',
                 template: '<date-over-date-multiple></date-over-date-multiple>'
+            })
+            .state('app.songOverSong', {
+                url: '/songOverSong',
+                template: '<song-over-song></song-over-song>'
             });
 
         $urlRouterProvider.otherwise('/app/');

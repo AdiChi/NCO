@@ -1,7 +1,7 @@
 function ReportService($http, config, superCache) {
     "ngInject";
     var baseUrl = config.apiUrl; //change as per need
-    var getHeaders = function() {
+    var getHeaders = function () {
         var headers = {
             'Accept': 'application/json'
         };
@@ -14,7 +14,7 @@ function ReportService($http, config, superCache) {
                 url: `${baseUrl}/searchsongs/${query}`,
                 method: "GET",
                 headers: getHeaders()
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log(error);
             });
             return songs;
@@ -24,7 +24,7 @@ function ReportService($http, config, superCache) {
                 url: `${baseUrl}/searchSongList/${query}`,
                 method: "GET",
                 headers: getHeaders()
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log(error);
             });
             return songList;
@@ -33,7 +33,7 @@ function ReportService($http, config, superCache) {
             var territories = $http.get(`${baseUrl}/nco/territoryList`, {
                     headers: getHeaders()
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log(error);
                 });
             return territories;
@@ -42,7 +42,7 @@ function ReportService($http, config, superCache) {
             var TGs = $http.get(`${baseUrl}/nco/territoryGroupList`, {
                     headers: getHeaders()
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log(error);
                 });
             return TGs;
@@ -51,7 +51,7 @@ function ReportService($http, config, superCache) {
             var retailers = $http.get(`${baseUrl}/nco/orgList`, {
                     headers: getHeaders()
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log(error);
                 });
 
@@ -1524,6 +1524,15 @@ function ReportService($http, config, superCache) {
         getDODMulitpleChart(query) {
             var chartDetails = $http({
                 url: `${baseUrl}/getMSDODChart`,
+                method: "GET",
+                params: query,
+                headers: getHeaders()
+            });
+            return chartDetails;
+        },
+        getSOSChart(query) {
+            var chartDetails = $http({
+                url: `${baseUrl}/getMSSDRChart`,
                 method: "GET",
                 params: query,
                 headers: getHeaders()
