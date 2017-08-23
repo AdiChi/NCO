@@ -1,7 +1,7 @@
 <div class="report-panel" ng-init="vm.initializeData()">
     <div class="panel panel-default reports">
         <div class="panel-heading {{$root.currentUser.role}}-heading clickable">
-            <h3 class="panel-title">Song Sales Comparison By Territory/Territory Groups</h3>
+            <h3 class="panel-title">Song Sales Comparison By City</h3>
             <span class="pull-right"><i class="glyphicon glyphicon-chevron-up"></i></span>
         </div>
         <div class="panel-body">
@@ -22,39 +22,8 @@
                 <div class="container-fluid">
                     <h4> Select City:</h4>
                 </div>
-                <div class="container-fluid outerdiv">
-                    <div class="animated zoomInRight">
-                        <div class="input-group search-bar">
-                            <input type="text" ng-model="citySearch" ng-model-options="{ debounce: 800 }" class="form-control" placeholder="Enter at least 3 characters of city name" autofocus />
-                            <span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
-                        </div>
-                        <div id="main-info" class="col-md-9">
-                            <div ng-if="vm.showLoading">
-                                <ul class="dropdown-menu rel-results" style="display: block;">
-                                    <li class="loading-results">Loading results...</li>
-                                </ul>
-                            </div>
-                            <div ng-if="vm.cities.length>0">
-                                <ul class="dropdown-menu rel-results" style="display: block;">
-                                    <li ng-repeat="city in vm.cities track by $index">
-                                        <a href id="{{ $index + 1 }}" ng-click="vm.updateCity(city)">{{city.name}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div ng-if="vm.noResults">
-                                <ul class="dropdown-menu rel-results" style="display: block;">
-                                    <li class="no-results">No results found.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid" ng-if="vm.selectedCities.length" style="padding-top: 10px;">
-                    <ul class="selected-city-list">
-                        <li class="selected-city {{$root.currentUser.role}}-list" ng-repeat="city in vm.selectedCities"><span>{{city.name}}</span>
-                            <i class="fa fa-times pull-right" ng-click="vm.removeCity($index)"></i>
-                        </li>
-                    </ul>
+                <div class="container-fluid outerdiv" ng-if="vm.cities">
+                    <multiselect ng-model="vm.selectedCities" options="vm.cities" id-prop="id" display-prop="name" show-search="true" class="col-md-3 multiselect"></multiselect>
                 </div>
             </div>
             <div class="container-fluid">
@@ -122,7 +91,7 @@
                 <h3 class="col-md-12 graph-song-label">{{vm.selectedSong.trackname}}</h3>
                 <div class="col-md-2 icon-wrapper">
                     <i class="fa fa-heart fa-2x fav" aria-hidden="true" ng-click="fav = !fav" ng-class="{selected: fav}" title="Add to favorites"></i>
-                    <i class="fa fa-2x fa-share-square-o mail" ng-click="vm.sendMail()" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa fa-share-alt mail" ng-click="vm.sendMail()" aria-hidden="true"></i>
                 </div>
                 <div class="col-md-10 graph-type-labels text-right">
                     <a class="btn btn-primary" ng-class="{'active': chartType.isActive, 'disable': chartType.isDisabled}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>

@@ -40,5 +40,13 @@
                 }
             }
         }
+        .outerdiv {
+            .multiselect {
+                padding: 0px;
+                ul {
+                    max-height: 400px;
+                }
+            }
+        }
     }
 }

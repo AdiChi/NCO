@@ -67,6 +67,16 @@ function ReportService($http, config, superCache) {
             });
             return cities;
         },
+        getAllCities() {
+            var cities = $http({
+                url: `${baseUrl}/nco/searchByCity`,
+                method: "GET",
+                headers: getHeaders()
+            }).catch(function(error) {
+                console.log(error);
+            });
+            return cities;
+        },
         getDODChart(query) {
             var chartDetails = $http({
                 url: `${baseUrl}/getDODChart`,

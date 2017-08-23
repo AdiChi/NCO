@@ -4,7 +4,8 @@ class SongSalesByCityController {
         'ngInject'
 
         this.chartTypes = [{
-                name: "heatmap"
+                name: "heatmap",
+                isDisabled: true
             },
             {
                 name: "donut"
@@ -35,6 +36,10 @@ class SongSalesByCityController {
         this.range = {};
 
         this.initializeData = function() {
+            ReportService.getAllCities().then((response) => {
+                this.cities = response.data;
+            });
+
             ReportService.getRetailers().then((res) => {
                 this.retailers = $filter('orderBy')(res.data, 'name');
             });
@@ -55,27 +60,6 @@ class SongSalesByCityController {
                 $this.addClass('panel-collapsed');
                 $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
             }
-        };
-
-        $scope.$watch('citySearch', (name) => {
-            if (name && name.length >= 3) {
-                this.showLoading = true;
-                ReportService.getCitiesBySearch(name).then((response) => {
-                    this.showLoading = false;
-                    this.cities = response.data;
-                    this.noResults = (this.cities.length === 0);
-                });
-            }
-        });
-
-        this.updateCity = function(city) {
-            this.selectedCities.push(city);
-            this.cities = [];
-            this.cityError = "";
-        };
-
-        this.removeCity = (index) => {
-            this.selectedCities.splice(index, 1);
         };
 
         //----Code for Charts-----//
