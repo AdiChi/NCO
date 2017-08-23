@@ -87,7 +87,8 @@ gulp.task('serve', () => {
         publicPath: config.output.publicPath
       }),
       webpachHotMiddelware(compiler)
-    ]
+    ],
+    ghostMode: false
   });
 });
 

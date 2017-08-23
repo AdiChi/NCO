@@ -1,5 +1,5 @@
 {
-  "name": "ng6-starter",
+  "name": "ncofrontend",
   "version": "0.0.1",
   "description": "NCO UI",
   "main": "index.js",
@@ -22,7 +22,8 @@
     "lodash": "^3.8.0",
     "ng-inline-edit": "git+https://github.com/devotis/ng-inline-edit.git",
     "node-sass": "^3.8.0",
-    "normalize.css": "^3.0.3"
+    "normalize.css": "^3.0.3",
+    "winser": "^1.0.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",
@@ -62,12 +63,15 @@
     "webpack-hot-middleware": "^2.6.0",
     "yargs": "^3.9.0"
   },
-  "scripts": {
-    "test": "karma start"
-  },
   "keywords": [
     "angular",
     "webpack",
     "es6"
-  ]
+  ],
+  "scripts": {
+    "start": "node ./node_modules/gulp/bin/gulp.js serve",
+    "test": "karma start",
+    "install-windows-service": "winser --install",
+    "uninstall-windows-service": "winser -r"
+  }
 }
