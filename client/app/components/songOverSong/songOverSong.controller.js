@@ -1,5 +1,5 @@
 class SongOverSongController {
-  constructor($scope, $filter, $window, ReportService, ModalService) {
+  constructor($scope, $filter, $window, ReportService, ModalService, EmailPdfService) {
     "ngInject"
 
     var vm = this;

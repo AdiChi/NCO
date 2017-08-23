@@ -126,13 +126,16 @@
     }
     #world-map {
         .legend {
-            text-align: right;
             h4 {
                 font-size: 16px;
                 font-weight: 600;
+                margin-top: 20px;
             }
             ul li {
                 text-align: center;
+            }
+            .list-inline {
+                margin-left: 0;
             }
         }
         padding-top: 20px;
