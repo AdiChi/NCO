@@ -37,6 +37,9 @@ class SongSalesByCityController {
 
         this.initializeData = function() {
             ReportService.getAllCities().then((response) => {
+                angular.forEach(response.data, (data) => {
+                    data.name = data.cityName + ', ' + data.stateName + ', ' + data.terrName;
+                });
                 this.cities = response.data;
             });
 
