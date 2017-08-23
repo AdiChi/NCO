@@ -47,7 +47,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="row in vm.displayCollection2" ng-click="vm.toggleSideNav(row)">
-                        <td st-ratio="2" row-select="row" ng-click="vm.select(row.id)"></td>
+                        <td st-ratio="2" row-select="row" ng-click="vm.select(row.id); $event.stopPropagation();"></td>
                         <td st-ratio="12">{{row.trackname}}</td>
                         <td st-ratio="12">{{row.albumname}}</td>
                         <td st-ratio="12">{{row.artist}}</td>
