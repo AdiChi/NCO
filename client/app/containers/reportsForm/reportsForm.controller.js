@@ -41,7 +41,7 @@ class ReportsFormController {
                 lastModified: "08/09/2017",
                 lastRan: "02/05/2017",
                 dataset: "Tableau - Historical",
-                url: "reports"
+                url: "songOverSong"
             }
         ];
         this.displayCollection = [].concat(this.allReports);
@@ -124,7 +124,7 @@ class ReportsFormController {
                 lastModified: "08/09/2017",
                 lastRan: "02/05/2017",
                 dataset: "Tableau - Historical",
-                url: "reports"
+                url: "songOverSong"
             }
         ];
         this.displayCollection2 = [].concat(this.myReports);

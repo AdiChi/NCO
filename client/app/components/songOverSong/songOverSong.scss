@@ -1,83 +1,6 @@
-.report-panel {
-    .rel-results {
-        max-height: 500px;
-        overflow: auto;
-        margin-top: -1px;
-        border-top: 0;
-        width: 100%;
-        .loading-results,
-        .no-results {
-            padding: 0 5px;
-        }
-    }
-    .alert {
-        padding: 5px;
-        margin-bottom: 10px;
-    }
-    .selected-song-list {
-        padding: 0;
-        .selected-song {
-            width: auto;
-            display: inline-block;
-            border-radius: 20px;
-            padding: 5px 10px;
-            margin: 0 5px 10px 0;
-            .fa-music::before,
-            .fa-th-list::before {
-                margin: 0 8px 0 0;
-            }
-            .fa-times::before {
-                position: relative;
-                top: 2px;
-                margin: 0 0 0 5px;
-                cursor: pointer;
-            }
-            &.artist-list {
-                background-color: #1a1c22;
-                color: #b9babd;
-                border: 1px solid #1a1c22;
-            }
-            &.analyst-list {
-                background-color: #01172d;
-                color: #b9babd;
-                border: 1px solid #01172d;
-            }
-            &.distributor-list {
-                background-color: #230118;
-                color: #b9babd;
-                border: 1px solid #230118;
-            }
-        }
-    }
-}
-
-.date-over-date-multiple {
-    .heading {
-        font-size: 14px;
-        font-weight: 600;
-    }
-    .row {
-        margin-top: 0px;
-        padding: 0 10px;
-        margin-bottom: 15px;
-    }
-    .well {
-        padding: 19px 12px;
-        display: inline-block;
-        width: 100%;
-        margin-bottom: 0;
-    }
-    .left-panel {
-        padding-right: 0;
-    }
-    .right-panel {
-        padding-left: 0;
-    }
-    .time-range {
-        margin: 15px 0 0;
-    }
-    .datetimepicker {
-        max-width: 275px
+.song-over-song {
+    .retailer-break-check {
+        vertical-align: top;
     }
     .loader {
         position: absolute;
@@ -101,17 +24,16 @@
             transform: rotate(360deg);
         }
     }
-    .graph-type-labels {
-        margin-top: 2px;
+
+    .well {
+        padding: 19px 12px;
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 0;
     }
-    .territories-retailers {
-        padding-bottom: 20px;
-        .dropdown-menu>.active>a,
-        .dropdown-menu>.active>a:hover,
-        .dropdown-menu>.active>a:focus {
-            color: #000;
-            background-color: #F5B041;
-        }
+    .timepicker {
+        padding-right: 10px;
+        display: inline-block;
     }
     .tab-head {
         color: #337ab7;
@@ -133,12 +55,17 @@
         i {
             cursor: pointer;
         }
+        .fav {
+            padding-left: 0;
+        }
+    }
+    .graph-type-labels {
+        margin-top: 0;
     }
     .report-heading {
         h3 {
             margin-top: 0;
             margin-bottom: 15px;
-            font-size: 18px;
         }
     }
     .drilldown {
@@ -199,16 +126,13 @@
     }
     #world-map {
         .legend {
+            text-align: right;
             h4 {
                 font-size: 16px;
                 font-weight: 600;
-                margin-top: 20px;
             }
             ul li {
                 text-align: center;
-            }
-            .list-inline {
-                margin-left: 0;
             }
         }
         padding-top: 20px;
@@ -219,11 +143,9 @@
         padding: 5px 10px;
         border-radius: 15px;
     }
-    .donutChart {
-        .c3-brush {
-            .extent {
-                fill-opacity: 0;
-            }
-        }
+    .row {
+        margin-top: 0px;
+        padding: 0 10px;
+        margin-bottom: 15px;
     }
 }
