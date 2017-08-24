@@ -9,16 +9,16 @@ class ReportsFormController {
                 lastModified: "08/09/2017",
                 lastRan: "02/11/2017",
                 dataset: "MediaMelt",
-                url: "reports"
+                url: "songSalesByCity"
             },
-            {
+            /*{
                 reportName: "Date over date song comparison report",
                 sharedReport: "N",
                 lastModified: "08/08/2017",
                 lastRan: "02/11/2017",
                 dataset: "MediaMelt",
                 url: "dateOverDateSong"
-            },
+            },*/
             {
                 reportName: "Songs sales by territory / territory group report",
                 sharedReport: "Y",
@@ -94,14 +94,14 @@ class ReportsFormController {
                 dataset: "MediaMelt",
                 url: "reports"
             },
-            {
+            /*{
                 reportName: "Date over date song comparison report",
                 sharedReport: "N",
                 lastModified: "08/08/2017",
                 lastRan: "02/11/2017",
                 dataset: "MediaMelt",
                 url: "dateOverDateSong"
-            },
+            },*/
             {
                 reportName: "Songs sales by territory / territory group report",
                 sharedReport: "Y",

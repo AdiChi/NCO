@@ -1,0 +1,189 @@
+<div class="report-panel" ng-init="vm.initializeData()">
+    <div class="panel panel-default reports">
+        <div class="panel-heading {{$root.currentUser.role}}-heading clickable">
+            <h3 class="panel-title">Song Sales Comparison By City</h3>
+            <span class="pull-right"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        </div>
+        <div class="panel-body">
+            <div class="song-wrapper">
+                <div class="container-fluid">
+                    <h4> Select Song or Song List:</h4>
+                </div>
+                <div class="container-fluid outerdiv">
+                    <select-song selected-song="vm.selectedSong" error-message="vm.songError"></select-song>
+                </div>
+                <div class="container-fluid">
+                    <h4 ng-if="vm.selectedSong" class="selectedSong {{$root.currentUser.role}}-heading">
+                        Selected song: <span style="color: #F5B041">{{vm.selectedSong.trackname}}</span>
+                    </h4>
+                </div>
+            </div>
+            <div class="city-wrapper">
+                <div class="container-fluid">
+                    <h4> Select City:</h4>
+                </div>
+                <div class="container-fluid outerdiv" ng-if="vm.cities">
+                    <multiselect ng-model="vm.selectedCities" options="vm.cities" id-prop="id" display-prop="name" show-search="true" class="col-md-4 multiselect"></multiselect>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div id="main-info" class="col-md-12 well report-criteria">
+                    <div class="col-md-6 left-content">
+                        <date-time-range range="vm.range"></date-time-range>
+                        <div class="col-md-12 select">
+                            <div class="col-md-6 select-label">Represent City Data As:</div>
+                            <div class="col-md-6">
+                                <select ng-model="vm.cityRepresentation">
+                                    <option value="1">Individual Cities</option>
+                                    <option value="2">Completely Aggregated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 right-content">
+                        <div class="retailers ">
+                            <p>Select Retailers</p>
+                            <multi-select-box items="vm.retailers" selected-items="vm.selectedRetailers"></multi-select-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid error-alert ">
+                <div ng-if="vm.songError ">
+                    {{vm.songError}}
+                </div>
+                <div ng-if="vm.rangeError ">
+                    {{vm.rangeError}}
+                </div>
+                <div ng-if="vm.timeError ">
+                    {{vm.timeError}}
+                </div>
+                <div ng-if="vm.cityError ">
+                    {{vm.cityError}}
+                </div>
+            </div>
+            <div class="container-fluid ">
+                <button id="confirmSubmit " type="submit " class="btn btn-success " ng-click="vm.getChart() ">Get Information</button>
+            </div>
+        </div>
+    </div>
+    <div style="color: red; ">
+        {{vm.NoChartError}}
+    </div>
+    <div class="loader" ng-if="vm.loading"></div>
+    <div ng-if="!vm.loading" class="chart-container">
+        <div class="container-fluid" ng-if="!vm.theChart && vm.chart" style="padding-top:25px">
+            <c3chart bindto-id="chartGroupDataPoints" sort-data="null" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections">
+                <chart-size chart-height="650" />
+                <chart-tooltip show-tooltip="true" name-format-function="vm.formatTooltip" />
+                <!-- <chart-bar ratio="0.5" /> -->
+                <chart-axes values-x="x" />
+                <chart-axis>
+                    <chart-axis-x axis-position="outer-center" axis-type="category" />
+                    <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                    <chart-axis-x-tick tick-rotate="0" tick-multiline="false" />
+                </chart-axis>
+                <chart-legend legend-position="inset" />
+            </c3chart>
+        </div>
+        <div class="container-fluid" ng-if="vm.theChart" style="padding-top:25px">
+            <div class="container-fluid">
+                <h3 class="col-md-12 graph-song-label">{{vm.selectedSong.trackname}}</h3>
+                <div class="col-md-2 icon-wrapper">
+                    <i class="fa fa-heart fa-2x fav" aria-hidden="true" ng-click="fav = !fav" ng-class="{selected: fav}" title="Add to favorites"></i>
+                    <i class="fa fa-2x fa fa-share-alt mail" ng-click="vm.sendMail()" aria-hidden="true"></i>
+                </div>
+                <div class="col-md-10 graph-type-labels text-right">
+                    <a class="btn btn-primary" ng-class="{'active': chartType.isActive, 'disable': chartType.isDisabled}" ng-repeat="chartType in vm.chartTypes" ng-click="vm.changeChartType(chartType)">{{chartType.name}}</a>
+                </div>
+            </div>
+            <div class="container-fluid c3graph" ng-if="!vm.theChart && vm.chart && !vm.showHeatMap" style="padding-top:25px">
+                <c3chart bindto-id="chartGroupDataPoints" sort-data="null" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback1" empty-label="No data available for above selections"
+                    ng-if="!vm.showHeatMap">
+                    <chart-size chart-height="700" />
+                    <chart-tooltip show-tooltip="true" />
+                    <!-- <chart-bar ratio="0.5" /> -->
+                    <chart-axes values-x="x" />
+                    <chart-axis>
+                        <chart-axis-x axis-position="outer-center" axis-label="Aggreagate" axis-type="category" />
+                        <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                        <chart-axis-x-tick tick-rotate="0" tick-multiline="false" />
+                    </chart-axis>
+                    <chart-legend legend-position="inset" />
+                    <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
+                </c3chart>
+            </div>
+            <div class="container-fluid c3graph" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:25px">
+                <c3chart bindto-id="chartGroupDataPoints" sort-data="null" chart-data="vm.datapoints" chart-columns="vm.datacolumns" chart-x="vm.datax" enable-zoom="true" show-subchart="true" callback-function="vm.handleCallback2" empty-label="No data available for above selections">
+                    <chart-tooltip show-tooltip="true" />
+                    <chart-size chart-height="700" />
+                    <!-- <chart-bar ratio="0.5" /> -->
+                    <chart-axes values-x="x" />
+                    <chart-axis>
+                        <chart-axis-x axis-position="outer-center" axis-type="category" />
+                        <chart-axis-y axis-position="outer-middle" axis-label="Sales" axis-type="category" />
+                        <chart-axis-x-tick tick-rotate="45" tick-multiline="false" />
+                    </chart-axis>
+                    <chart-legend legend-position="inset" />
+                    <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
+                </c3chart>
+            </div>
+            <div class="container-fluid" id="world-map" ng-if="vm.showHeatMap">
+                <div datamap data="vm.heatMapData" id="world-map-container" show-heat-map="vm.showHeatMap" ng-if="!vm.showNoData"> </div>
+                <div ng-if="vm.showNoData" class="no-map-data">No data available for heatmap for the selected Date Range</div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="vm.chart && vm.drilldown">
+        <div class="container drilldown">
+            <h3 class="tab-head">Sales - <span style="color: #000">{{vm.selectedSong.trackname}}</span></h3>
+            <!--<h5><label>Expand all: <input class="expandAll" type="checkbox" ng-model="vm.expandAll"></label>-->
+            </h5>
+            <div st-table class="drilldown-wrapper" ng-if="vm.chart.totalSongSales > 0">
+                <div ng-repeat="city in vm.chart.salesByCity | orderBy: 'cityName'" ng-if="city.totalCitySales > 0">
+                    <div class="content-wrapper" ng-click="city.isExpanded = !city.isExpanded">
+                        <div class="col-lg-10" style="padding-left: 0px"><i class="glyphicon" ng-class="(city.isExpanded || vm.expandAll) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{city.cityName}}</div>
+                        <div class="col-lg-2 text-right">{{city.totalCitySales}}</div>
+                    </div>
+                    <div class="content-header" ng-if="city.isExpanded || vm.expandAll">
+                        <div class="col-lg-10" style="padding-left: 30px">Date</div>
+                        <div class="col-lg-2 text-right">Sales</div>
+                    </div>
+                    <div ng-repeat="day in city.salesByDate" ng-if="(city.isExpanded || vm.expandAll) && day.totalDaySales > 0">
+                        <div class="content-wrapper" ng-click="day.isExpanded = !day.isExpanded">
+                            <div class="col-lg-10" style="padding-left: 30px"><i class="glyphicon" ng-class="(day.isExpanded || vm.expandAll) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{day.date}}</div>
+                            <div class="col-lg-2 text-right">{{day.totalDaySales}}</div>
+                        </div>
+                        <div class="content-header" ng-if="(day.isExpanded || vm.expandAll)">
+                            <div class="col-lg-10" style="padding-left: 60px">Retailer</div>
+                            <div class="col-lg-2 text-right">Sales</div>
+                        </div>
+                        <div ng-repeat="retailer in day.salesByRetailer" ng-if="(day.isExpanded || vm.expandAll) && retailer.totalRetailerSales > 0">
+                            <div class="content-wrapper" ng-click="retailer.isExpanded = !retailer.isExpanded">
+                                <div class="col-lg-10" style="padding-left: 60px"><i class="glyphicon" ng-class="(retailer.isExpanded || vm.expandAll) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right'"></i> {{retailer.retailerName}}</div>
+                                <div class="col-lg-2 text-right">{{retailer.totalRetailerSales}}</div>
+                            </div>
+                            <div class="content-header" ng-if="(retailer.isExpanded || vm.expandAll)">
+                                <div class="col-lg-10" style="padding-left: 100px">Time Range</div>
+                                <div class="col-lg-2 text-right">Sales</div>
+                            </div>
+                            <div ng-repeat="time in retailer.salesByTime" ng-if="(retailer.isExpanded || vm.expandAll) && time.totalSales > 0">
+                                <div class="content-wrapper">
+                                    <div class="col-lg-10" style="padding-left: 100px">{{vm.getTimeRangeInFormat(time.timeRange)}}</div>
+                                    <div class="col-lg-2 text-right">{{time.totalSales}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-wrapper total-sales">
+                    <div class="col-lg-10" style="padding-left: 0px">Total Sales</div>
+                    <div class="col-lg-2 text-right">{{vm.chart.totalSongSales}}</div>
+                </div>
+                <div>
+                    <a class="btn btn-default" st-export>Export to Excel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

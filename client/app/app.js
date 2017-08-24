@@ -22,6 +22,7 @@ import DateTimeRangeComponent from './components/dateTimeRange/dateTimeRange';
 import SelectSongComponent from './components/selectSong/selectSong';
 import DateOverDateSongComponent from './components/dateOverDateSong/dateOverDateSong';
 import SongSalesByTerritoryComponent from './components/songSalesByTerritory/songSalesByTerritory';
+import SongSalesByCityComponent from './components/songSalesByCity/songSalesByCity';
 import DateOverDateMultipleComponent from './components/dateOverDateMultiple/dateOverDateMultiple';
 import SongOverSongComponent from './components/songOverSong/songOverSong';
 import LoginComponent from './pages/login/login';
@@ -116,6 +117,7 @@ angular
         SelectSongComponent.name,
         DateOverDateSongComponent.name,
         SongSalesByTerritoryComponent.name,
+        SongSalesByCityComponent.name,
         DateOverDateMultipleComponent.name,
         ReportsComponent.name,
         SideNavComponent.name,
@@ -203,6 +205,10 @@ angular
             .state('app.songSalesByTerritory', {
                 url: '/songSalesByTerritory',
                 template: '<song-sales-by-territory></song-sales-by-territory>'
+            })
+            .state('app.songSalesByCity', {
+                url: '/songSalesByCity',
+                template: '<song-sales-by-city></song-sales-by-city>'
             })
             .state('app.dateOverDateMultiple', {
                 url: '/dateOverDateMultiple',
