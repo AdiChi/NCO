@@ -1,0 +1,52 @@
+.reports {
+    .song-wrapper,
+    .city-wrapper {
+        padding-bottom: 10px;
+    }
+    .city-wrapper {
+        .selected-city-list {
+            padding: 0;
+            margin: 0;
+            .selected-city {
+                width: auto;
+                display: inline-block;
+                border-radius: 20px;
+                padding: 5px 10px;
+                margin: 0;
+                margin-right: 5px;
+                .fa-th-list::before {
+                    margin: 0 8px 0 0;
+                }
+                .fa-times::before {
+                    position: relative;
+                    top: 2px;
+                    margin: 0 0 0 5px;
+                    cursor: pointer;
+                }
+                &.artist-list {
+                    background-color: #1a1c22;
+                    color: #b9babd;
+                    border: 1px solid #1a1c22;
+                }
+                &.analyst-list {
+                    background-color: #01172d;
+                    color: #b9babd;
+                    border: 1px solid #01172d;
+                }
+                &.distributor-list {
+                    background-color: #230118;
+                    color: #b9babd;
+                    border: 1px solid #230118;
+                }
+            }
+        }
+        .outerdiv {
+            .multiselect {
+                padding: 0px;
+                ul {
+                    max-height: 400px;
+                }
+            }
+        }
+    }
+}

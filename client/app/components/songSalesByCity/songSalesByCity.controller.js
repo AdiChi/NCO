@@ -1,10 +1,11 @@
-import BreakOutByRetailerController from './breakOutByRetailer.controller';
-class SongsalesByGeographyController {
+import BreakOutByRetailerController from '../songSalesByTerritory/breakOutByRetailer.controller';
+class SongSalesByCityController {
     constructor($scope, $filter, $uibModal, ReportService, EmailPdfService) {
         'ngInject'
 
         this.chartTypes = [{
-                name: "heatmap"
+                name: "heatmap",
+                isDisabled: true
             },
             {
                 name: "donut"
@@ -23,28 +24,23 @@ class SongsalesByGeographyController {
                 isActive: true
             }
         ];
-        this.selectedTerritoryGroups = [];
-        this.selectedTerritories = [];
+
+        this.selectedCities = [];
         this.selectedRetailers = [];
-        this.territoryRepresentation = '2';
+        this.cityRepresentation = '1';
 
         this.mapData = [];
         this.currentChartType = "bar";
         this.query = {};
         this.displayCollection = [];
         this.range = {};
-        this.rangeError = {
-            'dateError': "",
-            'timeError': ""
-        }
 
-        this.initializeData = function () {
-            ReportService.getTerritories().then((res) => {
-                this.territories = $filter('orderBy')(res.data, 'name');
-            });
-
-            ReportService.getTerritoryGroups().then((res) => {
-                this.territoryGroups = $filter('orderBy')(res.data, 'name');
+        this.initializeData = function() {
+            ReportService.getAllCities().then((response) => {
+                angular.forEach(response.data, (data) => {
+                    data.name = data.cityName + ', ' + data.stateName + ', ' + data.terrName;
+                });
+                this.cities = response.data;
             });
 
             ReportService.getRetailers().then((res) => {
@@ -52,7 +48,7 @@ class SongsalesByGeographyController {
             });
         };
 
-        $(document).on('click', '.panel-heading.clickable', function (e) {
+        $(document).on('click', '.panel-heading.clickable', function(e) {
             var $this = $(this);
             collapseSelection($this);
         });
@@ -70,7 +66,7 @@ class SongsalesByGeographyController {
         };
 
         //----Code for Charts-----//
-        this.changeChartType = function (currentChart) {
+        this.changeChartType = function(currentChart) {
             angular.forEach(this.chartTypes, (chartType) => {
                 chartType.isActive = false;
             });
@@ -101,20 +97,14 @@ class SongsalesByGeographyController {
                 })
 
                 if (chartType == "stacked-bar") {
-                    var days = [],
-                        salesByDate;
-                    if (this.chart.salesByGeography[0].geographyType === 'territoryGroup') {
-                        salesByDate = this.chart.salesByGeography[0].salesByTerritory[0].salesByDate;
-                    } else {
-                        salesByDate = this.chart.salesByGeography[0].salesByDate;
-                    }
-                    angular.forEach(salesByDate, (day) => {
+                    var days = [];
+                    angular.forEach(this.chart.salesByCity[0].salesByDate, (day) => {
                         days.push(day.date);
                     });
                     this.theChart2.groups([days]);
                     chartType = "bar";
                 } else if (this.currentChartType == "donut") {
-                    if (this.territoryRepresentation !== '3') {
+                    if (this.cityRepresentation === '1') {
                         this.plotDonutData();
                     }
                     this.theChart2.groups([]);
@@ -126,24 +116,15 @@ class SongsalesByGeographyController {
             }
         };
 
-        this.toggleMap = function (data) {
+        this.toggleMap = function(data) {
             let mapObject = [];
             this.showNoData = false;
 
-            angular.forEach(this.chart.salesByGeography, (geography) => {
-                if (geography.geographyType === 'territory') {
-                    mapObject.push({
-                        'Country': geography.geographyName,
-                        'Total Sales': geography.totalGeographySales
-                    });
-                } else {
-                    angular.forEach(geography.salesByTerritory, (territory) => {
-                        mapObject.push({
-                            'Country': territory.territoryName,
-                            'Total Sales': territory.totalTerritorySales
-                        });
-                    });
-                }
+            angular.forEach(this.chart.salesByCity, (city) => {
+                mapObject.push({
+                    'Country': city.cityName,
+                    'Total Sales': city.totalCitySales
+                });
             });
 
             if (!mapObject.length) {
@@ -170,62 +151,34 @@ class SongsalesByGeographyController {
             this.theChart2 = chartObj;
         };
 
-        this.plotDonutData = function () {
+        this.plotDonutData = function() {
             this.datapoints = [];
             this.datacolumns = [];
             this.names = [];
             let i = 0;
-            if (this.territoryRepresentation === '1') {
-                angular.forEach(this.chart.salesByGeography, (geography) => {
-                    if (geography.geographyType === 'territory') {
-                        this.datapoints[i] = {
-                            x: geography.geographyName
-                        };
-                        this.datapoints[i][geography.geographyName] = geography.totalGeographySales;
-                        this.datacolumns.push({
-                            "id": geography.geographyName,
-                            "type": "donut"
-                        });
-                        this.names.push(geography.geographyName);
-                        i++;
-                    } else {
-                        angular.forEach(geography.salesByTerritory, (territory) => {
-                            this.datapoints[i] = {
-                                x: territory.territoryName
-                            };
-                            this.datapoints[i][territory.territoryName] = territory.totalTerritorySales;
-                            this.datacolumns.push({
-                                "id": territory.territoryName,
-                                "type": "donut"
-                            });
-                            this.names.push(territory.territoryName);
-                            i++;
-                        });
-                    }
+
+            angular.forEach(this.chart.salesByCity, (city) => {
+                this.datapoints[i] = {
+                    x: city.cityName
+                };
+                this.datapoints[i][city.cityName] = city.totalCitySales;
+                this.datacolumns.push({
+                    "id": city.cityName,
+                    "type": "donut"
                 });
-            } else if (this.territoryRepresentation === '2') {
-                angular.forEach(this.chart.salesByGeography, (geography) => {
-                    this.datapoints[i] = {
-                        x: geography.geographyName
-                    };
-                    this.datapoints[i][geography.geographyName] = geography.totalGeographySales;
-                    this.datacolumns.push({
-                        "id": geography.geographyName,
-                        "type": "donut"
-                    });
-                    this.names.push(geography.geographyName);
-                    i++;
-                });
-            }
+                this.names.push(city.cityName);
+                i++;
+            });
+
             this.datax = {
                 "id": "x"
             };
             this.datapoints = $filter('orderBy')(this.datapoints, 'x');
-        }
+        };
 
-        this.plotIndividualTerritories = function (index, territoryName, salesByDate) {
+        this.plotIndividualCities = function(index, cityName, salesByDate) {
             this.datapoints[index] = {
-                x: territoryName
+                x: cityName
             };
             this.datacolumns = [];
             angular.forEach(salesByDate, (day) => {
@@ -243,7 +196,7 @@ class SongsalesByGeographyController {
             };
         };
 
-        this.plotCummulativeData = function (index, days) {
+        this.plotCummulativeData = function(index, days) {
             this.datacolumns = [];
             angular.forEach(days, (day) => {
                 this.datapoints[index][day.date] = day.totalDaySales;
@@ -260,7 +213,7 @@ class SongsalesByGeographyController {
             };
         };
 
-        this.getAggregateData = function (index, salesByDate, days) {
+        this.getAggregateData = function(index, salesByDate, days) {
             var j = 0;
             angular.forEach(salesByDate, (day) => {
                 if (index > 0) {
@@ -275,68 +228,33 @@ class SongsalesByGeographyController {
             });
         };
 
-        this.plotChart = function () {
+        this.plotChart = function() {
             collapseSelection($('.panel-heading.clickable'));
 
             // Disable line chart for aggregate option
-            this.chartTypes[2].isDisabled = (this.territoryRepresentation === '3');
+            this.chartTypes[2].isDisabled = (this.cityRepresentation === '2');
 
             this.names = [];
             this.datapoints = [];
             this.datacolumns = [];
 
-            if (this.territoryRepresentation === '1') {
+            if (this.cityRepresentation === '1') {
                 var i = 0;
-                angular.forEach(this.chart.salesByGeography, (geography) => {
-                    if (geography.geographyType === 'territoryGroup') {
-                        angular.forEach(geography.salesByTerritory, (territory) => {
-                            this.plotIndividualTerritories(i, territory.territoryName, territory.salesByDate);
-                            i++;
-                        });
-                    } else {
-                        this.plotIndividualTerritories(i, geography.geographyName, geography.salesByDate);
-                        i++;
-                    }
-                });
-                this.datapoints = $filter('orderBy')(this.datapoints, 'x');
-            } else if (this.territoryRepresentation === '2') {
-                var i = 0;
-                angular.forEach(this.chart.salesByGeography, (geography) => {
-                    var days = [];
-                    this.datapoints[i] = {
-                        x: geography.geographyName
-                    };
-                    if (geography.geographyType === 'territoryGroup') {
-                        var j = 0;
-                        angular.forEach(geography.salesByTerritory, (territory) => {
-                            this.getAggregateData(j, territory.salesByDate, days);
-                            j++;
-                        });
-                    } else {
-                        days = geography.salesByDate;
-                    }
-
-                    this.plotCummulativeData(i, days);
+                angular.forEach(this.chart.salesByCity, (city) => {
+                    this.plotIndividualCities(i, city.cityName, city.salesByDate);
                     i++;
                 });
                 this.datapoints = $filter('orderBy')(this.datapoints, 'x');
             } else { // Aggregate Data              
                 var days = [];
                 var i = 0;
-                angular.forEach(this.chart.salesByGeography, (geography) => {
-                    if (geography.geographyType === 'territoryGroup') {
-                        angular.forEach(geography.salesByTerritory, (territory) => {
-                            this.getAggregateData(i, territory.salesByDate, days);
-                            i++;
-                        });
-                    } else {
-                        this.getAggregateData(i, geography.salesByDate, days);
-                        i++;
-                    }
+                angular.forEach(this.chart.salesByCity, (city) => {
+                    this.getAggregateData(i, city.salesByDate, days);
+                    i++;
                 });
 
                 this.datapoints[0] = {
-                    x: 'Aggregate Territories/Territory Groups'
+                    x: 'Aggregate Cities'
                 };
                 this.plotCummulativeData(0, days);
             }
@@ -356,7 +274,7 @@ class SongsalesByGeographyController {
             this.chartTypes[5].isActive = true;
         };
 
-        this.setCriteria = function () {
+        this.setCriteria = function() {
             this.query.songId = this.selectedSong.songid;
             this.query.rangeDate1 = this.range.startDate;
             this.query.rangeDate2 = this.range.endDate;
@@ -364,12 +282,11 @@ class SongsalesByGeographyController {
             this.query.time2 = this.range.endTime;
             this.query.daysInRange = this.range.dateDiff;
             this.query["retailer[]"] = this.selectedRetailers || [];
-            this.query["territory[]"] = this.selectedTerritories || [];
-            this.query["territoryGroup[]"] = this.selectedTerritoryGroups || [];
-            this.query.territoryRepresentation = this.territoryRepresentation;
+            this.query["city[]"] = this.selectedCities || [];
+            this.query.cityRepresentation = this.cityRepresentation;
         };
 
-        this.getChart = function () {
+        this.getChart = function() {
             var blnError = false;
             if (!this.selectedSong) {
                 this.songError = "Please select song";
@@ -377,23 +294,23 @@ class SongsalesByGeographyController {
             }
             if (!this.range.startDate ||
                 !this.range.endDate) {
-                this.rangeError.dateError = "Please select date range";
+                this.rangeError = "Please select date range";
                 blnError = true;
             }
             if (!this.range.startTime ||
                 !this.range.endTime) {
-                this.rangeError.timeError = "Please select time range";
+                this.timeError = "Please select time range";
                 blnError = true;
             }
-            if (this.selectedTerritories.length === 0 && this.selectedTerritoryGroups.length === 0) {
-                this.terError = "Please select a territory or territory group";
+            if (this.selectedCities.length === 0) {
+                this.cityError = "Please select a city";
                 blnError = true;
             }
 
             if (blnError) {
                 return;
             } else {
-                this.songError = this.rangeError = this.timeError = this.terError = '';
+                this.songError = this.rangeError = this.timeError = this.cityError = '';
             }
 
             this.theChart = null;
@@ -403,7 +320,7 @@ class SongsalesByGeographyController {
             this.heatMapData = null;
 
             this.setCriteria();
-            this.chart = ReportService.getSalesByGeographyChart(this.query);
+            this.chart = ReportService.getSalesByCityChart(this.query);
             this.loading = false;
             this.plotChart();
             this.NoChartError = "";
@@ -411,10 +328,10 @@ class SongsalesByGeographyController {
         };
 
         this.showRetailerBreakOut = (data) => {
-            var dateData = $filter('filter')(this.chart.salesByGeography[data.x].salesByDate, {
+            var dateData = $filter('filter')(this.chart.salesByCity[data.x].salesByDate, {
                 date: data.name
             })[0];
-            dateData.geography = this.chart.salesByGeography[data.x].geographyName;
+            dateData.geography = this.chart.salesByCity[data.x].cityName;
             $scope.dateData = dateData;
             $uibModal.open({
                 templateUrl: 'app/components/songSalesByTerritory/breakOutByRetailer.html',
@@ -427,55 +344,34 @@ class SongsalesByGeographyController {
 
         //----Drill Down Code------//
 
-        this.prepareReportData = function () {
+        this.prepareReportData = function() {
             var allMap = [];
-            angular.forEach(this.chart.salesByGeography, (geography) => {
-                if (geography.geographyType === 'territoryGroup') {
-                    angular.forEach(geography.salesByTerritory, (territory) => {
-                        angular.forEach(territory.salesByDate, (day) => {
-                            angular.forEach(day.salesByRetailer, (retailer) => {
-                                angular.forEach(retailer.salesByTime, (time) => {
-                                    var finalObj = {
-                                        TerritoryGroup: geography.geographyName,
-                                        Territory: territory.territoryName,
-                                        Date: day.date,
-                                        Retailer: retailer.retailerName,
-                                        TimeRange: time.timeRange,
-                                        Sales: time.totalSales
-                                    };
-                                    allMap.push(finalObj);
-                                });
-                            });
+            angular.forEach(this.chart.salesByCity, (city) => {
+                angular.forEach(city.salesByDate, (day) => {
+                    angular.forEach(day.salesByRetailer, (retailer) => {
+                        angular.forEach(retailer.salesByTime, (time) => {
+                            var finalObj = {
+                                City: city.cityName,
+                                Date: day.date,
+                                Retailer: retailer.retailerName,
+                                TimeRange: time.timeRange,
+                                Sales: time.totalSales
+                            };
+                            allMap.push(finalObj);
                         });
                     });
-                } else {
-                    angular.forEach(geography.salesByDate, (day) => {
-                        angular.forEach(day.salesByRetailer, (retailer) => {
-                            angular.forEach(retailer.salesByTime, (time) => {
-                                var finalObj = {
-                                    TerritoryGroup: '',
-                                    Territory: geography.geographyName,
-                                    Date: day.date,
-                                    Retailer: retailer.retailerName,
-                                    TimeRange: time.timeRange,
-                                    Sales: time.totalSales
-                                };
-                                allMap.push(finalObj);
-                            });
-                        });
-                    });
-                }
+                });
             });
             this.chart.allMap = allMap;
         };
 
-        this.toFormat = function () {
+        this.toFormat = function() {
             this.exportListName = this.selectedSong.trackname + "\r\n\n\"" + this.chart.dateRange + "\r\n\n\"";
             this.prepareReportData();
             return this.chart.allMap;
         };
 
-        this.getTimeRangeInFormat = function (time) {
+        this.getTimeRangeInFormat = function(time) {
             var t1, t2, timestr;
             if (time.length == 11) {
                 timestr = time.split("-");
@@ -493,7 +389,7 @@ class SongsalesByGeographyController {
 
         // Send Email
 
-        this.sendMail = function () {
+        this.sendMail = function() {
             var vm = this;
             this.expandAll = true;
 
@@ -503,19 +399,19 @@ class SongsalesByGeographyController {
                 var elem = $(".c3graph");
             }
             var details = {
-                chartType: "Song Sales Comparison By Territory/Territory Groups",
+                chartType: "Song Sales Comparison By City",
                 song: this.selectedSong.trackname,
                 range1: "Date Range: " + this.chart.dateRange
             };
 
             var s = EmailPdfService.sendMail(elem, $('.drilldown'), this.expandAll, details);
-            s.then(function (r) {
+            s.then(function(r) {
                 vm.expandAll = false;
-            }).catch(function (e) {
+            }).catch(function(e) {
                 vm.expandAll = false;
             });
         };
     }
 }
 
-export default SongsalesByGeographyController;
+export default SongSalesByCityController;
