@@ -657,7 +657,7 @@ class SongOverSongController {
       vm.exportListName = vm.exportListName + "\r\n\n\"" +
         vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ") \"" + "\n";
 
-      vm.shortName = "Songs by Date Range comparison report--" +
+      vm.shortName = "Songs by Date Range Comparison Report--" +
         vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")";
 
       return vm.range1RollUp;
@@ -715,9 +715,9 @@ class SongOverSongController {
       firstRange = vm.chart.firstRange;
 
       var details = {
-        chartType: "Song Over Song Date Comparison",
+        chartType: "Songs by Date Range Comparison Report",
         song: selectedSong,
-        range1: "Range 1: " + firstRange,
+        range1: "Range: " + firstRange,
       };
 
       EmailPdfService.sendMail(elem, $('.drilldown'), vm.expandAll, details).then((r) => {
