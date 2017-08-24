@@ -299,23 +299,23 @@ class DateOverDateMultipleController {
               sales = sales + parseInt(territoryObj.totalSaleTerr);
               angular.forEach(territoryObj.terrSalesByHour, (time) => {
                 var finalObj = {
-                  song: '',
-                  date: dateObj.date,
-                  territory: territoryObj.name,
-                  retailer: retailerObj.name,
-                  timerange: vm.getTimeRangeInFormat(time.range),
-                  sales: time.totalSalesByHours
+                  Song: '',
+                  Date: dateObj.date,
+                  Retailer: retailerObj.name,
+                  Territory: territoryObj.name,
+                  Time: vm.getTimeRangeInFormat(time.range),
+                  Sales: time.totalSalesByHours
                 };
                 firstMap.push(finalObj);
               });
             } else {
               sales = sales + parseInt(territoryObj.totalSaleTerr);
               var finalObj = {
-                song: '',
-                date: dateObj.date,
-                territory: territoryObj.name,
-                retailer: retailerObj.name,
-                sales: territoryObj.totalSaleTerr
+                Song: '',
+                Date: dateObj.date,
+                Retailer: retailerObj.name,
+                Territory: territoryObj.name,
+                Sales: territoryObj.totalSaleTerr
               };
               firstMap.push(finalObj);
             }
@@ -706,7 +706,7 @@ class DateOverDateMultipleController {
 
       angular.forEach(range1Obj, (obj) => {
         angular.forEach(obj.allMap, (mapObj) => {
-          mapObj['song'] = vm.chart.salesPerSong[i].name;
+          mapObj['Song'] = vm.chart.salesPerSong[i].name;
         });
 
         if (!vm.range1RollUp) {
@@ -719,7 +719,7 @@ class DateOverDateMultipleController {
 
       angular.forEach(range2Obj, (obj) => {
         angular.forEach(obj.allMap, (mapObj) => {
-          mapObj['song'] = vm.chart.salesPerSong[j].name;
+          mapObj['Song'] = vm.chart.salesPerSong[j].name;
         });
 
         if (!vm.range2RollUp) {

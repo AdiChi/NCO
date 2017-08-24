@@ -1,5 +1,6 @@
+import BreakOutByRetailerController from './breakOutByRetailer.controller';
 class SongOverSongController {
-  constructor($scope, $filter, $window, ReportService, ModalService, EmailPdfService) {
+  constructor($scope, $filter, $window, $uibModal, ReportService, ModalService, EmailPdfService) {
     "ngInject"
 
     var vm = this;
@@ -116,7 +117,12 @@ class SongOverSongController {
         vm.theChart2.groups([]);
         var chartType = vm.currentChartType;
 
-        angular.forEach(this.datacolumns, (column) => {
+        vm.datacolumns = vm.chartData.datacolumns;
+        vm.datapoints = vm.chartData.datapoints
+        vm.datax = vm.chartData.datax;
+        vm.names = vm.chartData.names;
+
+        angular.forEach(vm.datacolumns, (column) => {
           column.type = chartType;
         });
 
@@ -156,6 +162,14 @@ class SongOverSongController {
           vm.theChart2.resize({
             height: 450
           });
+
+          if (vm.representData == '1') {
+            plotDonutData();
+          } else {
+            if (vm.chart.salesPerSong.length == 1) {
+              plotDonutData();
+            }
+          }
         }
 
         vm.theChart2.transform(chartType);
@@ -249,23 +263,23 @@ class SongOverSongController {
               sales = sales + parseInt(territoryObj.totalSaleTerr);
               angular.forEach(territoryObj.terrSalesByHour, (time) => {
                 var finalObj = {
-                  song: '',
-                  date: dateObj.date,
-                  territory: territoryObj.name,
-                  retailer: retailerObj.name,
-                  timerange: vm.getTimeRangeInFormat(time.range),
-                  sales: time.totalSalesByHours
+                  Song: '',
+                  Date: dateObj.date,
+                  Retailer: retailerObj.name,
+                  Territory: territoryObj.name,
+                  Time: vm.getTimeRangeInFormat(time.range),
+                  Sales: time.totalSalesByHours
                 };
                 firstMap.push(finalObj);
               });
             } else {
               sales = sales + parseInt(territoryObj.totalSaleTerr);
               var finalObj = {
-                song: '',
-                date: dateObj.date,
-                territory: territoryObj.name,
-                retailer: retailerObj.name,
-                sales: territoryObj.totalSaleTerr
+                Song: '',
+                Date: dateObj.date,
+                Retailer: retailerObj.name,
+                Territory: territoryObj.name,
+                Sales: territoryObj.totalSaleTerr
               };
               firstMap.push(finalObj);
             }
@@ -350,7 +364,8 @@ class SongOverSongController {
       }
 
       angular.forEach(vm.rangeMap, (rangeObj) => {
-        let sales = 0, k = 0;
+        let sales = 0,
+          k = 0;
         angular.forEach(vm.chart.salesPerSong, () => {
           sales += rangeObj['song' + (k + 1) + '_Sales'];
           k++;
@@ -436,6 +451,28 @@ class SongOverSongController {
       }
 
       positionLegend();
+    }
+
+    function plotDonutData() {
+      vm.datapoints = [];
+      vm.datacolumns = [];
+      vm.names = [];
+      let i = 0;
+      angular.forEach(vm.rangeMap, (rangeObj) => {
+        vm.datapoints[i] = {
+          x: rangeObj.date
+        }
+        vm.datapoints[i][rangeObj.date] = rangeObj.aggregateSongSales;
+        vm.datacolumns.push({
+          "id": rangeObj.date,
+          "type": "donut"
+        });
+        vm.names.push(rangeObj.date);
+        i++;
+      })
+      vm.datax = {
+        "id": "x"
+      };
     }
 
     function positionLegend() {
@@ -537,34 +574,49 @@ class SongOverSongController {
         vm.query.time1 &&
         vm.query.time2 &&
         !vm.duplicateSongError) {
-      vm.query.daysInRange = vm.range.dateDiff;
-      collapseSelection($('.panel-heading.clickable'));
-      $window.scrollTo(0, 0);
-      // vm.chart = ReportService.getSOSChart(vm.query);
-      // vm.loading = false;
-      // vm.drilldown = true;
+        vm.query.daysInRange = vm.range.dateDiff;
+        collapseSelection($('.panel-heading.clickable'));
+        $window.scrollTo(0, 0);
+        // vm.chart = ReportService.getSOSChart(vm.query);
+        // vm.loading = false;
+        // vm.drilldown = true;
 
-      // prepareChartData();
-      // vm.currentChartType = "bar";
-      // vm.NoChartError = "";
+        // prepareChartData();
+        // vm.currentChartType = "bar";
+        // vm.NoChartError = "";
 
-      ReportService.getSOSChart(vm.query).then((response) => {
-        vm.drilldown = true;
-        vm.chart = response.data;
-        prepareChartData();
-        vm.currentChartType = "bar";
+        ReportService.getSOSChart(vm.query).then((response) => {
+          vm.drilldown = true;
+          vm.chart = response.data;
+          prepareChartData();
+          vm.currentChartType = "bar";
 
-        vm.NoChartError = "";
-      }, (e) => {
-        vm.NoChartError = "Something went wrong!";
-        console.log(e);
-        vm.loading = false;
-      });
+          vm.NoChartError = "";
+        }, (e) => {
+          vm.NoChartError = "Something went wrong!";
+          console.log(e);
+          vm.loading = false;
+        });
       } else {
         vm.loading = false;
       }
-
     }
+
+    vm.showRetailerBreakOut = (data) => {
+      let songName = data.id.split('_')[0];
+      vm.chart.salesPerSong.map((song) => {
+        if(song.name == songName){
+          $scope.rangeData = song.dateRange1[data.x];
+        }
+      });
+    //   $uibModal.open({
+    //     templateUrl: 'app/components/songOverSong/breakOutByRetailer.html',
+    //     controller: BreakOutByRetailerController,
+    //     controllerAs: 'vm',
+    //     size: 'md',
+    //     scope: $scope
+    // });
+    };
 
     //Drilldown code
     function prepareExportData() {
@@ -579,7 +631,7 @@ class SongOverSongController {
 
       angular.forEach(range1Obj, (obj) => {
         angular.forEach(obj.allMap, (mapObj) => {
-          mapObj['song'] = vm.chart.salesPerSong[i].name;
+          mapObj['Song'] = vm.chart.salesPerSong[i].name;
         });
 
         if (!vm.range1RollUp) {
@@ -605,7 +657,7 @@ class SongOverSongController {
       vm.exportListName = vm.exportListName + "\r\n\n\"" +
         vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ") \"" + "\n";
 
-      vm.shortName = "Song Comparison-Date over Date Report--" +
+      vm.shortName = "Songs by Date Range comparison report--" +
         vm.chart.firstRange + "(" + vm.getTimeRangeInFormat(vm.chart.timerange1) + ")";
 
       return vm.range1RollUp;

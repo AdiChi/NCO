@@ -96,6 +96,7 @@
                     <chart-axis-x-tick tick-rotate="{{vm.tilt}}" tick-multiline="false" />
                 </chart-axis>
                 <chart-legend legend-position="inset" legend-inset="{{vm.legend.position}}" legend-inset-x="{{vm.legend.x}}" legend-inset-y="-{{vm.legend.y}}" legend-inset-step="{{vm.legend.step}}" />
+                <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
             </c3chart>
         </div>
         <div class="container-fluid" ng-if="vm.theChart" style="padding-top:30px">
@@ -127,6 +128,7 @@
                         <chart-axis-x-tick tick-rotate="{{vm.tilt}}" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="inset" legend-inset="{{vm.legend.position}}" legend-inset-x="{{vm.legend.x}}" legend-inset-y="-{{vm.legend.y}}" legend-inset-step="{{vm.legend.step}}" />
+                    <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
                 </c3chart>
             </div>
             <div class="container-fluid c3graph" ng-show="vm.theChart && !vm.showHeatMap" style="padding-top:30px" ng-class="{donutChart: vm.currentChartType == 'donut'}">
@@ -142,6 +144,7 @@
                         <chart-axis-x-tick tick-rotate="{{vm.tilt}}" tick-multiline="false" />
                     </chart-axis>
                     <chart-legend legend-position="inset" legend-inset="{{vm.legend.position}}" legend-inset-x="{{vm.legend.x}}" legend-inset-y="-{{vm.legend.y}}" legend-inset-step="{{vm.legend.step}}" />
+                    <chart-events on-click-data="vm.showRetailerBreakOut(data)" />
                 </c3chart>
             </div>
             <div class="container-fluid" id="world-map" ng-if="vm.showHeatMap">
